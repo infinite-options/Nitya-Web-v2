@@ -33,7 +33,7 @@ const responsive = {
 
 const useStyles = makeStyles({
   container: {
-    width: "980px",
+    width: "100%",
     height: "476px",
     backgroundColor: "white",
   },

@@ -3,7 +3,7 @@ import axios from "axios";
 import { fade } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import { Row, Col } from "reactstrap";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -24,6 +24,8 @@ import SearchIcon from "@material-ui/icons/Search";
 import defaultImg from "../Blog-Default-Img.png";
 
 import { ReactComponent as ShareBtn } from "../ios-share-alt.svg";
+
+import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
   blogpage: {
@@ -191,6 +193,7 @@ function Blogpage(props) {
   const [anchorEl, setanchorEl] = useState(null);
   const classes = useStyles();
   const [data, setData] = useState([]);
+  const history = useHistory();
   const fetchData = async () => {
     const res = await fetch(
       "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/truncatedBlog"
@@ -280,14 +283,29 @@ function Blogpage(props) {
       <div className={classes.container}>
         <div
           style={{
+            display: 'flex',
+            justifyContent: 'space-evenly',
             textAlign: "center",
             color: "#b28d42",
             fontSize: "31px",
             padding: "20px",
+
           }}
         >
-          Ayurvedic Musings
+          <div style={{ flex: '1' }}>
+            Ayurvedic Musings
+          </div>
+          <div>
+            <AddIcon
+              size='lg'
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                history.push('/addPost')
+              }}
+            />
+          </div>
         </div>
+
         <AppBar className={classes.appbar} position="static">
           <Toolbar>
             <Container maxWidth="md" className={classes.navbarDisplayFlex}>
