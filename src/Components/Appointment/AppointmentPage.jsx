@@ -12,6 +12,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MyContext } from "../../App";
 import Calendar from "react-calendar";
 import "./calendar.css";
+import { Container } from "@material-ui/core";
 // import moment from "moment";
 
 const useStyles = makeStyles({
@@ -174,7 +175,7 @@ const useStyles = makeStyles({
     width: "50%",
     height: "100%",
     padding: "20px",
-    backgroundColor: "#B28D42",
+  //  backgroundColor: "#B28D42",
   },
   // timeslotBox: {
   // width: "50%",
@@ -182,9 +183,10 @@ const useStyles = makeStyles({
   //padding: "20px",
   // },
   timeslotBox: {
-    width: "50%",
+    width: "100%",
     // height: "350px",
     height: "100%",
+    padding:'3rem',
     // display: "inline-block",
     // overflow: "auto",
     // display: "inline-block",
@@ -198,8 +200,8 @@ const useStyles = makeStyles({
     // height: '200px'
   },
   timeslotButton: {
-    width: "240px",
-    height: "60px",
+    width: "10rem",
+    height: "3rem",
     maxWidth: "80%",
     backgroundColor: "white",
     border: "2px solid #B28D42",
@@ -210,7 +212,7 @@ const useStyles = makeStyles({
     fontSize: "20px",
     borderRadius: "50px",
     display: "block",
-    margin: "2px auto",
+    margin: "6px auto",
     "&:hover": {
       background: "#B28D42",
       color: "white",
@@ -569,14 +571,14 @@ export default function AppointmentPage(props) {
 
   function renderAvailableApptsVertical() {
     return timeSlots.map((element) => (
-      <Row>
+      <Col  xs={3}>
         <button
           className={classes.timeslotButton}
           onClick={() => selectApptTime(element.begin_time)}
         >
           {formatTime(apiDateString, element.begin_time)}
         </button>
-      </Row>
+      </Col>
     ));
   }
 
@@ -589,7 +591,7 @@ export default function AppointmentPage(props) {
     <div style={{ backgroundColor: "#DADADA" }}>
       <ScrollToTop />
       <br />
-      <div
+      {/* <div
         className={classes.container}
         style={{
           // border: "dashed",
@@ -642,8 +644,8 @@ export default function AppointmentPage(props) {
               Book Now
             </button>
           </Col>
-        </Row>
-      </div>
+        </Row> 
+      </div>*/}
       {bookNowClicked ? (
         <div>
           <div
@@ -655,35 +657,69 @@ export default function AppointmentPage(props) {
             }}
           >
             <Row className={classes.calendarTimeTable}>
+            <Col>
+                <p className={classes.content2} style={{ textAlign: "left" }}>
+                  <span
+                    style={{
+                      fontWeight: "600",
+                    }}
+                  >
+                    {elementToBeRendered.title}
+                  </span>
+                  <br />
+                  {parseDuration(elementToBeRendered.duration)} |{" "}
+                  {elementToBeRendered.cost}
+                </p>
+                {/* <br /> */}
+                <img
+                  src={elementToBeRendered.image_url}
+                  className={classes.img}
+                  alt=""
+                />
+                <br />
+                <br />
+                <p className={classes.content2} style={{ textAlign: "left" }}>
+                  6055 Meridian Ave #40
+                  <br />
+                  San Jose, CA, 95120
+                  <br />
+                  <br />
+                  Office: (408) 471-7004
+                </p>
+              </Col>
               <Col className={classes.calendarBox}>
                 <h1
                   style={{
                     textAlign: "left",
-                    color: "white",
+                    color:"#B28D42",
                     fontFamily: "AvenirHeavy",
                     fontSize: "25px",
                   }}
                 >
-                  Find a date to meet with us
+                   Pick a Date for your appointment
                 </h1>
                 {console.log("(Calendar) date: ", date)}
                 <Calendar
-                  backgroundColor="#d3a625"
+                 
+                  //backgroundColor="#d3a625"
                   calendarType="US"
                   onClickDay={dateChange}
                   value={date}
                   minDate={minDate}
-                  className={classes.center}
+                  //className={classes.center}
                   next2Label={null}
                   prev2Label={null}
                 />
               </Col>
+              </Row>
+           
               <Col className={classes.timeslotBox}>
                 <div
                   style={{
                     height: "100px",
                     maxHeight: "100px",
-                    // display: "inline-block",
+                    display: "flex",
+                    justifyContent:'space-between'
                     // alignItems: "center",
                     // maxHeight: "100px",
                     // width: "100%",
@@ -691,22 +727,27 @@ export default function AppointmentPage(props) {
                   }}
                 >
                   <div
-                    className={classes.h1}
+                   // className={classes.h1}
                     style={{
                       textAlign: "left",
                       // border: "1px solid red",
                       // marginTop: "20px",
+                      color: "#B28D42",
+                      fontWeight:'bold',
+                      fontSize: "28px",
                       height: "50%",
                     }}
                   >
-                    What's a good time for you?
+                   Pick a Time for your appointment
                   </div>
                   <div
                     style={{
-                      textAlign: "left",
+                    //  textAlign: "left",
                       color: "#B28D42",
                       // fontFamily: "AvenirHeavy",
-                      fontSize: "15px",
+                      fontWeight:'bold',
+                      fontSize: "19px",
+                      marginTop:'1rem',
                       // border: "dashed"
                       // border: "1px solid red",
                       height: "50%",
@@ -715,11 +756,14 @@ export default function AppointmentPage(props) {
                     UTC - 07:00 Pacific Time
                   </div>
                 </div>
-                <div className={classes.timeslotButtonBox}>
+                {/* <div className={classes.timeslotButtonBox}> */}
+                <Container>
+               <Row md={8}>
                   {renderAvailableApptsVertical()}
-                </div>
+                {/* </div> */}
+              </Row> 
+              </Container>
               </Col>
-            </Row>
           </div>
           <div
             className={classes.container}
