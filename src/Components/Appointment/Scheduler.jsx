@@ -115,6 +115,7 @@ export default function Scheduler(props) {
   const [phoneNum, setPhoneNum] = useState("");
   const [notes, setNotes] = useState("");
 
+
   //String formatting functions for the date variable
   const doubleDigitMonth = (date) => {
     let str = "00" + (date.getMonth() + 1);
@@ -185,10 +186,45 @@ export default function Scheduler(props) {
     // setApptConfirmed(true);
   }
 
+    
+
+      
+    
+
   const [changeLoadingState, setLoadingState] = useState(false);
+  const [customerUid, setcustomerUid] = useState('');
+
 
   async function bookAppt() {
+
+    const tempFind = []
+    var tempID = ''
+
+    const body = {
+      phone_num: props.phoneNum,
+      email: props.email
+    }
     // sendToDatabase();
+    axios.post('https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/findCustomer', body)
+    .then(response => {
+    
+      console.log("response", response)
+      for(var i=0; i<response.data.result.length ; i++){
+      tempFind.push(response.data.result[i])
+      }
+      console.log("response", tempFind)
+      for(var i=0;i<tempFind.length;i++){
+        if(props.email === tempFind[i].customer_email){
+          if(props.phoneNum === tempFind[i].customer_phone_num){
+            console.log("response", tempFind[i].customer_uid)
+              setcustomerUid(tempFind[i].customer_uid)
+          }
+        }
+      }
+    })
+
+    console.log("response", customerUid)
+
     const temp = {
       tax: 5,
       total: 20,
@@ -201,7 +237,7 @@ export default function Scheduler(props) {
       "https://huo8rhh76i.execute-api.us-west-1.amazonaws.com/dev/api/v2/createPaymentIntent";
     axios
       .post(postURL, {
-        customer_uid: "100-000001",
+        customer_uid: customerUid,
         business_code: "NITYATEST",
         payment_summary: temp,
       })

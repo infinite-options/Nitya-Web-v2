@@ -407,7 +407,7 @@ export default function AppointmentPage(props) {
       console.log("fetching public key live");
       axios
         .get(
-          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/LIVE"
+          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYA"
         )
         .then((result) => {
           console.log(
