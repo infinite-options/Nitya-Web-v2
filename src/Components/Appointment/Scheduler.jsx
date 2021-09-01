@@ -193,12 +193,11 @@ export default function Scheduler(props) {
 
   const [changeLoadingState, setLoadingState] = useState(false);
   const [customerUid, setcustomerUid] = useState('');
+  const [customerUidState, setCustomerUidState] = useState(false);
 
-
-  async function bookAppt() {
+  useEffect(()=>{
 
     const tempFind = []
-    var tempID = ''
 
     const body = {
       phone_num: props.phoneNum,
@@ -217,17 +216,21 @@ export default function Scheduler(props) {
         if(props.email === tempFind[i].customer_email){
           if(props.phoneNum === tempFind[i].customer_phone_num){
             console.log("response", tempFind[i].customer_uid)
-              setcustomerUid(tempFind[i].customer_uid)
+             setcustomerUid(tempFind[i].customer_uid)
           }
         }
       }
     })
 
     console.log("response", customerUid)
+  },[customerUidState])
 
+  async function bookAppt() {
+
+    setCustomerUidState(!customerUidState)
     const temp = {
-      tax: 5,
-      total: 20,
+      tax: 0,
+      total: props.cost.replace(/[$]/g, ''),
     };
 
     var clientSecret;
@@ -238,7 +241,7 @@ export default function Scheduler(props) {
     axios
       .post(postURL, {
         customer_uid: customerUid,
-        business_code: "NITYATEST",
+        business_code: props.notes === "NITYATEST" ? "NITYATEST" : "NITYA",
         payment_summary: temp,
       })
       .then(function (result) {
@@ -343,6 +346,7 @@ export default function Scheduler(props) {
           hidden={!props.infoSubmitted ? "hidden" : ""}
           style={{
             // border: "dashed",
+            marginTop:'1rem',
             display: "flex",
             justifyContent: "center"
           }}
