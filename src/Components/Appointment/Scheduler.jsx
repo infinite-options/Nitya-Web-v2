@@ -161,7 +161,7 @@ export default function Scheduler(props) {
         first_name: props.fName,
         last_name: "",
         email: props.email,
-        phone_no: props.phoneNum,
+        phone_no: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
         appt_treatment_uid: props.treatmentID, //TREATMENT INFO #1
         notes: props.notes,
         appt_date: dateFormat3(props.date),
@@ -200,7 +200,7 @@ export default function Scheduler(props) {
     const tempFind = []
 
     const body = {
-      phone_num: props.phoneNum,
+      phone_num: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       email: props.email
     }
     // sendToDatabase();
@@ -227,10 +227,12 @@ export default function Scheduler(props) {
 
   async function bookAppt() {
 
+    const price = props.cost.split(' ', 1)
+
     setCustomerUidState(!customerUidState)
     const temp = {
       tax: 0,
-      total: props.cost.replace(/[$]/g, ''),
+      total: price[0].replace(/[$]/g, '')
     };
 
     var clientSecret;
