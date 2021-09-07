@@ -36,6 +36,14 @@ const useStyles = makeStyles({
     width: "100%",
     height: "476px",
     backgroundColor: "white",
+
+    display: "grid",
+    gridTemplateColumns: "repeat(2, auto)",
+    gridAutoRows: " 30%",
+    gridColumnGap: "3%",
+    gridRowGap: "30%",
+
+
   },
 
   title: {
@@ -62,6 +70,11 @@ const useStyles = makeStyles({
   img: {
     // width:"555px",
     // height:"476px",
+    width: "600px",
+    height: "500px",
+    width: "100%",
+    height: "100%",
+    objectFit: "cover",
   },
 
   carousel: {

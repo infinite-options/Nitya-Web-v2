@@ -230,7 +230,7 @@ function AdminLogin(props) {
                       axios
                         .post(
                           process.env.REACT_APP_SERVER_BASE_URI +
-                            "email_verification",
+                          "email_verification",
                           { email: emailValue },
                           {
                             headers: {

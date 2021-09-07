@@ -881,7 +881,8 @@ export default function AppointmentPage(props) {
                   }}
                 >
                   <SimpleForm
-                    field="Phone Number"
+                    field="Phone Number - 10 digits only"
+                    maxLength='10'
                     onHandleChange={handlePhoneNumChange}
                   />
                 </div>

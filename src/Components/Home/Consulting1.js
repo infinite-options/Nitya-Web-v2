@@ -15,7 +15,7 @@ import LearnMoreBTN from "../Services/LearnMoreBtn";
 import BookNowBTN from "../Appointment/BookNowBtn";
 
 const useStyles = makeStyles({
-  container:{
+  container: {
     //width: "80vw",
     //height: "70vh",
     //width: "100%",
@@ -35,13 +35,13 @@ const useStyles = makeStyles({
     backgroundColor: "#B28D42",
     //outline: "none",
     //float: "right",
-    marginBottom:"44px",
+    marginBottom: "44px",
     // marginLeft: "-100px",
     // marginRight: "-80px",
 
   },
   img: {
-    display: "block",
+    objectFit: "cover",
     width: "476.73px",
     height: "360px",
     //float: "left",
@@ -69,7 +69,7 @@ const useStyles = makeStyles({
     //float:"right",
     // paddingTop: "4rem",
     // padding: "4rem",
-    paddingTop:"44px",
+    paddingTop: "44px",
     //paddingRight:"50px",
     //paddingLeft:"57px",
   },
@@ -79,7 +79,7 @@ const useStyles = makeStyles({
     // fontSize: "1.4rem",
 
     // color: "black",
-    
+
     textAlign: "center",
     font: "normal normal normal 24px/26px Hoefler Text",
     letterSpacing: "0.6px",
@@ -97,7 +97,7 @@ const useStyles = makeStyles({
   LMbtn: {
     // textAlign: "center",
     display: "flex",
-    justifyContent:"center",
+    justifyContent: "center",
 
   },
   divBody: {
@@ -138,7 +138,7 @@ export default function Consulting() {
       className="consulting"
       id="consulting"
       aria-label={"consulting section"}
-      
+
     >
       <br /><br />
       <Row className={classes.container} >
@@ -169,9 +169,9 @@ export default function Consulting() {
                     {/* <Button className={classes.btn} variant="primary">
                         Book Now
                       </Button> */}
-                      <LearnMoreBTN  />
-                      <br />
-                    <BookNowBTN apptID={filteredService.treatment_uid} style={{display: "flex", justifyContent:"center",}} />
+                    <LearnMoreBTN />
+                    <br />
+                    <BookNowBTN apptID={filteredService.treatment_uid} style={{ display: "flex", justifyContent: "center", }} />
                   </CardBody>
                 </Row>
                 {/* </Col> */}
@@ -184,7 +184,7 @@ export default function Consulting() {
       {/* <div className={classes.LMbtn}>
         <LearnMoreBTN  />
       </div> */}
-      
+
     </div>
   );
 }

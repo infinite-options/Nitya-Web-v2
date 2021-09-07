@@ -23,6 +23,8 @@ const useStyles = makeStyles({
     // marginLeft: "-50px",
     //height: "360px",
     //width: "888.73px",
+
+
   },
 
   card: {
@@ -30,8 +32,8 @@ const useStyles = makeStyles({
     //width: "20rem",
     // height: "800px",
     //height: "42rem",
-    height: "360px",
-    width: "888.73px",
+    // height: "360px",
+    //width: "888.73px",
     border: "none",
     //outline: "none",
     //float: "right",
@@ -44,6 +46,7 @@ const useStyles = makeStyles({
     width: "476.73px",
     overflow: "hidden",
     height: "360px",
+
     //float: "left",
     //height: "20rem",
     //paddingLeft: "14px",
@@ -67,7 +70,7 @@ const useStyles = makeStyles({
     // minWidth: "420px",
     //marginLeft:"525px",
     height: "360px",
-    width: "412px",
+    width: "100px",
     // display: "flex",
     // alignItems:"center",
     // textAlign: "center",
@@ -149,7 +152,7 @@ export default function Consulting() {
         {data
           .filter((service) => service.category === "Consultation")
           .map((filteredService) => (
-            <Col>
+            <Col style={{ padding: "0px 60px" }}>
               <Card className={classes.card}>
                 {/* <Col className="no-gutters"> */}
                 <Row>

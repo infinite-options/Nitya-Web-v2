@@ -23,6 +23,7 @@ const useStyles = makeStyles({
     // marginLeft: "-50px",
     //height: "360px",
     //width: "888.73px",
+
   },
 
   card: {
@@ -30,7 +31,7 @@ const useStyles = makeStyles({
     //width: "20rem",
     // height: "800px",
     //height: "42rem",
-    height: "360px",
+    // height: "360px",
     border: "none",
     //outline: "none",
     //float: "right",
@@ -137,7 +138,10 @@ export default function Consulting() {
   }, []);
 
   return (
-    <div className="treatments" id="treatments" aria-label="treatments section">
+    <div className="treatments"
+      id="treatments"
+      aria-label={"treatments section"}
+    >
       <br />
       <br />
       <Row className={classes.container}>

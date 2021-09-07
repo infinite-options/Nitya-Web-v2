@@ -21,14 +21,15 @@ const useStyles = makeStyles({
     height: "auto",
     width: "auto",
     */
-    width: "980px",
-    height: "609px",
+    // width: "980px",
+    // height: "609px",
     //padding: "50px",
     backgroundColor: "white",
     // display: "flex",
     // flexDirection: "column",
     // justifyContent: "center",
     // alignItems: "left",
+
   },
 
   title: {
@@ -138,6 +139,7 @@ export default function Contact() {
   });
 
   function submit(e) {
+    console.log("prevent", e.target.value)
     e.preventDefault();
     Axios.post(url, {
       name: data.name,
@@ -248,8 +250,8 @@ export default function Contact() {
                     //backgroundColor="#B28D42"
                     fontSize="large"
                     onClick={(event) =>
-                      (window.location.href =
-                        "https://www.instagram.com/nityaayurveda/")
+                    (window.location.href =
+                      "https://www.instagram.com/nityaayurveda/")
                     }
                     aria-hidden="false"
                     aria-label="Instagram"

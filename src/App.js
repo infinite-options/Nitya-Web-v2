@@ -56,6 +56,7 @@ function App() {
 
   useEffect(() => {
     if (!servicesLoaded) {
+      console.log("app.js treatment")
       axios.get(url).then((res) => {
         setServiceArr(res.data.result);
         setServicesLoaded(true);
