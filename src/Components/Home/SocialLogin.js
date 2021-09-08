@@ -89,7 +89,7 @@ function SocialLogin(props) {
           axios
             .post(
               process.env.REACT_APP_SERVER_BASE_URI +
-                "token_fetch_update/update_web",
+              "token_fetch_update/update_web",
               {
                 uid: customerInfo.customer_uid,
                 user_access_token: accessToken,
@@ -171,6 +171,7 @@ function SocialLogin(props) {
       backgroundColor: "transparent",
       borderRadius: "15px",
       outline: "none",
+      justifyContent: 'right',
     },
     socialLogin: {
       height: "52px",

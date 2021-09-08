@@ -8,7 +8,7 @@ class ServicePage extends Component {
   render() {
     return (
       <>
-        <div className="page-container ">
+        <div className="page-container" >
           <Navbar />
           <ServiceCard />
           <Footer />

@@ -12,8 +12,7 @@ const Services = (props) => {
     container: {
       marginTop: "95px",
 
-      height: "1381px",
-      width: "980px",
+
 
       backgroundColor: "white",
       display: "flex",
@@ -74,7 +73,7 @@ const Services = (props) => {
     <div className="page-container" style={{ padding: "0px" }}>
       <div className="services" id="services" aria-label={"service block"}>
         <div id="servicesContainer">
-          <ScrollToTop />
+          {/* <ScrollToTop /> */}
           <div aria-label={"click button to switch service type."}>
             <ButtonGroup className="ButtonGroup">
               <Button

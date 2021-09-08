@@ -16,7 +16,7 @@
 }
 
 .list-unstyled {
-  display: flexbox;
+  display: flex;
   align-items: left;
   text-decoration: none;
   text-align: left;

@@ -24,6 +24,7 @@ const useStyles = makeStyles({
     // width: "980px",
     // height: "609px",
     //padding: "50px",
+
     backgroundColor: "white",
     // display: "flex",
     // flexDirection: "column",
@@ -43,6 +44,7 @@ const useStyles = makeStyles({
     // wordWrap: "break-word",
     // color: "#b28d42",
     // lineHeight: "2",
+
     textAlign: "left",
     font: "normal normal normal 24px/29px SF Pro Display",
     letterSpacing: "0px",
@@ -61,6 +63,7 @@ const useStyles = makeStyles({
     // //lineHeight: "1.4",
     // //textAlign: "left",
     textAlign: "left",
+
     font: "normal normal normal 24px/29px SF Pro Display",
     letterSpacing: "0px",
     color: "#B28D42",

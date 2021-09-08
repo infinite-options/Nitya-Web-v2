@@ -5,6 +5,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import { Button } from "@material-ui/core";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye } from "@fortawesome/free-solid-svg-icons";
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import SocialLogin from "./SocialLogin";
 
@@ -78,9 +83,18 @@ export default function SignUp(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [open, setOpen] = useState(false);
   const togglePasswordVisiblity = (id, passwordShown) => {
     if (id === 1) setPassword1Shown(!passwordShown);
     else setPassword2Shown(!passwordShown);
+  };
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
   };
 
   const object = {
@@ -106,17 +120,21 @@ export default function SignUp(props) {
     social_id: "NULL"
   }
 
+  function Success() {
+    handleClose()
+    window.location.href = "/login";
+  }
+
   function handleSignUp() {
     if (password === confirmPassword) {
-      console.log("signUp")
       axios
         .post("https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/createAccount", object)
         .then((res) => {
           console.log("res", res)
-          // window.location.href = "/login";
         });
+      handleClickOpen()
     } else {
-      alert("Password Does not match")
+      alert("Password does not match")
     }
   }
 
@@ -127,7 +145,7 @@ export default function SignUp(props) {
           Sign Up
         </div>
         <SocialLogin />
-        <div className={classes.pageText} style={{ padding: "10px" }}>
+        <div className={classes.pageText} style={{ paddingTop: "20px" }}>
           Or
         </div>
         <form className={classes.formContainer}>
@@ -177,10 +195,8 @@ export default function SignUp(props) {
 
 
         </form>
-        <div style={{ padding: "15px" }}>
-          {/* <input type="submit" value="Sign Up" className={classes.button} /> */}
-          <Button type="submit" onClick={handleSignUp} className={classes.button} > SignUp</Button>
-        </div>
+        <Button type="submit" onClick={handleSignUp} className={classes.button} > SignUp</Button>
+        {/* <input type="submit" value="Sign Up" className={classes.button} /> */}
         <div className={classes.pageText} style={{ marginTop: "40px" }}>
           Already have an account?
         </div>
@@ -194,6 +210,33 @@ export default function SignUp(props) {
           Login
         </button>
       </div>
+
+
+      <div>
+        {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Open alert dialog
+        </Button> */}
+        <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"SignUp Successful"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              You Have successfully created a New Account
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={Success} color="primary">
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+
+
     </div>
   );
 }

@@ -14,6 +14,7 @@ const useStyles = makeStyles({
 
   title: {
     marginLeft: "40px",
+    padding: '24px',
     //textAlign: "left",
     //fontFamily: "DidoteTextW01-Italic",
     //fontStyle: "italic",
@@ -41,9 +42,9 @@ const useStyles = makeStyles({
     //textAlign: "left",
     //marginRight:"23px",
     marginTop: "23px",
-
+    padding: '24px',
     width: "410px",
-    height: "468px",
+    height: "478px",
     textAlign: "left",
     font: "normal normal normal 22px/26px SFProDisplayRegular",
     letterSpacing: "0px",
@@ -102,7 +103,7 @@ export default function Home() {
                 plan guiding her clients to achieve optimum health with lasting
                 results.
               </p>
-              ​
+
             </Col>
             <Col classname="secCol">
               <div className={classes.image}>

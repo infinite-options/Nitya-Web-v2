@@ -64,6 +64,7 @@ const useStyles = makeStyles({
     width: "476.73px",
     objectFit: "cover",
     height: "360px",
+
   },
   body: {
     backgroundColor: "#B28D42",
@@ -78,7 +79,7 @@ const useStyles = makeStyles({
     //float:"right",
     // paddingTop: "4rem",
     // padding: "4rem",
-    paddingTop: "44px",
+    padding: "44px",
     //paddingRight:"50px",
     //paddingLeft:"57px",
   },
