@@ -23,7 +23,15 @@ const useStyles = makeStyles({
     // marginLeft: "-50px",
     //height: "360px",
     //width: "888.73px",
-
+    display: "grid",
+    backgroundColor: "#ffffff",
+    gridTemplateColumns: "repeat(1, auto)",
+    gridAutoRows: " 30%",
+    gridColumnGap: "30%",
+    gridRowGap: "0%",
+    position: "relative",
+    top: 0,
+    bottom: 0,
 
   },
 
@@ -71,7 +79,7 @@ const useStyles = makeStyles({
     // minWidth: "420px",
     //marginLeft:"525px",
     height: "360px",
-    width: "100px",
+    width: "350px",
     // display: "flex",
     // alignItems:"center",
     // textAlign: "center",

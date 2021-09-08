@@ -10,9 +10,10 @@ class Homepage extends Component {
   render() {
     return (
       <>
-        <div className="homepage" id="homepage" style={{ minWidth: "1000px" }}>
+        <div className="homepage" id="homepage" >
           <div className="page-container " style={{ padding: "0px" }}>
             <ScrollToTop />
+
             <Home />
             {/* <About />
             <p
@@ -29,7 +30,7 @@ class Homepage extends Component {
             >
               Services
             </p> */}
-            <div style={{ padding: "50px" }}>
+            <div >
               <Services />
             </div>
 

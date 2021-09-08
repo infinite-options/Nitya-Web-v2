@@ -21,7 +21,7 @@ const useStyles = makeStyles({
     height: "auto",
     width: "auto",
     */
-    // width: "980px",
+    width: "980px",
     // height: "609px",
     //padding: "50px",
 
@@ -114,13 +114,15 @@ const useStyles = makeStyles({
     width: "462px",
     marginTop: "40px",
     height: "600px",
+    padding: '80px'
   },
   Col2: {
     width: "518px",
     display: "flex",
-    justifyContent: "center",
+    justifyContent: "flex-start",
     marginTop: "49px",
     height: "600px",
+    marginLeft: '24px'
     // marginRight:"34px"
   },
 });
@@ -195,7 +197,7 @@ export default function Contact() {
                     name="name"
                     id="name"
                     placeholder="Full Name"
-                    style={{ width: "457px" }}
+                    style={{ width: "25rem" }}
                     onChange={(e) => handle(e)}
                     value={data.name}
                     className={classes.form}
@@ -208,7 +210,7 @@ export default function Contact() {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    style={{ width: "457px" }}
+                    style={{ width: "25rem" }}
                     onChange={(e) => handle(e)}
                     value={data.email}
                     className={classes.form}
@@ -221,7 +223,7 @@ export default function Contact() {
                     name="subject"
                     id="subject"
                     placeholder="Subject"
-                    style={{ width: "457px" }}
+                    style={{ width: "25rem" }}
                     onChange={(e) => handle(e)}
                     value={data.subject}
                     className={classes.form}
@@ -234,7 +236,7 @@ export default function Contact() {
                     name="text"
                     id="message"
                     placeholder="Type your message here"
-                    style={{ width: "457px", height: "139px" }}
+                    style={{ width: "25rem", height: "139px" }}
                     onChange={(e) => handle(e)}
                     value={data.message}
                     className={classes.form}

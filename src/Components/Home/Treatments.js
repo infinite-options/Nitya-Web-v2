@@ -23,6 +23,15 @@ const useStyles = makeStyles({
     // marginLeft: "-50px",
     //height: "360px",
     //width: "888.73px",
+    display: "grid",
+    backgroundColor: "#ffffff",
+    gridTemplateColumns: "repeat(1, auto)",
+    gridAutoRows: " 30%",
+    gridColumnGap: "30%",
+    gridRowGap: "0%",
+    position: "relative",
+    top: 0,
+    bottom: 0,
 
   },
 
@@ -67,7 +76,7 @@ const useStyles = makeStyles({
     // minWidth: "420px",
     //marginLeft:"525px",
     height: "360px",
-    width: "200px",
+    width: "350px",
     // display: "flex",
     // alignItems:"center",
     // textAlign: "center",
@@ -138,9 +147,9 @@ export default function Consulting() {
   }, []);
 
   return (
-    <div className="treatments"
-      id="treatments"
-      aria-label={"treatments section"}
+    <div className="consulting"
+      id="consulting"
+      aria-label={"consulting section"}
     >
       <br />
       <br />

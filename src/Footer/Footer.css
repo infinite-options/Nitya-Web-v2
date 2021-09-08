@@ -60,6 +60,7 @@
   .mobile-container {
     display: block;
     min-width: 100%;
+    top: 400%;
   }
   .grid-cell {
     max-width: 360px;

@@ -33,15 +33,14 @@ const responsive = {
 
 const useStyles = makeStyles({
   container: {
-    width: "100%",
-    height: "476px",
+
     backgroundColor: "white",
 
     display: "grid",
     gridTemplateColumns: "repeat(2, auto)",
     gridAutoRows: " 30%",
     gridColumnGap: "3%",
-    gridRowGap: "30%",
+    gridRowGap: "0%",
 
 
   },

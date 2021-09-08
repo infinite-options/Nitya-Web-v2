@@ -25,7 +25,7 @@ export default function SignUp(props) {
     },
     root: {
       backgroundColor: "#DADADA",
-      padding: "50px",
+      padding: '50px'
     },
     container: {
       marginLeft: "auto",
@@ -56,11 +56,11 @@ export default function SignUp(props) {
     button: {
       height: "60px",
       width: "243px",
-      marginLeft: "auto",
-      marginRight: "auto",
+
       color: "white",
       backgroundColor: pageColor,
       borderRadius: "25px",
+      marginTop: '1rem',
       border: "none",
       "&:focus": {
         outline: "none",

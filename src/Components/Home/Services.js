@@ -4,18 +4,15 @@ import Consulting from "./Consulting";
 import Treatments from "./Treatments";
 import { makeStyles } from "@material-ui/core/styles";
 import ScrollToTop from "../../Blog/ScrollToTop";
-
+import Footer from "../../Footer/Footer";
 import "./Services.css";
 
 const Services = (props) => {
   const useStyles = makeStyles({
     container: {
       marginTop: "95px",
-
-
-
-      backgroundColor: "white",
       display: "flex",
+      backgroundColor: '#dadada',
       flexDirection: "column",
       alignItems: "center",
     },
@@ -70,10 +67,10 @@ const Services = (props) => {
   const [activeComponent, setActiveComponent] = useState("consulting");
 
   return (
-    <div className="page-container" style={{ padding: "0px" }}>
+    <div className={classes.container} style={{ padding: "0px" }}>
       <div className="services" id="services" aria-label={"service block"}>
         <div id="servicesContainer">
-          {/* <ScrollToTop /> */}
+          <ScrollToTop />
           <div aria-label={"click button to switch service type."}>
             <ButtonGroup className="ButtonGroup">
               <Button
@@ -100,12 +97,6 @@ const Services = (props) => {
               </Button>
             </ButtonGroup>
           </div>
-          {/*
-          <div>
-          <img src="consulting2.jpg"></img>
-          </div>
-  */}
-
           <p style={{ width: "fit-content", height: "fit-content" }}>
             {rSelected}
           </p>

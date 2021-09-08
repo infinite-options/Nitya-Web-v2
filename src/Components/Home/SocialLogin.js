@@ -167,6 +167,7 @@ function SocialLogin(props) {
   const useStyles = makeStyles({
     socialLoginBtn: {
       padding: "0px",
+      margin: '0px',
       border: "none",
       backgroundColor: "transparent",
       borderRadius: "15px",
@@ -180,8 +181,8 @@ function SocialLogin(props) {
   const classes = useStyles();
 
   return (
-    <Grid container spacing={1} xs={12}>
-      <Grid item xs={12}>
+    <div style={{ height: '11rem', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+      <div style={{ flex: '1' }}>
         <AppleLogin
           clientId=""
           redirectURI=""
@@ -191,8 +192,8 @@ function SocialLogin(props) {
             </button>
           )}
         />
-      </Grid>
-      <Grid item xs={12}>
+      </div>
+      <div style={{ flex: '1' }}>
         <FacebookLogin
           appId={process.env.REACT_APP_FACEBOOK_APP_ID}
           autoLoad={false}
@@ -203,8 +204,8 @@ function SocialLogin(props) {
           cssClass={classes.socialLoginBtn}
           icon={<img src={FacebookLoginBtn} className={classes.socialLogin} />}
         />
-      </Grid>
-      <Grid item xs={12}>
+      </div>
+      <div>
         <GoogleLogin
           clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
           onSuccess={responseGoogle}
@@ -218,8 +219,8 @@ function SocialLogin(props) {
             </button>
           )}
         />
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 }
 

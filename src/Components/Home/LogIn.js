@@ -380,8 +380,6 @@ function AdminLogin(props) {
     button: {
       height: "60px",
       width: "243px",
-      marginLeft: "auto",
-      marginRight: "auto",
       color: "white",
       backgroundColor: pageColor,
       borderRadius: "25px",
