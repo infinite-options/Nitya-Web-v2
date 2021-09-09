@@ -24,6 +24,10 @@
   padding-top: 30px;
 }
 
+.nav-links-active{
+  color: #d3a625;
+}
+
 .right {
   width: 250px;
   margin-left: auto;
@@ -39,6 +43,7 @@
 .nav-link:hover {
   color: #d3a625;
 }
+
 
 .nav-log {
   list-style: none;

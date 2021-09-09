@@ -14,11 +14,11 @@ function Footer() {
     <div className="main-footer">
       <div className="main-container">
         <Row>
-          <Col></Col>
+          {/* <Col></Col> */}
           <Col
             style={{
               display: "flex",
-              justifyContent: "center",
+              justifyContent: "left",
               height: "120px",
             }}
           >
@@ -45,34 +45,39 @@ function Footer() {
                   justifyContent: "left",
                 }}
               >
-                <ui className="list-unstyled">
+                <p style={{ fontSize: "13px", textAlign: "left" }}>Leena Marathay <br /> NAMA Certified Ayurvedic Practitioner</p>
+                {/* <ui className="list-unstyled">
                   <li style={{ fontSize: "13px", textAlign: "left" }}>
                     Leena Marathay
                   </li>
                   <li style={{ fontSize: "13px", textAlign: "left" }}>
                     NAMA Certified Ayurvedic Practitioner
                   </li>
-                </ui>
+                </ui> */}
               </Col>
               {/* Column3 */}
               <Col md="auto">
-                <ui
+                <p style={{ fontSize: "13px", textAlign: "left" }}> Office: 408 471 7004 <br /> Email: Leena@nityaayurveda.com</p>
+                {/* <ui
                   className="list-unstyled"
                   style={{ fontSize: "13px", textAlign: "left" }}
                 >
                   <li>Office: 408 471 7004</li>
                   <li>Email: Leena@nityaayurveda.com</li>
-                </ui>
+                </ui> */}
               </Col>
 
               {/* Column2 */}
               <Col md="auto" style={{}}>
-                <ui className="list-unstyled" style={{ fontSize: "13px" }}>
+                <p style={{ fontSize: "13px" }}>6055 Meridian Ave, Ste. 40A, <br />San Jose, CA 95120</p>
+                {/* <ui className="list-unstyled" style={{ fontSize: "13px" }}>
                   <li>6055 Meridian Ave, Ste. 40A,</li>
                   <li>San Jose, CA 95120</li>
-                </ui>
+                </ui> */}
               </Col>
             </Row>
+
+
             <Row style={{ paddingTop: " 15px", paddingBottom: "30px" }}>
               <Col md="auto" style={{ width: "261px" }}>
                 <p

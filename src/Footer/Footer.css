@@ -5,11 +5,17 @@
   bottom: 0;
   min-width: 100%;
   font-size: 1.5rem;
+  /* width: 980px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .main-container {
   display: flexbox;
-  align-items: center;
-  min-width: 100%;
+  border: 1px solid pink;
+  /* align-items: center; */
+  /* min-width: 100%; */
+  max-width: 980px;
 }
 .col {
   padding: 0px 50px;

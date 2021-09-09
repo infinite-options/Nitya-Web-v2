@@ -39,8 +39,9 @@ const useStyles = makeStyles({
     display: "grid",
     gridTemplateColumns: "repeat(2, auto)",
     gridAutoRows: " 30%",
-    gridColumnGap: "3%",
+    // gridColumnGap: "3%",
     gridRowGap: "0%",
+    
 
 
   },
@@ -69,8 +70,8 @@ const useStyles = makeStyles({
   img: {
     // width:"555px",
     // height:"476px",
-    width: "600px",
-    height: "500px",
+    // width: "600px",
+    // height: "500px",
     width: "100%",
     height: "100%",
     objectFit: "cover",
