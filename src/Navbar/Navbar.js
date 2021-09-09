@@ -16,6 +16,10 @@ const useStyles = makeStyles((theme) => ({
     position: "absolute",
     width: "500px",
   },
+
+  buttonColor: {
+    color: "#000000"
+  }
 }));
 
 function useOutsideAlerter(ref) {
@@ -68,12 +72,13 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
+      <div className="emptyDiv">
+      </div>
       <Link to="/" className="nav-logo">
         <img
           src={logo}
           style={{
-            width: 250,
-            height: 150,
+            height: '128px',
             objectFit: "cover",
           }}
           alt="Nitya Ayurveda’s Logo"
@@ -90,7 +95,7 @@ const Navbar = () => {
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/about" className="nav-link" onClick={closeMenu}>
+          <Link to="/about" className="nav-link" onClick={closeMenu} >
             About
           </Link>
         </li>

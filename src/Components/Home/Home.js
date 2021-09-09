@@ -35,13 +35,7 @@ const useStyles = makeStyles({
   container: {
 
     backgroundColor: "white",
-
-    display: "grid",
-    gridTemplateColumns: "repeat(2, auto)",
-    gridAutoRows: " 30%",
-    gridColumnGap: "3%",
-    gridRowGap: "0%",
-
+    width: '980px'
 
   },
 
