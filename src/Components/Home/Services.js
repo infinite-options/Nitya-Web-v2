@@ -10,10 +10,21 @@ import "./Services.css";
 const Services = (props) => {
   const useStyles = makeStyles({
     container: {
+      // paddingTop: "50px",
       display: "flex",
       backgroundColor: '#dadada',
       flexDirection: "column",
       alignItems: "center",
+    },
+    services:{
+      width: "980px",
+    },
+
+    title:{
+      font: "italic normal normal 54px/65px Hoefler Text",
+      color: "#B28D42",
+      padding: "30px 0 10px 0",
+
     },
 
     ButtonGroup: {
@@ -66,9 +77,11 @@ const Services = (props) => {
   const [activeComponent, setActiveComponent] = useState("consulting");
 
   return (
+    <div className="page-container">
     <div className={classes.container} >
-      <div className="services" id="services" aria-label={"service block"}>
+      <div className={classes.services} id="services" aria-label={"service block"} >
         <div id="servicesContainer">
+        <h1 className={classes.title}>Services</h1>
           <ScrollToTop />
           <div aria-label={"click button to switch service type."}>
             <ButtonGroup className="ButtonGroup">
@@ -101,6 +114,7 @@ const Services = (props) => {
           </p>
         </div>
       </div>
+    </div>
     </div>
   );
 };

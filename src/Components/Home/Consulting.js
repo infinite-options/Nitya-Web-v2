@@ -23,15 +23,17 @@ const useStyles = makeStyles({
     // marginLeft: "-50px",
     //height: "360px",
     //width: "888.73px",
-    display: "grid",
-    backgroundColor: "#ffffff",
-    gridTemplateColumns: "repeat(1, auto)",
-    gridAutoRows: " 30%",
-    gridColumnGap: "30%",
-    gridRowGap: "0%",
-    position: "relative",
-    top: 0,
-    bottom: 0,
+    // display: "grid",
+    // backgroundColor: "#ffffff",
+    // gridTemplateColumns: "repeat(1, auto)",
+    // gridAutoRows: " 40%",
+    // gridColumnGap: "50%",
+    // gridRowGap: "0%",
+    // // position: "relative",
+    // top: 0,
+    // bottom: 0,
+    width:"980px",
+    // border: "1px solid pink",
 
   },
 
@@ -45,7 +47,7 @@ const useStyles = makeStyles({
     border: "none",
     //outline: "none",
     //float: "right",
-    marginBottom: "44px",
+    // marginBottom: "44px",
     // marginLeft: "-100px",
     // marginRight: "-80px",
   },
@@ -155,6 +157,7 @@ export default function Consulting() {
       id="consulting"
       aria-label={"consulting section"}
     >
+      {/* <h1>Services</h1> */}
       <br />
       <br />
       <Row className={classes.container}>

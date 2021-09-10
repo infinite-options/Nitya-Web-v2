@@ -32,7 +32,7 @@
 
   align-items: center;
   justify-content: center;
-  padding-top: 50px;
+  /* padding-top: 50px; */
   /* height: 329px;
     width: 679px; */
 }
@@ -80,8 +80,9 @@
   margin-right: 200px;
 }
 .consulting {
-  margin-left: 43px;
-  margin-right: 43px;
+  /* margin-left: 43px;
+  margin-right: 43px; */
+  /* width: 980px; */
   /* margin-left: 10rem; 
   margin-right: 10rem; */
 }

@@ -197,6 +197,7 @@ export default function Home() {
 
   return (
     <>
+     <div className="page-container">
       <div className="home" id="home">
         <div aria-label="Home block">
           <ScrollToTop />
@@ -265,7 +266,7 @@ export default function Home() {
                     What is Ayurveda?
                   </h1>
                   <p
-                    style={{ font: "normal normal normal 20px SF Pro Display" }}
+                    style={{ font: "normal normal normal 20px  Hoefler Text" }}
                   >
                     Ayurvedic Medicine is the traditional holistic medical
                     science of ancient India. Orgin of Ayurveda dates back more
@@ -275,7 +276,7 @@ export default function Home() {
                     world.
                   </p>
                   <p
-                    style={{ font: "normal normal normal 20px SF Pro Display" }}
+                    style={{ font: "normal normal normal 20px  Hoefler Text" }}
                   >
                     Nitya Ayurveda brings theis classical Ayurvedic healthcare
                     to clients in the South Bay. We offer Ayurvedic health
@@ -303,27 +304,27 @@ export default function Home() {
                     Is Ayurveda for you?
                   </h1>
                   <p
-                    style={{ font: "normal normal normal 20px SF Pro Display" }}
+                    style={{ font: "normal normal normal 20px Hoefler Text" }}
                   >
                     If you're seeking Ayurvedic treatment and wondering if this
                     system of medicine will work for you, try to answer these
                     two simple questions:
                   </p>
                   <p
-                    style={{ font: "normal normal normal 20px SF Pro Display" }}
+                    style={{ font: "normal normal normal 20px Hoefler Text" }}
                   >
                     1. Do you suspect that your diet, lifestyle, the supplements
                     you are taking may have something to do with your current
                     health issue?
                   </p>
                   <p
-                    style={{ font: "normal normal normal 20px SF Pro Display" }}
+                    style={{ font: "normal normal normal 20px Hoefler Text" }}
                   >
                     2. Are you willing to make changes in your diet and
                     lifestyle?
                   </p>
                   <p
-                    style={{ font: "normal normal normal 20px SF Pro Display" }}
+                    style={{ font: "normal normal normal 20px Hoefler Text" }}
                   >
                     If your answer is "yes" to both questions then Ayurveda is
                     probably for you!
@@ -333,6 +334,7 @@ export default function Home() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </>
   );
