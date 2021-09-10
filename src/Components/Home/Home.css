@@ -1,19 +1,22 @@
 
 #container {
     width: 980px;
-    height:  476px ;
+    height:  476px;
     /* background-color:  white ; */
     
 }
 
 #title {
     text-align:  center ;
-    font:  italic normal normal 54px/65px Hoefler Text ;
+    /* font:  italic normal normal 54px/65px Hoefler Text ; */
+    font:  italic normal normal 54px/65px SFProDisplayRegular ;
+
     letter-spacing:  0px ;
     /* color:  #B28D42 ;
     opacity:  1 ; */
-    padding-top:  90px ; 
-    padding-bottom: 20px ;
+    /* padding-top:  90px ; 
+    padding-bottom: 20px ; */
+    padding: 90px 11px 20px 11px;
 }
 
 #btn {
@@ -25,6 +28,7 @@
     height: 49px ;
     margin-bottom: 12px ;
     font-size: 15px ;
+
     
 }
 
@@ -34,21 +38,24 @@
 }
 
 #carousel{
-    margin-bottom:  -50px ;
-    margin-top: 10px ;
+    /* margin-bottom:  -50px ; */
+    /* margin-top: 10px ; */
+
 }
 
 #leftCol {
     width:  425px ;
-    float:  left ;
+    /* float:  left ; */
+
     /* background-color:  white ; */
 }
 
 #rightCol {
     width:  555px ;
-    float:  right ;
+    /* float:  left ; */
     background-position:  36% 58% ;
     background-size:  120% ;
     /* filter:  saturate(130%) ; */
+
 }
 

@@ -13,23 +13,10 @@ import { auto } from "@popperjs/core";
 
 const useStyles = makeStyles({
   container: {
-    //position: "relative",
-    //top: "70px",
-    //marginLeft: "90px",
-    /*minHeight: "710px",
-    minWidth: "600px",
-    height: "auto",
-    width: "auto",
-    */
     width: "980px",
-    // height: "609px",
-    //padding: "50px",
+    height:"615px",
 
     backgroundColor: "white",
-    // display: "flex",
-    // flexDirection: "column",
-    // justifyContent: "center",
-    // alignItems: "left",
 
   },
 
@@ -76,9 +63,9 @@ const useStyles = makeStyles({
     letterSpacing: "0px",
     color: "#B28D42",
     opacity: "1",
-    borderRadius: "10px",
-    border: "1px solid #a8841d",
-    borderWidth: "0.15em",
+    borderRadius: "25px",
+    border: "2px solid #a8841d",
+    // borderWidth: "0.15em",
     width: "440px",
     height: "61px",
   },
@@ -112,19 +99,24 @@ const useStyles = makeStyles({
   },
   Col1: {
     width: "462px",
-    marginTop: "40px",
-    height: "600px",
-    padding: '80px'
+    height:"500px",
+    // marginTop: "40px",
+    // height: "600px",
+    // padding: '80px'
   },
   Col2: {
     width: "518px",
-    display: "flex",
-    justifyContent: "flex-start",
-    marginTop: "49px",
-    height: "600px",
-    marginLeft: '24px'
+    // display: "flex",
+    // justifyContent: "flex-start",
+    // marginTop: "49px",
+    height: "500px",
+    // marginLeft: '24px'
     // marginRight:"34px"
   },
+  row: {
+    height: "600px"
+  }
+
 });
 
 const location = {
@@ -169,7 +161,7 @@ export default function Contact() {
       <div className="contact" id="contact">
         <ScrollToTop />
         <div className={classes.container}>
-          <Row>
+          <Row className={classes.row}>
             <Col className={classes.Col1}>
               <p className={classes.title}>Contact Us</p>
               <p
@@ -260,7 +252,8 @@ export default function Contact() {
                     }
                     aria-hidden="false"
                     aria-label="Instagram"
-                    style={{ color: "#b28d42" }}
+    
+    style={{ color: "#b28d42", }}
                   />
                 </div>
               </Form>

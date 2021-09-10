@@ -14,6 +14,7 @@ const useStyles = makeStyles({
 
   title: {
     marginLeft: "40px",
+    marginTop:"15px",
     padding: '24px',
     //textAlign: "left",
     //fontFamily: "DidoteTextW01-Italic",
@@ -29,45 +30,37 @@ const useStyles = makeStyles({
     opacity: "1",
     width: "443px",
     height: "32px",
-    marginTop: "45px",
+    // marginTop: "45px",
   },
 
   content: {
-    //font: "normal normal normal 21px Hoefler Text",
-    //fontSize: "1.5rem",
-    //fontFamily: "'Open Sans', sans-serif",
-    //wordWrap: "break-word",
-    //color: "#808080",
-    //lineHeight: "1.4",
-    //textAlign: "left",
-    //marginRight:"23px",
     marginTop: "23px",
-    padding: '24px',
-    width: "410px",
-    height: "478px",
-    textAlign: "left",
     font: "normal normal normal 22px/26px SFProDisplayRegular",
-    letterSpacing: "0px",
+
     color: "#B28D42",
-    opacity: "1",
+ 
+    textAlign: "left",
+    paddingBottom: "10px",
+
   },
   image: {
     width: "400px",
     height: "463px",
     overflow: "hidden",
     display: "block",
+    
   },
 
   img: {
-    //marginRight: "-40px",
     width: "450px",
-    // height: "463px",
+
     objectFit: "cover",
     marginLeft: "-35px",
-    //marginTop:"23px",
-    //marginBottom:"62px",
-    //marginRight:"48px",
-    //objectFit: "cover",
+  },
+
+  rows:{
+    paddingBottom: "30px",
+
   },
 });
 
