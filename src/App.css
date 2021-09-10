@@ -33,6 +33,8 @@
   align-items: center;
   justify-content: center;
   padding-top: 50px;
+
+  
   /* height: 329px;
     width: 679px; */
 }
@@ -108,4 +110,114 @@
   text-align: center;
   font-style: italic;
   color: #8d6f1a;
+}
+
+.rows{
+  padding-bottom: 30px;
+
+}
+
+.content {
+  margin-top: 23px;
+  font: normal normal normal 22px/26px SFProDisplayRegular;
+
+  color: #B28D42;
+
+  text-align: left;
+  padding-Bottom: 10px;
+
+}
+
+.imageAbout {
+  width: 400px;
+  height: 463px;
+  overflow: hidden;
+  display: block;
+  margin: '50px 50px 0px 50px'
+}
+
+
+.page-container-contact {
+  background-color: #dbdbdb;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left:30px;
+  padding-right: 30px;
+}
+
+.container-contact {
+  width: 980px;
+  height: 615px;
+
+  background-color: white;
+}
+
+@media screen and (max-width: 1050px) {
+  .home {
+
+    display: flex;
+  
+    align-items: center;
+    justify-content: center;
+    padding: 150px;
+
+  }
+
+  .contact {
+    
+    display: flex;
+  }
+
+  .rows{
+    padding-bottom: 30px;
+  
+    flex-direction: column-reverse;
+  }
+ 
+  .page-container {
+    background-color: #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left:90px;
+    padding-right: 90px;
+  }
+
+  
+  .page-container-contact {
+    background-color: #dbdbdb;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-left:90px;
+    padding-right: 90px;
+      }
+
+  .content {
+    margin-top: 23px;
+    font: normal normal normal 22px/26px SFProDisplayRegular;
+  
+    color: #B28D42;
+  
+    text-align: left;
+    padding: 30px;
+  
+  }
+
+  .imageAbout {
+    width: 400px;
+    height: 463px;
+    overflow: hidden;
+    display: block;
+    margin-top: 50px;
+  }
+
+  
+.container-contact {
+  width: auto;
+  height: 1100px;
+
+  background-color: white;
+}
 }

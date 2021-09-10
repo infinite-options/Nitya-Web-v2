@@ -13,9 +13,9 @@ const useStyles = makeStyles({
   },
 
   title: {
-    marginLeft: "40px",
-    marginTop:"15px",
-    padding: '24px',
+    //marginLeft: "40px",
+    //marginTop: "15px",
+    //padding: '24px',
     //textAlign: "left",
     //fontFamily: "DidoteTextW01-Italic",
     //fontStyle: "italic",
@@ -28,28 +28,28 @@ const useStyles = makeStyles({
     letterSpacing: "0px",
     color: "#B28D42",
     opacity: "1",
-    width: "443px",
+    // width: "443px",
     height: "32px",
     // marginTop: "45px",
   },
 
-  content: {
-    marginTop: "23px",
-    font: "normal normal normal 22px/26px SFProDisplayRegular",
+  // content: {
+  //   marginTop: "23px",
+  //   font: "normal normal normal 22px/26px SFProDisplayRegular",
 
-    color: "#B28D42",
- 
-    textAlign: "left",
-    paddingBottom: "10px",
+  //   color: "#B28D42",
 
-  },
-  image: {
-    width: "400px",
-    height: "463px",
-    overflow: "hidden",
-    display: "block",
-    
-  },
+  //   textAlign: "left",
+  //   paddingBottom: "10px",
+
+  // },
+  // image: {
+  //   width: "400px",
+  //   height: "463px",
+  //   overflow: "hidden",
+  //   display: "block",
+  //   margin: '50px 50px 0px 50px'
+  // },
 
   img: {
     width: "450px",
@@ -58,10 +58,7 @@ const useStyles = makeStyles({
     marginLeft: "-35px",
   },
 
-  rows:{
-    paddingBottom: "30px",
 
-  },
 });
 
 export default function Home() {
@@ -75,10 +72,12 @@ export default function Home() {
           aria-label="Counselor Introduction Block"
         >
           <ScrollToTop />
-          <p className={classes.title}>Leena Marathay</p>
-          <Row className={classes.rows}>
+          {/* <p className={classes.title}>Leena Marathay</p> */}
+          <Row className="rows">
             <Col classname="firstCol">
-              <p className={classes.content}>
+              <p className="content">
+                <p className={classes.title}> Leena Marathay </p>
+                <br></br>
                 Leena is a NAMA (National Ayurvedic Medical Association)
                 certified Ayurvedic Practitioner and an Ayurvedic Health and
                 Lifestyle Counselor.
@@ -99,7 +98,7 @@ export default function Home() {
 
             </Col>
             <Col classname="secCol">
-              <div className={classes.image}>
+              <div className="imageAbout">
                 <img
                   src={Img}
                   className={classes.img}
