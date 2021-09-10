@@ -98,6 +98,7 @@ function Footer() {
                   display: "flex",
                   flexDirection: "row",
                 }}
+                id="hideAfter"
               >
                 <img
                   src={Namacb}
@@ -109,11 +110,13 @@ function Footer() {
                 />
                 <img
                   src={CAAM}
+                  
                   style={{
                     // width: "198",
                     height: "54px",
                     marginLeft: "40px",
                   }}
+                  // id="hideAfter"
                 ></img>
                 <div
                   style={{
@@ -121,8 +124,11 @@ function Footer() {
                     marginBottom: "auto",
                     marginLeft: "39px",
                   }}
+                  className="hideMe"
+                  
                 >
                   <InstagramIcon
+                    id="hideAfter"
                     fontSize="large"
                     onClick={(event) =>
                       (window.location.href =

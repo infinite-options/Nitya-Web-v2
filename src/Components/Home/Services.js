@@ -7,7 +7,10 @@ import ScrollToTop from "../../Blog/ScrollToTop";
 import Footer from "../../Footer/Footer";
 import "./Services.css";
 
+import heightContent from "./Consulting";
+
 const Services = (props) => {
+
   const useStyles = makeStyles({
     container: {
       // paddingTop: "50px",
@@ -18,6 +21,9 @@ const Services = (props) => {
     },
     services:{
       width: "980px",
+      height: "1360px",
+      backgroundColor: "white",
+      // border: "1px solid blue",
     },
 
     title:{
@@ -109,7 +115,7 @@ const Services = (props) => {
               </Button>
             </ButtonGroup>
           </div>
-          <p style={{ width: "fit-content", height: "fit-content" }}>
+          <p id="content"style={{ width: "fit-content", height: "fit-content" }}>
             {rSelected}
           </p>
         </div>
