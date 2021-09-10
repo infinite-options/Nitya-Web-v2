@@ -17,7 +17,6 @@ const useStyles = makeStyles({
     height:"615px",
 
     backgroundColor: "white",
-    border: "1px solid blue",
 
   },
 
