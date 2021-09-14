@@ -1,10 +1,13 @@
 
 #container {
-    width: 980px;
-    height:  476px;
+ 
     /* background-color:  white ; */
-    
+    background-color: white;
+    width: 980px;
+    display: flex;
 }
+
+ 
 
 #title {
     text-align:  center ;
@@ -44,18 +47,44 @@
 }
 
 #leftCol {
-    width:  425px ;
+    width:  490px ;
     /* float:  left ; */
 
     /* background-color:  white ; */
 }
 
 #rightCol {
-    width:  555px ;
+    width:  490px ;
     /* float:  left ; */
     background-position:  36% 58% ;
     background-size:  120% ;
     /* filter:  saturate(130%) ; */
 
+}
+
+@media screen and (max-width: 1050px) {
+
+    #container {
+ 
+        background-color: white;
+        width: auto;
+        display: flex;
+        flex-direction: column;
+       
+    }
+
+    #leftCol {
+        width:  490px ;
+        /* background-color: black; */
+
+    }
+
+    #rightCol {
+        width:  490px ;
+        /* float:  left ; */
+   
+        /* filter:  saturate(130%) ; */
+    
+    }
 }
 

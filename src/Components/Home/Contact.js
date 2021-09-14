@@ -12,13 +12,13 @@ import ScrollToTop from "../../Blog/ScrollToTop";
 import { auto } from "@popperjs/core";
 
 const useStyles = makeStyles({
-  container: {
-    width: "980px",
-    height:"615px",
+  // container: {
+  //   width: "980px",
+  //   height: "615px",
 
-    backgroundColor: "white",
+  //   backgroundColor: "white",
 
-  },
+  // },
 
   title: {
     // marginTop: "40px",
@@ -32,6 +32,8 @@ const useStyles = makeStyles({
     // color: "#b28d42",
     // lineHeight: "2",
 
+    fontSize: '36px',
+    marginTop: '2rem',
     textAlign: "left",
     font: "normal normal normal 24px/29px SF Pro Display",
     letterSpacing: "0px",
@@ -50,7 +52,7 @@ const useStyles = makeStyles({
     // //lineHeight: "1.4",
     // //textAlign: "left",
     textAlign: "left",
-
+    fontSize: '18px',
     font: "normal normal normal 24px/29px SF Pro Display",
     letterSpacing: "0px",
     color: "#B28D42",
@@ -99,7 +101,7 @@ const useStyles = makeStyles({
   },
   Col1: {
     width: "462px",
-    height:"500px",
+    height: "500px",
     // marginTop: "40px",
     // height: "600px",
     // padding: '80px'
@@ -157,10 +159,10 @@ export default function Contact() {
     setData(newData);
   }
   return (
-    <div className="page-container">
+    <div className="page-container-contact">
       <div className="contact" id="contact">
         <ScrollToTop />
-        <div className={classes.container}>
+        <div className="container-contact">
           <Row className={classes.row}>
             <Col className={classes.Col1}>
               <p className={classes.title}>Contact Us</p>
@@ -252,8 +254,8 @@ export default function Contact() {
                     }
                     aria-hidden="false"
                     aria-label="Instagram"
-    
-    style={{ color: "#b28d42", }}
+
+                    style={{ color: "#b28d42", }}
                   />
                 </div>
               </Form>
