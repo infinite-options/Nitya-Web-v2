@@ -159,10 +159,10 @@ export default function Contact() {
     setData(newData);
   }
   return (
-    <div className="page-container-contact">
+    <div className="page-container">
       <div className="contact" id="contact">
         <ScrollToTop />
-        <div className="container-contact">
+        <div className="container-contact" style={{border:"1px solid purple"}}>
           <Row className={classes.row}>
             <Col className={classes.Col1}>
               <p className={classes.title}>Contact Us</p>

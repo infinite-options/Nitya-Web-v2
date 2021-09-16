@@ -136,14 +136,14 @@
 }
 
 
-.page-container-contact {
+/* .page-container-contact {
   background-color: #dbdbdb;
   display: flex;
   flex-direction: column;
   justify-content: center;
   padding-left:30px;
   padding-right: 30px;
-}
+} */
 
 .container-contact {
   width: 980px;
@@ -184,14 +184,14 @@
   }
 
   
-  .page-container-contact {
+  /* .page-container-contact {
     background-color: #dbdbdb;
     display: flex;
     flex-direction: column;
     justify-content: center;
     padding-left:90px;
     padding-right: 90px;
-      }
+      } */
 
   /* .content {
     margin-top: 23px;
@@ -214,8 +214,8 @@
 
   
 .container-contact {
-  width: auto;
-  height: 1100px;
+  width: 490px;
+  height: 1060px;
 
   background-color: white;
 }
