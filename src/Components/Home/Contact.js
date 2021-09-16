@@ -35,7 +35,7 @@ const useStyles = makeStyles({
     fontSize: '36px',
     marginTop: '2rem',
     textAlign: "left",
-    font: "normal normal normal 24px/29px SF Pro Display",
+    font: "italic normal normal 24px/29px Hoefler Text",
     letterSpacing: "0px",
     color: "#B28D42",
     opacity: "1",
