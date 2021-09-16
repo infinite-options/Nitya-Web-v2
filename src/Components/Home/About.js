@@ -58,6 +58,12 @@ const useStyles = makeStyles({
     marginLeft: "-35px",
   },
 
+  '@media screen and (max-width: 1050px)': {
+    container:{
+      width:"490px",
+    }
+  },
+
 
 });
 
