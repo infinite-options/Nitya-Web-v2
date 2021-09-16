@@ -14,6 +14,12 @@
   /* // justifyContent:  center ; */
   align-items: center;
 }
+.services {
+  width: 980px;
+  height: 1360px;
+  background-color: white;
+  /* // border: "1px solid blue", */
+}
 
 .ButtonGroup {
   top: 0;
@@ -78,3 +84,15 @@
   color: white;
   border: 1px solid #b28d42;
 } */
+
+
+@media screen and (max-width: 1050px) {
+  .services {
+    width: 490px;
+    height: 2449px;
+    background-color: white;
+    /* // border: "1px solid blue", */
+  }
+  
+}
+

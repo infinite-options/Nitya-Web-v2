@@ -123,6 +123,11 @@ const useStyles = makeStyles({
     //width:"400px",
     //marginLeft:""
   },
+  '@media screen and (max-width: 1050px)': {
+      container: {
+        width:"490px",
+      },
+    }
 
   // btn: {
   //   // backgroundColor: "#d3a625",

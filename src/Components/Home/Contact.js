@@ -19,6 +19,11 @@ const useStyles = makeStyles({
   //   backgroundColor: "white",
 
   // },
+  container:{
+    width: "980px",
+    backgroundColor:"white",
+    height: "615px",
+  },
 
   title: {
     // marginTop: "40px",
@@ -117,7 +122,14 @@ const useStyles = makeStyles({
   },
   row: {
     height: "600px"
-  }
+  },
+
+  '@media screen and (max-width: 1050px)':{
+      container: {
+        width:"490px",
+        height:"1060px"
+      }
+  },
 
 });
 
@@ -159,10 +171,10 @@ export default function Contact() {
     setData(newData);
   }
   return (
-    <div className="page-container-contact">
+    <div className="page-container">
       <div className="contact" id="contact">
         <ScrollToTop />
-        <div className="container-contact">
+        <div className={classes.container}>
           <Row className={classes.row}>
             <Col className={classes.Col1}>
               <p className={classes.title}>Contact Us</p>

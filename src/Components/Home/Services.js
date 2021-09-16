@@ -19,12 +19,12 @@ const Services = (props) => {
       flexDirection: "column",
       alignItems: "center",
     },
-    services:{
-      width: "980px",
-      height: "1360px",
-      backgroundColor: "white",
-      // border: "1px solid blue",
-    },
+    // services:{
+    //   width: "980px",
+    //   height: "1360px",
+    //   backgroundColor: "white",
+    //   // border: "1px solid blue",
+    // },
 
     title:{
       font: "italic normal normal 54px/65px Hoefler Text",
@@ -85,7 +85,7 @@ const Services = (props) => {
   return (
     <div className="page-container">
     <div className={classes.container} >
-      <div className={classes.services} id="services" aria-label={"service block"} >
+      <div className="services" id="services" aria-label={"service block"} >
         <div id="servicesContainer">
         <h1 className={classes.title}>Services</h1>
           <ScrollToTop />
