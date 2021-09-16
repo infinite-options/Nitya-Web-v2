@@ -32,7 +32,8 @@ const useStyles = makeStyles({
     // position: "relative",
     // top: 0,
     // bottom: 0,
-    width:"980px"
+    width:"980px",
+    // border:"1px solid purple"
 
   },
 

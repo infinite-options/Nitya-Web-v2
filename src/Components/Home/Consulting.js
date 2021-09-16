@@ -34,6 +34,7 @@ const useStyles = makeStyles({
     // top: 0,
     // bottom: 0,
     width:"980px",
+
     // border: "1px solid pink",
 
   },

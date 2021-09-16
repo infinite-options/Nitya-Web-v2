@@ -13,6 +13,7 @@
   flex-direction: column;
   /* // justifyContent:  center ; */
   align-items: center;
+  width: 980px;
 }
 .services {
   width: 980px;

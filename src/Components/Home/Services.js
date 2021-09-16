@@ -23,7 +23,7 @@ const Services = (props) => {
     //   width: "980px",
     //   height: "1360px",
     //   backgroundColor: "white",
-    //   // border: "1px solid blue",
+      // border: "1px solid blue",
     // },
 
     title:{
