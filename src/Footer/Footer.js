@@ -145,83 +145,93 @@ function Footer() {
           <Col></Col>
         </Row>
       </div>
+
+
+
+
       <div className="mobile-container" style={{ padding: "15px" }}>
         <Row style={{ padding: "10px" }}>
           <Col style={{ textAlign: "center" }}>
             <img src={Logo} style={{ height: "100px" }} />
-            <p style={{ fontSize: "13px", margin: "0px", marginTop: "5px" }}>
+            <p style={{ font: "normal normal 600 8px SF Pro Display", margin: "0px", marginTop: "5px" }}>
               &copy;{new Date().getFullYear()} by Leena Marathay
             </p>
           </Col>
         </Row>
-        <Row
-          style={{ display: "flex", justifyContent: "center", padding: "10px" }}
-        >
-          <Col className="grid-cell">
-            <ui className="list-unstyled" style={{ fontSize: "13px" }}>
-              <li>6055 Meridian Ave, Ste. 40A,</li>
-              <li>San Jose, CA 95120</li>
-            </ui>
-          </Col>
-          <Col className="grid-cell">
-            <ui
-              className="list-unstyled"
-              style={{ fontSize: "13px", textAlign: "left" }}
-            >
-              <li>Office: 408 471 7004</li>
-              <li>Email: Leena@nityaayurveda.com</li>
-            </ui>
-          </Col>
+        <Row style={{display:"flex", justifyContent:"center"}}>
+               <Col md="auto" style={{ textAlign: "center"}}>
+                <p
+                  style={{
+                    font: "normal normal 600 14px/25px SF Pro Display",
+                    textDecoration: "underline",
+                    margin: "0px",
+                    padding: "0 0 20px 0",
+                  }}
+                >
+                  <a href="/login" style={{ color: "white" }}>
+                    Admin Login
+                  </a>
+                </p>
+              </Col>
         </Row>
-        <Row
-          style={{ display: "flex", justifyContent: "center", padding: "10px" }}
-        >
-          <Col className="grid-cell">
-            <ui className="list-unstyled">
-              <li style={{ fontSize: "13px", textAlign: "left" }}>
-                Leena Marathay
-              </li>
-              <li style={{ fontSize: "13px", textAlign: "left" }}>
-                NAMA Certified Ayurvedic Practitioner
-              </li>
-            </ui>
-          </Col>
-          <Col className="grid-cell">
+
+
+        <div>
+          <Row style={{margin:"0",  }}>
+            <Col style={{float:"left"}}>
+              <p style={{ fontSize: "13px", }}>6055 Meridian Ave, Ste. 40A, <br /> San Jose, CA 95120</p>
+            </Col>
+            <Col>
+              <div style={{float:"right"}}>
+              <p style={{ fontSize: "13px",  }}> Office: 408 471 7004 <br /> Leena@nityaayurveda.com</p>
+              </div>
+              
+            </Col>
+          </Row>
+
+          <Row style={{margin:"0"}}>
+            <Col>
+              <p style={{ fontSize: "13px", textAlign: "left", }}>Leena Marathay <br /> NAMA Certified Ayurvedic Practitioner</p>
+            </Col>
+            <Col>
+            <div style={{float:"right"}}>
+              <img
+                  src={CAAM}
+                  style={{
+                    height: "60px",
+                  }}
+                />
+              </div>
+            </Col>
+          </Row>
+          <Row style={{padding:"0 0 0 15px", margin:"0"}}>
             <img
-              src={Namacb}
-              style={{
-                width: "50px",
-                height: "50px",
-                float: "center",
-              }}
-              alt="An Image of NAMACB CAP"
-            />
-          </Col>
-        </Row>
-        <Row
-          style={{ display: "flex", justifyContent: "center", padding: "10px" }}
-        >
-          <Col className="grid-cell">
-            <img
-              src={CAAM}
-              style={{
-                height: "50px",
-              }}
-            ></img>
-          </Col>
-          <Col className="grid-cell">
-            <InstagramIcon
-              fontSize="large"
-              onClick={(event) =>
-                (window.location.href =
-                  "https://www.instagram.com/nityaayurveda/")
-              }
-              style={{ height: "45px", width: "45px", cursor: "pointer" }}
-              aria-hidden="false"
-              aria-label="Instagram"
-            />
-          </Col>
-        </Row>
+                  src={Namacb}
+                  style={{
+                    width: "50px",
+                    height: "50px",
+                    float: "center",
+                  }}
+                  alt="An Image of NAMACB CAP"
+                />
+                 &nbsp; &nbsp;
+                <InstagramIcon
+                  fontSize="large"
+                  onClick={(event) =>
+                    (window.location.href =
+                      "https://www.instagram.com/nityaayurveda/")
+                  }
+                  style={{ height: "50px", width: "50px", cursor: "pointer" }}
+                  aria-hidden="false"
+                  aria-label="Instagram"
+                />
+          </Row>
+        </div>
+
+
+
+
+        
       </div>
     </div>
   );
