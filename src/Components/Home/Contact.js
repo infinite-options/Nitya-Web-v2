@@ -12,13 +12,19 @@ import ScrollToTop from "../../Blog/ScrollToTop";
 import { auto } from "@popperjs/core";
 
 const useStyles = makeStyles({
-  // container: {
-  //   width: "980px",
-  //   height: "615px",
+  container: {
+    width: "980px",
+    // height: "615px",
+    // border:"1px solid green ",
+    backgroundColor: "white",
+    display:"flex",
+    alignItems:"center",
+    justifyContent:"center"
 
-  //   backgroundColor: "white",
-
-  // },
+  },
+  container2:{
+    padding:"40px 0 50px 0"
+  },
 
   title: {
     // marginTop: "40px",
@@ -33,7 +39,7 @@ const useStyles = makeStyles({
     // lineHeight: "2",
 
     fontSize: '36px',
-    marginTop: '2rem',
+    // marginTop: '2rem',
     textAlign: "left",
     font: "italic normal normal 24px/29px Hoefler Text",
     letterSpacing: "0px",
@@ -105,6 +111,7 @@ const useStyles = makeStyles({
     // marginTop: "40px",
     // height: "600px",
     // padding: '80px'
+    // border:"1px solid pink"
   },
   Col2: {
     width: "518px",
@@ -116,8 +123,24 @@ const useStyles = makeStyles({
     // marginRight:"34px"
   },
   row: {
-    height: "600px"
-  }
+    // height: "600px",
+    width:"980px"
+  },
+
+  '@media screen and (max-width: 1050px)': {
+    container:{
+      width:"490px",
+      // height: "1060px",
+      // border:"1px solid purple"
+    },
+    row: {
+      // height: "600px",
+      width:"490px"
+    },
+    Col1:{
+      height:"450px"
+    }
+  },
 
 });
 
@@ -159,11 +182,12 @@ export default function Contact() {
     setData(newData);
   }
   return (
-    <div className="page-container">
-      <div className="contact" id="contact">
+    <div className="page-container" >
+      <div className="contact" id="contact" >
         <ScrollToTop />
-        <div className="container-contact" style={{border:"1px solid purple"}}>
-          <Row className={classes.row}>
+        <div className={classes.container} >
+          <div className={classes.container2} >
+          <Row className={classes.row} >
             <Col className={classes.Col1}>
               <p className={classes.title}>Contact Us</p>
               <p
@@ -261,6 +285,7 @@ export default function Contact() {
               </Form>
             </Col>
           </Row>
+          </div>
 
           {/* <div className="column">
             <p className={classes.title}>Contact Us</p>

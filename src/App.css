@@ -146,10 +146,10 @@
 } */
 
 .container-contact {
-  width: 980px;
-  height: 615px;
+  /* width: 980px; */
+  /* height: 615px; */
 
-  background-color: white;
+  /* background-color: white; */
 }
 
 @media screen and (max-width: 1050px) {
@@ -212,11 +212,11 @@
     margin-top: 50px;
   }
 
-  
+/*   
 .container-contact {
   width: 490px;
   height: 1060px;
 
   background-color: white;
-}
+} */
 }
