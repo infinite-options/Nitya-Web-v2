@@ -128,6 +128,11 @@ const useStyles = makeStyles({
   //   fontSize: "1.4rem",
   //   minHeight: "40px",
   // },
+  '@media screen and (max-width: 1050px)': {
+    container:{
+      width:"490px",
+    }
+  },
 });
 
 export default function Consulting() {

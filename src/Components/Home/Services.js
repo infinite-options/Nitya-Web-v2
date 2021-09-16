@@ -76,6 +76,13 @@ const Services = (props) => {
         border: "#B28D42",
       },
     },
+    '@media screen and (max-width: 1050px)': {
+      services:{
+        width:"490px",
+        height: "2460px",
+
+      }
+    },
   });
   const classes = useStyles();
 
