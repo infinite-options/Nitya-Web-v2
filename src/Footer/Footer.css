@@ -59,18 +59,21 @@
   display: none;
 }
 
-@media screen and (max-width: 1200px) {
+
+@media screen and (max-width: 1050px) {
   .main-container {
     display: none;
   }
   .mobile-container {
     display: block;
-    min-width: 100%;
-    top: 400%;
+    /* min-width: 100%; */
+    /* top: 400%; */
+    min-width: 490px;
+    /* width: 100%; */
+    
   }
-  .grid-cell {
+  /* .grid-cell {
     max-width: 360px;
-  }
+  } */
 }
-
 
