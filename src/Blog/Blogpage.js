@@ -108,6 +108,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   card: {
+    border:"1px solid blue",
     display: "flex",
     boxShadow: "none",
     paddingTop: "30px",
@@ -137,6 +138,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   header: {
+    border: "1px solid green",
     display: "flex",
     justifyContent: "space-between",
     color: "#8d6f19",
@@ -148,7 +150,9 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   desc: {
-    marginLeft: "-50px",
+    // marginLeft: "-50px",
+    border: "1px solid purple",
+    height: "327px",
   },
   title: {
     color: "#b28d42",

@@ -230,7 +230,7 @@ export default function Home() {
                   }}
                 >
                   {/* Is Ayurveda for you? */}
-                  Schedule a Free 15 min consultation
+                  Schedule a Free Consultation
                 </Button>
               </div>
             </div>
@@ -284,7 +284,7 @@ export default function Home() {
                     treated holistically.
                   </p>
                 </div>
-                <div
+                {/* <div
                   style={{
                     color: "white",
                     textAlign: "center",
@@ -328,7 +328,7 @@ export default function Home() {
                     If your answer is "yes" to both questions then Ayurveda is
                     probably for you!
                   </p>
-                </div>
+                </div> */}
               </Carousel>
             </div>
           </div>

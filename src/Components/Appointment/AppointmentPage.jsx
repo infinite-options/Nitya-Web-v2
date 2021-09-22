@@ -205,10 +205,10 @@ const useStyles = makeStyles({
     // height: '200px'
   },
   timeslotButton: {
-    // width: "10rem",
+    width: "10rem",
     height: "3rem",
-    width: "80%",
-    backgroundColor: "pink",
+    maxWidth: "80%",
+    backgroundColor: "white",
     border: "2px solid #B28D42",
     color: "#B28D42",
     // padding: "15px 90px",
@@ -264,6 +264,10 @@ const useStyles = makeStyles({
       backgroundColor: "#52330D",
     },
   },
+  colTime:{
+    display: "flex",
+	  flexDirection: "column"
+  },
   img: {
     width: "100%",
   },
@@ -283,12 +287,13 @@ const useStyles = makeStyles({
       
     },
     timeBox:{
-      border: "1px solid purple",
+      // border: "1px solid purple",
       overflowX: "hidden"
     },
     colTime:{
-      border: "1px solid blue",
-      padding:"20px"
+      // border: "1px solid blue",
+
+      // padding:"20px"
     }
   },
 });
@@ -600,7 +605,7 @@ export default function AppointmentPage(props) {
 
   function renderAvailableApptsVertical() {
     return timeSlots.map((element) => (
-      <Col  className={classes.colTime}>
+      <Col className={classes.colTime}>
         <button
           className={classes.timeslotButton}
           onClick={() => selectApptTime(element.begin_time)}
@@ -765,6 +770,7 @@ export default function AppointmentPage(props) {
                       fontWeight:'bold',
                       fontSize: "28px",
                       height: "50%",
+                      
                     }}
                   >
                    Pick a Time for your appointment
@@ -782,7 +788,7 @@ export default function AppointmentPage(props) {
                       height: "50%",
                     }}
                   >
-                    UTC - 07:00 Pacific Time
+                    UTC - 07:00 PST
                   </div>
                 </div>
                 {/* <div className={classes.timeslotButtonBox}> */}
