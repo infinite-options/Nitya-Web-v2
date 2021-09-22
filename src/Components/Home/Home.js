@@ -12,6 +12,8 @@ import "react-multi-carousel/lib/styles.css";
 
 import card1 from "./card1.jpg";
 
+import Contact from  "./Contact";
+
 const responsive = {
   superLargeDesktop: {
     breakpoint: { max: 3000, min: 1430 },
@@ -222,16 +224,17 @@ export default function Home() {
                 aria-label={"click button to book a session."}
                 style={{ textAlign: "center" }}
               >
+                <a href="Contact" style={{textDecoration:"none"}}>
                 <Button
                   className={classes.btn}
                   id="btn"
-                  onClick={() => {
-                    goToSlide2(1);
-                  }}
+                  // onClick={() => {
+                  //   goToSlide2(1);
+                  // }}
                 >
                   {/* Is Ayurveda for you? */}
                   Schedule a Free Consultation
-                </Button>
+                </Button></a>
               </div>
             </div>
 
