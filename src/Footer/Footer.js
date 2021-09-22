@@ -158,7 +158,7 @@ function Footer() {
             </p>
           </Col>
         </Row>
-        <Row style={{display:"flex", justifyContent:"center"}}>
+        {/* <Row style={{display:"flex", justifyContent:"center"}}>
                <Col md="auto" style={{ textAlign: "center"}}>
                 <p
                   style={{
@@ -173,7 +173,7 @@ function Footer() {
                   </a>
                 </p>
               </Col>
-        </Row>
+        </Row> */}
 
 
         <div>
@@ -204,7 +204,28 @@ function Footer() {
               </div>
             </Col>
           </Row>
-          <Row style={{padding:"0 0 0 15px", margin:"0"}}>
+
+
+
+
+          <Row style={{margin:"0"}}>
+            <Col>
+            <p
+                    style={{
+                      font: "normal normal 600 14px/25px SF Pro Display",
+                      textDecoration: "underline",
+                      margin: "0px",
+                      padding: "0 0 20px 0",
+                    }}
+                  >
+                    <a href="/login" style={{ color: "white" }}>
+                      Admin Login
+                    </a>
+                  </p>
+
+            </Col>
+            <Col>
+            <div style={{float:"right"}}>
             <img
                   src={Namacb}
                   style={{
@@ -225,7 +246,12 @@ function Footer() {
                   aria-hidden="false"
                   aria-label="Instagram"
                 />
+              </div>
+            </Col>
           </Row>
+
+
+
         </div>
 
 
