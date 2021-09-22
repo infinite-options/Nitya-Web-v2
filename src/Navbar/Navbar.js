@@ -77,10 +77,11 @@ const Navbar = () => {
       <Link to="/" className="nav-logo">
         <img
           src={logo}
-          style={{
-            height: '128px',
-            objectFit: "cover",
-          }}
+          // style={{
+          //   height: '128px',
+          //   objectFit: "cover",
+          // }}
+          className="logoImg"
           alt="Nitya Ayurveda’s Logo"
           onClick={scrollToTop}
         />

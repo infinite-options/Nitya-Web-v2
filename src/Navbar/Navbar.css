@@ -1,5 +1,6 @@
 .navbar {
   height: 20vh;
+  /* height: 15vh; */
   background: white;
   color: #8d6f1a;
   display: flex;
@@ -68,6 +69,11 @@ flex: 1;
   color: #d3a625;
 }
 
+.logoImg{
+  height: 128px;
+  object-fit: cover;
+}
+
 @media screen and (max-width: 1250px) and (min-width: 1050px) {
   .right {
     width: auto;
@@ -82,6 +88,7 @@ flex: 1;
     z-index: 500;
     justify-content: space-between;
     /* cursor: pointer; */
+    height: 12vh;
   }
 
   .emptyDiv{
@@ -119,5 +126,8 @@ flex: 1;
     width: 0px;
     margin-left: 0px;
     display: none;
+  }
+  .logoImg {
+    height: 100px;
   }
 }
