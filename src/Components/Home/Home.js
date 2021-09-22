@@ -154,7 +154,7 @@ export default function Home() {
       para1 = card1P1;
       para2 = card1P2;
     } else if (arg === "3") {
-      title = "Is Ayurveda for you?";
+      title = "Schedule a Free 15 min consultation";
       para1 = card2P1;
       para2 = card2P2;
     }
@@ -229,7 +229,8 @@ export default function Home() {
                     goToSlide2(1);
                   }}
                 >
-                  Is Ayurveda for you?
+                  {/* Is Ayurveda for you? */}
+                  Schedule a Free 15 min consultation
                 </Button>
               </div>
             </div>
@@ -251,7 +252,7 @@ export default function Home() {
                     textAlign: "center",
                     padding: "5%",
                     backgroundColor: "#B28D42",
-                    height: "476px",
+                    height: "520px",
                   }}
                 >
                   <h1
@@ -289,7 +290,7 @@ export default function Home() {
                     textAlign: "center",
                     padding: "5%",
                     backgroundColor: "#B28D42",
-                    height: "476px",
+                    height: "520px",
                   }}
                 >
                   <h1

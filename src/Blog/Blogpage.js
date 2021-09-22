@@ -42,8 +42,9 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "100px",
     },
     "@media (max-width: 1100px)": {
-      marginRight: "50px",
-      marginLeft: "50px",
+      // marginRight: "50px",
+      // marginLeft: "50px",
+      width:"490px"
     },
   },
   appbar: {
@@ -434,8 +435,8 @@ function Blogpage(props) {
                       </div>
                     </div>
                   </Link>
-                  <hr style={{ color: "#b28d42" }}></hr>
-                  <div className={classes.cardActions}>
+                  {/* <hr style={{ color: "#b28d42" }}></hr> */}
+                  {/* <div className={classes.cardActions}>
                     <p>
                       <span>Views &nbsp;&nbsp; Comments</span>
                     </p>
@@ -448,7 +449,7 @@ function Blogpage(props) {
                         <ShareBtn style={{ height: "24px" }} />
                       </IconButton>
                     </div>
-                  </div>
+                  </div> */}
                 </Col>
               </Row>
             </Card>

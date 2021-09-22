@@ -4,6 +4,7 @@
   padding: 0;
   font-family: "Roboto", sans-serif;
   width: 100%;
+
 }
 .about {
   /* margin-left: 200px;
@@ -101,10 +102,11 @@
   padding-top: 50px;
   padding-bottom: 50px;
   /* width: 100%; */
-  border: 1px solid slateblue;
+  /* border: 1px solid slateblue; */
   /* margin:0;
    */
    overflow-x: hidden;
+   margin: 0;
 }
 .content-wrap {
   flex: 1;
