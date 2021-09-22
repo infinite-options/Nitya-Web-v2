@@ -108,7 +108,7 @@ const useStyles = makeStyles((theme) => ({
   },
 
   card: {
-    border:"1px solid blue",
+    // border:"1px solid blue",
     display: "flex",
     boxShadow: "none",
     paddingTop: "30px",
@@ -138,7 +138,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   header: {
-    border: "1px solid green",
+    // border: "1px solid green",
     display: "flex",
     justifyContent: "space-between",
     color: "#8d6f19",
@@ -150,8 +150,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   desc: {
-    // marginLeft: "-50px",
-    border: "1px solid purple",
+    marginLeft: "-50px",
+
     height: "327px",
   },
   title: {
@@ -388,7 +388,7 @@ function Blogpage(props) {
                     >
                       <MoreVertIcon />
                     </IconButton> */}
-                    <Menu
+                    {/* <Menu
                       elevation={0}
                       getContentAnchorEl={null}
                       anchorOrigin={{
@@ -404,7 +404,7 @@ function Blogpage(props) {
                       keepMounted
                       open={Boolean(anchorEl)}
                       onClose={handleClose}
-                    >
+                    > */}
                       {/* <MenuItem
                         style={{
                           color: "#594d2c",
@@ -424,7 +424,7 @@ function Blogpage(props) {
                         </IconButton>
                         Share
                       </MenuItem> */}
-                    </Menu>
+                    {/* </Menu> */}
                   </div>
                   <Link
                     to={`/${post.blog_uid}/fullblog`}
@@ -519,8 +519,8 @@ function Blogpage(props) {
                     </div>
                   </div>
                 </Link>
-                <hr style={{ color: "#b28d42" }}></hr>
-                <div className={classes.cardActions}>
+                {/* <hr style={{ color: "#b28d42" }}></hr> */}
+                {/* <div className={classes.cardActions}>
                   <p>
                     <span>Views &nbsp;&nbsp; Comments</span>
                   </p>
@@ -533,7 +533,7 @@ function Blogpage(props) {
                       <ShareBtn style={{ height: "24px" }} />
                     </IconButton>
                   </div>
-                </div>
+                </div> */}
               </Col>
             </Card>
           </div>
