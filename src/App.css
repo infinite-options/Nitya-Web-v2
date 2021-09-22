@@ -100,6 +100,11 @@
   flex-direction: column;
   padding-top: 50px;
   padding-bottom: 50px;
+  /* width: 100%; */
+  border: 1px solid slateblue;
+  /* margin:0;
+   */
+   overflow-x: hidden;
 }
 .content-wrap {
   flex: 1;

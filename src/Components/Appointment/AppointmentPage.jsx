@@ -21,6 +21,7 @@ const useStyles = makeStyles({
     width: "980px",
     padding: "50px 50px",
     backgroundColor: "white",
+    // border: "1px solid blue"
   },
   // h1: {
   //   fontSize: "24px",
@@ -43,7 +44,7 @@ const useStyles = makeStyles({
     fontSize: "20px",
     // fontFamily: "SFProDisplayRegular",
     color: "#B28D42",
-    textAlign: "center",
+    textAlign: "left",
   },
   content3: {
     fontSize: "22px",
@@ -69,6 +70,7 @@ const useStyles = makeStyles({
     margin: "auto",
     width: "980px",
     backgroundColor: "white",
+    // border: "1px solid green"
   },
   bookButton: {
     width: "200px",
@@ -163,7 +165,8 @@ const useStyles = makeStyles({
     width: "100%",
     margin: "0 auto",
     // border: "solid blue",
-    height: "520px",
+    // height: "520px",
+    // border:"1px solid orange"
   },
   // calendarBox: {
   //   width: "50%",
@@ -187,12 +190,14 @@ const useStyles = makeStyles({
     // height: "350px",
     height: "100%",
     padding:'3rem',
+    // marginTop:"700px",
     // display: "inline-block",
     // overflow: "auto",
     // display: "inline-block",
     // flexDirection: "column",
     // border: "dashed"
     //padding: "20px",
+    // border: "10px solid pink",
   },
   center: {
     margin: "0 auto",
@@ -200,10 +205,10 @@ const useStyles = makeStyles({
     // height: '200px'
   },
   timeslotButton: {
-    width: "10rem",
+    // width: "10rem",
     height: "3rem",
-    maxWidth: "80%",
-    backgroundColor: "white",
+    width: "80%",
+    backgroundColor: "pink",
     border: "2px solid #B28D42",
     color: "#B28D42",
     // padding: "15px 90px",
@@ -261,6 +266,30 @@ const useStyles = makeStyles({
   },
   img: {
     width: "100%",
+  },
+  '@media screen and (max-width: 1050px)':{
+    CalendarContainer:{
+      width:"490px",
+      // height:"2000px"
+    },
+    container:{
+      width:"490px",
+    },
+    content2:{
+      width:"300px"
+    },
+    timeslotButton:{
+      width: "10rem",
+      
+    },
+    timeBox:{
+      border: "1px solid purple",
+      overflowX: "hidden"
+    },
+    colTime:{
+      border: "1px solid blue",
+      padding:"20px"
+    }
   },
 });
 
@@ -571,7 +600,7 @@ export default function AppointmentPage(props) {
 
   function renderAvailableApptsVertical() {
     return timeSlots.map((element) => (
-      <Col  xs={3}>
+      <Col  className={classes.colTime}>
         <button
           className={classes.timeslotButton}
           onClick={() => selectApptTime(element.begin_time)}
@@ -658,7 +687,7 @@ export default function AppointmentPage(props) {
           >
             <Row className={classes.calendarTimeTable}>
             <Col>
-                <p className={classes.content2} style={{ textAlign: "left" }}>
+                <p className={classes.content2}>
                   <span
                     style={{
                       fontWeight: "600",
@@ -678,7 +707,7 @@ export default function AppointmentPage(props) {
                 />
                 <br />
                 <br />
-                <p className={classes.content2} style={{ textAlign: "left" }}>
+                <p className={classes.content2} >
                   6055 Meridian Ave #40
                   <br />
                   San Jose, CA, 95120
@@ -757,7 +786,7 @@ export default function AppointmentPage(props) {
                   </div>
                 </div>
                 {/* <div className={classes.timeslotButtonBox}> */}
-                <Container>
+                <Container className={classes.timeBox}>
                <Row md={8}>
                   {renderAvailableApptsVertical()}
                 {/* </div> */}
