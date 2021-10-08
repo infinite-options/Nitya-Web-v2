@@ -21,9 +21,9 @@ import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ShareOutline from "@material-ui/icons/ShareOutlined";
 import SearchIcon from "@material-ui/icons/Search";
-import defaultImg from "../Blog-Default-Img.png";
-
-import { ReactComponent as ShareBtn } from "../ios-share-alt.svg";
+import defaultImg from "../Assets/Images/Blog-Default-Img.png";
+import { Markup } from 'interweave';
+import { ReactComponent as ShareBtn } from "../Assets/Images/ios-share-alt.svg";
 
 import AddIcon from '@material-ui/icons/Add';
 
@@ -42,13 +42,12 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: "100px",
     },
     "@media (max-width: 1100px)": {
-      // marginRight: "50px",
-      // marginLeft: "50px",
-      width:"490px"
+      marginRight: "50px",
+      marginLeft: "50px",
     },
   },
   appbar: {
-    backgroundColor: "#b28d42",
+    backgroundColor: "#C3A336",
     boxShadow: "none",
     padding: "4px",
     "@media (max-width: 880px)": {
@@ -100,7 +99,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "15px",
     border: "none",
     "&::placeholder": {
-      color: "#b28d42",
+      color: "#C3A336",
     },
     "@media (max-width: 1430px)": {
       width: "200px",
@@ -108,13 +107,11 @@ const useStyles = makeStyles((theme) => ({
   },
 
   card: {
-    // border:"1px solid blue",
-    display: "flex",
+    display: "block",
     boxShadow: "none",
     paddingTop: "30px",
     paddingBottom: "30px",
     paddingLeft: "30px",
-    paddingRight: "30px",
     "@media (max-width: 1100px)": {},
   },
   cardRow: {
@@ -130,15 +127,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   blogImg: {
-    width: "436px",
-    height: "327px",
+    width: "25rem",
+    height: "20rem",
     "@media (max-width: 570px)": {
       width: "90%",
       height: "90%",
     },
   },
   header: {
-    // border: "1px solid green",
     display: "flex",
     justifyContent: "space-between",
     color: "#8d6f19",
@@ -151,11 +147,9 @@ const useStyles = makeStyles((theme) => ({
   },
   desc: {
     marginLeft: "-50px",
-
-    height: "327px",
   },
   title: {
-    color: "#b28d42",
+    color: "#C3A336",
     fontSize: "2rem",
     lineHeight: "1.6",
   },
@@ -166,7 +160,6 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     lineHeight: "1.4",
     textAlign: "justify",
-    paddingTop: "30px",
     paddingBottom: "10px",
   },
   cardActions: {
@@ -277,7 +270,7 @@ function Blogpage(props) {
   };
 
   const navLinks = [
-    { title: `all posts`, path: `/all posts` },
+    { title: `all posts`, path: `/blog` },
     { title: `healthy tips`, path: `/healthy tips` },
     { title: `recipes`, path: `/recipes` },
     { title: `living well`, path: `/living well` },
@@ -291,7 +284,7 @@ function Blogpage(props) {
             display: 'flex',
             justifyContent: 'space-evenly',
             textAlign: "center",
-            color: "#b28d42",
+            color: "#C3A336",
             fontSize: "31px",
             padding: "20px",
 
@@ -352,10 +345,10 @@ function Blogpage(props) {
 
         {data.map((post) => (
           <div className="blogPostContainer">
-            <Card className={classes.card}>
-              <Row className={classes.cardRow}>
+            <div className={classes.card}>
+              <div style={{ display: 'flex' }} className={classes.cardRow}>
                 <div>
-                  <Col>
+                  <div>
                     <img
                       src={
                         post.blogImage !== "NULL" && post.blogImage
@@ -365,30 +358,13 @@ function Blogpage(props) {
                       className={classes.blogImg}
                       onError={(e) => (e.target.style.display = "none")}
                     />
-                  </Col>
+                  </div>
                 </div>
-                <Col className={classes.desc}>
+                <div style={{ paddingLeft: '10%' }} className={classes.desc}>
                   <div className={classes.header}>
                     {convertDate(post.postedOn)}
-                    <div
-                      style={{
-                        height: "6px",
-                        width: "6px",
-                        backgroundColor: "#d28d42",
-                        borderRadius: "3px",
-                        marginTop: "auto",
-                        marginBottom: "auto",
-                      }}
-                    />
-                    3 mins
-                    {/* <IconButton
-                      onClick={handleClick}
-                      style={{ float: "right" }}
-                      aria-label="click to share post"
-                    >
-                      <MoreVertIcon />
-                    </IconButton> */}
-                    {/* <Menu
+
+                    <Menu
                       elevation={0}
                       getContentAnchorEl={null}
                       anchorOrigin={{
@@ -404,7 +380,7 @@ function Blogpage(props) {
                       keepMounted
                       open={Boolean(anchorEl)}
                       onClose={handleClose}
-                    > */}
+                    >
                       {/* <MenuItem
                         style={{
                           color: "#594d2c",
@@ -424,7 +400,7 @@ function Blogpage(props) {
                         </IconButton>
                         Share
                       </MenuItem> */}
-                    {/* </Menu> */}
+                    </Menu>
                   </div>
                   <Link
                     to={`/${post.blog_uid}/fullblog`}
@@ -432,31 +408,16 @@ function Blogpage(props) {
                   >
                     <div>
                       <div className={classes.title}>
-                        <p>{post.blogTitle}</p>
+                        <div style={{ textAlign: 'left' }}>{post.blogTitle}</div>
                       </div>
-                      <div className={classes.content}>
-                        <p>{post.blogText}</p>
+                      <div className={classes.content} style={{ width: '100%', marginRight: '0px' }}>
+                        <Markup content={post.blogSummary} />
                       </div>
                     </div>
                   </Link>
-                  {/* <hr style={{ color: "#b28d42" }}></hr> */}
-                  {/* <div className={classes.cardActions}>
-                    <p>
-                      <span>Views &nbsp;&nbsp; Comments</span>
-                    </p>
-
-                    <div>
-                      <IconButton style={{ color: "#b28d42" }}>
-                        <FavoriteBorderIcon />
-                      </IconButton>
-                      <IconButton>
-                        <ShareBtn style={{ height: "24px" }} />
-                      </IconButton>
-                    </div>
-                  </div> */}
-                </Col>
-              </Row>
-            </Card>
+                </div>
+              </div>
+            </div>
             <Card className={classes.cardMobile}>
               <img
                 src={
@@ -480,7 +441,6 @@ function Blogpage(props) {
                       marginBottom: "auto",
                     }}
                   />
-                  3 mins
                   {/* <IconButton
                       onClick={handleClick}
                       style={{ float: "right" }}
@@ -514,26 +474,26 @@ function Blogpage(props) {
                     <div className={classes.title}>
                       <p>{post.blogTitle}</p>
                     </div>
-                    <div className={classes.content}>
-                      <p>{post.blogText}</p>
+                    <div className={classes.content} style={{ width: '100%' }}>
+                      <Markup content={post.blogSummary} />
                     </div>
                   </div>
                 </Link>
-                {/* <hr style={{ color: "#b28d42" }}></hr> */}
-                {/* <div className={classes.cardActions}>
+                <hr style={{ color: "#C3A336" }}></hr>
+                <div className={classes.cardActions}>
                   <p>
                     <span>Views &nbsp;&nbsp; Comments</span>
                   </p>
 
                   <div>
-                    <IconButton style={{ color: "#b28d42" }}>
+                    <IconButton style={{ color: "#C3A336" }}>
                       <FavoriteBorderIcon />
                     </IconButton>
                     <IconButton>
                       <ShareBtn style={{ height: "24px" }} />
                     </IconButton>
                   </div>
-                </div> */}
+                </div>
               </Col>
             </Card>
           </div>

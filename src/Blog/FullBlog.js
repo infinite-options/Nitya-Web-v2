@@ -22,30 +22,34 @@ import SearchIcon from "@material-ui/icons/Search";
 import AuthorIcon from "@material-ui/icons/AccountCircle";
 import { useParams } from "react-router";
 import ScrollToTop from "./ScrollToTop";
+import { Markup } from 'interweave';
 
 const useStyles = makeStyles((theme) => ({
+  blogpage: {
+    marginLeft: "auto",
+    marginRight: "auto",
+  },
   container: {
-    position: "relative",
-    marginTop: "100px",
-    marginBottom: "100px",
-    left: "200px",
-    right: "80px",
-    maxheight: "auto",
-    width: "1430px",
     backgroundColor: "white",
-    paddingTop: 0,
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
+    marginRight: "200px",
+    marginLeft: "200px",
+    fontFamily: "Hoefler Text",
+    "@media (max-width: 1430px)": {
+      marginRight: "100px",
+      marginLeft: "100px",
+    },
+    "@media (max-width: 1100px)": {
+      marginRight: "50px",
+      marginLeft: "50px",
+    },
   },
   appbar: {
-    backgroundColor: "#ffffff",
+    backgroundColor: "#b28d42",
     boxShadow: "none",
-    paddingBottom: "10px",
-    paddingLeft: "300px",
-    paddingRight: "80px",
-    position: "fixed",
+    padding: "4px",
+    "@media (max-width: 880px)": {
+      display: "none",
+    },
   },
   navbarDisplayFlex: {
     display: "flex",
@@ -55,19 +59,17 @@ const useStyles = makeStyles((theme) => ({
   navDisplayFlex: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
+    minWidth: "60%",
   },
   linkText: {
     textDecoration: "none",
     textTransform: "capitalize",
-    color: "#594d2c",
+    color: "white",
   },
   search: {
-    position: "relative",
-    borderRadius: theme.shape.borderRadius,
-    backgroundColor: fade(theme.palette.common.white, 0.15),
-    "&:hover": {
-      backgroundColor: fade(theme.palette.common.white, 0.25),
-    },
+    display: "inline-block",
+    borderRadius: "15px",
     marginLeft: 0,
     width: "100%",
     [theme.breakpoints.up("sm")]: {
@@ -75,69 +77,89 @@ const useStyles = makeStyles((theme) => ({
       width: "auto",
     },
   },
-  searchIcon: {
-    padding: theme.spacing(0, 0),
-    height: "100%",
-    position: "absolute",
-    pointerEvents: "none",
+  searchIconDiv: {
+    marginTop: "auto",
+    marginBottom: "auto",
+    marginLeft: "10px",
+  },
+  searchContainer: {
     display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-    color: "#594d2c",
   },
   inputRoot: {
     color: "#594d2cs",
   },
   inputInput: {
+    padding: "10px",
     boxShadow: "none",
     outline: "none",
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(1)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("sm")]: {
-      width: "12ch",
-      "&:focus": {
-        width: "20ch",
-      },
+    width: "450px",
+    borderRadius: "15px",
+    border: "none",
+    "&::placeholder": {
+      color: "#b28d42",
+    },
+    "@media (max-width: 1430px)": {
+      width: "200px",
     },
   },
+
   card: {
     display: "flex",
     boxShadow: "none",
-    maxWidth: "auto",
-    paddingLeft: "160px",
-    paddingRight: "160px",
+    paddingTop: "30px",
+    paddingBottom: "30px",
+    paddingLeft: "30px",
+    paddingRight: "30px",
+    "@media (max-width: 1100px)": {},
+  },
+  cardRow: {
+    "@media (max-width: 1100px)": {
+      display: "none",
+    },
+  },
+  cardMobile: {
+    display: "none",
+    "@media (max-width: 1100px)": {
+      display: "block",
+      textAlign: "center",
+    },
+  },
+  blogImg: {
+    width: "436px",
+    height: "327px",
+    "@media (max-width: 570px)": {
+      width: "90%",
+      height: "90%",
+    },
   },
   header: {
-    display: "flex-inline",
-    fontFamily: "'Open Sans', sans-serif",
+    display: "flex",
+    justifyContent: "space-between",
     color: "#8d6f19",
-    fontSize: "1.6rem",
-    paddingTop: "10px",
+    fontSize: "1.2rem",
     paddingBottom: "10px",
+    width: "250px",
+    "@media (max-width: 570px)": {
+      width: "100px",
+    },
+  },
+  desc: {
+    marginLeft: "-50px",
   },
   title: {
-    fontFamily: "DidoteTextW01-Italic",
-    color: "#594d2c",
-    fontSize: "4rem",
+    color: "#b28d42",
+    fontSize: "2rem",
     lineHeight: "1.6",
   },
-  img: {
-    display: "flex",
-    justifyContent: "center",
-    maxWidth: "100%",
-  },
   content: {
-    fontSize: "1.8rem",
-    fontFamily: "'Open Sans', sans-serif",
+    fontSize: "1.2rem",
+    fontFamily: "SF Pro Display",
     wordWrap: "break-word",
-    color: "#8d6f19",
+    color: "black",
     lineHeight: "1.4",
     textAlign: "justify",
     paddingTop: "30px",
-    paddingBottom: "30px",
+    paddingBottom: "10px",
   },
   cardActions: {
     display: "flex",
@@ -148,18 +170,19 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Open Sans', sans-serif",
     wordWrap: "break-word",
     color: "#8d6f19",
-    paddingBottom: "30px",
   },
-  icon: {
-    color: "red",
-    float: "right",
-  },
+
   author: {
     display: "flex",
   },
   paginationContainer: {
     display: "flex",
     justifyContent: "center",
+  },
+  btn: {
+    backgroundColor: "#d3a625",
+    color: "#ffffff",
+    boxShadow: "none",
   },
 }));
 
@@ -227,17 +250,19 @@ function FullBlog(props) {
               ))}
             </List>
           </Container>
-          <div className={classes.search}>
-            <div className={classes.searchIcon}>
-              <SearchIcon />
+          <div className={classes.searchContainer}>
+            <div className={classes.search}>
+              <form onSubmit={submitSearch}>
+                <input
+                  type="text"
+                  className={classes.inputInput}
+                  placeholder="Search..."
+                />
+              </form>
             </div>
-            <form onSubmit={submitSearch}>
-              <input
-                type="text"
-                className={classes.inputInput}
-                placeholder="Search..."
-              />
-            </form>
+            <div className={classes.searchIconDiv}>
+              <SearchIcon fontSize="large" />
+            </div>
           </div>
         </Toolbar>
       </AppBar>
@@ -246,10 +271,13 @@ function FullBlog(props) {
           <div className="blogPostContainer">
             <Card className={classes.card}>
               <div>
-                <div className={classes.header}>
+                <div style={{ textAlign: 'left', fontSize: '52px' }} className={classes.title}>
+                  <p>{post.blogTitle}</p>
+                </div>
+                <div style={{ width: '50%' }} className={classes.header}>
                   <span>
                     <IconButton
-                      size="medium"
+                      size="lg"
                       onClick={handleClick}
                       aria-label="click to share post"
                     >
@@ -257,14 +285,16 @@ function FullBlog(props) {
                     </IconButton>
                     &nbsp;&nbsp; &nbsp;&nbsp;
                     {post.author} &nbsp;&nbsp; {post.postedOn}{" "}
+                    <IconButton
+                      onClick={handleClick}
+                      style={{}}
+                      aria-label="click to share post">
+                      <MoreVertIcon />
+                    </IconButton>
+
                   </span>
-                  <IconButton
-                    onClick={handleClick}
-                    style={{ float: "right" }}
-                    aria-label="click to share post"
-                  >
-                    <MoreVertIcon />
-                  </IconButton>
+
+
                   <Menu
                     elevation={0}
                     getContentAnchorEl={null}
@@ -304,9 +334,7 @@ function FullBlog(props) {
                   </Menu>
                 </div>
 
-                <div className={classes.title}>
-                  <p>{post.blogTitle}</p>
-                </div>
+
                 {!!post.blogImage && (
                   <div className={classes.img}>
                     <img
@@ -320,7 +348,20 @@ function FullBlog(props) {
                   </div>
                 )}
                 <div className={classes.content}>
-                  <p>{post.blogText}</p>
+                  {/* <div>{post.blogText.replace('</br>', '\n')}</div> */}
+                  <p style={{ fontSize: '32px' }}>{post.blogTitle}</p>
+                  {/* {
+                    post.blogText.split("\n").map(function (item, idx) {
+                      return (
+                        <span key={idx}>
+                          {item}
+                          <br />
+                        </span>
+                      )
+                    })
+                  } */}
+
+                  <Markup content={post.blogText} />
                 </div>
 
                 <hr style={{ color: "#8d6f19" }}></hr>

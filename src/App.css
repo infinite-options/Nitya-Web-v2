@@ -1,229 +1,39 @@
 .App {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-family: "Roboto", sans-serif;
-  width: 100%;
-
-}
-.about {
-  /* margin-left: 200px;
-  margin-right: 200px; */
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-
-  align-items: center;
-  justify-content: center;
-}
-.home {
-  /* margin-left: 200px;
-  margin-right: 200px; */
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-
-  align-items: center;
-  justify-content: center;
-  /* padding-top: 50px; */
-  /* height: 329px;
-    width: 679px; */
-}
-.contact {
-  /* margin-left: 200px;
-  margin-right: 200px; */
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-
-  align-items: center;
-  justify-content: center;
-}
-.services {
-  /* margin-left: 200px;
-  margin-right: 200px; */
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-
-  -ms-flex-align: center;
-  -webkit-align-items: center;
-  -webkit-box-align: center;
-
-  align-items: center;
-  justify-content: center;
-}
-.servicespage {
-  /* margin-left: 0px;
-  margin-right: 0px;
-  margin: none; */
-  margin: auto;
-  /* background-color: white; */
-}
-.blog {
-  margin-left: 200px;
-  margin-right: 200px;
-}
-.fullblog {
-  margin-left: 200px;
-  margin-right: 200px;
-}
-.consulting {
-  /* margin-left: 43px;
-  margin-right: 43px; */
-  /* width: 980px; */
-  /* margin-left: 10rem; 
-  margin-right: 10rem; */
-}
-/* .treatments {
-  margin-left: 200px;
-  margin-right: 200px;
-  margin-left: 10rem; 
-  margin-right: 10rem;
-  display: flex;
-  justify-content: center;
-} */
-.page-container {
-  background-color: #dbdbdb;
-  display: flex;
-  flex-direction: column;
-  padding-top: 50px;
-  padding-bottom: 50px;
-  /* width: 100%; */
-  /* border: 1px solid slateblue; */
-  /* margin:0;
-   */
-   overflow-x: hidden;
-   margin: 0;
-}
-.content-wrap {
-  flex: 1;
-}
-.heading {
-  font-size: 80px;
   text-align: center;
-  font-style: italic;
-  color: #8d6f1a;
+  background-color: #DADADA;
 }
 
-.rows{
-  padding-bottom: 30px;
-
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
 }
 
-.content {
-  margin-top: 23px;
-  font: normal normal normal 22px/26px SFProDisplayRegular;
-
-  color: #B28D42;
-
-  text-align: left;
-  padding-Bottom: 10px;
-
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
 }
 
-.imageAbout {
-  width: 400px;
-  height: 463px;
-  overflow: hidden;
-  display: block;
-  margin: '50px 50px 0px 50px'
-}
-
-
-/* .page-container-contact {
-  background-color: #dbdbdb;
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: center;
-  padding-left:30px;
-  padding-right: 30px;
-} */
-
-.container-contact {
-  /* width: 980px; */
-  /* height: 615px; */
-
-  /* background-color: white; */
+  font-size: calc(10px + 2vmin);
+  color: white;
 }
 
-@media screen and (max-width: 1050px) {
-  .home {
+.App-link {
+  color: #61dafb;
+}
 
-    display: flex;
-  
-    align-items: center;
-    justify-content: center;
-    /* padding: 150px; */
-
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
   }
-
-  .contact {
-    
-    display: flex;
+  to {
+    transform: rotate(360deg);
   }
-
-  .rows{
-    padding-bottom: 30px;
-  
-    flex-direction: column-reverse;
-  }
- 
-  .page-container {
-    background-color: #dbdbdb;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left:90px;
-    padding-right: 90px;
-  }
-
-  
-  /* .page-container-contact {
-    background-color: #dbdbdb;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    padding-left:90px;
-    padding-right: 90px;
-      } */
-
-  /* .content {
-    margin-top: 23px;
-    font: normal normal normal 22px/26px SFProDisplayRegular;
-  
-    color: #B28D42;
-  
-    text-align: left;
-    padding: 30px;
-  
-  } */
-
-  .imageAbout {
-    width: 400px;
-    height: 463px;
-    overflow: hidden;
-    display: block;
-    margin-top: 50px;
-  }
-
-/*   
-.container-contact {
-  width: 490px;
-  height: 1060px;
-
-  background-color: white;
-} */
 }
