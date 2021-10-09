@@ -1,0 +1,67 @@
+@font-face {
+    font-family: Hoefler Text;
+    src: url('../fonts/Hoefler-Text.ttc');
+    font-family: SF Pro ;
+    src: url('../fonts/SF-Pro.ttf');
+    font-family: SF Pro Display Regular;
+    src: url('../fonts/SF-Pro-Display-Regular.otf');
+    font-family: SF Pro Display Semibold;
+    src: url('../fonts/SF-Pro-Display-Semibold.otf');
+  
+  }
+
+.Container_Contact{
+    background-color: white;
+    width: 60%;
+    padding: 5%;
+    margin-left: 15%;
+    margin-top: 5rem;
+    margin-bottom: 5rem;
+    display: flex;
+    justify-content: center;
+}
+
+.Container_1_Contact{
+    flex:1;
+    width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+
+.Title_Contact{
+    font-family:  Hoefler Text ;
+    font-style: italic;
+    font-size: 42px;
+    color: #C3A336;
+}
+
+.Body_Contact{
+    font-family: SF Pro Display Regular;
+    font-size: 20px;
+    color: #C3A336;
+    margin-top: 1rem;
+}
+
+.Container_2_Contact{
+    margin-left: 2rem;
+    margin-top: 2rem;
+    width: 50%;
+    flex:1;
+    display: flex;
+    flex-direction: column;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: #C3A336;
+    opacity: 1; /* Firefox */
+  }
+  
+  :-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: #C3A336;
+  }
+  
+  ::-ms-input-placeholder { /* Microsoft Edge */
+    color: #C3A336;
+  }
