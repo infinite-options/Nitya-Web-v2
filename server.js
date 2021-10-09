@@ -25,8 +25,8 @@ app.get('/*', function (req, res) {
 });
 
 
-var key_url = '/etc/letsencrypt/live/infiniteoptions.com/privkey.pem';
-var cert_url = '/etc/letsencrypt/live/infiniteoptions.com/fullchain.pem';
+var key_url = '/etc/letsencrypt/live/nityaayurveda.com/privkey.pem';
+var cert_url = '/etc/letsencrypt/live/nityaayurveda.com/fullchain.pem';
 
 var options = {};
 
