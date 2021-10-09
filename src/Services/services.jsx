@@ -14,7 +14,21 @@ const Services = (props) => {
       display: "flex",
       flexDirection: "column",
       alignItems: "center",
+      backgroundColor:'white',
+      marginTop:'2rem',
+      width:'60%',
+      marginLeft:'20%',
+      // "@media (max-width: 1000px)": {
+      //   width: "60%",
+      //   marginLeft:'20%'
+      // },
+      // "@media (max-width: 1850px) and (min-width: 1600px)": {
+      //   width: "100%",
+      //   marginLeft:'20%'
+      // },
     },
+
+ 
 
     ButtonGroup: {
       top: 0,
@@ -68,7 +82,6 @@ const Services = (props) => {
   return (
     <div className={classes.container} >
         
-      <div className="services" id="services" aria-label={"service block"}>
         <div id="servicesContainer" >
         <div className="BoxContainer_1_title" style={{marginTop:'2rem'}}>
             Services
@@ -107,7 +120,6 @@ const Services = (props) => {
             {rSelected}
           </p>
         </div>
-      </div>
     </div>
   );
 };

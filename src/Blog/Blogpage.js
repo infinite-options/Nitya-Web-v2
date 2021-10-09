@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { fade } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
@@ -24,7 +24,7 @@ import SearchIcon from "@material-ui/icons/Search";
 import defaultImg from "../Assets/Images/Blog-Default-Img.png";
 import { Markup } from 'interweave';
 import { ReactComponent as ShareBtn } from "../Assets/Images/ios-share-alt.svg";
-
+import { AuthContext } from "../auth/AuthContext";
 import AddIcon from '@material-ui/icons/Add';
 
 const useStyles = makeStyles((theme) => ({
@@ -192,6 +192,8 @@ function Blogpage(props) {
   const classes = useStyles();
   const [data, setData] = useState([]);
   const history = useHistory();
+  const Auth = useContext(AuthContext);
+
   const fetchData = async () => {
     const res = await fetch(
       "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/truncatedBlog"
@@ -293,7 +295,9 @@ function Blogpage(props) {
           <div style={{ flex: '1' }}>
             Ayurvedic Musings
           </div>
-          <div>
+          {/* <div style={{ color: 'black' }}>{String(Auth.isAuth)}</div> */}
+
+          <div hidden={Auth.isAuth === false}>
             <AddIcon
               size='lg'
               style={{ cursor: 'pointer' }}

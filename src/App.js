@@ -30,9 +30,33 @@ import SignUp from './Admin/SignUp';
 import AddPost from './Blog/AddPost';
 import Temp from './New Temp/Temp.jsx';
 import ConfirmationPage from './Appointment/confirmationPage';
+import Cookies from "universal-cookie";
+import { AuthContext } from './auth/AuthContext';
 export const MyContext = React.createContext();
 
 function App() {
+
+  const cookies = new Cookies();
+  let uid =
+    cookies.get("customer_uid") == null ? "" : cookies.get("customer_uid");
+  let role = cookies.get("role") == null ? "" : cookies.get("role");
+  let guesProfile =
+    localStorage.getItem("guestProfile") == null
+      ? ""
+      : localStorage.getItem("guestProfile");
+  const [isGuest, setIsGuest] = useState(guesProfile === "" ? false : true); // checks if user is logged in
+  const [isAuth, setIsAuth] = useState(uid === "" ? false : true); // checks if user is logged in
+  const [authLevel, setAuthLevel] = useState();
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+
+  const login = () => {
+    setIsLoggedIn(true);
+  };
+
+  const logout = () => {
+    setIsLoggedIn(false);
+  };
 
   const url =
     "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/treatments";
@@ -54,115 +78,122 @@ function App() {
   return (
     <div className="App">
       <Router>
+        <AuthContext.Provider
+          value={{
+            isLoggedIn: isLoggedIn,
+            login: login,
+            logout: logout,
+            isGuest,
+            setIsGuest,
+            isAuth,
+            setIsAuth,
+            authLevel,
+            setAuthLevel,
+          }}
+        >
+          <div>
 
-        <div>
+            <Navigation />
 
-          <Navigation />
+            <Switch>
+              <Route exact path="/:treatmentID/appt/">
+                <MyContext.Provider value={{ serviceArr, servicesLoaded }}>
+                  <Appointment />
+                </MyContext.Provider>
+              </Route>
+              <Route path="/:treatmentID/confirm">
+                <MyContext.Provider value={{ serviceArr, servicesLoaded }}>
 
-          <Switch>
-            <Route exact path="/:treatmentID/appt/">
-              <MyContext.Provider value={{ serviceArr, servicesLoaded }}>
-                <Appointment />
-              </MyContext.Provider>
-            </Route>
-            <Route path="/:treatmentID/confirm">
-              <MyContext.Provider value={{ serviceArr, servicesLoaded }}>
+                  <AppointmentConfirm />
+                </MyContext.Provider>
 
-                <AppointmentConfirm />
-              </MyContext.Provider>
+              </Route>
+              <Route path="/healthy tips">
 
-            </Route>
-            <Route path="/healthy tips">
+                <HealthyTips />
 
-              <HealthyTips />
+              </Route>
 
-            </Route>
+              <Route path="/login">
 
-            <Route path="/login">
+                <Login />
 
-              <Login />
+              </Route>
 
-            </Route>
+              <Route path="/apptconfirm">
+                <ConfirmationPage />
+              </Route>
 
-            <Route path="/apptconfirm">
-              <ConfirmationPage />
-            </Route>
+              <Route path="/addpost">
 
-            <Route path="/addpost">
+                <AddPost />
 
-              <AddPost />
+              </Route>
 
-            </Route>
+              <Route path="/signup">
 
-            <Route path="/signup">
+                <SignUp />
 
-              <SignUp />
+              </Route>
 
-            </Route>
+              <Route path="/recipes">
 
-            <Route path="/recipes">
+                <Recipes />
 
-              <Recipes />
+              </Route>
 
-            </Route>
+              <Route path="/living well">
 
-            <Route path="/living well">
+                <LivingWell />
 
-              <LivingWell />
-
-            </Route>
-
-
-            <Route path="/learnMore">
-
-              <LearnMore />
-
-            </Route>
-
-            <Route path="/about">
-
-              <About />
-
-            </Route>
-            <Route path="/:blog_uid/fullblog">
-
-              <FullBlog />
-            </Route>
-
-            <Route path="/blog">
-
-              <Blog />
-            </Route>
-
-            <Route path="/contact">
-
-              <Contact />
-
-            </Route>
-
-            <Route path="/services">
-
-              <Services />
-
-            </Route>
-
-            <Route path="/">
-
-              <Home />
-
-            </Route>
+              </Route>
 
 
+              <Route path="/learnMore">
 
+                <LearnMore />
 
-          </Switch>
+              </Route>
 
-          <Footer />
+              <Route path="/about">
 
-        </div>
+                <About />
 
+              </Route>
+              <Route path="/:blog_uid/fullblog">
 
+                <FullBlog />
+              </Route>
 
+              <Route path="/blog">
+
+                <Blog />
+              </Route>
+
+              <Route path="/contact">
+
+                <Contact />
+
+              </Route>
+
+              <Route path="/services">
+
+                <Services />
+
+              </Route>
+
+              <Route path="/">
+
+                <Home />
+
+              </Route>
+
+            </Switch>
+
+            <Footer />
+
+          </div>
+        </AuthContext.Provider>
       </Router>
 
     </div>

@@ -155,11 +155,11 @@ export default function Consulting(props) {
       //className="consulting"
       //id="consulting"
       //aria-label={"consulting section"}
-      style={{ width:'100%'}}
+      
     >
       <br />
       <br />
-      <div style={{ width:'1015px',  height: '30rem'}}>
+      <div className = "ConsultingContainer" style={{marginLeft:'10%',  height: '30rem'}}>
         { data
           .filter((service) =>   service.category === "Consultation" )
           .map((filteredService) => (

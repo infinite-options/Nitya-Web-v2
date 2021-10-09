@@ -7,7 +7,6 @@
 }
 
 #servicesContainer {
-   position:  relative ;
   /*  // top:  40px ; */
   /*minHeight:  710px ;
     minWidth:  600px ;
@@ -15,12 +14,9 @@
     width:  auto ;
     */
   margin-top: 50px;
-  width: 90%;
-  margin-left: 5%;
   height: 130rem;
   /* // padding:  50px ; */
 
-  background-color:white;
   display: flex;
   flex-direction: column;
   /* // justifyContent:  center ; */
@@ -94,3 +90,8 @@
   color: white;
   border: 1px solid #b28d42;
 } */
+
+@media screen and (max-width: 1850px) and (min-width: 1600px) {
+
+
+}

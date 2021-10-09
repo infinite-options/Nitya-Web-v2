@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import InputLabel from "@material-ui/core/InputLabel";
+import { Link, useHistory } from "react-router-dom";
 import FormHelperText from "@material-ui/core/FormHelperText";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
@@ -11,6 +12,7 @@ import IconButton from "@material-ui/core/IconButton";
 import PhotoCamera from "@material-ui/icons/PhotoCamera";
 import MenuItem from "@material-ui/core/MenuItem";
 import { Editor } from '@tinymce/tinymce-react';
+import ImageUploading from 'react-images-uploading';
 import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
@@ -49,6 +51,7 @@ const useStyles = makeStyles((theme) => ({
 
 function AddPost(props) {
   const classes = useStyles();
+  const history = useHistory();
   const [blog, setBlog] = useState(props.blog);
   const [blogTitle, setBlogTitle] = useState("");
   const [blogText, setBlogText] = useState("");
@@ -57,6 +60,14 @@ function AddPost(props) {
   const [author, setAuthor] = useState("");
   const [postedOn, setPostedOn] = useState("");
   const [blogCategory, setBlogCategory] = useState("");
+  const [images, setImages] = useState([]);
+  const maxNumber = 69;
+
+  const onChange = (imageList, addUpdateIndex) => {
+    // data for submit
+    console.log(imageList, addUpdateIndex);
+    setImages(imageList);
+  };
 
   const editorRef = useRef(null);
   const editorSummaryRef = useRef(null);
@@ -86,6 +97,7 @@ function AddPost(props) {
     })
       .then((response) => {
         console.log(response)
+        //  history.push("/blog")
       })
     // fetch(
     //   "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/addBlog",
@@ -136,44 +148,49 @@ function AddPost(props) {
 
                   <div style={{ textAlign: 'left', flex: '1', display: 'flex', flexDirection: 'column' }} className={classes.root}>
                     <div>
-                      <img src={blogImage} style={{ backgroundColor: '#DADADA', width: '200px', height: '200px' }} />
+                      {/* <img src={blogImage} style={{ backgroundColor: '#DADADA', width: '200px', height: '200px' }} /> */}
                     </div>
-                    <div>
-                      <input
-                        accept="image/*"
-                        className={classes.input}
-                        id="contained-button-file"
-                        value={blogImage}
+                    <div className="App">
+                      <ImageUploading
                         multiple
-                        type="file"
-                      />
-                      <label htmlFor="contained-button-file">
-                        <Button
-                          variant="contained"
-                          className={classes.btn}
-                          component="span"
-                          onChange={(e) => setBlogImage(e.target.value)}
-                        >
-                          Upload
-                        </Button>
-                      </label>
-                      <input
-                        accept="image/*"
-                        className={classes.input}
-                        id="icon-button-file"
-                        value={blogImage}
-                        type="file"
-                      />
-                      <label htmlFor="icon-button-file">
-                        <IconButton
-                          color="#d3a625"
-                          aria-label="upload picture"
-                          component="span"
-                          onChange={(e) => setBlogImage(e.target.value)}
-                        >
-                          <PhotoCamera />
-                        </IconButton>
-                      </label>
+                        value={images}
+                        onChange={onChange}
+                        maxNumber={maxNumber}
+                        dataURLKey="data_url"
+                      >
+                        {({
+                          imageList,
+                          onImageUpload,
+                          onImageRemoveAll,
+                          onImageUpdate,
+                          onImageRemove,
+                          isDragging,
+                          dragProps,
+                        }) => (
+                          // write your building UI
+                          <div className="upload__image-wrapper">
+                            <button
+                              style={isDragging ? { color: 'red' } : undefined}
+                              onClick={onImageUpload}
+                              {...dragProps}
+                            >
+                              Click or Drop here
+                            </button>
+                            &nbsp;
+                            <button onClick={onImageRemoveAll}>Remove all images</button>
+                            {imageList.map((image, index) => (
+                              setBlogImage(image['data_url']),
+                              <div key={index} className="image-item">
+                                <img src={image['data_url']} alt="" width="100" />
+                                <div className="image-item__btn-wrapper">
+                                  <button onClick={() => onImageUpdate(index)}>Update</button>
+                                  <button onClick={() => onImageRemove(index)}>Remove</button>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        )}
+                      </ImageUploading>
                     </div>
                     <div style={{ textAlign: 'left' }}>
                       <InputLabel id="demo-simple-select-label">
@@ -241,7 +258,7 @@ function AddPost(props) {
                     <div >
                       <Editor
                         onInit={(evt, editor) => editorSummaryRef.current = editor}
-                        apiKey='fil2sq11a35ihv1mg9a8elbax6n4fsays1o6krb5dcxxdtru'
+                        apiKey='adc5ek8m7a2vvtebcvzm881l62jkqx3qpcvp6do4lbhtp20q'
                         initialValue="<p>Write an abstract</p>"
                         onChange={log}
                         init={{
@@ -271,7 +288,7 @@ function AddPost(props) {
                 <div style={{ marginTop: '2rem' }}>
                   <Editor
                     onInit={(evt, editor) => editorRef.current = editor}
-                    apiKey='fil2sq11a35ihv1mg9a8elbax6n4fsays1o6krb5dcxxdtru'
+                    apiKey='adc5ek8m7a2vvtebcvzm881l62jkqx3qpcvp6do4lbhtp20q'
                     initialValue="<p>Write complete blog here</p>"
                     onChange={log}
                     init={{

@@ -1,7 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "js-cookie";
-import { withRouter } from "react-router";
+import { useHistory, withRouter } from "react-router";
 import axios from "axios";
 import { Grid, Paper, Button, Typography, Box } from "@material-ui/core";
 import { AuthContext } from "../auth/AuthContext";
@@ -19,6 +19,7 @@ function AdminLogin(props) {
   const [errorMessage, setErrorMessage] = useState("");
 
   const Auth = useContext(AuthContext);
+  const history = useHistory();
 
   useEffect(() => {
     if (
@@ -190,6 +191,9 @@ function AdminLogin(props) {
                     //TODO: tell to please use Google/ Facebook login
                     console.log(res);
                     if (res.data.code === 200) {
+                      history.push("/blog")
+                      Auth.setIsAuth(true)
+                      Auth.isLoggedIn(true)
                       setError("");
                       console.log("Login success");
                       let customerInfo = res.data.result[0];
@@ -466,66 +470,7 @@ function AdminLogin(props) {
           Sign Up
         </button>
       </div>
-      {/* <Paper style={paperStyle}>
-        <Grid container spacing={1} xs={12}>
-          <Grid item xs={12}>
-            <Box my={1} style={{ fontSize: "20px", color: "#8d6f1a" }}>
-              Log In
-            </Box>
-          </Grid>
-          <Grid item xs={12}>
-            <CssTextField
-              error={errorValue}
-              id="outlined-required"
-              label="email"
-              variant="outlined"
-              size="small"
-              value={emailValue}
-              onChange={handleEmailChange}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12}>
-            <CssTextField
-              error={errorValue}
-              id="outlined-password-input"
-              label="Password"
-              type="password"
-              variant="outlined"
-              size="small"
-              value={passwordValue}
-              onChange={handlePasswordChange}
-              fullWidth
-            />
-          </Grid>
-          <Grid item xs={12}>
-            {showError()}
-          </Grid>
-          <Grid item xs={12}>
-            <Box mb={2}>
-              <Button
-                variant="contained"
-                style={{
-                  backgroundColor: "#e9d9ac",
-                  color: "#8d6f1a",
-                  width: "300px",
-                  height: "40px",
-                  border: "1px solid #8d6f1a",
-                }}
-                onClick={verifyLoginInfo}
-              >
-                Login
-              </Button>
-            </Box>
-          </Grid>
-          <Grid item xs={12}>
-            <Box mb={2}>
-              <Box>or</Box>
-            </Box>
-          </Grid>
-          <SocialLogin setError={setError} setErrorMessage={setErrorMessage} />
-        </Grid>
-      </Paper> */}
+    
     </div>
   );
 }

@@ -8,6 +8,7 @@ import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
 import About from '../About/about';
 import Contact from '../Contact/contact';
+import '../Contact/contact.css';
 import card1 from "../Assets/Images/card1.jpg";
 import Axios from "axios";
 import MapSection from "../Contact/Map";
@@ -251,7 +252,7 @@ export default function Home(){
 
             <div>
                   <Services/>
-            </div>
+            </div >
 
 
             <div >
@@ -336,75 +337,7 @@ export default function Home(){
                   />
                 </div>
           </div>
-    </div>
-
-          {/*   <div className="BoxContainer_5">
-                <div className="BoxContainer_5_Text">
-                    <div  className="BoxContainer_5_Text_Header" >
-                    What our clients say
-                    </div>
-                    <div  className="BoxContainer_5_Text_Body" >
-                    “Choosing Infinite Options to create a wireframe for the early phase of my startup was the best decision I have made! 
-                    From the introduction, to development, to completion, the IO team was warm, consistent, and competent in their expertise.
-                     As someone without a technical background, the IO team made the process understandable and seamless. 
-                     I am obsessed with the final product and am looking forward to working with them again in the future!”
-                   </div>
-                   <p  className="BoxContainer_5_Text_Tail">
-                   -Mercedes Fernandez,
-                    </p>
-                    <div className="BoxContainer_5_Text_Tail">
-                    Founder, Walk with Pop
-                    </div>
-                </div>
-            </div>
-
-            <div  className="BoxContainer_6" style={{marginTop:'-1rem'}} >
-                <div  className="BoxContainer_6_Text_Header" >
-                    Teams
-                </div>
-                <div className="BoxContainer_6_Text_Body" >
-                    <div>
-                        <p>Front-End Development</p>
-                        <p>Back-End Development</p>
-                        <p>Mobile App Development</p>
-                    </div>
-                    <div className="BoxContainer_6_Text_Body_Margin">
-                        <p>UI / UX Design</p>
-                        <p>Marketing</p>
-                        <p>Human Resources</p>
-                    </div>
-                </div>
-                <div  style={{display:'flex', justifyContent:'center'}}>
-                    <button  ref={myRef} className="BoxContainer_6_Text_Button" onClick={()=> history.push("/teams")}>
-                    Join the team
-                    </button>
-                </div>
-            </div>
-        
-           
-            <div  className="BoxContainer_5">
-                <div className="BoxContainer_5_Text">
-                    <div  className="BoxContainer_5_Text_Header" >
-                    About Us
-                    </div>
-                    <div  className="BoxContainer_7_Text_Body" >
-                    Infinite Options was primarily started in 2019 to help college students gain real work experience along with their coursework.
-                    Prashant Marathay, the Founder and CEO, has 25+ years of experience as a project manager in Silicon Valley at companies 
-                    like Apple, Intel, Alphabet.
-               
-                   </div>
-                   <div  className="BoxContainer_7_Text_Body" >
-                        
-                    We’ve since built multiple businesses in-house, we offer business-in-a-box to people who want to be self-employed and
-                    we also work with clients to design and develop their business ideas.
-                    </div>
-                    <div style={{display:'flex', justifyContent:'center'}}>
-                    <button style={{fontSize:'20px' , marginTop:'2rem', border:'3px solid #52330D',color:'#52330D', borderRadius:'42px',fontFamily:'Avenir LT Std 45 Book',fontWeight:'600',padding:'1rem',paddingLeft:'2rem',paddingRight:'2rem',textTransform:'none', backgroundColor:"white"}}>
-                    Learn More
-                    </button>
-                </div>
-                </div> 
-            </div>*/}
+          </div>
             </Box>
             </Box>
         </div>
