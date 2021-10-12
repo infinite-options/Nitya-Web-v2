@@ -12,75 +12,30 @@ import { ApptContext } from "./Scheduler";
 const google = window.google;
 
 const useStyles = makeStyles({
-  container: {
-    margin: "50px auto",
-    width: "980px",
-    padding: "50px 50px",
-    backgroundColor: "white",
-    border: "inset"
-  },
-  h1: {
-    fontSize: "24px",
-    color: "#B28D42",
-    fontFamily: "Hoefler",
-  },
-  content: {
-    fontSize: "22px",
-    fontFamily: "SFProDisplayRegular",
-    color: "#B28D42",
-    textAlign: "center",
-  },
-  selectTime: {
-    fontSize: "32px",
-    color: "#52330D",
-    fontFamily: "AvenirHeavy",
-    margin: "0 auto",
-    textAlign: "center",
+  MobileContainerDivider:{
+    height: 'calc(100% - 174px)',
+    display: 'flex',
+    width: '100%',
+    "@media (max-width: 500px)": {
+      height:'auto',
+     display:'flex',
+     flexDirection:'column',
+   },
   },
 
-  CalendarContainer: {
-    margin: "auto",
-    width: "980px",
-    backgroundColor: "white",
-  },
-  button: {
-    backgroundColor: "white",
-    border: "2px solid #B28D42",
-    color: "#B28D42",
-    padding: "15px 90px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "block",
-    fontSize: "20px",
-    borderRadius: "50px",
-    margin: "2px auto",
-    "&:hover": {
-      background: "#B28D42",
-      color: "white",
-    },
-    "&:focus": {
-      outline: "none",
-      boxShadow: "none",
-    },
-    "&:active": {
-      outline: "none",
-      boxShadow: "none",
-    },
-  },
-  date: {
-    fontSize: "42px",
-    fontFamily: "AvenirHeavy",
-    margin: "0 auto",
-    textAlign: "center",
-  },
-
-  center: {
-    margin: "0 auto",
-  },
-
-  img: {
-    width: "100%",
+  MobileContainerSubDivider:{
+      borderRight: '1px solid #D3A625',
+      height: '100%',
+      width: '50%',
+      marginLeft: '30px',
+      marginBottom:'10px',
+      "@media (max-width: 500px)": {
+        width: '100%',
+        borderRight: '0px solid #D3A625',
+        marginLeft: '0px',
+     },
   }
+
 });
 
 export default function ConfirmationPage(props) {
@@ -154,50 +109,16 @@ export default function ConfirmationPage(props) {
       style={{
         // border: "dashed",
         // height: "100vh",
-        height: "860px",
+        height: "auto",
         width: "100vw",
         maxWidth: "100%",
         backgroundColor: "#DADADA",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center"
-        // marginBottom: "500px"
+        alignItems: "left",
+        textAlign:'left',
+        justifyContent: "center",
       }}
     >
-      {/* For debugging window size */}
-			{/* <span 
-				style={{
-					zIndex: '101',
-					position: 'fixed',
-					backgroundColor: 'white',
-					border: 'solid',
-					borderWidth: '1px',
-					borderColor: 'red',
-					width: '150px',
-          left: '0'
-				}}
-			>
-				Height: {dimensions.height}px
-				<br />
-				Width: {dimensions.width}px
-			</span> */}
-      {/* width: `calc(${280-(810-dimensions.width)}px)` */}
-      {/* <span 
-				style={{
-					zIndex: '101',
-					position: 'fixed',
-					backgroundColor: 'white',
-					border: 'solid',
-					borderWidth: '1px',
-					borderColor: 'green',
-					width: '150px',
-          right: '0'
-				}}
-			>
-				Height: {scaleHeightFn(dimensions.width)}px
-				<br />
-				Width: {scaleWidthFn(dimensions.width)}px
-			</span> */}
       <div
         style={{
           backgroundColor: "white",
@@ -205,7 +126,8 @@ export default function ConfirmationPage(props) {
           height: "800px",
           maxWidth: "980px",
           display: 'block',
-          overflow: 'auto'
+          overflow: 'auto',
+          paddingLeft:'2rem',
         }}
       >
         <div
@@ -226,7 +148,7 @@ export default function ConfirmationPage(props) {
               style={{
                 fontFamily: '"Times New Roman", Times, serif',
                 fontSize: "32px",
-                color: "#b28d42",
+                color: "#D3A625",
                 marginTop: "10px",
                 width: "100%",
                 textAlign: "center"
@@ -237,7 +159,7 @@ export default function ConfirmationPage(props) {
             <div
               style={{
                 fontSize: "19px",
-                color: "#b28d42",
+                color: "#D3A625",
                 marginTop: "10px",
                 width: "100%",
                 textAlign: "center"
@@ -257,28 +179,12 @@ export default function ConfirmationPage(props) {
           </div>
         </div>
         <div
-          style={{
-            // border: 'dashed',
-            height: 'calc(100% - 174px)',
-            display: 'inline-flex',
-            width: '100%'
-          }}
-        >
+        className = {classes.MobileContainerDivider}>
           <div
-            style={{
-              // border: 'solid purple',
-              borderRight: '1px solid #B28D42',
-              height: '100%',
-              // minWidth: 'calc(50%-30px)',
-              // width: 'calc(50%-30px)',
-              width: '50%',
-              marginLeft: '30px',
-              paddingRight: '30px'
-            }}
-          >
+            className = {classes.MobileContainerSubDivider}>
             <span
               style={{
-                color: "#b28d42",
+                color: "#D3A625",
                 fontSize: '18px',
                 fontWeight: '500'
               }}
@@ -288,106 +194,30 @@ export default function ConfirmationPage(props) {
             <br />
             <span
               style={{
-                color: "#b28d42",
+                color: "#D3A625",
               }}
             >
               1 hr 30 min | {
-               location.state.apptInfo.purchase_price.substring(
-                 0, location.state.apptInfo.purchase_price.indexOf(' ')
-               )
+               location.state.apptInfo.purchase_price
               }
             </span>
-            {/* <img
-              className={classes.img}
-              id="blogImage"
-              variant="top"
-              src={
-                post.blogImage == "NULL"
-                  ? NityaLogo
-                  : post.blogImage
-              }
-              style={{
-                width: "50%",
-                height: "50%",
-                objectFit: "cover",
-                objectPosition: "center -20px",
-              }}
-              onError={(e) =>
-                (e.target.style.display = "none")
-              }
-              aria-label={"an image of " + post.blogTitle}
-            /> */}
             <br />
-            {/* <div
-              style={{
-                position: 'relative',
-                // border: '1px solid green',
-                height: '224px'
-              }}
-            >
-              <img
-                // className={classes.img}
-                // src={`url(${herbsImg})`}
-                // src={herbsImg}
-                // src={require(herbsImg)}
-                src={require('../../Mask Group 12.png').default}
-                style={{
-                  position: 'absolute',
-                  width: "280px",
-                  maxWidth: '95%',
-                  // height: "210px",
-                  // height: '75vw',
-                  paddingBottom: '75%',
-                  margin: '20px 0 0 0'
-                }}
-              />
-            </div> */}
             <img
-              // className={classes.img}
-              // src={`url(${herbsImg})`}
-              // src={herbsImg}
-              // src={require(herbsImg)}
-              src={'../Assets/Images/card1.png'}
+              src={location.state.apptInfo.image_url}
               style={dimensions.width > 810 ? {
-                width: '280px',
+                width: '80%',
                 height: '210px',
-                // maxWidth: '95%',
-                // height: "210px",
-                // height: '75vw',
-                // paddingBottom: '75%',
                 margin: '20px 0 20px 0'
               } : {
-                // width: `calc(${280-(810-dimensions.width)}px)`,
-                // height: `calc(${210+(810-dimensions.width)}px)`,
-                width: `${scaleWidthFn(dimensions.width)}px`,
-                height: `${scaleHeightFn(dimensions.width)}px`,
-                // height: `${dimensions.width-600}px`,
-                // maxWidth: '95%',
-                // height: "210px",
-                // height: '75vw',
-                // paddingBottom: '75%',
+                width: '90%',
+                height: '210px',
                 margin: '20px 0 20px 0'
               }}
             />
-            {/* <img
-              // className={classes.img}
-              // src={`url(${herbsImg})`}
-              // src={herbsImg}
-              // src={require(herbsImg)}
-              src={require('../../Mask Group 12.png').default}
-              style={{
-                width: "280px",
-                maxWidth: '95%',
-                // height: "210px",
-                // height: '75vw',
-                paddingBottom: '75%',
-                margin: '10px 0 10px 0'
-              }}
-            /> */}
             <br />
             <span
               style={{
-                color: "#b28d42",
+                color: "#D3A625",
               }}
             >
               6055 Meridian Ave #40
@@ -395,7 +225,7 @@ export default function ConfirmationPage(props) {
             <br />
             <span
               style={{
-                color: "#b28d42",
+                color: "#D3A625",
               }}
             >
               San Jose, CA, 95120
@@ -404,56 +234,23 @@ export default function ConfirmationPage(props) {
             <br />
             <span
               style={{
-                color: "#b28d42",
+                color: "#D3A625",
               }}
             >
               Office: (408) 471-7004
             </span>
             <br />
-            {/* <div
-              id = "map"
-              style={{
-                height: '200px',
-                width: '200px',
-                border: '1px solid',
-                margin: '20px 0 20px 0',
-              }}
-            >
-              MAPS
-            </div> */}
-            {/* <div
-              style={{
-                position: 'relative',
-                border: '1px solid green',
-                height: '250px'
-              }}
-            > */}
-            {/* <MapSection location={{lat: 37, lng: 122}} zoomLevel={15}/> */}
-            {/* <div 
-              // className = {styles.googleMap} 
-              style={{
-                width: '280px',
-                height: '210px',
-                margin: '20px 0 0 0',
-                borderRadius: '25px',
-                border: '1px solid'
-                // backgroundColor: '#E8E8E8',
-                // display: 'flex',
-                // alignItems: 'center',
-                // justifyContent: 'center'
-              }}
-              // id = "map"
-            />    */}
               <div
                 style={dimensions.width > 810 ? {
-                  width: '280px',
-                  height: '210px',
+                  width: '80%',
+                  height: '10rem',
                   margin: '20px 0 0 0',
                   borderRadius: '25px',
                   backgroundColor: '#E8E8E8',
                   display: 'flex',
                   alignItems: 'center',
-                  justifyContent: 'center'
+                  justifyContent: 'center',
+                  marginTop:'2rem'
                 } : {
                   // position: 'absolute',
                   // width: "280px",
@@ -461,11 +258,11 @@ export default function ConfirmationPage(props) {
                   // height: "210px",
                   // height: '75vw',
                   // paddingBottom: '75%',
-                  width: `${scaleWidthFn(dimensions.width)}px`,
-                  height: `${scaleHeightFn(dimensions.width)}px`,
+                  width: '90%',
+                  height: '10rem',
                   // maxWidth: '95%',
                   // height: '210px',
-                  margin: '20px 0 0 0',
+                  margin: '3rem 0 4rem 0',
                   borderRadius: '25px',
                   backgroundColor: '#E8E8E8',
                   display: 'flex',
@@ -473,19 +270,29 @@ export default function ConfirmationPage(props) {
                   justifyContent: 'center'
                 }}
               >
-                Maps
+                <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176.732452474541!2d-121.8872221846979!3d37.230325779862234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e314406ce969d%3A0x82fb75802c5ef489!2s6055%20Meridian%20Ave%20%2340%2C%20San%20Jose%2C%20CA%2095120!5e0!3m2!1sen!2sus!4v1618695078070!5m2!1sen!2sus"
+                width="100%"
+                className="Contact_Map"
+                allowfullscreen=""
+                loading="lazy"
+              ></iframe>
               </div>
             {/* </div> */}
           </div>
           <div
-            style={{
-              borderLeft: '1px solid #B28D42',
-              // border: 'solid cyan',
+            style={dimensions.width > 810 ?  { 
+              borderLeft: '1px solid #D3A625',
               height: '100%',
-              // width: 'calc(50%-30px)',
               width: '50%',
               marginRight: '30px',
               paddingLeft: '30px'
+            }: {
+              borderTop: '2px solid #D3A625',
+              width: '100%',
+              marginRight: '-30px',
+              marginLeft: '-30px',
+              paddingLeft:'20px',
             }}
           >
             <div
@@ -522,7 +329,7 @@ export default function ConfirmationPage(props) {
             {/* <br /> */}
             <div
               style={{
-                color: "#b28d42",
+                color: "#D3A625",
                 fontSize: '20px',
                 margin: '40px 0 0 0'
               }}
@@ -533,7 +340,7 @@ export default function ConfirmationPage(props) {
             {/* <br /> */}
             <div
               style={{
-                color: "#b28d42",
+                color: "#D3A625",
                 fontSize: '14px',
                 // padding: '50px 50px 50px 50px',
                 margin: '12px 0 0 0'
@@ -552,7 +359,8 @@ export default function ConfirmationPage(props) {
             <div
               style={{
                 fontSize: '14px',
-                margin: '12px 0 0 0'
+                margin: '12px 0 0 0',
+                paddingBottom:'2rem'
                 // display: 'inline-block',
                 // width: '50%',
                 // border: 'dashed'

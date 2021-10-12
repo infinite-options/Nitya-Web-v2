@@ -67,14 +67,14 @@ const useStyles = makeStyles({
 
   },
   body: {
-    backgroundColor: "#C3A336",
+    backgroundColor: "#D3A625",
     // minWidth: "420px",
     //marginLeft:"525px",
     height:'100%',
     // display: "flex",
     // alignItems:"center",
     // textAlign: "center",
-    color: "#C3A336",
+    color: "#D3A625",
     //float:"right",
     // paddingTop: "4rem",
     // padding: "4rem",
@@ -159,14 +159,12 @@ export default function Consulting(props) {
     >
       <br />
       <br />
-      <div className = "ConsultingContainer" style={{marginLeft:'10%',  height: '30rem'}}>
+      <div className = "ConsultingContainer" style={{  height: '30rem'}}>
         { data
           .filter((service) =>   service.category === "Consultation" )
           .map((filteredService) => (
-            <div style={{display:'flex',padding : '3%', height:'380px', width:'84%' }}>
-           
-                {/* <Col className="no-gutters"> */}
-                <div style={{display:'flex'}}>
+            <div className="Consulting_SubContainer" >
+                  <div  className="Consulting_SubContainer_1">
                   {/* <Row className="d-none d-sm-block d-md-block"> */}
                   <div style={{width:'100%', flex:'1'}}>
                     <img
@@ -196,19 +194,10 @@ export default function Consulting(props) {
                   </div>
                   </div>
                 </div>
-                {/* </Col> */}
               <br />
             </div>))
-        //   )) :
-        //   <div style={{width:'1500px', backgroundColor:'white'}}> 
-            
-        // </div> 
     }
       </div>
-
-      {/* <div className={classes.LMbtn}>
-        <LearnMoreBTN  />
-      </div> */}
     </div>
   );
 }

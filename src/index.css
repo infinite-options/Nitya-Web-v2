@@ -11,3 +11,15 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+@font-face {
+  font-family: Hoefler Text;
+  src: url('./fonts/Hoefler-Text.ttc');
+  font-family: SF Pro ;
+  src: url('./fonts/SF-Pro.ttf');
+  font-family: SF Pro Display Regular;
+  src: url('./fonts/SF-Pro-Display-Regular.otf');
+  font-family: SF Pro Display Semibold;
+  src: url('./fonts/SF-Pro-Display-Semibold.otf');
+
+}

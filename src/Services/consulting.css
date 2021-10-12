@@ -6,7 +6,19 @@
   }
 
 .ConsultingContainer{
-    width: '100%';
+    margin-left:5%;
+    width: 100%;
+}
+
+.Consulting_SubContainer{
+    display:flex;
+    padding:3%;
+    height:380px;
+    width:84%; 
+}
+
+.Consulting_SubContainer_1{
+    display:flex;
 }
 
 .BodyFont{
@@ -15,14 +27,37 @@
     font-size: 20px;
     letter-spacing: 0.55px;
     color: #FFFFFF;
-    padding-left:10%;
-    padding-right:10%;
+    padding-left:5%;
+    padding-right:5%;
 }
 
 .TitleFont{
-    font-family: SF Pro Display Regular;
+    font-family: Hoefler Text;
     font-size: 28px;
     text-align: center;
     letter-spacing: 0.6px;
     color: #FFFFFF;
+}
+
+
+@media screen and (max-width: 500px) {
+
+    .ConsultingContainer{
+        margin-left:0%;
+        width: 100%;
+    }
+
+.Consulting_SubContainer{
+    display:flex;
+    padding-left:5%;
+    margin-top: 3rem;
+    height:480px;
+    width:90%; 
+}
+
+.Consulting_SubContainer_1{
+    display:flex;
+    flex-direction: column;
+}
+
 }

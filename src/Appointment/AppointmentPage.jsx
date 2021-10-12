@@ -16,7 +16,7 @@ import { Container } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 import { useHistory } from 'react-router';
 import { Link } from "react-router-dom";
-
+import '../Appointment/AppointmentPage.css';
 // import moment from "moment";
 
 const useStyles = makeStyles({
@@ -28,31 +28,31 @@ const useStyles = makeStyles({
   },
   // h1: {
   //   fontSize: "24px",
-  //   color: "#B28D42",
+  //   color: "#D3A625",
   //   fontFamily: "Hoefler",
   // },
   h1: {
     fontSize: "24px",
-    color: "#B28D42",
+    color: "#D3A625",
     paddingTop: "15px",
     fontFamily: "Hoefler",
   },
   content: {
     fontSize: "22px",
     fontFamily: "SFProDisplayRegular",
-    color: "#B28D42",
+    color: "#D3A625",
     textAlign: "center",
   },
   content2: {
     fontSize: "20px",
     // fontFamily: "SFProDisplayRegular",
-    color: "#B28D42",
+    color: "#D3A625",
     textAlign: "left",
   },
   content3: {
     fontSize: "22px",
     // fontFamily: "SFProDisplayRegular",
-    color: "#B28D42",
+    color: "#D3A625",
     textAlign: "center",
   },
   selectTime: {
@@ -64,21 +64,17 @@ const useStyles = makeStyles({
   },
   selectTime2: {
     fontSize: "24px",
-    color: "#B28D42",
+    color: "#D3A625",
     fontFamily: "AvenirHeavy",
     margin: "0 auto",
     textAlign: "center",
   },
-  CalendarContainer: {
-    margin: "auto",
-    width: "60%",
-    backgroundColor: "white",
-  },
+  
   bookButton: {
     width: "200px",
     height: "50px",
-    backgroundColor: "#B28D42",
-    border: "2px solid #B28D42",
+    backgroundColor: "#D3A625",
+    border: "2px solid #D3A625",
     color: "white",
     // padding: "0 10px 0 10px",
     textDecoration: "none",
@@ -99,18 +95,18 @@ const useStyles = makeStyles({
       boxShadow: "none",
     },
     "&:disabled": {
-      backgroundColor: "#B28D42",
+      backgroundColor: "#D3A625",
       color: "white",
       opacity: "50%",
       "&:hover": {
-        borderColor: "#B28D42",
+        borderColor: "#D3A625",
       },
     },
   },
   button: {
     backgroundColor: "white",
-    border: "2px solid #B28D42",
-    color: "#B28D42",
+    border: "2px solid #D3A625",
+    color: "#D3A625",
     padding: "15px 90px",
     textAlign: "center",
     textDecoration: "none",
@@ -119,7 +115,7 @@ const useStyles = makeStyles({
     borderRadius: "50px",
     margin: "2px auto",
     "&:hover": {
-      background: "#B28D42",
+      background: "#D3A625",
       color: "white",
     },
     "&:focus": {
@@ -132,7 +128,7 @@ const useStyles = makeStyles({
     },
   },
   buttonDisable: {
-    backgroundColor: "#B28D42",
+    backgroundColor: "#D3A625",
     border: "none",
     color: "white",
     padding: "15px 100px",
@@ -173,12 +169,18 @@ const useStyles = makeStyles({
   //   width: "50%",
   //   height: "550px",
   //   padding: "20px",
-  //   backgroundColor: "#B28D42",
+  //   backgroundColor: "#D3A625",
   // },
   calendarBox: {
-    marginLeft:'5rem',
-    width: "60%",
-  //  backgroundColor: "#B28D42",
+  marginLeft:'2rem',
+  width: "80%",
+    "@media (max-width: 500px)": {
+       marginLeft:'0rem',
+      width: "100%",
+    },
+ 
+  
+  //  backgroundColor: "#D3A625",
   },
   // timeslotBox: {
   // width: "50%",
@@ -206,8 +208,8 @@ const useStyles = makeStyles({
     height: "3rem",
     maxWidth: "80%",
     backgroundColor: "white",
-    border: "2px solid #B28D42",
-    color: "#B28D42",
+    border: "2px solid #D3A625",
+    color: "#D3A625",
     // padding: "15px 90px",
     textAlign: "center",
     textDecoration: "none",
@@ -216,17 +218,17 @@ const useStyles = makeStyles({
     display: "block",
     margin: "6px auto",
     "&:hover": {
-      background: "#B28D42",
+      background: "#D3A625",
       color: "white",
     },
     "&:focus": {
-      background: "#B28D42",
+      background: "#D3A625",
       color: "white",
       outline: "none",
       boxShadow: "none",
     },
     "&:active": {
-      background: "#B28D42",
+      background: "#D3A625",
       color: "white",
       outline: "none",
       boxShadow: "none",
@@ -600,14 +602,14 @@ export default function AppointmentPage(props) {
       {bookNowClicked ? (
         <div>
           <div
-            className={classes.CalendarContainer}
+            className="CalendarContainer"
             aria-label={"find a day to meet"}
             style={{
               // border: "dashed",
-              maxWidth: "96%",
+             // maxWidth: "96%",
             }}
           >
-            <div style={{display:'flex', padding:'5%'}}>
+            <div className="ApptContainer">
             <div>
                 <p className={classes.content2} style={{ textAlign: "left" }}>
                   <span
@@ -640,16 +642,18 @@ export default function AppointmentPage(props) {
                 </p>
               </div>
             <div className={classes.calendarBox}>
-                <h1
+                <div
+                  className="TitleFontAppt"
                   style={{
                     textAlign: "center",
-                    color:"#B28D42",
-                    fontFamily: "AvenirHeavy",
-                    fontSize: "25px",
+                    color:"#D3A625",
+                    //fontFamily: "AvenirHeavy",
+                    fontWeight:'500',
+                    fontSize: "30px",
                   }}
                 >
                    Pick a Date for your appointment
-                </h1>
+                </div>
                 {console.log("(Calendar) date: ", date)}
                 <Calendar
                   //backgroundColor="#d3a625"
@@ -680,12 +684,12 @@ export default function AppointmentPage(props) {
                 >
                   <div
                    // className={classes.h1}
+                   className="TitleFontAppt"
                     style={{
                       textAlign: "left",
                       // border: "1px solid red",
                       // marginTop: "20px",
-                      color: "#B28D42",
-                      fontWeight:'bold',
+                      color: "#D3A625",
                       fontSize: "28px",
                       height: "50%",
                     }}
@@ -693,12 +697,12 @@ export default function AppointmentPage(props) {
                    Pick a Time for your appointment
                   </div>
                   <div
+                    className="BodyFontAppt"
                     style={{
                     //  textAlign: "left",
-                      color: "#B28D42",
+                      color: "#D3A625",
                       // fontFamily: "AvenirHeavy",
-                      fontWeight:'bold',
-                      fontSize: "19px",
+                      fontSize: "18px",
                       // border: "dashed"
                       // border: "1px solid red",
                       height: "50%",

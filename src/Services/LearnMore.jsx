@@ -7,6 +7,7 @@ import BookNowBTN from "./BookNowBtn";
 import { height } from "@mui/system";
 import { Typography } from "@material-ui/core";
 import './consulting.css'
+import './LearnMore.css'
 
 const useStyles = makeStyles({
   container: {
@@ -182,15 +183,15 @@ export default function LearnMore(props) {
         {data != '' ? data
           .filter((service) =>  location.state.id === service.treatment_uid)
           .map((filteredService) => (
-            <div style={{backgroundColor:'white',padding : '3%', height:'auto',width:'55%', display:'flex', flexDirection:'column', marginLeft:'20%' }}>
+            <div className="LearnMoreContianer">
            
                 {/* <Col className="no-gutters"> */}
-                <div style={{display:'flex', flex:'3',height:'500px'}}>
+                <div  className="LearnMoreSubContianer" >
                   {/* <Row className="d-none d-sm-block d-md-block"> */}
                   <div style={{width:'100%', flex:'1'}}>
                     <img
                      // className={classes.img}
-                     style={{width:'100%',minHeight:'100%' ,objectFit:'cover'}}
+                     style={{width:'100%',height:'100%' ,objectFit:'cover'}}
                       variant="top"
                       src={filteredService.image_url}
                       alt={"An image of" + filteredService.title}
@@ -211,7 +212,7 @@ export default function LearnMore(props) {
                     {/* <Button className={classes.btn} variant="primary">
                         Book Now
                       </Button> */}
-                      <div style={{color:'white'}}>
+                      <div style={{color:'white', fontSize:'20px'}}>
                       {parseDuration(filteredService.duration)} | {filteredService.cost}
                       </div>
                     <br />
@@ -221,7 +222,7 @@ export default function LearnMore(props) {
                 </div>
                 {/* </Col> */}
               <br />
-              <div style={{flex:'1', height:'20%'}}>
+              <div style={{flex:'1', height:'20%', fontWeight:'600'}}>
               {/* <Typography>{filteredService.treatment_notes}</Typography> */}
               {
                     filteredService.treatment_notes.split("\n").map(function (item, idx) {
@@ -241,7 +242,9 @@ export default function LearnMore(props) {
             
         </div> }
       </div>
+      <div  style={{fontWeight:'600', marginTop:'1rem'}}>
       Cancellation Policy: To cancel or reschedule, please contact us 24 hours in advance.
+      </div>
       {/* <div className={classes.LMbtn}>
         <LearnMoreBTN  />
       </div> */}

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import './BookNowBtn.css';
 
 class BookNowBTN extends Component {
   constructor(props) {
@@ -15,21 +16,25 @@ class BookNowBTN extends Component {
           style={{
             backgroundColor: "white",
             border: "none",
-            borderRadius: "24px",
+            borderRadius: "36px",
             //padding: "10px",
-            width:"40%",
-            height: "60px",
+            width:"60%",
+            height: "auto",
             align:"center",
-            textDecoration:'none'
+            textDecorationLine:'none'
 
           }}
         >
-          <Link to={`/${this.state.tID}/appt`}>
+          <Link to={`/${this.state.tID}/appt`} style={{textDecoration:'none'}} >
             <p
+              className="BookNowBtn"
               style={{
                 color: "#B28D42",
+                display:'flex',
+                justifyContent:'center',
                 fontSize:"20px",
                 textDecoration:'none'
+                
 
               }}
             >

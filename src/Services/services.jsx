@@ -17,11 +17,12 @@ const Services = (props) => {
       backgroundColor:'white',
       marginTop:'2rem',
       width:'60%',
-      marginLeft:'20%',
-      // "@media (max-width: 1000px)": {
-      //   width: "60%",
-      //   marginLeft:'20%'
-      // },
+      "@media (max-width: 500px)": {
+        width: "100%",
+      },
+      "@media (min-width: 500px)": {
+        marginLeft:'20%',
+      },
       // "@media (max-width: 1850px) and (min-width: 1600px)": {
       //   width: "100%",
       //   marginLeft:'20%'
@@ -116,7 +117,7 @@ const Services = (props) => {
               </Button>
             </ButtonGroup>
           </div>
-          <p style={{ width: "fit-content", height: "fit-content" }}>
+          <p style={{ width: "fit-content", height: activeComponent === "treatments" ? "85rem" : "115rem" }}>
             {rSelected}
           </p>
         </div>

@@ -26,7 +26,7 @@ import { Markup } from 'interweave';
 import { ReactComponent as ShareBtn } from "../Assets/Images/ios-share-alt.svg";
 import { AuthContext } from "../auth/AuthContext";
 import AddIcon from '@material-ui/icons/Add';
-
+import '../Appointment/AppointmentPage.css'
 const useStyles = makeStyles((theme) => ({
   blogpage: {
     marginLeft: "auto",
@@ -115,8 +115,10 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 1100px)": {},
   },
   cardRow: {
-    "@media (max-width: 1100px)": {
-      display: "none",
+    display: 'flex',
+    "@media (max-width: 500px)": {
+      display: 'flex',
+      flexDirection: 'column',
     },
   },
   cardMobile: {
@@ -129,8 +131,9 @@ const useStyles = makeStyles((theme) => ({
   blogImg: {
     width: "25rem",
     height: "20rem",
-    "@media (max-width: 570px)": {
-      width: "90%",
+    "@media (max-width: 500px)": {
+      width: "100%",
+      marginLeft: '-30px',
       height: "90%",
     },
   },
@@ -142,11 +145,17 @@ const useStyles = makeStyles((theme) => ({
     paddingBottom: "10px",
     width: "250px",
     "@media (max-width: 570px)": {
-      width: "100px",
+      width: "100%",
     },
   },
   desc: {
+    paddingLeft: '10%',
     marginLeft: "-50px",
+    "@media (max-width: 500px)": {
+      textAlign: 'left',
+      paddingLeft: '0px',
+      marginLeft: '0px'
+    },
   },
   title: {
     color: "#C3A336",
@@ -292,7 +301,7 @@ function Blogpage(props) {
 
           }}
         >
-          <div style={{ flex: '1' }}>
+          <div className="TitleFontAppt" style={{ flex: '1' }}>
             Ayurvedic Musings
           </div>
           {/* <div style={{ color: 'black' }}>{String(Auth.isAuth)}</div> */}
@@ -350,7 +359,7 @@ function Blogpage(props) {
         {data.map((post) => (
           <div className="blogPostContainer">
             <div className={classes.card}>
-              <div style={{ display: 'flex' }} className={classes.cardRow}>
+              <div className={classes.cardRow}>
                 <div>
                   <div>
                     <img
@@ -364,7 +373,7 @@ function Blogpage(props) {
                     />
                   </div>
                 </div>
-                <div style={{ paddingLeft: '10%' }} className={classes.desc}>
+                <div className={classes.desc}>
                   <div className={classes.header}>
                     {convertDate(post.postedOn)}
 
@@ -385,25 +394,6 @@ function Blogpage(props) {
                       open={Boolean(anchorEl)}
                       onClose={handleClose}
                     >
-                      {/* <MenuItem
-                        style={{
-                          color: "#594d2c",
-                          width: "200px",
-                          height: "50px",
-                          padding: "0",
-                          fontSize: "1.5rem",
-                        }}
-                        position="bottom"
-                        onClick={handleClose}
-                      >
-                        <IconButton
-                          fontSize="small"
-                          aria-label="click to share post"
-                        >
-                          <ShareOutline />
-                        </IconButton>
-                        Share
-                      </MenuItem> */}
                     </Menu>
                   </div>
                   <Link
@@ -422,84 +412,7 @@ function Blogpage(props) {
                 </div>
               </div>
             </div>
-            <Card className={classes.cardMobile}>
-              <img
-                src={
-                  post.blogImage !== "NULL" && post.blogImage
-                    ? post.blogImage
-                    : defaultImg
-                }
-                className={classes.blogImg}
-                onError={(e) => (e.target.style.display = "none")}
-              />
-              <Col className={classes.desc} style={{ margin: "0px" }}>
-                <div className={classes.header} style={{ marginTop: "20px" }}>
-                  {convertDate(post.postedOn)}
-                  <div
-                    style={{
-                      height: "6px",
-                      width: "6px",
-                      backgroundColor: "#d28d42",
-                      borderRadius: "3px",
-                      marginTop: "auto",
-                      marginBottom: "auto",
-                    }}
-                  />
-                  {/* <IconButton
-                      onClick={handleClick}
-                      style={{ float: "right" }}
-                      aria-label="click to share post"
-                    >
-                      <MoreVertIcon />
-                    </IconButton> */}
-                  <Menu
-                    elevation={0}
-                    getContentAnchorEl={null}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "center",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "center",
-                    }}
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  ></Menu>
-                </div>
-                <Link
-                  to={`/${post.blog_uid}/fullblog`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div>
-                    <div className={classes.title}>
-                      <p>{post.blogTitle}</p>
-                    </div>
-                    <div className={classes.content} style={{ width: '100%' }}>
-                      <Markup content={post.blogSummary} />
-                    </div>
-                  </div>
-                </Link>
-                <hr style={{ color: "#C3A336" }}></hr>
-                <div className={classes.cardActions}>
-                  <p>
-                    <span>Views &nbsp;&nbsp; Comments</span>
-                  </p>
 
-                  <div>
-                    <IconButton style={{ color: "#C3A336" }}>
-                      <FavoriteBorderIcon />
-                    </IconButton>
-                    <IconButton>
-                      <ShareBtn style={{ height: "24px" }} />
-                    </IconButton>
-                  </div>
-                </div>
-              </Col>
-            </Card>
           </div>
         ))}
         {/* <div style={{ paddingBottom: "30px" }}>

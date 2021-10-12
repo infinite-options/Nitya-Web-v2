@@ -159,14 +159,12 @@ export default function Consulting(props) {
     >
       <br />
       <br />
-      <div className="ConsultingContainer" style={{ marginLeft: '10%', height: '30rem' }}>
+      <div className="ConsultingContainer" style={{ height: '30rem', padding: '1rem' }}>
         {data
           .filter((service) => service.category === "Treatment")
           .map((filteredService) => (
-            <div style={{ display: 'flex', padding: '3%', height: '380px', width: '84%' }}>
-
-              {/* <Col className="no-gutters"> */}
-              <div style={{ display: 'flex' }}>
+            <div className="Consulting_SubContainer" >
+              <div className="Consulting_SubContainer_1">
                 {/* <Row className="d-none d-sm-block d-md-block"> */}
                 <div style={{ width: '100%', flex: '1' }}>
                   <img

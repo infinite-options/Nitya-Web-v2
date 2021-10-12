@@ -53,12 +53,13 @@ flex: 0.3;
 
 .nav-link {
   text-decoration: none;
-  color: #C3A336;
+  color: #ad8131;
   transition: 0.3s all;
 }
 
 .nav-link:hover, .nav-link:focus {
-  color: #d3a625;
+  color: #D3A625;
+  text-decoration: underline;
 }
 
 
@@ -73,12 +74,12 @@ flex: 0.3;
 }
 
 .instagram-icon {
-  color: #8d6f1a;
+  color: #ad8131;
   height: 50px;
 }
 
 .instagram-icon:hover {
-  color: #d3a625;
+  color: #D3A625;
 }
 
 @media screen and (max-width: 1250px) and (min-width: 1050px) {

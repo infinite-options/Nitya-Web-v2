@@ -52,7 +52,7 @@ export default function Contact() {
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176.732452474541!2d-121.8872221846979!3d37.230325779862234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e314406ce969d%3A0x82fb75802c5ef489!2s6055%20Meridian%20Ave%20%2340%2C%20San%20Jose%2C%20CA%2095120!5e0!3m2!1sen!2sus!4v1618695078070!5m2!1sen!2sus"
                 width="356px"
-                style={{ border: 0, borderRadius: "30px", height: "12rem", marginTop:'2rem' }}
+                className="Contact_Map"
                 allowfullscreen=""
                 loading="lazy"
               ></iframe>
@@ -64,7 +64,7 @@ export default function Contact() {
                     name="name"
                     id="name"
                     placeholder="Full Name"
-                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#C3A336',border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#D3A625',border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.name}
                   />
@@ -74,7 +74,7 @@ export default function Contact() {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#C3A336',border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#D3A625',border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.email}
                   />
@@ -84,7 +84,7 @@ export default function Contact() {
                     name="subject"
                     id="subject"
                     placeholder="Subject"
-                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#C3A336',border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#D3A625',border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.subject}
                   />
@@ -94,7 +94,7 @@ export default function Contact() {
                     name="text"
                     id="message"
                     placeholder="Type your message here"
-                    style={{fontWeight:'600',fontSize:'16px', width: "100%",color:'#C3A336', height: "139px", border:'3px solid #C3A336', borderRadius:'16px', textTransform:'none',marginTop:'1rem' }}
+                    style={{fontWeight:'600',fontSize:'16px', width: "100%",color:'#D3A625', height: "139px", border:'3px solid #D3A625', borderRadius:'16px', textTransform:'none',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.message}
                   />
@@ -103,7 +103,7 @@ export default function Contact() {
                   style={{ display: "flex", justifyContent: "center" }}
                   aria-label={"click button to submit your messsage session."}
                 >
-                  <button style={{color:'white', backgroundColor:'#C3A336',borderRadius:"24px", border:'0px', height:'3rem', width:'40%'}} >Submit</button>
+                  <button style={{color:'white', backgroundColor:'#D3A625',borderRadius:"24px", border:'0px', height:'3rem', width:'40%'}} >Submit</button>
                 </div>
                 <br />
                 <div style={{ display: "flex", justifyContent: "center" }}>

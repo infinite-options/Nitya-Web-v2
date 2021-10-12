@@ -14,7 +14,7 @@
     width:  auto ;
     */
   margin-top: 50px;
-  height: 130rem;
+ 
   /* // padding:  50px ; */
 
   display: flex;
@@ -26,7 +26,7 @@
   font-family: Hoefler Text;
   font-size: 52px;
   font-style: italic;
-  color: #C3A336;
+  color: #D3A625;
 }
 
 .ButtonGroup {
@@ -35,7 +35,7 @@
 }
 
 .selected {
-  background-color: #C3A336 !important;
+  background-color: #D3A625 !important;
 
 }
 
@@ -51,20 +51,20 @@
   /* //border:  1px solid #88898a ; */
   border: none;
   /* //borderRadius:  0px ; */
-  /* // color:  #b28d42 ; */
+  /* // color:  #D3A625 ; */
   /* // fontSize:  2.5rem ; */
   margin-right: 50px;
   padding: 1px 1px;
 }
 /* #btn1.hover {
   background-color: transparent;
-  color: #b28d42;
-  border: #b28d42;
+  color: #D3A625;
+  border: #D3A625;
 }
 #btn1:focus {
-  background-color: #b28d42;
+  background-color: #D3A625;
   color: white;
-  border: 1px solid #b28d42;
+  border: 1px solid #D3A625;
 } */
 
 #btn2 {
@@ -82,16 +82,27 @@
 
 /* #btn2.hover {
   background-color: transparent;
-  color: #b28d42;
-  border: #b28d42;
+  color: #D3A625;
+  border: #D3A625;
 }
 #btn2:focus {
-  background-color: #b28d42;
+  background-color: #D3A625;
   color: white;
-  border: 1px solid #b28d42;
+  border: 1px solid #D3A625;
 } */
 
 @media screen and (max-width: 1850px) and (min-width: 1600px) {
 
+
+}
+
+@media screen and (max-width: 500px) {
+
+  #servicesContainer {
+    margin-top: 5rem;
+    height: 155rem;  
+    display: flex;
+    flex-direction: column;
+  }
 
 }

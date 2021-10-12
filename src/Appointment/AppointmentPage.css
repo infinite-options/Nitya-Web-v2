@@ -1,0 +1,65 @@
+@font-face {
+    font-family: Hoefler Text;
+    src: url('../fonts/Hoefler-Text.ttc');
+    font-family: SF Pro ;
+    src: url('../fonts/SF-Pro.ttf');
+    font-family: SF Pro Display Regular;
+    src: url('../fonts/SF-Pro-Display-Regular.otf');
+    font-family: SF Pro Display Semibold;
+    src: url('../fonts/SF-Pro-Display-Semibold.otf');
+  
+  }
+.BodyFontAppt{
+  font-family:SF Pro Display Regular ;
+}
+
+.TitleFontAppt{
+  font-family:Hoefler Text ;
+  font-style: italic;
+}
+
+.ApptContainer{
+  display:flex;
+  padding:5%;
+}
+
+.CalendarContainer{
+  margin: auto;
+  width: 60%;
+  background-color: white 
+}
+
+.ApptConfirmContainer{
+  display:flex;
+  justify-content:space-evenly;
+}
+
+.ApptConfirmTextBox{
+  margin-top:2rem;
+  width:50%;
+}
+
+@media screen and (max-width: 500px) {
+
+  .ApptContainer{
+    display:flex;
+    flex-direction: column;
+    padding:5%;
+  }
+  .CalendarContainer{
+    margin: auto;
+    width: 90%;
+    background-color: white 
+  }
+
+  .ApptConfirmContainer{
+    display:flex;
+    flex-direction: column;
+    justify-content:space-evenly;
+  }
+
+  .ApptConfirmTextBox{
+    margin-top:2rem;
+    width: 100%;
+  }
+}

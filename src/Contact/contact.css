@@ -9,6 +9,13 @@
     src: url('../fonts/SF-Pro-Display-Semibold.otf');
   
   }
+.MessageFont{
+  font-family:SF Pro Display Regular ;
+}
+
+.ButtonFont{
+  font-family:Hoefler Text ;
+}
 
 .Container_Contact{
     background-color: white;
@@ -34,13 +41,13 @@
     font-family:  Hoefler Text ;
     font-style: italic;
     font-size: 42px;
-    color: #C3A336;
+    color: #D3A625;
 }
 
 .Body_Contact{
     font-family: SF Pro Display Regular;
     font-size: 20px;
-    color: #C3A336;
+    color: #D3A625;
     margin-top: 1rem;
 }
 
@@ -53,15 +60,67 @@
     flex-direction: column;
 }
 
+
+.Contact_Map{
+  border: 0;
+  border-radius: 30px;
+  width: 100%;
+  height: 15rem;
+  margin-top:2rem; 
+}
+
 ::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
-    color: #C3A336;
+    color: #D3A625;
     opacity: 1; /* Firefox */
   }
   
   :-ms-input-placeholder { /* Internet Explorer 10-11 */
-    color: #C3A336;
+    color: #D3A625;
   }
   
   ::-ms-input-placeholder { /* Microsoft Edge */
-    color: #C3A336;
+    color: #D3A625;
   }
+
+
+  @media screen and (max-width: 500px) {
+
+    .Container_Contact{
+      
+      background-color: white;
+      width: 80%;
+      padding: 5%;
+      margin-left: 5%;
+      margin-top: 5rem;
+      margin-bottom: 5rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .Container_1_Contact{
+    flex:1;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-evenly;
+}
+  
+.Container_2_Contact{
+  margin-left: 2rem;
+  margin-top: 2rem;
+  width: 80%;
+  flex:1;
+  display: flex;
+  flex-direction: column;
+}
+
+  .Contact_Map{
+    border: 0;
+    border-radius: 30px;
+    height: 10rem;
+    margin-top:2rem; 
+  }
+ 
+}

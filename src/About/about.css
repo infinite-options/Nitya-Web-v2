@@ -10,9 +10,24 @@
   
   }
 
+  .About_Container{
+    background-color:white;
+    width:60%;
+    height:auto;
+    margin-left:20%;
+    margin-top:5rem;
+    margin-bottom:5rem;
+  }
+
+  .About_SubContainer{
+    display:flex;
+    text-align:left;
+     padding-right:2rem;
+  }
+
   .Title{
       font-family: Hoefler Text;
-      color: #C3A336;
+      color: #D3A625;
       font-size: 52px;
       font-style: italic;
       padding: 0px;
@@ -20,7 +35,37 @@
 
   .BodyText{
     font-family:SF Pro Display Regular;
-    color: #C3A336;
+    color: #D3A625;
     font-size: 20px;
 
+  }
+
+  .AboutImage{
+    flex:1;
+    padding-top:8rem;
+  }
+
+  @media screen and (max-width: 500px) {
+    .About_Container{
+      background-color:white;
+      width:90%;
+      height:auto;
+      margin-left:5%;
+      margin-top:2rem;
+      margin-bottom:5rem;
+    }
+
+    .About_SubContainer{
+      display:flex;
+      flex-direction: column-reverse;
+      text-align:left;
+       padding-right:2rem;
+    }
+
+    .AboutImage{
+      flex:1;
+      width: 100%;
+      padding-left: 1rem;
+      padding-top:2rem;
+    }
   }

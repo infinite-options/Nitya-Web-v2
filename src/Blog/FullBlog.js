@@ -20,6 +20,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ShareOutline from "@material-ui/icons/ShareOutlined";
 import SearchIcon from "@material-ui/icons/Search";
 import AuthorIcon from "@material-ui/icons/AccountCircle";
+import ReplyIcon from '@material-ui/icons/Reply';
 import { useParams } from "react-router";
 import ScrollToTop from "./ScrollToTop";
 import { Markup } from 'interweave';
@@ -44,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appbar: {
-    backgroundColor: "#b28d42",
+    backgroundColor: "#D3A625",
     boxShadow: "none",
     padding: "4px",
     "@media (max-width: 880px)": {
@@ -96,7 +97,7 @@ const useStyles = makeStyles((theme) => ({
     borderRadius: "15px",
     border: "none",
     "&::placeholder": {
-      color: "#b28d42",
+      color: "#D3A625",
     },
     "@media (max-width: 1430px)": {
       width: "200px",
@@ -138,18 +139,19 @@ const useStyles = makeStyles((theme) => ({
     color: "#8d6f19",
     fontSize: "1.2rem",
     paddingBottom: "10px",
-    width: "250px",
+    width: "100%",
     "@media (max-width: 570px)": {
-      width: "100px",
+      width: "130%",
+      marginLeft: '-2rem',
     },
   },
   desc: {
     marginLeft: "-50px",
   },
   title: {
-    color: "#b28d42",
+    color: "#D3A625",
     fontSize: "2rem",
-    lineHeight: "1.6",
+    lineHeight: "1",
   },
   content: {
     fontSize: "1.2rem",
@@ -219,7 +221,7 @@ function FullBlog(props) {
   };
 
   const navLinks = [
-    { title: `all posts`, path: `/all posts` },
+    { title: `all posts`, path: `/blog` },
     { title: `healthy tips`, path: `/healthy tips` },
     { title: `recipes`, path: `/recipes` },
     { title: `living well`, path: `/living well` },
@@ -271,10 +273,10 @@ function FullBlog(props) {
           <div className="blogPostContainer">
             <Card className={classes.card}>
               <div>
-                <div style={{ textAlign: 'left', fontSize: '52px' }} className={classes.title}>
+                <div style={{ textAlign: 'left', fontSize: '52px', color: '#D3A625' }} className={classes.title}>
                   <p>{post.blogTitle}</p>
                 </div>
-                <div style={{ width: '50%' }} className={classes.header}>
+                <div style={{ color: '#D3A625' }} className={classes.header}>
                   <span>
                     <IconButton
                       size="lg"
@@ -283,14 +285,15 @@ function FullBlog(props) {
                     >
                       <AuthorIcon />
                     </IconButton>
-                    &nbsp;&nbsp; &nbsp;&nbsp;
+                    &nbsp;&nbsp;
                     {post.author} &nbsp;&nbsp; {post.postedOn}{" "}
-                    <IconButton
+
+                    <ReplyIcon
                       onClick={handleClick}
-                      style={{}}
+                      size="sm"
+                      style={{ marginLeft: '1rem', transform: 'scaleX(-1)', color: '#D3A625', marginBottom: '-0.3rem' }}
                       aria-label="click to share post">
-                      <MoreVertIcon />
-                    </IconButton>
+                    </ReplyIcon>
 
                   </span>
 

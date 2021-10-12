@@ -5,10 +5,10 @@ import '../About/about.css'
 export default function About() {
  
   return (
-    <div style={{backgroundColor:'white', width:'60%', height:'auto', marginLeft:'20%', marginTop:'5rem', marginBottom:'5rem'}}>
+    <div className="About_Container" >
       <div >
         <div
-        style={{display:'flex', textAlign:'left', paddingRight:'2rem'}}
+        className="About_SubContainer"
           aria-label="Counselor Introduction Block"
           
         >
@@ -35,7 +35,7 @@ export default function About() {
             </p>
 
            
-            <div style={{flex:'1',paddingTop:'8rem'}}>
+            <div className="AboutImage">
                 <img
                   src={Img}
                   style={{objectFit:'contain', width:'100%', height:'90%'}}

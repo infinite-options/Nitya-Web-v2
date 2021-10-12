@@ -22,7 +22,7 @@ import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ShareOutline from "@material-ui/icons/ShareOutlined";
 import SearchIcon from "@material-ui/icons/Search";
 import defaultImg from "../Assets/Images/Blog-Default-Img.png";
-
+import { Markup } from 'interweave';
 import { ReactComponent as ShareBtn } from "../Assets/Images/ios-share-alt.svg";
 
 import AddIcon from '@material-ui/icons/Add';
@@ -403,8 +403,8 @@ function Blogpage(props) {
                       <div className={classes.title}>
                         <div style={{ textAlign: 'left' }}>{post.blogTitle}</div>
                       </div>
-                      <div className={classes.content}>
-                        <p>{post.blogText}</p>
+                      <div className={classes.content} style={{ width: '100%', marginRight: '0px' }}>
+                        <Markup content={post.blogSummary} />
                       </div>
                     </div>
                   </Link>
@@ -468,8 +468,8 @@ function Blogpage(props) {
                     <div className={classes.title}>
                       <p>{post.blogTitle}</p>
                     </div>
-                    <div className={classes.content}>
-                      <p>{post.blogText}</p>
+                    <div className={classes.content} style={{ width: '100%' }}>
+                      <Markup content={post.blogSummary} />
                     </div>
                   </div>
                 </Link>

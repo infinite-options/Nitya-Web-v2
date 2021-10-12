@@ -64,8 +64,8 @@ const useStyles = makeStyles({
   payButton: {
     width: "200px",
     height: "50px",
-    backgroundColor: "#B28D42",
-    border: "2px solid #B28D42",
+    backgroundColor: " #D3A625",
+    border: "2px solid  #D3A625",
     color: "white",
     // padding: "0 10px 0 10px",
     textDecoration: "none",
@@ -73,8 +73,8 @@ const useStyles = makeStyles({
     borderRadius: "50px",
     fontFamily: "AvenirHeavy",
     "&:hover": {
-      borderColor: "#52330D",
-      background: "#52330D",
+      borderColor: " #D3A625",
+      background: " #D3A625",
       color: "#white"
     },
     "&:focus": {
@@ -86,11 +86,11 @@ const useStyles = makeStyles({
       boxShadow: "none",
     },
     "&:disabled": {
-      backgroundColor: "#B28D42",
+      backgroundColor: " #D3A625",
       color: "white",
       opacity: "50%",
       "&:hover": {
-        borderColor: "#B28D42"
+        borderColor: " #D3A625"
       },
     }
   },
