@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 import StripeElement from "./StripeElement";
 import { useParams } from "react-router";
-//import ScrollToTop from "../../Blog/ScrollToTop";
+import ScrollToTop from "../Blog/ScrollToTop";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { Row, Col } from "reactstrap";
@@ -597,7 +597,7 @@ export default function AppointmentPage(props) {
 
   return (
     <div style={{ backgroundColor: "#DADADA" }}>
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
       <br />
       {bookNowClicked ? (
         <div>
@@ -717,7 +717,7 @@ export default function AppointmentPage(props) {
                 {/* </div> */}
               </Container>
               </div>
-              <button onClick={()=> history.push({pathname: `/${treatmentID}/confirm`,state: {date:apiDateString ,time :selectedTime}})} style={{color:'white', backgroundColor:'#C3A336', border:'0px', width:'20%', height:'3rem', borderRadius:'24px', marginBottom:'2rem', marginTop:'1rem'}}> Continue </button>
+              <button onClick={()=> history.push({pathname: `/${treatmentID}/confirm`,state: {date:apiDateString ,time :selectedTime}})} style={{cursor:'pointer',fontSize:'20px', color:'white', backgroundColor:'#D3A625', border:'0px', width:'20%', height:'3rem', borderRadius:'24px', marginBottom:'2rem', marginTop:'1rem'}}> Continue </button>
 
           </div>
           

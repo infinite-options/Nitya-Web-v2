@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 
 import StripeElement from "./StripeElement";
 import { useLocation, useParams } from "react-router";
-//import ScrollToTop from "../../Blog/ScrollToTop";
+import ScrollToTop from "../Blog/ScrollToTop";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
 import { Row, Col } from "reactstrap";
@@ -24,10 +24,10 @@ import '../Appointment/AppointmentPage.css';
 const useStyles = makeStyles({
   container: {
     margin: "50px auto",
-    width: "980px",
+   // width: "980px",
     padding: "50px 50px",
     backgroundColor: "white",
-    width:'100%',
+    width:'60%',
     "@media (max-width: 500px)": {
       marginLeft:'0.5rem',
      width: "75%",
@@ -84,6 +84,7 @@ const useStyles = makeStyles({
   bookButton: {
     width: "200px",
     height: "50px",
+    cursor:'pointer',
     backgroundColor: "#D3A625",
     border: "2px solid #D3A625",
     color: "white",
@@ -93,8 +94,8 @@ const useStyles = makeStyles({
     borderRadius: "50px",
     fontFamily: "AvenirHeavy",
     "&:hover": {
-      borderColor: "#52330D",
-      background: "#52330D",
+      borderColor: "#D3A625",
+      background: "#D3A625",
       color: "#white",
     },
     "&:focus": {
@@ -600,7 +601,7 @@ export default function AppointmentPage(props) {
 
   return (
     <div style={{ backgroundColor: "#DADADA" }}>
-      {/* <ScrollToTop /> */}
+      <ScrollToTop />
       <br />
       {bookNowClicked ? (
         <div>

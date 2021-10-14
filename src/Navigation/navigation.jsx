@@ -9,7 +9,7 @@ import { animateScroll as scroll } from "react-scroll";
 import { useHistory, useLocation } from "react-router-dom";
 import InstagramIcon from "@material-ui/icons/Instagram";
 
-//import logo from "../Assets/Projects/Nitya.png";
+import Logo from "../Assets/Images/Logo.png";
 //import InstagramIcon from "../Assets/Projects/Nitya.png";
 // import LoginNavBar from "./LoginNavBar";
 // import SignUp from "../Components/Home/SignUp";
@@ -108,7 +108,7 @@ const Navbar = () => {
       </div>
       <Link to="/" className="nav-logo"  onClick={closeMenu}>
          {/* <img src={location.pathname === "/projects" ? "/Navigation/Logo-White.png"  : "/Navigation/Logo.png"}/> */}
-         <img src={"./Logo.png"} style={{height:'auto', width:'10rem'}}/>
+         <img src={Logo} style={{height:'auto', width:'10rem'}}/>
       </Link>
       <div onClick={handleClick} className="nav-icon">
         {open ? <FiX /> : <FiMenu />}

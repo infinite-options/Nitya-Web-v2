@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Axios from "axios";
 import MapSection from "../Contact/Map";
 import InstagramIcon from "@material-ui/icons/Instagram";
-//import ScrollToTop from "../../Blog/ScrollToTop";
+import ScrollToTop from "../Blog/ScrollToTop";
 import '../Contact/contact.css';
 
 const location = {
@@ -20,9 +20,9 @@ export default function Contact() {
     message: "",
   });
 
-  function submit(e) {
-    console.log("prevent", e.target.value)
-    e.preventDefault();
+  function submit() {
+    //console.log("prevent", e.target.value)
+    //e.preventDefault();
     Axios.post(url, {
       name: data.name,
       email: data.email,
@@ -34,6 +34,7 @@ export default function Contact() {
       })
       .then((response) => {
         console.log(response);
+
       });
   }
   function handle(e) {
@@ -43,7 +44,7 @@ export default function Contact() {
   }
   return (
     <div  className="Container_Contact">
-        {/* <ScrollToTop /> */}
+        <ScrollToTop />
             <div className="Container_1_Contact">
               <div className= "Title_Contact">Contact Us</div>
               <div className= "Body_Contact"> 6055 Meridian Ave #40, </div>
@@ -64,7 +65,7 @@ export default function Contact() {
                     name="name"
                     id="name"
                     placeholder="Full Name"
-                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#D3A625',border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontWeight:'600',fontSize:'16px', width: "100%",border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.name}
                   />
@@ -74,7 +75,7 @@ export default function Contact() {
                     name="email"
                     id="email"
                     placeholder="Email"
-                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#D3A625',border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontWeight:'600',fontSize:'16px', width: "100%",border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.email}
                   />
@@ -84,7 +85,7 @@ export default function Contact() {
                     name="subject"
                     id="subject"
                     placeholder="Subject"
-                    style={{ fontWeight:'600',fontSize:'16px', width: "100%", color:'#D3A625',border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontWeight:'600',fontSize:'16px', width: "100%",border:'3px solid #D3A625', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.subject}
                   />
@@ -94,7 +95,7 @@ export default function Contact() {
                     name="text"
                     id="message"
                     placeholder="Type your message here"
-                    style={{fontWeight:'600',fontSize:'16px', width: "100%",color:'#D3A625', height: "139px", border:'3px solid #D3A625', borderRadius:'16px', textTransform:'none',marginTop:'1rem' }}
+                    style={{fontWeight:'600',fontSize:'16px', width: "100%", height: "139px", border:'3px solid #D3A625', borderRadius:'16px', textTransform:'none',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.message}
                   />
@@ -103,7 +104,7 @@ export default function Contact() {
                   style={{ display: "flex", justifyContent: "center" }}
                   aria-label={"click button to submit your messsage session."}
                 >
-                  <button style={{color:'white', backgroundColor:'#D3A625',borderRadius:"24px", border:'0px', height:'3rem', width:'40%'}} >Submit</button>
+                  <button onClick={submit} style={{  color:'white', backgroundColor:'#D3A625',borderRadius:"24px", border:'0px', height:'3rem', width:'40%', cursor:'pointer'}} >Submit</button>
                 </div>
                 <br />
                 <div style={{ display: "flex", justifyContent: "center" }}>
@@ -117,7 +118,7 @@ export default function Contact() {
                     aria-hidden="false"
                     aria-label="Instagram"
 
-                    style={{ color: "#b28d42", }}
+                    style={{ color: "#b28d42", cursor:'pointer'}}
                   />
                 </div>
           </div>

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Consulting from "./consulting";
 import Treatments from "./Treatments";
 import { makeStyles } from "@material-ui/core/styles";
-//import ScrollToTop from "../../Blog/ScrollToTop";
+import ScrollToTop from "../Blog/ScrollToTop";
 //import Footer from "../../Footer/Footer";
 import "./Services.css";
 import { Button, ButtonGroup } from "reactstrap";
@@ -82,7 +82,7 @@ const Services = (props) => {
 
   return (
     <div className={classes.container} >
-        
+         <ScrollToTop/>
         <div id="servicesContainer" >
         <div className="BoxContainer_1_title" style={{marginTop:'2rem'}}>
             Services

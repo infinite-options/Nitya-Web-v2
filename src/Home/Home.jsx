@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import {Box, Button} from '@material-ui/core';
 import '../Home/Home.css'
 import { useHistory, useLocation } from "react-router-dom";
-//import ScrollToTop from "../Contact/ScrollToTop";
+import ScrollToTop from "../Blog/ScrollToTop";
 import Carousel from "react-multi-carousel";
 import "react-multi-carousel/lib/styles.css";
 import { Link } from "react-router-dom";
@@ -133,9 +133,9 @@ export default function Home(){
         message: "",
       });
     
-      function submit(e) {
-        console.log("prevent", e.target.value)
-        e.preventDefault();
+      function submit() {
+        //console.log("prevent", e.target.value)
+        //e.preventDefault();
         Axios.post(url, {
           name: data.name,
           email: data.email,
@@ -147,6 +147,7 @@ export default function Home(){
           })
           .then((response) => {
             console.log(response);
+            window.location.reload(false);
           });
       }
       function handle(e) {
@@ -157,6 +158,11 @@ export default function Home(){
 
     return(
         <div  >
+           <title>Nitya Ayurveda</title>
+           <meta name="description" content="Written by Ajieth Venkat,
+Illustrated by V. Gogh, Price: $17.99,
+Length: 784 pages"/>
+          <ScrollToTop/>
             <Box ref={myRef_home} style={{backgroundColor:'#DADADA'}}>
             <Box className="HomeContainer">
             <div  className="BoxContainer_1">
@@ -271,7 +277,7 @@ export default function Home(){
                     name="name"
                     id="name"
                     placeholder="  Full Name"
-                    style={{ fontSize:'16px', width: "100%", color:'#C3A336',border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontSize:'16px', width: "100%",border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.name}
                   />
@@ -281,7 +287,7 @@ export default function Home(){
                     name="email"
                     id="email"
                     placeholder="  Email"
-                    style={{ fontSize:'16px', width: "100%", color:'#C3A336',border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontSize:'16px', width: "100%",border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.email}
                   />
@@ -291,7 +297,7 @@ export default function Home(){
                     name="subject"
                     id="subject"
                     placeholder="  Subject"
-                    style={{fontSize:'16px', width: "100%", color:'#C3A336',border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{fontSize:'16px', width: "100%",border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.subject}
                   />
@@ -302,7 +308,7 @@ export default function Home(){
                     id="message"
                     placeholder="  Type your message here"
                     className="MessageFont"
-                    style={{paddingTop:'1rem', fontSize:'16px', width: "100%",color:'#C3A336', height: "139px", border:'3px solid #C3A336', borderRadius:'16px', textTransform:'none',marginTop:'1rem' }}
+                    style={{paddingTop:'1rem', fontSize:'16px', width: "100%", height: "139px", border:'3px solid #C3A336', borderRadius:'16px', textTransform:'none',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.message}
                   />
@@ -311,7 +317,7 @@ export default function Home(){
                   style={{ display: "flex", justifyContent: "center" }}
                   aria-label={"click button to submit your messsage session."}
                 >
-                  <button className="ButtonFont" style={{color:'white',fontSize:'20px', backgroundColor:'#C3A336',borderRadius:"24px", border:'0px',marginTop:'2rem', width:'50%', height:'3rem'}} >Submit</button>
+                  <button className="ButtonFont" onClick={submit} style={{color:'white',fontSize:'20px', backgroundColor:'#C3A336',borderRadius:"24px", border:'0px',marginTop:'2rem', width:'50%', height:'3rem', cursor:'pointer'}} >Submit</button>
                 </div>
                 <br />
                 <div style={{ display: "flex", justifyContent: "center" }}>
@@ -325,7 +331,7 @@ export default function Home(){
                     aria-hidden="false"
                     aria-label="Instagram"
 
-                    style={{ color: "#b28d42", }}
+                    style={{ color: "#b28d42", cursor:'pointer' }}
                   />
                 </div>
           </div>

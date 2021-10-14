@@ -1,18 +1,23 @@
 import React from "react";
 import Img from "../Assets/Images/card2.png";
+import ScrollToTop from "../Blog/ScrollToTop";
 import '../About/about.css'
 
 export default function About() {
  
   return (
     <div className="About_Container" >
+       <title>Nitya Ayurveda About</title>
+       <meta name="description" content="Written by Ajieth Venkat,
+Illustrated by V. Gogh, Price: $17.99,
+Length: 784 pages"/>
       <div >
         <div
         className="About_SubContainer"
           aria-label="Counselor Introduction Block"
           
         >
-          {/* <ScrollToTop /> */}
+          <ScrollToTop />
           {/* <p className={classes.title}>Leena Marathay</p> */}
       
             <p className="BodyText" style={{paddingLeft:'5%', paddingRight:'5%', flex:'1'}}>
