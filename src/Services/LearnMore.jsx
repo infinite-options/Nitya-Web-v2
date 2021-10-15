@@ -8,6 +8,8 @@ import { height } from "@mui/system";
 import { Typography } from "@material-ui/core";
 import './consulting.css'
 import './LearnMore.css'
+import { Markup } from 'interweave';
+
 
 const useStyles = makeStyles({
   container: {
@@ -225,14 +227,15 @@ export default function LearnMore(props) {
               <div style={{flex:'1', height:'20%', fontWeight:'600'}}>
               {/* <Typography>{filteredService.treatment_notes}</Typography> */}
               {
-                    filteredService.treatment_notes.split("\n").map(function (item, idx) {
-                      return (
-                        <span key={idx}>
-                          {item}
-                          <br />
-                        </span>
-                      )
-                    })
+                <Markup content={filteredService.treatment_notes} />
+                    // filteredService.treatment_notes.split("\n").map(function (item, idx) {
+                    //   return (
+                    //     <span key={idx}>
+                    //       {item}
+                    //       <br />
+                    //     </span>
+                    //   )
+                    // })
                   }
             </div>
             </div>
