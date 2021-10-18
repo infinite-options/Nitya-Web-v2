@@ -1,15 +1,14 @@
-import logo from './logo.svg';
-import React, { useState, useEffect } from "react";
-import axios from "axios";
 
-import './App.css';
-import { useHistory } from 'react-router';
+import React, { useState, useEffect } from "react";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   Link
 } from "react-router-dom";
+import { useHistory } from 'react-router';
+
+import axios from "axios";
 
 import Navigation from './Navigation/navigation'
 import Home from './Home/Home';
@@ -32,6 +31,7 @@ import Temp from './New Temp/Temp.jsx';
 import ConfirmationPage from './Appointment/confirmationPage';
 import Cookies from "universal-cookie";
 import { AuthContext } from './auth/AuthContext';
+import './App.css';
 export const MyContext = React.createContext();
 
 function App() {

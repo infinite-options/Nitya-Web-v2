@@ -2,15 +2,25 @@ import React from "react";
 import Img from "../Assets/Images/card2.png";
 import ScrollToTop from "../Blog/ScrollToTop";
 import '../About/about.css'
+import DocumentMeta from 'react-document-meta';
+
 
 export default function About() {
  
+  const meta = {
+    title: 'About',
+    description: 'We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies.',
+    canonical: 'https://nityaayurveda.com/about',
+    meta: {
+        charset: 'utf-8',
+        name: {
+            keywords: 'react,meta,document,html,tags'
+        }
+    }
+  }
   return (
     <div className="About_Container" >
-       <title>Nitya Ayurveda About</title>
-       <meta name="description" content="Written by Ajieth Venkat,
-Illustrated by V. Gogh, Price: $17.99,
-Length: 784 pages"/>
+         <DocumentMeta {...meta}/>
       <div >
         <div
         className="About_SubContainer"

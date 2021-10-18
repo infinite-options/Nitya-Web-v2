@@ -14,6 +14,7 @@ import Axios from "axios";
 import MapSection from "../Contact/Map";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import Services from '../Services/services';
+import DocumentMeta from 'react-document-meta';
 
 //import Backdrop from "../Assets/Backdrop.png"
 
@@ -156,12 +157,21 @@ export default function Home(){
         setData(newData);
       }
 
+      const meta = {
+        title: 'Nitya Ayurveda, Center for Ayurveda',
+        description: 'Nitya Ayurveda is a holistic healing center that offers classical Ayurvedic solutions for your health issues with herbal plans, diet and lifestyle guidance, and follow ups.  The center also offers Panchakarma (cleansing and purification treatments) and traditional Ayurvedic wellness therapies to maintain health, relaxation and rejuvenation.',
+        canonical: 'https://nityaayurveda.com',
+        meta: {
+            charset: 'utf-8',
+            name: {
+                keywords: 'react,meta,document,html,tags'
+            }
+        }
+      }
+
     return(
-        <div  >
-           <title>Nitya Ayurveda</title>
-           <meta name="description" content="Written by Ajieth Venkat,
-Illustrated by V. Gogh, Price: $17.99,
-Length: 784 pages"/>
+        <div>
+          <DocumentMeta {...meta}/>
           <ScrollToTop/>
             <Box ref={myRef_home} style={{backgroundColor:'#DADADA'}}>
             <Box className="HomeContainer">

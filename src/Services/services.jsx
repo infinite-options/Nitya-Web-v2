@@ -7,6 +7,8 @@ import ScrollToTop from "../Blog/ScrollToTop";
 import "./Services.css";
 import { Button, ButtonGroup } from "reactstrap";
 import { height } from "@mui/system";
+import DocumentMeta from 'react-document-meta';
+
 
 const Services = (props) => {
   const useStyles = makeStyles({
@@ -80,8 +82,21 @@ const Services = (props) => {
   const [rSelected, setRSelected] = useState(<Consulting />);
   const [activeComponent, setActiveComponent] = useState("consulting");
 
+  const meta = {
+    title: 'Services',
+    description: 'We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies.',
+    canonical: 'https://nityaayurveda.com/services',
+    meta: {
+        charset: 'utf-8',
+        name: {
+            keywords: 'react,meta,document,html,tags'
+        }
+    }
+  }
+
   return (
     <div className={classes.container} >
+       <DocumentMeta {...meta}/>
          <ScrollToTop/>
         <div id="servicesContainer" >
         <div className="BoxContainer_1_title" style={{marginTop:'2rem'}}>
