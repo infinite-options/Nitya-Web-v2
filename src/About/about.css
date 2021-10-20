@@ -12,9 +12,9 @@
 
   .About_Container{
     background-color:white;
-    width:60%;
+    width:65%;
     height:auto;
-    margin-left:20%;
+    margin-left:17.5%;
     margin-top:5rem;
     margin-bottom:5rem;
   }
@@ -42,7 +42,7 @@
 
   .AboutImage{
     flex:1;
-    padding-top:8rem;
+    padding-top:4rem;
   }
 
   @media screen and (max-width: 500px) {

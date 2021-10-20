@@ -11,14 +11,14 @@ class BookNowBTN extends Component {
 
   render() {
     return (
-      <div aria-label={"click button to book a session now"} style={{display:"flex", justifyContent:"center"}}>
+      <div aria-label={"click button to book a session now"} style={{display:"flex", justifyContent:"center",marginTop:'1rem'}}>
         <Button
           style={{
-            backgroundColor: "white",
+            backgroundColor: "#D3A625",
             border: "none",
-            borderRadius: "36px",
+            //borderRadius: "36px",
             //padding: "10px",
-            width:"60%",
+            width:"40%",
             height: "auto",
             align:"center",
             textDecorationLine:'none'
@@ -29,7 +29,7 @@ class BookNowBTN extends Component {
             <p
               className="BookNowBtn"
               style={{
-                color: "#B28D42",
+                color: "white",
                 display:'flex',
                 justifyContent:'center',
                 fontSize:"20px",

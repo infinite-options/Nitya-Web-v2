@@ -19,8 +19,8 @@ class BookNowBTN extends Component {
       <div style={{
               textAlign: "center",
               //fontSize:"1.3rem",
-              //width:"300px",            
-              color: "white",
+              //width:"300px",   
+              color: "blue",
               textDecoration: "underline",
               font: "normal normal normal 22px/26px Hoefler Text"
               //paddingTop: "20px",
@@ -36,7 +36,7 @@ class BookNowBTN extends Component {
             aria-label={"click button to learn more."}
       >
         
-        <Link to={{pathname: '/learnMore',  state : { id: this.state.tID } }} style={{color:"white"}}>Learn More</Link>
+        <Link to={{pathname: '/learnMore',  state : { id: this.state.tID } }} style={{color:"#0288D1", fontSize:'16px'}}>Learn More</Link>
       </div>
       </div>
     );

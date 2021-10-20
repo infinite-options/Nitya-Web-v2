@@ -15,6 +15,11 @@ import MapSection from "../Contact/Map";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import Services from '../Services/services';
 import DocumentMeta from 'react-document-meta';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 //import Backdrop from "../Assets/Backdrop.png"
 
@@ -148,9 +153,28 @@ export default function Home(){
           })
           .then((response) => {
             console.log(response);
-            window.location.reload(false);
+            handleClickOpen()
           });
+
+          
+      Axios.post('https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/sendEmail', { email: data.email })
+      .then((res) => {
+        console.log("response email", res)
+        
+      })
       }
+
+      const [open, setOpen] = React.useState(false);
+
+      const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+        window.location.reload(false);
+      };
+
       function handle(e) {
         const newData = { ...data };
         newData[e.target.id] = e.target.value;
@@ -344,6 +368,24 @@ export default function Home(){
                     style={{ color: "#b28d42", cursor:'pointer' }}
                   />
                 </div>
+                <Dialog
+          open={open}
+          onClose={handleClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">{"Message Recieved"}</DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              We Got your Message!!! Please Check your email
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={handleClose} color="primary">
+              Close
+            </Button>
+          </DialogActions>
+        </Dialog>
           </div>
           </div>
             </Box>

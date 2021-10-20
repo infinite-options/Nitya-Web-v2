@@ -67,14 +67,14 @@ const useStyles = makeStyles({
 
   },
   body: {
-    backgroundColor: "#D3A625",
+    backgroundColor: "#DADADA",
     // minWidth: "420px",
     //marginLeft:"525px",
     height:'100%',
     // display: "flex",
     // alignItems:"center",
     // textAlign: "center",
-    color: "#D3A625",
+    color: "#000000",
     //float:"right",
     // paddingTop: "4rem",
     // padding: "4rem",
@@ -177,11 +177,11 @@ export default function Consulting(props) {
                   </div>
                   {/* <Row style={{ display: "flex", justifyContent: "center" }}> */}
                   <div style={{flex:'1'}}>
-                  <div style={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'space-evenly'}} className={classes.body}>
+                  <div style={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'center'}} className={classes.body}>
                     <div className="TitleFont">
                       {filteredService.title}
                     </div>
-                    <div className="BodyFont">
+                    <div className="BodyFont" >
                       {filteredService.description} <br />
                       {/* <NavHashLink to="#home">Learn More</NavHashLink> <br /> */}
                       {/* <LearnMoreBTN apptID={filteredService.treatment_uid} /> */}
@@ -190,7 +190,7 @@ export default function Consulting(props) {
                         Book Now
                       </Button> */}
                     <LearnMoreBTN apptID={filteredService.treatment_uid}/>
-                    <BookNowBTN apptID={filteredService.treatment_uid} />
+                    <BookNowBTN apptID={filteredService.treatment_uid}/>
                   </div>
                   </div>
                 </div>

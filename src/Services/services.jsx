@@ -18,12 +18,13 @@ const Services = (props) => {
       alignItems: "center",
       backgroundColor:'white',
       marginTop:'2rem',
-      width:'60%',
+      width:'65%',
+      marginLeft:'0%',
       "@media (max-width: 500px)": {
         width: "100%",
       },
       "@media (min-width: 500px)": {
-        marginLeft:'20%',
+        marginLeft:'17.5%',
       },
       // "@media (max-width: 1850px) and (min-width: 1600px)": {
       //   width: "100%",

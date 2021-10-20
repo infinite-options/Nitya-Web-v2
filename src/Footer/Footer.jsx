@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 
 export default function Footer(){
     return(
-        <div style={{display:'flex',marginTop:'5rem', justifyContent:'space-evenly',fontFamily:'Avenir LT Std 45 Book',fontSize:'12px' , color:'white',alignItems:'center',width:'100%',backgroundColor:'#C3A336', position:'relative', bottom:'0'}}>
+        <div style={{display:'flex',marginTop:'5rem', justifyContent:'space-evenly',fontFamily:'Avenir LT Std 45 Book',fontSize:'12px' , color:'white',alignItems:'center',width:'100%',backgroundColor:'#424242', position:'relative', bottom:'0'}}>
             <div style={{display:'flex', flexDirection:'column', alignItems:'flex-end',padding:'2rem', flex:'0.3'}}>
                 <img src={Logo} style={{ height:'5rem', width:'8rem'}}/>
                 <div> </div>
