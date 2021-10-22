@@ -1,8 +1,8 @@
 @font-face {
   font-family: SF Pro Italic;
   src: url('../fonts/SF-Pro-Italic.ttf');
-  font-family: SF Pro ;
-  src: url('../fonts/SF-Pro.ttf');
+  font-family: SF Pro Display Regular ;
+  src: url('../fonts/SF-Pro-Display-Black.otf');
   font-family: SF Pro Display Semibold;
   src: url('../fonts/SF-Pro-Display-Semibold.otf');
 
@@ -18,30 +18,32 @@
   position: sticky;
   top: 0;
   z-index: 500;
-  font-family: SF Pro Display Semibold;
+  font-family: SF Pro Display Regular;
   /* cursor: pointer; */
 }
 
 .emptyDiv{
-flex: 0.3;
+flex: 0;
 }
 
 .emptyDiv1{
-  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  flex: 0.5;
   text-align: left;
   }
 
 .nav-logo {
-  flex:1;
+  flex:0.5;
   text-align: right;
 }
 
 .nav-links {
-  flex:1;
+  flex:0.8;
   text-align: center;
   display: grid;
-  grid-template-columns: repeat(7, auto);
-  grid-gap: 0.5rem;
+  grid-template-columns: repeat(10, auto);
+  grid-gap: 0.1rem;
   list-style: none;
 }
 
@@ -59,7 +61,6 @@ flex: 0.3;
 
 .nav-link:hover, .nav-link:focus {
   color: #D3A625;
-  text-decoration: underline;
 }
 
 
@@ -74,8 +75,9 @@ flex: 0.3;
 }
 
 .instagram-icon {
-  color: #ad8131;
-  height: 50px;
+  color:  #ad8131;
+  margin-top: -0.2rem;
+  margin-left: 5%;
 }
 
 .instagram-icon:hover {

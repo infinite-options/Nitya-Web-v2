@@ -157,11 +157,11 @@ export default function Home(){
           });
 
           
-      Axios.post('https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/sendEmail', { email: data.email })
-      .then((res) => {
-        console.log("response email", res)
+      // Axios.post('https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/sendEmail', { email: data.email })
+      // .then((res) => {
+      //   console.log("response email", res)
         
-      })
+      // })
       }
 
       const [open, setOpen] = React.useState(false);
@@ -204,7 +204,7 @@ export default function Home(){
               <p className="BoxContainer_1_title" >
                 Helping your body heal itself
               </p>
-              <div
+              {/* <div
                 aria-label={"click button to book a session."}
                 style={{ textAlign: "center" }}
               >
@@ -218,26 +218,26 @@ export default function Home(){
                 >
                   What is Ayurveda?
                 </Button>
-              </div>
+              </div> */}
               <div
                 aria-label={"click button to book a session."}
                 style={{ textAlign: "center" }}
               >
                 <Button
                //   className={classes.btn}
-               style={{textTransform:'none', backgroundColor:'#D3A625', color:'white',borderRadius:'24px', width:'75%', marginTop:'1rem', height:'3rem'}}
+               style={{textTransform:'none', backgroundColor:'#D3A625', color:'white',fontSize:'24px' , width:'75%', height:'3rem'}}
                   id="btn"
                   onClick={() => {
                     history.push("/contact")
                   }}
                 >
-                  Schedule a Free 15min Consultation
+                 Book a Session
                 </Button>
               </div>
             </div>
 
             <div  className="BoxContainer_1_right" >
-              <Carousel
+              {/* <Carousel
                 responsive={responsive}
                 arrows={false}
                 showDots={true}
@@ -245,15 +245,15 @@ export default function Home(){
                 autoPlay={true}
                 autoPlaySpeed={10000}
                 infinite={true}
-              >
+              > */}
                 <img src={card1} className="CardImage" />
-                <div
+                {/* <div
                   style={{
                     color: "white",
                     textAlign: "center",
                     padding: "5%",
                     backgroundColor: "#D3A625",
-                    height:'100%'
+                   
                   }}
                 >
                   <h1
@@ -277,25 +277,23 @@ export default function Home(){
            Every client is treated holistically taking into account the uniqueness of his/her mind, body and causative factors.
             Nitya Ayurveda supports clients in their journey in maintaining health and bringing harmony and balance to their life.”
                   </p>
-                </div>
-              </Carousel>
+                </div> */}
+              {/* </Carousel> */}
             </div>
+            </div>
+
+            <div >
+               <About/>
             </div>
 
             <div className="BoxContainer_2_Mobile">
               <Services/>
             </div >
-
-
-            <div >
-               <About/>
-            </div>
    
-            <div   className="BoxContainer_1" style={{marginTop:'-2rem'}}>
-            <div style={{padding:'2rem', textAlign:'left', flex:'1'}}>
+            <div   className="BoxContainer_1" >
+            <div style={{padding:'2rem', textAlign:'center', flex:'1'}}>
               <div className= "Title_Contact">Contact Us</div>
-              <div className= "Body_Contact"> 6055 Meridian Ave #40, </div>
-              <div className= "Body_Contact" style={{marginTop:'0rem'}} > San Jose, CA 95120, USA </div>
+              <div className= "Body_Contact"> 6055 Meridian Ave #40, San Jose, CA 95120, USA </div>
               <div className= "Body_Contact" >Office: 408 471 7004</div>
               <iframe
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176.732452474541!2d-121.8872221846979!3d37.230325779862234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e314406ce969d%3A0x82fb75802c5ef489!2s6055%20Meridian%20Ave%20%2340%2C%20San%20Jose%2C%20CA%2095120!5e0!3m2!1sen!2sus!4v1618695078070!5m2!1sen!2sus"
@@ -304,14 +302,15 @@ export default function Home(){
                 loading="lazy"
               ></iframe>
             </div>
-            <div  style={{padding:'2rem', flex:'1'}}>
+            <div  style={{padding:'2rem', flex:'1', backgroundColor:'#DADADA',marginRight:'2rem', paddingTop:'5rem'}}>
            
+                <div style={{display:'flex'}}>
                   <input  
                     type="text"
                     name="name"
                     id="name"
                     placeholder="  Full Name"
-                    style={{ fontSize:'16px', width: "100%",border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{ fontSize:'16px', width: "50%", height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.name}
                   />
@@ -321,17 +320,18 @@ export default function Home(){
                     name="email"
                     id="email"
                     placeholder="  Email"
-                    style={{ fontSize:'16px', width: "100%",border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{marginRight:'-0.5rem', marginLeft:'1rem', fontSize:'16px', width: "50%", height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.email}
                   />
+                  </div>
         
                   <input
                     type="text"
                     name="subject"
                     id="subject"
                     placeholder="  Subject"
-                    style={{fontSize:'16px', width: "100%",border:'3px solid #C3A336', borderRadius:'24px', height:'3rem',marginTop:'1rem' }}
+                    style={{fontSize:'16px', width: "100%", height:'3rem',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.subject}
                   />
@@ -342,7 +342,7 @@ export default function Home(){
                     id="message"
                     placeholder="  Type your message here"
                     className="MessageFont"
-                    style={{paddingTop:'1rem', fontSize:'16px', width: "100%", height: "139px", border:'3px solid #C3A336', borderRadius:'16px', textTransform:'none',marginTop:'1rem' }}
+                    style={{paddingTop:'1rem', fontSize:'16px', width: "100%", height: "139px", textTransform:'none',marginTop:'1rem' }}
                     onChange={(e) => handle(e)}
                     value={data.message}
                   />
@@ -351,7 +351,7 @@ export default function Home(){
                   style={{ display: "flex", justifyContent: "center" }}
                   aria-label={"click button to submit your messsage session."}
                 >
-                  <button className="ButtonFont" onClick={submit} style={{color:'white',fontSize:'20px', backgroundColor:'#C3A336',borderRadius:"24px", border:'0px',marginTop:'2rem', width:'50%', height:'3rem', cursor:'pointer'}} >Submit</button>
+                  <button className="ButtonFont" onClick={submit} style={{color:'white',fontSize:'20px', backgroundColor:'#C3A336', border:'0px',marginTop:'2rem', width:'50%', height:'3rem', cursor:'pointer'}} >Submit</button>
                 </div>
                 <br />
                 <div style={{ display: "flex", justifyContent: "center" }}>

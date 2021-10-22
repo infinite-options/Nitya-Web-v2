@@ -11,6 +11,7 @@
   }
 .MessageFont{
   font-family:SF Pro Display Regular ;
+  color:black
 }
 
 .ButtonFont{
@@ -40,14 +41,12 @@
 .Title_Contact{
     font-family:  Hoefler Text ;
     font-style: italic;
-    font-size: 42px;
+    font-size: 54px;
     color: #D3A625;
 }
 
 .Body_Contact{
-    font-family: SF Pro Display Regular;
-    font-size: 20px;
-    color: #D3A625;
+    font-size: 16px;
     margin-top: 1rem;
 }
 

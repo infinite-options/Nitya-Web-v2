@@ -45,11 +45,11 @@ export default function Contact() {
 
       });
 
-      Axios.post('https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/sendEmail', { email: data.email })
-      .then((res) => {
-        console.log("response email", res)
+      // Axios.post('https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/sendEmail', { email: data.email })
+      // .then((res) => {
+      //   console.log("response email", res)
         
-      })
+      // })
   }
 
   const [open, setOpen] = React.useState(false);
