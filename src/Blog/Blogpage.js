@@ -47,9 +47,10 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appbar: {
-    backgroundColor: "#C3A336",
+    backgroundColor: "white",
     boxShadow: "none",
     padding: "4px",
+    color: 'black',
     "@media (max-width: 880px)": {
       display: "none",
     },
@@ -68,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
   linkText: {
     textDecoration: "none",
     textTransform: "capitalize",
-    color: "white",
+    color: "black",
   },
   search: {
     display: "inline-block",
@@ -158,7 +159,8 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   title: {
-    color: "#C3A336",
+    color: "black",
+    fontStyle: "italic",
     fontSize: "2rem",
     lineHeight: "1.6",
   },
@@ -289,6 +291,9 @@ function Blogpage(props) {
 
   return (
     <div className={classes.blogpage} id="blogpage">
+      <div style={{ fontSize: '56px', color: "#C3A336", fontStyle: 'italic' }}>
+        Blog
+      </div>
       <div className={classes.container}>
         <div
           style={{
@@ -297,13 +302,13 @@ function Blogpage(props) {
             textAlign: "center",
             color: "#C3A336",
             fontSize: "31px",
-            padding: "20px",
+            padding: "10px",
 
           }}
         >
-          <div className="TitleFontAppt" style={{ flex: '1' }}>
+          {/* <div className="TitleFontAppt" style={{ flex: '1' }}>
             Ayurvedic Musings
-          </div>
+          </div> */}
           {/* <div style={{ color: 'black' }}>{String(Auth.isAuth)}</div> */}
 
           <div hidden={Auth.isAuth === false}>
@@ -350,7 +355,7 @@ function Blogpage(props) {
                 </form>
               </div>
               <div className={classes.searchIconDiv}>
-                <SearchIcon fontSize="large" />
+                <SearchIcon fontSize="small" />
               </div>
             </div>
           </Toolbar>

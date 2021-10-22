@@ -135,9 +135,9 @@ const useStyles = makeStyles((theme) => ({
   },
   header: {
     display: "flex",
-    justifyContent: "space-between",
+    justifyContent: "flex-start",
     color: "#8d6f19",
-    fontSize: "1.2rem",
+    fontSize: "20px",
     paddingBottom: "10px",
     width: "100%",
     "@media (max-width: 570px)": {
@@ -220,6 +220,57 @@ function FullBlog(props) {
     alert("Searched");
   };
 
+  const convertDate = (date) => {
+    if (date) {
+      const year = date.substring(0, 4);
+      let month = date.substring(5, 7);
+      const day = date.substring(8, 10);
+
+      switch (month) {
+        case "01":
+          month = "Jan";
+          break;
+        case "02":
+          month = "Feb";
+          break;
+        case "03":
+          month = "Mar";
+          break;
+        case "04":
+          month = "Apr";
+          break;
+        case "05":
+          month = "May";
+          break;
+        case "06":
+          month = "Jun";
+          break;
+        case "07":
+          month = "Jul";
+          break;
+        case "08":
+          month = "Aug";
+          break;
+        case "09":
+          month = "Sep";
+          break;
+        case "10":
+          month = "Oct";
+          break;
+        case "11":
+          month = "Nov";
+          break;
+        case "12":
+          month = "Dec";
+          break;
+        default:
+          month = date.substring(5, 7);
+      }
+      return month + " " + day + ", " + year;
+    }
+    return "";
+  };
+
   const navLinks = [
     { title: `all posts`, path: `/blog` },
     { title: `healthy tips`, path: `/healthy tips` },
@@ -273,30 +324,28 @@ function FullBlog(props) {
           <div className="blogPostContainer">
             <Card className={classes.card}>
               <div>
-                <div style={{ textAlign: 'left', fontSize: '52px', color: '#D3A625' }} className={classes.title}>
-                  <p>{post.blogTitle}</p>
-                </div>
+
                 <div style={{ color: '#D3A625' }} className={classes.header}>
-                  <span>
-                    <IconButton
-                      size="lg"
-                      onClick={handleClick}
-                      aria-label="click to share post"
-                    >
-                      <AuthorIcon />
-                    </IconButton>
-                    &nbsp;&nbsp;
-                    {post.author} &nbsp;&nbsp; {post.postedOn}{" "}
+                  <IconButton
+                    size="lg"
+                    onClick={handleClick}
+                    aria-label="click to share post"
+                  >
+                    <AuthorIcon style={{ marginTop: '-0.7rem' }} />
+                  </IconButton>
+                  &nbsp;&nbsp;
+                  {post.author} &nbsp;&nbsp; <li></li>  {convertDate(post.postedOn)}{" "}
 
-                    <ReplyIcon
-                      onClick={handleClick}
-                      size="sm"
-                      style={{ marginLeft: '1rem', transform: 'scaleX(-1)', color: '#D3A625', marginBottom: '-0.3rem' }}
-                      aria-label="click to share post">
-                    </ReplyIcon>
+                  <ReplyIcon
+                    onClick={handleClick}
+                    size="sm"
+                    style={{ marginLeft: '1rem', transform: 'scaleX(-1)', color: '#D3A625', marginBottom: '-0.3rem' }}
+                    aria-label="click to share post">
+                  </ReplyIcon>
 
-                  </span>
-
+                  <div style={{ textAlign: 'left', fontSize: '52px', color: '#D3A625' }} className={classes.title}>
+                    <p>{post.blogTitle}</p>
+                  </div>
 
                   <Menu
                     elevation={0}
