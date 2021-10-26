@@ -4,7 +4,7 @@ import Img from "../Assets/Images/card2.png";
 
 import '../Intro_Container/Container.css';
 
-export default function Aboutr(){
+export default function About(){
     return(
         <div className="Container">
             <div className="Intro_Container_Grid">
