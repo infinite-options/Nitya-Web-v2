@@ -3,20 +3,11 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import {Box, Button} from '@material-ui/core';
-// import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
-import { animateScroll as scroll } from "react-scroll";
 import { useHistory, useLocation } from "react-router-dom";
 import InstagramIcon from "@material-ui/icons/Instagram";
-import AccountCircleIcon from '@mui/icons-material/AccountCircleRounded';
 import Logo from "../Assets/Images/Logo.png";
-//import InstagramIcon from "../Assets/Projects/Nitya.png";
-// import LoginNavBar from "./LoginNavBar";
-// import SignUp from "../Components/Home/SignUp";
-// import LogIn from "../Components/Home/LogIn";
 import "./Navbar.css";
-//import Home from "../Home/Home";
 
 const useStyles = makeStyles((theme) => ({
   authModal: {
@@ -28,6 +19,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#000000"
   }
 }));
+
 
 function useOutsideAlerter(ref) {
   useEffect(() => {
@@ -100,7 +92,7 @@ const Navbar = () => {
   };
 
   const scrollToTop = () => {
-    scroll.scrollToTop();
+   // scroll.scrollToTop();
   };
 
   return (

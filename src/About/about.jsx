@@ -1,36 +1,15 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
+
 import Img from "../Assets/Images/card2.png";
-import ScrollToTop from "../Blog/ScrollToTop";
-import '../About/about.css'
-import DocumentMeta from 'react-document-meta';
 
+import '../Intro_Container/Container.css';
 
-export default function About() {
- 
-  const meta = {
-    title: 'About',
-    description: 'We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies.',
-    canonical: 'https://nityaayurveda.com/about',
-    meta: {
-        charset: 'utf-8',
-        name: {
-            keywords: 'react,meta,document,html,tags'
-        }
-    }
-  }
-  return (
-    <div className="About_Container" >
-         <DocumentMeta {...meta}/>
-      <div >
-        <div
-        className="About_SubContainer"
-          aria-label="Counselor Introduction Block"
-          
-        >
-          <ScrollToTop />
-          {/* <p className={classes.title}>Leena Marathay</p> */}
-      
-            <p className="BodyText" style={{paddingLeft:'5%', paddingRight:'5%', flex:'1'}}>
+export default function Aboutr(){
+    return(
+        <div className="Container">
+            <div className="Intro_Container_Grid">
+            <div>
+              <p className="BodyText" style={{paddingLeft:'5%', paddingRight:'5%', flex:'1'}}>
                 <div className="Title"> Leena Marathay </div>
                 <p>Leena is a NAMA (National Ayurvedic Medical Association)
                 certified Ayurvedic Practitioner and an Ayurvedic Health and
@@ -47,18 +26,16 @@ export default function About() {
                 client's health imbalance and suggests an individualized health
                 plan guiding her clients to achieve optimum health with lasting
                 results.
-            </p>
-
-           
-            <div className="AboutImage">
-                <img
+                </p>
+            </div>
+            <div>
+            <img
                   src={Img}
                   style={{objectFit:'contain', width:'100%', height:'90%'}}
                   alt="An image of Leena Marathay"
                 />
             </div>
+            </div>
         </div>
-      </div>
-    </div>
-  );
+    )
 }

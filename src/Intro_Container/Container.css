@@ -1,0 +1,44 @@
+@font-face {
+    font-family: Hoefler Text;
+    src: url('../fonts/Hoefler-Text.ttc');
+    font-family: SF Pro Display Regular;
+    src: url('../fonts/SF-Pro-Display-Regular.otf');
+  }
+
+.Container{
+    width: 60rem;
+    padding: 5%;
+    background-color: white;
+    height: auto;
+    padding-bottom: 5rem;
+    margin-top: 10%;
+    margin-left: -4%;
+}
+
+.Intro_Container_Grid{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-column-gap: 1rem ;
+}
+
+.CardImage{
+  object-fit:contain;
+  height:400px;
+  width:500px;
+}
+
+
+.Title{
+  font-family: Hoefler Text;
+  color: #D3A625;
+  font-size: 52px;
+  font-style: italic;
+  padding: 0px;
+}
+
+.BodyText{
+font-family:SF Pro Display Regular;
+color: #D3A625;
+font-size: 20px;
+
+}
