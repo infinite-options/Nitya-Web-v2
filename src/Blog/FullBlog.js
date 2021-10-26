@@ -45,7 +45,7 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   appbar: {
-    backgroundColor: "#D3A625",
+    backgroundColor: "white",
     boxShadow: "none",
     padding: "4px",
     "@media (max-width: 880px)": {
@@ -85,6 +85,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchContainer: {
     display: "flex",
+    color: 'black'
   },
   inputRoot: {
     color: "#594d2cs",
@@ -94,10 +95,11 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
     outline: "none",
     width: "450px",
-    borderRadius: "15px",
-    border: "none",
+    borderRadius: "0px",
+    border: '0px',
+    borderBottom: '1px solid black',
     "&::placeholder": {
-      color: "#D3A625",
+      color: "black",
     },
     "@media (max-width: 1430px)": {
       width: "200px",
@@ -138,7 +140,6 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: "flex-start",
     color: "#8d6f19",
     fontSize: "20px",
-    paddingBottom: "10px",
     width: "100%",
     "@media (max-width: 570px)": {
       width: "130%",
@@ -162,6 +163,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "justify",
     paddingTop: "30px",
     paddingBottom: "10px",
+    padding: '10%',
   },
   cardActions: {
     display: "flex",
@@ -294,7 +296,7 @@ function FullBlog(props) {
                   href={path}
                   key={title}
                   className={classes.linkText}
-                  style={{ textDecoration: "none" }}
+                  style={{ textDecoration: "none", color: 'black' }}
                 >
                   <ListItem button>
                     <ListItemText primary={title} />
@@ -314,7 +316,7 @@ function FullBlog(props) {
               </form>
             </div>
             <div className={classes.searchIconDiv}>
-              <SearchIcon fontSize="large" />
+              <SearchIcon fontSize="small" />
             </div>
           </div>
         </Toolbar>
@@ -325,7 +327,7 @@ function FullBlog(props) {
             <Card className={classes.card}>
               <div>
 
-                <div style={{ color: '#D3A625' }} className={classes.header}>
+                <div style={{ color: 'black', marginLeft: '8%' }} className={classes.header}>
                   <IconButton
                     size="lg"
                     onClick={handleClick}
@@ -333,8 +335,8 @@ function FullBlog(props) {
                   >
                     <AuthorIcon style={{ marginTop: '-0.7rem' }} />
                   </IconButton>
-                  &nbsp;&nbsp;
-                  {post.author} &nbsp;&nbsp; <li></li>  {convertDate(post.postedOn)}{" "}
+                  &nbsp; &nbsp;
+                  {post.author} &nbsp; &nbsp; <li></li>  {convertDate(post.postedOn)}{" "}
 
                   <ReplyIcon
                     onClick={handleClick}
@@ -343,9 +345,7 @@ function FullBlog(props) {
                     aria-label="click to share post">
                   </ReplyIcon>
 
-                  <div style={{ textAlign: 'left', fontSize: '52px', color: '#D3A625' }} className={classes.title}>
-                    <p>{post.blogTitle}</p>
-                  </div>
+
 
                   <Menu
                     elevation={0}
@@ -386,6 +386,9 @@ function FullBlog(props) {
                   </Menu>
                 </div>
 
+                <div style={{ textAlign: 'left', fontSize: '52px', color: 'black', marginLeft: '10%' }} className={classes.title}>
+                  <p>{post.blogTitle}</p>
+                </div>
 
                 {!!post.blogImage && (
                   <div className={classes.img}>

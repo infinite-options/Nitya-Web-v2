@@ -67,14 +67,14 @@ const useStyles = makeStyles({
 
   },
   body: {
-    backgroundColor: "#C3A336",
+    backgroundColor: "#DADADA",
     // minWidth: "420px",
     //marginLeft:"525px",
     height: '100%',
     // display: "flex",
     // alignItems:"center",
     // textAlign: "center",
-    color: "#C3A336",
+    color: "#00000",
     //float:"right",
     // paddingTop: "4rem",
     // padding: "4rem",
@@ -159,11 +159,11 @@ export default function Consulting(props) {
     >
       <br />
       <br />
-      <div className="ConsultingContainer" style={{ height: '30rem', padding: '1rem' }}>
+      <div className="ConsultingContainer" style={{ height: '30rem' }}>
         {data
           .filter((service) => service.category === "Treatment")
           .map((filteredService) => (
-            <div className="Consulting_SubContainer" >
+            <div className="Consulting_SubContainer"  >
               <div className="Consulting_SubContainer_1">
                 {/* <Row className="d-none d-sm-block d-md-block"> */}
                 <div style={{ width: '100%', flex: '1' }}>
@@ -177,7 +177,7 @@ export default function Consulting(props) {
                 </div>
                 {/* <Row style={{ display: "flex", justifyContent: "center" }}> */}
                 <div style={{ flex: '1' }}>
-                  <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-evenly' }} className={classes.body}>
+                  <div style={{ width: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'center' }} className={classes.body}>
                     <div className="TitleFont">
                       {filteredService.title}
                     </div>

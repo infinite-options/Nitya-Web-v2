@@ -152,12 +152,10 @@ const Navbar = () => {
       </ul>
 
       <div className="emptyDiv1" >
-      <AccountCircleIcon 
+      {/* <AccountCircleIcon 
       size='large'
-      style={{color:'#ad8131', marginRight:'0.5rem', marginTop:'0.3rem'}}/>
-      <Button onClick={ ()=> {history.push("/login")}} style={{textTransform:'none', color:'#ad8131'}} >
-      Log In
-      </Button>
+      style={{color:'#ad8131', marginRight:'0.5rem', marginTop:'0.3rem'}}/> */}
+   
       <InstagramIcon
           fontSize="large"
           className="instagram-icon"

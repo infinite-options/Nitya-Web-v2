@@ -4,9 +4,12 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import CAAM from "../Assets/Images/CAAM_logo.png";
 import Namacb from "../Assets/Images/namacb.png";
 import { Link } from "react-router-dom";
+import { useHistory, useLocation } from "react-router-dom";
 
 
 export default function Footer(){
+    const history = useHistory();
+
     return(
         <div style={{display:'flex',marginTop:'5rem', justifyContent:'space-evenly',fontFamily:'Avenir LT Std 45 Book',fontSize:'12px' , color:'white',alignItems:'center',width:'100%',backgroundColor:'white', position:'relative', bottom:'0'}}>
             {/* <div style={{display:'flex', flexDirection:'column', alignItems:'flex-end',padding:'2rem', flex:'0.3'}}>
@@ -48,7 +51,9 @@ export default function Footer(){
             </div>
 
             <div style={{marginTop:'3rem', marginBottom:'2rem'}}>
+            <button onClick={ ()=> {history.push("/login")}} style={{textTransform:'none',cursor:'pointer', color:'#C3A336', backgroundColor:'white', border:'0px'}} >
             © 2021 by Leena Marathay
+            </button>
             </div>
             </div>
         </div>

@@ -18,8 +18,8 @@ const Services = (props) => {
       alignItems: "center",
       backgroundColor:'white',
       marginTop:'2rem',
-      width:'65%',
-      marginLeft:'0%',
+    // width:'65%',
+    //  marginLeft:'0%',
       "@media (max-width: 500px)": {
         width: "100%",
       },
@@ -96,7 +96,7 @@ const Services = (props) => {
   }
 
   return (
-    <div className={classes.container} >
+    <div className={classes.container} style={{width:activeComponent === "treatments" ? "70%" : "65%", marginLeft:activeComponent === "treatments" ? "15%" : '17.5%'}} >
        <DocumentMeta {...meta}/>
          <ScrollToTop/>
         <div id="servicesContainer" >
@@ -133,7 +133,7 @@ const Services = (props) => {
               </Button>
             </ButtonGroup>
           </div>
-          <p style={{ width: "fit-content", height: activeComponent === "treatments" ? "85rem" : "115rem" }}>
+          <p style={{ width: "100%", height: activeComponent === "treatments" ? "85rem" : "115rem" }}>
             {rSelected}
           </p>
         </div>
