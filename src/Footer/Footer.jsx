@@ -50,7 +50,7 @@ export default function Footer(){
             
             </div>
 
-            <div style={{marginTop:'3rem', marginBottom:'2rem'}}>
+            <div style={{marginTop:'3rem', marginBottom:'2rem', textAlign:'center'}}>
             <button onClick={ ()=> {history.push("/login")}} style={{textTransform:'none',cursor:'pointer', color:'#C3A336', backgroundColor:'white', border:'0px'}} >
             © 2021 by Leena Marathay
             </button>

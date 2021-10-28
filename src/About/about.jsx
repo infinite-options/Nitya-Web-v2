@@ -2,15 +2,15 @@ import React, { useEffect, useRef, useState } from "react";
 
 import Img from "../Assets/Images/card2.png";
 
-import '../Intro_Container/Container.css';
+import '../Home/Home.css';
 
 export default function About(){
     return(
-        <div className="Container">
-            <div className="Intro_Container_Grid">
+        <div className="Card">
+            <div className="CardGrid">
             <div>
-              <p className="BodyText" style={{paddingLeft:'5%', paddingRight:'5%', flex:'1'}}>
-                <div className="Title"> Leena Marathay </div>
+              <p className="CardText">
+                <h1 className="CardTitle"> Leena Marathay </h1>
                 <p>Leena is a NAMA (National Ayurvedic Medical Association)
                 certified Ayurvedic Practitioner and an Ayurvedic Health and
                 Lifestyle Counselor.</p>
@@ -31,7 +31,7 @@ export default function About(){
             <div>
             <img
                   src={Img}
-                  style={{objectFit:'contain', width:'100%', height:'90%'}}
+                  className="CardImage"
                   alt="An image of Leena Marathay"
                 />
             </div>

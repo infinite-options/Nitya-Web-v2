@@ -5,10 +5,187 @@
     src: url('../fonts/SF-Pro-Display-Regular.otf');
   }
 
+  /* -------------- Scroll View Style ------------------------------------------------*/
+
+  ::-webkit-scrollbar {
+    width: 5px;
+  }
+  
+  /* Track */
+  ::-webkit-scrollbar-track {
+    background: #FFFFFF; 
+  }
+   
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: #757575; 
+  }
+  
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: #FFFFFF; 
+  }  
+
+  /* -------------- Parent Conatiner in Home.jsx ------------------------------------------------*/
+
+  /*Parent Container For Home.jsx */
   .HomeContainer{
     display:grid;
     justify-content: center;
     background-color: #DADADA;
-    grid-template-rows: repeat(2, auto);
     grid-template-columns: repeat(1, auto);
   }
+
+  /* -------------- Child Conatiners in Home.jsx ------------------------------------------------*/
+
+  /* Card Format for all Intro, About, Service & Contact */
+.Card{
+  width: 60rem;
+  height: auto;
+
+  margin: 5% 0% 5% 0%;
+  padding: 5%;
+
+  background-color: white;
+}
+
+.CardGrid{
+  display: grid;
+  grid-template-columns: repeat(2, auto);
+  grid-column-gap: 5% ;
+
+  margin: 0px;
+  border:2px solid white;
+  padding: 0%;
+}
+
+.CardImage{
+  object-fit:cover;
+  height:100%;
+  width:30rem;
+}
+
+.CardButton{
+  text-transform:none;
+  background-color:#D3A625;
+  color:white;
+
+  font-size:24px;
+
+  width:75%;
+  height:3rem;
+
+  margin-top: 2rem;
+  border:0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.CardTitle{
+  font-family: Hoefler Text;
+  color: #D3A625;
+  font-size: 52px;
+  font-style: italic;
+  padding: 0px;
+  text-align: center;
+}
+
+.CardText{
+  font-family:SF Pro Display Regular;
+  color: #D3A625;
+  font-size: 20px;
+  padding-left:5%;
+  padding-right:5%;
+  flex:1;
+}
+
+/* -------------- Services ------------------------------------------------*/
+
+/* Title "Services" on Home.jsx */
+.Service_Title{
+  font-family: Hoefler Text;
+  color: #D3A625;
+  font-size: 42px;
+  font-style: italic;
+  text-align: center;
+  align-items: center;
+  font-weight: bold;
+  margin-top: 4rem;
+}
+
+/* Services Switch Button Container for "Consulting" & "Treatments" */
+.Services_Button_Contianer{
+  display: flex;
+  justify-content: center;
+}
+
+/* Services Switch Button Styles for "Consulting" & "Treatments" */
+.Services_Button{
+  text-transform:none;
+  background-color:black;
+  font-size:24px;
+  width:50%;
+  height:3rem;
+  margin-left:2rem;
+}
+
+/* Title Text For each Service Card */
+.Services_Title_Font{
+  font-family: Hoefler Text;
+  font-size: 28px;
+  text-align: center;
+  letter-spacing: 0.6px;
+  color: #000000;
+  padding-left:5%;
+  padding-right:5%;
+}
+
+/* Body Text for each Service Card */
+.Services_Body_Font{
+  font-family: SF Pro Display Regular;
+  text-align: center;
+  font-size: 16px;
+  font-weight: normal;
+  letter-spacing: 0.55px;
+  color: #000000;
+  padding-left:5%;
+  padding-right:5%;
+  margin-top: 1rem;
+}
+
+/* -------------- Contact ------------------------------------------------*/
+
+/* Title Text "Contact Us" in Contact.jsx */
+.Title_Contact{
+  font-family:  Hoefler Text ;
+  font-style: italic;
+  font-size: 54px;
+  color: #D3A625;
+}
+
+/* Body Text Address in Contact.jsx */
+.Body_Contact{
+  font-size: 16px;
+  margin-top: 1rem;
+}
+
+/* Map Conatiner in Contact.jsx */
+.Contact_Map{
+  border: 0;
+  width: 100%;
+  border-radius: 0%;
+  height: 20rem;
+  margin-top:2rem; 
+}
+
+/* Input for all the contact.jsx */
+.CardInput{
+  font-family: SF Pro Display Regular ;
+  height:3rem;
+  margin-top:1rem;
+  font-size:16px;
+ 
+}
+
