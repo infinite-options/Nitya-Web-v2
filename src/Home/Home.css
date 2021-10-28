@@ -30,32 +30,41 @@
 
   /*Parent Container For Home.jsx */
   .HomeContainer{
-    display:grid;
+    /* display:grid; */
+    /* justify-content: flex-end; */
+    /* place-items: center; */
+    /* background-color: #DADADA; */
+    display: flex;
+    flex-direction: column;
     justify-content: center;
-    background-color: #DADADA;
+    align-items: center;
     grid-template-columns: repeat(1, auto);
+    border: 2px solid yellow;
+
   }
 
   /* -------------- Child Conatiners in Home.jsx ------------------------------------------------*/
 
   /* Card Format for all Intro, About, Service & Contact */
 .Card{
-  width: 60rem;
+  width: 50rem;
+  /* width: clamp(200px, 50%, 600px); */
   height: auto;
 
   margin: 5% 0% 5% 0%;
-  padding: 5%;
+  /* padding: 5%;  */
 
-  background-color: white;
+  /* background-color: white; */
+  border: 2px solid green;
+
 }
 
 .CardGrid{
   display: grid;
   grid-template-columns: repeat(2, auto);
-  grid-column-gap: 5% ;
+  /* grid-column-gap: 5% ; */
 
   margin: 0px;
-  border:2px solid white;
   padding: 0%;
 }
 
@@ -90,6 +99,7 @@
   font-style: italic;
   padding: 0px;
   text-align: center;
+ 
 }
 
 .CardText{
@@ -109,9 +119,9 @@
   color: #D3A625;
   font-size: 42px;
   font-style: italic;
-  text-align: center;
+  /* text-align: center;
   align-items: center;
-  font-weight: bold;
+  font-weight: bold; */
   margin-top: 4rem;
 }
 
@@ -177,7 +187,7 @@
   width: 100%;
   border-radius: 0%;
   height: 20rem;
-  margin-top:2rem; 
+
 }
 
 /* Input for all the contact.jsx */

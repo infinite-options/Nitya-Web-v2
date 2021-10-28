@@ -97,8 +97,8 @@ const Navbar = () => {
 
   return (
     // <nav className="navbar" style={{ background: location.pathname === "/projects" ? '#52330D' : 'white' }}>
-      <nav className="navbar">
-      <div className="emptyDiv">
+  <nav className="navbar">
+    <div className="emptyDiv">
       </div>
       <Link to="/" className="nav-logo"  onClick={closeMenu}>
          {/* <img src={location.pathname === "/projects" ? "/Navigation/Logo-White.png"  : "/Navigation/Logo.png"}/> */}

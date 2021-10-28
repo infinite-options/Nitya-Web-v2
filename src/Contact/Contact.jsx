@@ -59,10 +59,10 @@ export default function Contact(){
   }
 
     return(
-        <div className="Card">
+        <div className="Card" >
             <div className="CardGrid">
-            <div style={{display:'flex', flexDirection:'column', alignItems:'center',padding:'5%'}}>
-                <h1 className="CardTitle">Contact Us</h1>
+            <div style={{ display:'flex', flexDirection:'column', alignItems:'center'}}>
+                <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact Us</div>
             <div className="CardText"> 6055 Meridian Ave  Ste #40 <br></br> San Jose, CA 95120, USA </div>
             <div className="CardText"> Office: 408 471 7004</div>
             {/* <button className="CardButton"> Test </button> */}
@@ -75,28 +75,39 @@ export default function Contact(){
             </iframe>
             </div>
             <div>
-            <div style={{ backgroundColor:'#DADADA', paddingTop:'5rem', width:'30rem',padding:'5%'}}>
-            <div style={{display:'flex'}}>
+            <div style={{ backgroundColor:'#DADADA', paddingTop:'5rem', width:'auto',padding:'5%'}}>
+            <div className="CardGrid">
                 <input  
                     type="text"
                     name="name"
                     id="name"   
                     className="CardInput"
                     placeholder="  Full Name"
-                    style={{  width: "45%",marginRight:'5%' }}
+                    style={{  width: "100%" }}
                     onChange={(e) => handle(e)}
                     value={data.name}/>
            
                 <input
+                    type="phone"
+                    name="phone"
+                    id="phone"
+                    className="CardInput"
+                    placeholder="  Phone"
+                    style={{ width: "100%"}}
+                    onChange={(e) => handle(e)}
+                    value={data.email}/>
+                    
+            </div>
+
+            <input
                     type="email"
                     name="email"
                     id="email"
                     className="CardInput"
                     placeholder="  Email"
-                    style={{ width: "50%"}}
+                    style={{ width: "100%"}}
                     onChange={(e) => handle(e)}
                     value={data.email}/>
-            </div>
         
             <input
                 type="text"
@@ -139,23 +150,23 @@ export default function Contact(){
                     style={{ color: "#b28d42", cursor:'pointer' }}/>
             </div>
             </div>
-            <Dialog
-                open={open}
-                onClose={handleClose}
-                aria-labelledby="alert-dialog-title"
-                aria-describedby="alert-dialog-description">
-                <DialogTitle id="alert-dialog-title">{"Message Recieved"}</DialogTitle>
-                <DialogContent>
-                    <DialogContentText id="alert-dialog-description">
-                         We Got your Message!!! Please Check your email
-                    </DialogContentText>
-                    </DialogContent>
-                        <DialogActions>
-                           <Button onClick={handleClose} color="primary">
-                                Close
-                            </Button>
-                        </DialogActions>
-            </Dialog>
+        <Dialog
+            open={open}
+            onClose={handleClose}
+            aria-labelledby="alert-dialog-title"
+            aria-describedby="alert-dialog-description">
+            <DialogTitle id="alert-dialog-title">{"Message Recieved"}</DialogTitle>
+            <DialogContent>
+                <DialogContentText id="alert-dialog-description">
+                      We Got your Message!!! Please Check your email
+                </DialogContentText>
+                </DialogContent>
+                    <DialogActions>
+                        <Button onClick={handleClose} color="primary">
+                            Close
+                        </Button>
+                    </DialogActions>
+        </Dialog>
        
             </div>
             </div>

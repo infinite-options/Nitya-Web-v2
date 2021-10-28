@@ -19,7 +19,7 @@ export default function Home(){
                 <About/>
             </div>
             <div>
-                <div className="Service_Title"> Services </div>
+                <h1 className="Service_Title"> Services </h1>
                 <Services/>
             </div>
             <div style={{marginBottom:'5%'}} >
