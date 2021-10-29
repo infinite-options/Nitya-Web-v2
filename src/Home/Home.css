@@ -33,13 +33,12 @@
     /* display:grid; */
     /* justify-content: flex-end; */
     /* place-items: center; */
-    /* background-color: #DADADA; */
+    background-color: #DADADA;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     grid-template-columns: repeat(1, auto);
-    border: 2px solid yellow;
 
   }
 
@@ -47,17 +46,17 @@
 
   /* Card Format for all Intro, About, Service & Contact */
 .Card{
-  width: 50rem;
+  width: 60rem;
   /* width: clamp(200px, 50%, 600px); */
   height: auto;
 
   margin: 5% 0% 5% 0%;
   /* padding: 5%;  */
 
-  /* background-color: white; */
-  border: 2px solid green;
+  background-color: white;
 
 }
+
 
 .CardGrid{
   display: grid;
@@ -65,32 +64,17 @@
   /* grid-column-gap: 5% ; */
 
   margin: 0px;
-  padding: 0%;
+  /* padding: 0%; */
+  padding:3%;
 }
 
 .CardImage{
-  object-fit:cover;
+  object-fit:contain;
   height:100%;
   width:30rem;
 }
 
-.CardButton{
-  text-transform:none;
-  background-color:#D3A625;
-  color:white;
 
-  font-size:24px;
-
-  width:75%;
-  height:3rem;
-
-  margin-top: 2rem;
-  border:0px;
-
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
 
 .CardTitle{
   font-family: Hoefler Text;
@@ -111,6 +95,34 @@
   flex:1;
 }
 
+.CardButton{
+  text-transform:none;
+  background-color:#D3A625;
+  color:white;
+
+  font-size:24px;
+
+  width:75%;
+  height:3rem;
+
+  margin-top: 2rem;
+  border:0px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.ButtonGrid{
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(2, auto);
+  grid-column-gap: 5% ;
+
+  margin: 0px;
+  /* padding: 0%; */
+  padding:3%;
+}
 /* -------------- Services ------------------------------------------------*/
 
 /* Title "Services" on Home.jsx */
@@ -119,8 +131,8 @@
   color: #D3A625;
   font-size: 42px;
   font-style: italic;
-  /* text-align: center;
-  align-items: center;
+  text-align: center;
+  /* align-items: center;
   font-weight: bold; */
   margin-top: 4rem;
 }
@@ -199,3 +211,36 @@
  
 }
 
+
+@media screen and (max-width: 1050px) {
+
+    /* Card Format for all Intro, About, Service & Contact */
+.Card{
+  width: 30rem;
+  /* width: clamp(200px, 50%, 600px); */
+  height: auto;
+
+  margin: 5% 0% 5% 0%;
+  /* padding: 5%;  */
+
+  background-color: white;
+
+}
+
+.CardGrid{
+  display: grid;
+  grid-template-columns: repeat(1, auto);
+  /* grid-column-gap: 5% ; */
+
+  margin: 0px;
+  /* padding: 0%; */
+  padding:3%;
+}
+
+.CardImage{
+  object-fit:contain;
+  height:30rem;
+  width:100%;
+}
+
+}

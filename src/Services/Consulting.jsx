@@ -18,12 +18,12 @@ export default function Consulting(){
 
 
     return(
-        <div>
-          <div style={{  height: 'auto'}}>
+        <div className="Card" style={{ margin:'0%'}}>
+          <div  className = "CardGrid" style={{  gridTemplateColumns: 'repeat(1, auto)'}}>
             { data
                 .filter((service) =>   service.category === "Consultation" )
                     .map((filteredService) => (
-                    <div style={{display:'flex', backgroundColor:'#DADADA', marginTop:'2rem'}}>
+                    <div style={{display:'flex',marginTop:'1rem', backgroundColor:'#DADADA'}}>
                         <div style={{width:'100%', flex:'1'}}>
                             <img
                                 style={{width:'100%',minHeight:'100%' ,objectFit:'cover'}}

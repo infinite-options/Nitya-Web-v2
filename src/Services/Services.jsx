@@ -21,11 +21,11 @@ export default function Services(){
     return(
 
         <div className="Card">
-        <div className="CardGrid">
-               <Button onClick={stateChangeableInvert} style={{textTransform:'none', backgroundColor: !state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px' , width:'30%', height:'3rem', marginLeft:'75%'}}>
+            <div className="ButtonGrid">
+               <Button onClick={stateChangeableInvert} style={{textTransform:'none', backgroundColor: !state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px'}}>
                     Consulting
                </Button>
-               <Button onClick={stateChangeable} style={{textTransform:'none', backgroundColor: state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px' , width:'30%', height:'3rem', marginLeft:'1rem'}}>
+               <Button onClick={stateChangeable} style={{textTransform:'none', backgroundColor: state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px' }}>
                     Treatments
                </Button>
            </div>

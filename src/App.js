@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       <Router>
-        <div style={{ border: '2px solid red' }}>
+        <div >
 
           <Navigation />
 
@@ -27,7 +27,7 @@ function App() {
 
             <Route path="/">
 
-              <Home style={{ border: '2px solid blue' }} />
+              <Home />
 
             </Route>
 

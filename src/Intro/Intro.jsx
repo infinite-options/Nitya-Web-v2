@@ -9,7 +9,7 @@
         return(
             <div className="Card">
                 <div className="CardGrid">
-                <div style={{padding:'5%', border:'2px solid purple', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+                <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                     <h1 className="CardTitle">Helping your body heal itself</h1>
                 {/* <button className="CardButton"> Test </button> */}
                     <button

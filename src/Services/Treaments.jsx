@@ -17,8 +17,8 @@ export default function Treatments(){
     },[]);
  
     return(
-      <div>
-        <div style={{  height: 'auto'}}>
+        <div className="Card" style={{ margin:'0%'}}>
+        <div  className = "CardGrid" style={{  gridTemplateColumns: 'repeat(1, auto)', height: 'auto'}}>
           { data
               .filter((service) =>   service.category === "Treatment" )
                   .map((filteredService) => (
