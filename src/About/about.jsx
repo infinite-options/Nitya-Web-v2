@@ -6,6 +6,7 @@ import '../Home/Home.css';
 
 export default function About(){
     return(
+        <div className="HomeContainer" >
         <div className="Card">
             <div className="CardGrid">
             <div>
@@ -36,6 +37,7 @@ export default function About(){
                 />
             </div>
             </div>
+        </div>
         </div>
     )
 }

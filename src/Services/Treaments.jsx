@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from "react";
 import {Box, Button} from '@material-ui/core';
+import LearnMoreBTN from "./LearnMoreBtn";
+import BookNowBTN from "../Services/BookNowBtn"
 import axios from "axios";
 
-import '../Home/Home.css';
 
 export default function Treatments(){
 
@@ -39,8 +40,8 @@ export default function Treatments(){
                               <div className="Services_Body_Font">
                                   {filteredService.description} <br />
                               </div> 
-                              {/* <LearnMoreBTN apptID={filteredService.treatment_uid}/>
-                              <BookNowBTN apptID={filteredService.treatment_uid}/> */}
+                              <LearnMoreBTN apptID={filteredService.treatment_uid}/>
+                              <BookNowBTN apptID={filteredService.treatment_uid}/>
                           </div>
                       </div>
                   </div>))

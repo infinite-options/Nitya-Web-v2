@@ -1,0 +1,10 @@
+@font-face {
+    font-family: Hoefler Text;
+    src: url('../fonts/Hoefler-Text.ttc');
+    font-family: SF Pro Display Regular;
+    src: url('../fonts/SF-Pro-Display-Regular.otf');
+  }
+
+.BookNowBtn{
+    font-family: Hoefler Text ;
+}

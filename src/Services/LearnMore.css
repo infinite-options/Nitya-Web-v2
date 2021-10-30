@@ -1,0 +1,35 @@
+.LearnMoreContianer{
+    background-color:white;
+    padding : 3%;
+    height:40rem;
+    width:55%;
+    display:flex;
+    flex-direction:column;
+    margin-left:20%;
+}
+
+.LearnMoreSubContianer{
+    display:flex;
+    flex:1.5;
+}
+
+
+@media screen and (max-width: 500px) {
+
+    .LearnMoreContianer{
+        background-color:white;
+        padding : 3%;
+        height:auto;
+        width:80%;
+        display:flex;
+        flex-direction:column;
+        margin-left:5%;
+    }
+
+    .LearnMoreSubContianer{
+        display:flex;
+        flex-direction: column;
+        flex:1.5
+    }
+
+}

@@ -1,6 +1,8 @@
 import React, { useEffect, useRef, useState } from "react";
 import {Box, Button} from '@material-ui/core';
 import axios from "axios";
+import LearnMoreBTN from "./LearnMoreBtn";
+import BookNowBTN from "../Services/BookNowBtn"
 
 import '../Home/Home.css';
 
@@ -33,15 +35,15 @@ export default function Consulting(){
                             />
                         </div>
                         <div style={{flex:'1'}}>
-                            <div style={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'center', marginTop:'2rem'}} >
+                            <div style={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'center', marginTop:'2rem', marginBottom:'2rem'}} >
                                 <div className="Services_Title_Font">
                                     {filteredService.title}
                                 </div>
                                 <div className="Services_Body_Font">
                                     {filteredService.description} <br />
                                 </div> 
-                                {/* <LearnMoreBTN apptID={filteredService.treatment_uid}/>
-                                <BookNowBTN apptID={filteredService.treatment_uid}/> */}
+                                <LearnMoreBTN apptID={filteredService.treatment_uid}/>
+                                <BookNowBTN apptID={filteredService.treatment_uid} />
                             </div>
                         </div>
                     </div>))

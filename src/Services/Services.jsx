@@ -19,7 +19,7 @@ export default function Services(){
     }
 
     return(
-
+    <div className="HomeContainer" >
         <div className="Card">
             <div className="ButtonGrid">
                <Button onClick={stateChangeableInvert} style={{textTransform:'none', backgroundColor: !state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px'}}>
@@ -39,5 +39,6 @@ export default function Services(){
            </Box>
 
         </div>
+    </div>
     )
 }
