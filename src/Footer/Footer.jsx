@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from '../Assets/Images/Group 15.svg'
 import InstagramIcon from "@material-ui/icons/Instagram";
-import CAAM from "../Assets/Images/CAAM_logo.png";
+import CAAM from "../Assets/Images/CAAM-logo.png";
 import Namacb from "../Assets/Images/namacb.png";
 import { Link } from "react-router-dom";
 import { useHistory, useLocation } from "react-router-dom";
@@ -35,14 +35,14 @@ export default function Footer(){
                 </div>
                
             </div>
-            <div style={{display:'flex', justifyContent:'flex-start', marginTop:'1rem'}}>
+            <div style={{display:'flex', justifyContent:'center', marginTop:'1rem'}}>
               
-                <img src={CAAM} style={{ height:'7rem', marginTop:'2rem', marginLeft:'10%'}}/>
+                <img src={CAAM} style={{ height:'8rem', marginTop:'2rem', marginLeft:'10%'}}/>
                 <img src={Namacb} style={{  height:'7rem', marginTop:'2rem', marginLeft:'15%'}}/>
                 <InstagramIcon
           fontSize="large"
           className="instagram-icon"
-          style={{color:'white', display:'flex', justifyContent:'center', marginTop:'3%', marginLeft:'25%'}}
+          style={{color:'black', display:'flex', justifyContent:'center', marginTop:'3%', marginLeft:'25%'}}
           onClick={(event) =>
             (window.location.href = "https://www.instagram.com/nityaayurveda/")
           }
