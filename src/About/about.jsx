@@ -10,8 +10,8 @@ export default function About(){
         <div className="Card">
             <div className="CardGrid">
             <div>
-              <p className="CardText">
-                <h1 className="CardTitle"> Leena Marathay </h1>
+                <div className="CardTitle">Leena Marathay</div>  
+                <p className="CardText">
                 <p>Leena is a NAMA (National Ayurvedic Medical Association)
                 certified Ayurvedic Practitioner and an Ayurvedic Health and
                 Lifestyle Counselor.</p>

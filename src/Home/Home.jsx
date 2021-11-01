@@ -12,17 +12,16 @@ import './Home.css';
 export default function Home(){
     return(
         <div className="HomeContainer" >
-            <div style={{marginTop:'5%'}}>
+            <div style={{marginTop:'3%'}}>
                 <Intro/>
             </div>
             <div >
                 <About/>
             </div>
             <div>
-                <h1 className="Service_Title"> Services </h1>
                 <Services/>
             </div>
-            <div style={{marginBottom:'5%'}} >
+            <div style={{marginBottom:'3%'}} >
                 <Contact/>
             </div>
         </div>

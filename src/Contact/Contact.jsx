@@ -62,7 +62,7 @@ export default function Contact(){
       <div className="HomeContainer" >
         <div className="Card" >
             <div className="CardGrid" >
-            <div style={{marginRight:'1.8rem', display:'flex', flexDirection:'column', alignItems:'center'}}>
+            <div style={{ display:'flex', flexDirection:'column', alignItems:'center'}}>
                 <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact Us</div>
                 <div className="CardText"> 6055 Meridian Ave  Ste #40 <br></br> San Jose, CA 95120, USA </div>
                 <div className="CardText"> Office: 408 471 7004</div>
@@ -73,7 +73,6 @@ export default function Contact(){
                 {/* <button className="CardButton"> Test </button> */}
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176.732452474541!2d-121.8872221846979!3d37.230325779862234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e314406ce969d%3A0x82fb75802c5ef489!2s6055%20Meridian%20Ave%20%2340%2C%20San%20Jose%2C%20CA%2095120!5e0!3m2!1sen!2sus!4v1618695078070!5m2!1sen!2sus"
-                  width="356px"
                   className="Contact_Map"
                   allowfullscreen=""
                   loading="lazy">
@@ -147,7 +146,7 @@ export default function Contact(){
                 </div>
               <br/>
                 <div style={{ display: "flex", justifyContent: "center" }}>
-                    <InstagramIcon
+                    {/* <InstagramIcon
                       //backgroundColor="#B28D42"
                         fontSize="large"
                         onClick={(event) =>
@@ -156,7 +155,7 @@ export default function Contact(){
                         }
                         aria-hidden="false"
                         aria-label="Instagram"
-                        style={{ color: "#b28d42", cursor:'pointer' }}/>
+                        style={{ color: "#b28d42", cursor:'pointer' }}/> */}
                 </div>
             
         <Dialog

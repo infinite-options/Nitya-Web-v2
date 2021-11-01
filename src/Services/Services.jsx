@@ -19,25 +19,31 @@ export default function Services(){
     }
 
     return(
-    <div className="HomeContainer" >
-        <div className="Card">
-            <div className="ButtonGrid">
-               <Button onClick={stateChangeableInvert} style={{textTransform:'none', backgroundColor: !state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px'}}>
-                    Consulting
-               </Button>
-               <Button onClick={stateChangeable} style={{textTransform:'none', backgroundColor: state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px' }}>
-                    Treatments
-               </Button>
-           </div>
+    <div>
+        <div className="Service_Title">
+            Services
+        </div>
+        
+        <div className="HomeContainer" >
+            <div className="Card">
+                <div className="ButtonGrid">
+                <Button onClick={stateChangeableInvert} style={{textTransform:'none', backgroundColor: !state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px'}}>
+                        Consulting
+                </Button>
+                <Button onClick={stateChangeable} style={{textTransform:'none', backgroundColor: state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px' }}>
+                        Treatments
+                </Button>
+            </div>
 
-           <Box hidden={state} >
-                <Consulting/>
-           </Box>
+            <Box hidden={state} >
+                    <Consulting/>
+            </Box>
 
-           <Box hidden={!state} >
-                <Treatments/>
-           </Box>
+            <Box hidden={!state} >
+                    <Treatments/>
+            </Box>
 
+            </div>
         </div>
     </div>
     )

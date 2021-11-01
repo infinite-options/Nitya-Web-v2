@@ -10,7 +10,7 @@
             <div className="Card">
                 <div className="CardGrid">
                 <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
-                    <h1 className="CardTitle">Helping your body heal itself</h1>
+                    <div className="CardTitle">Helping your body heal itself</div>
                 {/* <button className="CardButton"> Test </button> */}
                     <button
                         className="CardButton"
