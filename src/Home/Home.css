@@ -129,13 +129,13 @@
 .Service_Title{
   font-family: Hoefler Text;
   color: #D3A625;
-  font-size: 42px;
+  font-size: 52px;
   font-style: italic;
   text-align: center;
   /* align-items: center;*/
   font-weight: bold; 
-  margin-top: 4rem;
-  background-color:#DADADA;
+  margin: 2rem;
+  /* background-color:#DADADA; */
 }
 
 /* Services Switch Button Container for "Consulting" & "Treatments" */

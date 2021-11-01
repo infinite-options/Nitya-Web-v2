@@ -20,18 +20,18 @@ export default function Services(){
 
     return(
     <div>
-        <div className="Service_Title">
-            Services
-        </div>
-        
         <div className="HomeContainer" >
+            
             <div className="Card">
+                <div className="Service_Title">
+                    Services
+                </div>
                 <div className="ButtonGrid">
                 <Button onClick={stateChangeableInvert} style={{textTransform:'none', backgroundColor: !state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px'}}>
                         Consulting
                 </Button>
                 <Button onClick={stateChangeable} style={{textTransform:'none', backgroundColor: state ?  '#D3A625' : '#DADADA', color:'black',fontSize:'20px' }}>
-                        Treatments
+                        Therapies
                 </Button>
             </div>
 
