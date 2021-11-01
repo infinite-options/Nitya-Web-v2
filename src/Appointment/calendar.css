@@ -49,9 +49,11 @@
   margin-bottom: 1em;
   font-family: "AvenirMedium";
   font-size: 24px;
+  display: flex;
+  justify-content: center;
 }
 .react-calendar__navigation button {
-  width: 3em;
+  width: auto;
   height: auto;
   background: none;
   color: #D3A625;

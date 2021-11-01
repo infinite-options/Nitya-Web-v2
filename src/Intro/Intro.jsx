@@ -1,11 +1,14 @@
     import React, { useEffect, useRef, useState } from "react";
     import {Box, Button} from '@material-ui/core';
+    import { useHistory } from 'react-router';
 
     import card1 from "../Assets/Images/card1.jpg";
 
     import '../Home/Home.css';
 
     export default function Intro(){
+
+        const history = useHistory()
         return(
             <div className="Card">
                 <div className="CardGrid">
@@ -15,7 +18,7 @@
                     <button
                         className="CardButton"
                         onClick={() => {
-                    //  history.push("/contact")
+                          history.push("/services")
                         }}
                         >
                         Book a Session

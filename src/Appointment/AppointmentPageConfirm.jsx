@@ -656,7 +656,7 @@ export default function AppointmentPage(props) {
                   // hidden={!timeSelected ? "hidden" : ""}
                 >
                   <span>
-                    {moment(location.state.date).format('ll')}
+                    {moment(location.state.date).format('ll')} {' '}
                     at {formatTime(location.state.date, location.state.time)}
                   </span>
                 </h1>

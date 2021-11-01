@@ -198,8 +198,11 @@ const useStyles = makeStyles({
     // border: "dashed"
     //padding: "20px",
   },
+
+
   center: {
     margin: "0 auto",
+    color:'black',
     // border: 'solid',
     // height: '200px'
   },
@@ -310,6 +313,9 @@ export default function AppointmentPage(props) {
   const [timeSlots, setTimeSlots] = useState([]);
   const [duration, setDuration] = useState(null);
   const cost = elementToBeRendered.cost;
+
+
+  const [buttonSelect, setButtonSelect] = useState(false);
 
   useEffect(() => {
     console.log()
@@ -511,6 +517,7 @@ export default function AppointmentPage(props) {
   };
 
   const dateChange = (date) => {
+   
     setDate(date);
     dateStringChange(date);
     // setTimeSelected(true);
@@ -593,54 +600,57 @@ export default function AppointmentPage(props) {
   function selectApptTime(element) {
     setSelectedTime(element);
     setTimeSelected(true);
+    setButtonSelect(true)
   }
 
   return (
-    <div style={{ backgroundColor: "#DADADA" }}>
+    <div className="HomeContainer">
       <ScrollToTop />
       <br />
       {bookNowClicked ? (
         <div>
           <div
-            className="CalendarContainer"
-            aria-label={"find a day to meet"}
-            style={{
-              // border: "dashed",
-             // maxWidth: "96%",
-            }}
-          >
-            <div className="ApptContainer">
-            <div>
-                <p className={classes.content2} style={{ textAlign: "left" }}>
-                  <span
-                    style={{
-                      fontWeight: "600",
-                    }}
-                  >
-                    {elementToBeRendered.title}
-                  </span>
-                  <br />
-                  {parseDuration(elementToBeRendered.duration)} |{" "}
-                  {elementToBeRendered.cost}
-                </p>
-                {/* <br /> */}
-                <img
-                  src={elementToBeRendered.image_url}
-                  //className={classes.img}
-                  style={{objectFit:'cover', width:'320px', textAlign:'left'}}
-                  alt=""
-                />
-                <br />
-                <br />
-                <p className={classes.content2} style={{ textAlign: "left" }}>
+          className="Card"
+          //   className="CalendarContainer"
+          //   aria-label={"find a day to meet"}
+          //   style={{
+          //     // border: "dashed",
+          //    // maxWidth: "96%",
+          //   }}
+           >
+            <div className="CardGrid">
+              <div>
+                <div className="ApptPageTitle">
+                        {elementToBeRendered.title}
+                </div>
+                <div className="ApptPageText" >
+                        {elementToBeRendered.description} <br />
+                </div>
+                <div className="ApptPageHeader">
+                        {parseDuration(elementToBeRendered.duration)} | {elementToBeRendered.cost}
+                </div>
+                    {/* <BookNowBTN apptID={elementToBeRendered.treatment_uid} /> */}
+                <div style={{margin:'2rem'}}>
+                      <img
+                      style={{width:'100%',height:'100%' ,objectFit:'cover'}}
+                        variant="top"
+                        src={elementToBeRendered.image_url}
+                        alt={"An image of" + elementToBeRendered.title}
+                      />
+                </div>       
+                {/*                
+                <p className="ApptPageText" style={{ textAlign: "left" }}>
                   6055 Meridian Ave #40
                   <br />
                   San Jose, CA, 95120
                   <br />
                   <br />
                   Office: (408) 471-7004
-                </p>
+                </p> */}
               </div>
+
+              
+            {/* Right hand side of the Container */}
             <div className={classes.calendarBox}>
                 <div
                   className="TitleFontAppt"
@@ -652,7 +662,7 @@ export default function AppointmentPage(props) {
                     fontSize: "30px",
                   }}
                 >
-                   Pick a Date for your appointment
+                   Pick an Appointment Date
                 </div>
                 {console.log("(Calendar) date: ", date)}
                 <Calendar
@@ -661,21 +671,23 @@ export default function AppointmentPage(props) {
                   onClickDay={dateChange}
                   value={date}
                   minDate={minDate}
-                  //className={classes.center}
+                 // style={{backgroundColor:'black'}}
+                  // className={classes.center}
                   next2Label={null}
                   prev2Label={null}
                 />
               </div>
               </div>
            
-              <div className={classes.timeslotBox}>
+              <div style={{width:'100%', height:'100%'}}  >
                 <div
                   style={{
-                    height: "100px",
-                    maxHeight: "100px",
+                  
                     display: "flex",
                     justifyContent:'space-between',
-                    padding:'5%',
+                    alignItems:'flex-start',
+                    padding:'3%'
+                    // margin:'5%'
                     // alignItems: "center",
                     // maxHeight: "100px",
                     // width: "100%",
@@ -685,16 +697,15 @@ export default function AppointmentPage(props) {
                   <div
                    // className={classes.h1}
                    className="TitleFontAppt"
-                    style={{
-                      textAlign: "left",
-                      // border: "1px solid red",
-                      // marginTop: "20px",
-                      color: "#D3A625",
-                      fontSize: "28px",
-                      height: "50%",
-                    }}
+                   style={{
+                   // textAlign: "center",
+                    color:"#D3A625",
+                    //fontFamily: "AvenirHeavy",
+                    fontWeight:'500',
+                    fontSize: "30px",
+                  }}
                   >
-                   Pick a Time for your appointment
+                   Pick an Appointment Time
                   </div>
                   <div
                     className="BodyFontAppt"
@@ -705,19 +716,32 @@ export default function AppointmentPage(props) {
                       fontSize: "18px",
                       // border: "dashed"
                       // border: "1px solid red",
-                      height: "50%",
+                     // height: "50%",
                     }}
                   >
-                    UTC - 07:00 Pacific Time
+                    Pacific Standard Time
                   </div>
                 </div>
                 {/* <div className={classes.timeslotButtonBox}> */}
-                <Container style={{marginTop:'-3rem', marginLeft:'2rem'}} >
+                {/* <Container style={{marginTop:'-3rem', marginLeft:'2rem'}} >
                   {renderAvailableApptsVertical()}
-                {/* </div> */}
-              </Container>
-              </div>
-              <button onClick={()=> history.push({pathname: `/${treatmentID}/confirm`,state: {date:apiDateString ,time :selectedTime}})} style={{cursor:'pointer',fontSize:'20px', color:'white', backgroundColor:'#D3A625', border:'0px', width:'20%', height:'3rem', borderRadius:'24px', marginBottom:'2rem', marginTop:'1rem'}}> Continue </button>
+                {/* </div> 
+              </Container> */}
+                <div style={{ display:'flex', justifyContent:'center'}}>
+                {renderAvailableApptsVertical()}
+                </div>
+           
+
+                <div style={{ padding:'3%'}}>
+                  <button 
+                  hidden={!buttonSelect}
+                  onClick={()=> history.push({pathname: `/${treatmentID}/confirm`,state: {date:apiDateString ,time :selectedTime}})}
+                  className={classes.timeslotButton}
+                    > 
+                  Continue 
+                  </button>
+                </div>
+               </div>
 
           </div>
           
