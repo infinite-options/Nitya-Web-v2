@@ -12,7 +12,7 @@ import './Home.css';
 export default function Home(){
     return(
         <div className="HomeContainer" >
-            <div style={{marginTop:'3%'}}>
+            <div style={{marginTop:'2%'}}>
                 <Intro/>
             </div>
             <div >
@@ -21,7 +21,7 @@ export default function Home(){
             <div>
                 <Services/>
             </div>
-            <div style={{marginBottom:'3%'}} >
+            <div style={{marginBottom:'2%'}} >
                 <Contact/>
             </div>
         </div>
