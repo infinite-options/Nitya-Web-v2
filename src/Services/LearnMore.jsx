@@ -7,9 +7,10 @@ import BookNowBTN from "./BookNowBtn";
 //import { height } from "@mui/system";
 //import { Typography } from "@material-ui/core";
 //import './consulting.css'
-//import './LearnMore.css'
+import './LearnMore.css'
 import { Markup } from 'interweave';
 import '../Home/Home.css';
+
 
 
 
@@ -177,77 +178,55 @@ export default function LearnMore(props) {
 
   return (
     <div className="HomeContainer" >
-        <div className="Card">
+      
+        {/* <div className="Card"> */}
            
         {data != '' ? data
           .filter((service) =>  location.state.id === service.treatment_uid)
           .map((filteredService) => (
-            <div className="CardGrid" >
-           
-                {/* <Col className="no-gutters"> */}
-                <div  className="LearnMoreSubContianer" >
-                  {/* <Row className="d-none d-sm-block d-md-block"> */}
-                  <div style={{width:'100%', flex:'1'}}>
+            <div style={{textAlign:'center', padding:'3% 20% 3% 20%'}}>
+                  <div className="LearnMoreTitle">
+                      {filteredService.title}
+                  </div>
+                  <div className="LearnMoreText" >
+                      {filteredService.description} <br />
+                  </div>
+                  <div className="LearnMoreHeader">
+                      {parseDuration(filteredService.duration)} | {filteredService.cost}
+                  </div>
+                  <BookNowBTN apptID={filteredService.treatment_uid} />
+                  <div style={{margin:'2rem'}}>
                     <img
-                     // className={classes.img}
                      style={{width:'100%',height:'100%' ,objectFit:'cover'}}
                       variant="top"
                       src={filteredService.image_url}
                       alt={"An image of" + filteredService.title}
                     />
                   </div>
-                  {/* <Row style={{ display: "flex", justifyContent: "center" }}> */}
-                  <div style={{flex:'1'}}>
-                  <div style={{width:'100%', display:'flex', flexDirection:'column', justifyContent:'space-evenly'}} className={classes.body}>
-                    <div className="TitleFont">
+                  <Markup className="LearnMoreText" content={filteredService.treatment_notes} />
+                  <div  className="LearnMoreHeader" style={{fontWeight:'bold'}}> Book Online</div>
+                  <div className="LearnMoreHeader">
                       {filteredService.title}
-                    </div>
-                    <div className="BodyFont">
-                      {filteredService.description} <br />
-                      
-                      {/* <NavHashLink to="#home">Learn More</NavHashLink> <br /> */}
-                      {/* <LearnMoreBTN apptID={filteredService.treatment_uid} /> */}
-                    </div>
-                    {/* <Button className={classes.btn} variant="primary">
-                        Book Now
-                      </Button> */}
-                      <div style={{color:'white', fontSize:'20px'}}>
+                  </div>
+                  <div  className="LearnMoreHeader">
                       {parseDuration(filteredService.duration)} | {filteredService.cost}
-                      </div>
-                    <br />
-                    <BookNowBTN apptID={filteredService.treatment_uid} />
                   </div>
-                  </div>
-                </div>
-                {/* </Col> */}
-              <br />
-              <div style={{flex:'1', height:'20%', fontWeight:'600'}}>
-              {/* <Typography>{filteredService.treatment_notes}</Typography> */}
-              {
-                <Markup content={filteredService.treatment_notes} />
-                    // filteredService.treatment_notes.split("\n").map(function (item, idx) {
-                    //   return (
-                    //     <span key={idx}>
-                    //       {item}
-                    //       <br />
-                    //     </span>
-                    //   )
-                    // })
-                  }
-            </div>
+                  <BookNowBTN apptID={filteredService.treatment_uid} />
+
+                  <div className="LearnMoreText" >6055 Meridian Ave, Ste. 40, San Jose, CA 95120, US
+                        4084717004
+                        leena@nityaayurveda.com
+                  </div> 
+                  <div  style={{fontWeight:'600', marginTop:'1rem'}}>
+                      Cancellation Policy: To cancel or reschedule, please contact us 24 hours in advance.
+                  </div>                
             </div>
           
           )) :
           <div style={{width:'1500px', backgroundColor:'white'}}> 
             
         </div> }
-      </div>
-      <div  style={{fontWeight:'600', marginTop:'1rem'}}>
-      Cancellation Policy: To cancel or reschedule, please contact us 24 hours in advance.
-      </div>
-      {/* <div className={classes.LMbtn}>
-        <LearnMoreBTN  />
-      </div> */}
+            
     </div>
   );
 }

@@ -30,15 +30,12 @@
 
   /*Parent Container For Home.jsx */
   .HomeContainer{
-    /* display:grid; */
-    /* justify-content: flex-end; */
-    /* place-items: center; */
     background-color: #DADADA;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    grid-template-columns: repeat(1, auto);
+    /* grid-template-columns: repeat(1, auto); */
 
   }
 

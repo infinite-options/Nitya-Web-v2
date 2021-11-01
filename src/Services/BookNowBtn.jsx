@@ -17,9 +17,9 @@ class BookNowBTN extends Component {
           style={{
             backgroundColor: "#D3A625",
             border: "none",
-            //borderRadius: "36px",
+            borderRadius: "4px",
             //padding: "10px",
-            width:"30%",
+            width:"135px",
             height: "auto",
             align:"center",
             textDecorationLine:'none'

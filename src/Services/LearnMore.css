@@ -1,35 +1,26 @@
-.LearnMoreContianer{
-    background-color:white;
-    padding : 3%;
-    height:40rem;
-    width:55%;
-    display:flex;
-    flex-direction:column;
-    margin-left:20%;
+@font-face {
+    font-family: Hoefler Text;
+    src: url('../fonts/Hoefler-Text.ttc');
+    font-family: SF Pro Display Regular;
+    src: url('../fonts/SF-Pro-Display-Regular.otf');
+  }
+
+.LearnMoreTitle{
+    font-family: Hoefler Text ;
+    font-size: 48px;
+    margin: 1rem;
+
 }
 
-.LearnMoreSubContianer{
-    display:flex;
-    flex:1.5;
+.LearnMoreHeader{
+    font-size: 24px;
+    margin: 1rem;
+
 }
 
+.LearnMoreText{
 
-@media screen and (max-width: 500px) {
-
-    .LearnMoreContianer{
-        background-color:white;
-        padding : 3%;
-        height:auto;
-        width:80%;
-        display:flex;
-        flex-direction:column;
-        margin-left:5%;
-    }
-
-    .LearnMoreSubContianer{
-        display:flex;
-        flex-direction: column;
-        flex:1.5
-    }
+    font-size: 18px;
+    margin: 1rem;
 
 }
