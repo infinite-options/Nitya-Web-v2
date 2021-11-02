@@ -102,6 +102,7 @@ const useStyles = makeStyles((theme) => ({
     width: "450px",
     borderRadius: "15px",
     border: "none",
+    borderBottom: '1px solid black',
     "&::placeholder": {
       color: "#C3A336",
     },

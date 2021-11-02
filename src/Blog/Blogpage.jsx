@@ -97,8 +97,9 @@ const useStyles = makeStyles((theme) => ({
     boxShadow: "none",
     outline: "none",
     width: "450px",
-    borderRadius: "15px",
+    borderRadius: "0px",
     border: "none",
+    borderBottom: '1px solid black',
     "&::placeholder": {
       color: "#C3A336",
     },
@@ -263,7 +264,7 @@ function Blogpage(props) {
   return (
     <div className="HomeContainer" >
     <div className={classes.blogpage} id="blogpage">
-      <div style={{ fontSize: '56px', color: "#C3A336", fontStyle: 'italic', textAlign:'center' }}>
+      <div className="CardTitle" style={{margin:'2rem'}}>
         Blog
       </div>
       <div className={classes.container}>
@@ -377,7 +378,7 @@ function Blogpage(props) {
                       <div className={classes.title}>
                         <div style={{ textAlign: 'left' }}>{post.blogTitle}</div>
                       </div>
-                      <div className={classes.content} style={{ width: '100%', marginRight: '0px' }}>
+                      <div className={classes.content} style={{ marginRight:'5%' }}>
                         <Markup content={post.blogSummary} />
                       </div>
                     </div>

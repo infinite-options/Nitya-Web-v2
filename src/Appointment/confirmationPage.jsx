@@ -229,10 +229,7 @@ export default function ConfirmationPage(props) {
                 style={{marginRight:'0rem'}}
               ></iframe>
         </div>
-
-
       </div>
-      
     </div>
   );
 }
