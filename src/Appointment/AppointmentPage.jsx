@@ -440,12 +440,12 @@ export default function AppointmentPage(props) {
             <div className={classes.calendarBox}>
                 <div
                   className="TitleFontAppt"
-                  style={{
-                    textAlign: "center",
-                    color:"#D3A625",
-                    fontWeight:'500',
-                    fontSize: "30px",
-                  }}
+                  // style={{
+                  //   textAlign: "center",
+                  //   color:"#D3A625",
+                  //   fontWeight:'500',
+                  //   fontSize: "30px",
+                  // }}
                 >
                    Pick an Appointment Date
                 </div>
@@ -473,11 +473,11 @@ export default function AppointmentPage(props) {
                 >
                   <div
                    className="TitleFontAppt"
-                   style={{
-                    color:"#D3A625",
-                    fontWeight:'500',
-                    fontSize: "30px",
-                  }}
+                  //  style={{
+                  //   color:"#D3A625",
+                  //   fontWeight:'500',
+                  //   fontSize: "30px",
+                  // }}
                   >
                    Pick an Appointment Time
                   </div>

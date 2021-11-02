@@ -16,6 +16,10 @@
 .TitleFontAppt{
   font-family:Hoefler Text ;
   font-style: italic;
+  color:#D3A625;
+  font-weight:500;
+  font-size: 30px;
+  text-align: center;
 }
 
 .ApptContainer{

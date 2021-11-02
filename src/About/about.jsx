@@ -9,7 +9,7 @@ import '../Home/Home.css';
 export default function About(){
     return(
         <div className="HomeContainer" >
-            <div>We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies</div>
+            <div hidden={true}>We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies</div>
         <ScrollToTop/>
         <div className="Card">
             <div className="CardGrid">

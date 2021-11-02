@@ -8,6 +8,8 @@ import { ApptContext } from "./Scheduler";
 //import herbsImg from '../../images/herbsImg.png';
 // import MapSection from "../Home/Map";
 // import { withGoogleMap, GoogleMap, Marker, InfoWindow } from "react-google-maps";
+import "../Home/Home.css"
+import "../Appointment/AppointmentPage.css"
 
 const google = window.google;
 
@@ -105,240 +107,132 @@ export default function ConfirmationPage(props) {
   }, []);
 
   return (
-    <div
-      style={{
-        height: "auto",
-        width: "100vw",
-        maxWidth: "100%",
-        backgroundColor: "#DADADA",
-        display: "flex",
-        alignItems: "left",
-        textAlign:'left',
-        justifyContent: "center",
-      }}
+    <div className="HomeContainer"
+      // style={{
+      //   height: "auto",
+      //   width: "100vw",
+      //   maxWidth: "100%",
+      //   backgroundColor: "#DADADA",
+      //   display: "flex",
+      //   alignItems: "left",
+      //   textAlign:'left',
+      //   justifyContent: "center",
+      // }}
     >
-      <div
-        style={{
-          backgroundColor: "white",
-          width: "90%",
-          height: "800px",
-          maxWidth: "980px",
-          display: 'block',
-          overflow: 'auto',
-          paddingLeft:'2rem',
-        }}
-      >
-        <div
-          style={{
-            height: "144px",
-            display: "flex",
-            justifyContent: "center",
-          }}
-        >
-          <div
-            style={{
-              display: "inline-block"
-            }}
-          >
-            <div
-              style={{
-                fontFamily: '"Times New Roman", Times, serif',
-                fontSize: "32px",
-                color: "#D3A625",
-                marginTop: "10px",
-                width: "100%",
-                textAlign: "center"
-              }}
-            >
-              Booking Confirmed
-            </div>
-            <div
-              style={{
-                fontSize: "19px",
-                color: "#D3A625",
-                marginTop: "10px",
-                width: "100%",
-                textAlign: "center"
-              }}
-            >
-              We have sent a confirmation email to
-            </div>
-            <div
-              style={{
-                fontSize: "19px",
-                width: "100%",
-                textAlign: "center"
-              }}
-            >
-              {location.state.apptInfo.email}
-            </div>
+      <div className="Card">
+        <div className="TitleFontAppt" style={{padding:'1rem'}}>
+          <div >
+            Booking Confirmed
+          </div>
+          <div className="CardText" style={{marginTop:'1rem'}}>
+            We have sent a confirmation email to:
+          </div>
+          <div className="CardText">
+            {location.state.apptInfo.email}
           </div>
         </div>
-        <div
-        className = {classes.MobileContainerDivider}>
-          <div
-            className = {classes.MobileContainerSubDivider}>
-            <span
-              style={{
-                color: "#D3A625",
-                fontSize: '18px',
-                fontWeight: '500'
-              }}
-            >
-              First-Time Customer Package (Online)
-            </span>
-            <br />
-            <span
-              style={{
-                color: "#D3A625",
-              }}
-            >
-              1 hr 30 min | {
-               location.state.apptInfo.purchase_price
-              }
-            </span>
-            <br />
-            <img
-              src={location.state.apptInfo.image_url}
-              style={dimensions.width > 810 ? {
-                width: '80%',
-                height: '210px',
-                margin: '20px 0 20px 0'
-              } : {
-                width: '90%',
-                height: '210px',
-                margin: '20px 0 20px 0'
-              }}
-            />
-            <br />
-            <span
-              style={{
-                color: "#D3A625",
-              }}
-            >
-              6055 Meridian Ave #40
-            </span>
-            <br />
-            <span
-              style={{
-                color: "#D3A625",
-              }}
-            >
-              San Jose, CA, 95120
-            </span>
-            <br />
-            <br />
-            <span
-              style={{
-                color: "#D3A625",
-              }}
-            >
-              Office: (408) 471-7004
-            </span>
-            <br />
-              <div
-                style={dimensions.width > 810 ? {
-                  width: '80%',
-                  height: '10rem',
-                  margin: '20px 0 0 0',
-                  borderRadius: '25px',
-                  backgroundColor: '#E8E8E8',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginTop:'2rem'
-                } : {
-                  width: '90%',
-                  height: '10rem',
-                  margin: '3rem 0 4rem 0',
-                  borderRadius: '25px',
-                  backgroundColor: '#E8E8E8',
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center'
-                }}
-              >
-                <iframe
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176.732452474541!2d-121.8872221846979!3d37.230325779862234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e314406ce969d%3A0x82fb75802c5ef489!2s6055%20Meridian%20Ave%20%2340%2C%20San%20Jose%2C%20CA%2095120!5e0!3m2!1sen!2sus!4v1618695078070!5m2!1sen!2sus"
-                width="100%"
-                className="Contact_Map"
-                allowfullscreen=""
-                loading="lazy"
-              ></iframe>
-              </div>
+        
+        <div className="CardGrid" >
+          <div >
+                <div className="ApptPageTitle">
+                  {location.state.apptInfo.treatment}
+                </div>
+                {/* <div className="ApptPageText" >
+                  {location.state.apptInfo.description} <br />
+                </div> */}
+                <div className="ApptPageHeader">
+                    {location.state.apptInfo.duration} | {location.state.apptInfo.purchase_price}
+                </div>
+                    {/* <BookNowBTN apptID={elementToBeRendered.treatment_uid} /> */}
+                <div style={{margin:'1rem'}}>
+                    <img
+                      style={{width:'100%',height:'100%' ,objectFit:'contain'}}
+                      variant="top"
+                      src={location.state.apptInfo.image_url}
+                      alt={"An image of" + location.state.apptInfo.title} />
+                </div>       
           </div>
-          <div
-            style={dimensions.width > 810 ?  { 
-              borderLeft: '1px solid #D3A625',
-              height: '100%',
-              width: '50%',
-              marginRight: '30px',
-              paddingLeft: '30px'
-            }: {
-              borderTop: '2px solid #D3A625',
-              width: '100%',
-              marginRight: '-30px',
-              marginLeft: '-30px',
-              paddingLeft:'20px',
-            }}
-          >
+
+          <div style={{ margin: '1rem',  width: "25rem" }}>
+           
             <div
               style={{
+                color: "#D3A625",
                 fontSize: '18px',
                 fontWeight: '500'
               }}
             >
               If anything changes we will contact you: 
             </div>
-            <div
-              style={{
-                fontSize: '22px',
-                fontWeight: '300',
-                margin: '16px 0 0 0'
-              }}
-            >
-              {location.state.apptInfo.first_name}
+
+            <div  className="CardText" style={{color:'black', marginTop:'1rem'}}>
+              <div
+                // style={{
+                //   fontSize: '22px',
+                //   fontWeight: '300',
+                // //  margin: '16px 0 0 0'
+                // }}
+              >
+                {location.state.apptInfo.first_name}
+              </div>
+              <div
+                // style={{
+                //   fontSize: '22px',
+                //   fontWeight: '300',
+                // }}
+              >
+                {location.state.apptInfo.phone_no}
+              </div>
             </div>
-            <div
-              style={{
-                fontSize: '22px',
-                fontWeight: '300',
-              }}
-            >
-              {location.state.apptInfo.phone_no}
-            </div>
-            <div
-              style={{
-                color: "#D3A625",
-                fontSize: '20px',
-                margin: '40px 0 0 0'
-              }}
-            >
+            
+            <div className="CardText" style={{marginTop:'1rem'}}>
               How to prepare for your consultation:
             </div>
 
-            <div
-              style={{
-                color: "#D3A625",
-                fontSize: '14px',
-                margin: '12px 0 0 0'
-              }}
-            >
-              Bringing these things to the consultation will help us accelerate the process.
-            </div>
 
-            <div
-              style={{
-                fontSize: '14px',
-                margin: '12px 0 0 0',
-                paddingBottom:'2rem'
-              }}
-            >
-              List of your current medication, diet, and food preferences
+            <div>
+
+              <div
+                style={{
+                  color: "#D3A625",
+                  fontSize: '16px',
+                //  margin: '12px 0 0 0'
+                }}
+              >
+                Bring these things to your consultation:  
+              </div>
+
+              <div
+                style={{
+                  marginTop:'2rem',
+                  fontSize: '16px',
+                // margin: '12px 0 0 0',
+                  paddingBottom:'2rem'
+                }}
+              >
+                List of your current medication, diet, and food preferences
+              </div>
+              
             </div>
           </div>
         </div>
+        <div className="TitleFontAppt" >
+              We'll see you at:
+        </div>
+        <div  style={{display:'flex',justifyContent:'center', margin:'1rem'}}>
+            <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176.732452474541!2d-121.8872221846979!3d37.230325779862234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e314406ce969d%3A0x82fb75802c5ef489!2s6055%20Meridian%20Ave%20%2340%2C%20San%20Jose%2C%20CA%2095120!5e0!3m2!1sen!2sus!4v1618695078070!5m2!1sen!2sus"
+                width="100%"
+                className="Contact_Map"
+                allowfullscreen=""
+                loading="lazy"
+                style={{marginRight:'0rem'}}
+              ></iframe>
+        </div>
+
+
       </div>
+      
     </div>
   );
 }
