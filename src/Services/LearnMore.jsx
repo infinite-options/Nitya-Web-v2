@@ -57,42 +57,51 @@ export default function LearnMore(props) {
         {data != '' ? data
           .filter((service) =>  location.state.id === service.treatment_uid)
           .map((filteredService) => (
-            <div style={{textAlign:'center', padding:'3% 20% 3% 20%'}}>
-                  <div className="LearnMoreTitle">
-                      {filteredService.title}
-                  </div>
-                  <div className="LearnMoreText" >
-                      {filteredService.description} <br />
-                  </div>
-                  <div className="LearnMoreHeader">
-                      {parseDuration(filteredService.duration)} | {filteredService.cost}
-                  </div>
-                  <BookNowBTN apptID={filteredService.treatment_uid} />
-                  <div style={{margin:'2rem'}}>
-                    <img
-                     style={{width:'100%',height:'100%' ,objectFit:'cover'}}
-                      variant="top"
-                      src={filteredService.image_url}
-                      alt={"An image of" + filteredService.title}
-                    />
-                  </div>
-                  <Markup className="LearnMoreText" content={filteredService.treatment_notes} />
-                  <div  className="LearnMoreHeader" style={{fontWeight:'bold'}}> Book Online</div>
-                  <div className="LearnMoreHeader">
-                      {filteredService.title}
-                  </div>
-                  <div  className="LearnMoreHeader">
-                      {parseDuration(filteredService.duration)} | {filteredService.cost}
-                  </div>
-                  <BookNowBTN apptID={filteredService.treatment_uid} />
+            <div style={{ padding:'3% 20% 3% 20%'}}>
+              <div style={{textAlign:'center'}}>
+                    <div className="LearnMoreTitle">
+                        {filteredService.title}
+                    </div>
+                    <div className="LearnMoreText" >
+                        {filteredService.description} <br />
+                    </div>
+                    <div className="LearnMoreHeader">
+                        {parseDuration(filteredService.duration)} | {filteredService.cost}
+                    </div>
+                    <BookNowBTN apptID={filteredService.treatment_uid} />
+                    <div style={{margin:'2rem'}}>
+                      <img
+                      style={{width:'100%',height:'100%' ,objectFit:'cover'}}
+                        variant="top"
+                        src={filteredService.image_url}
+                        alt={"An image of" + filteredService.title}
+                      />
+                    </div>
+              </div>
 
-                  <div className="LearnMoreText" >6055 Meridian Ave, Ste. 40, San Jose, CA 95120, US
-                        4084717004
-                        leena@nityaayurveda.com
-                  </div> 
-                  <div  style={{fontWeight:'600', marginTop:'1rem'}}>
-                      Cancellation Policy: To cancel or reschedule, please contact us 24 hours in advance.
-                  </div>                
+              <div >
+                    <div style={{ padding:'0% 3% 0% 3%'}}>
+                      <Markup  content={filteredService.treatment_notes} />
+                    </div>
+                    <div style={{textAlign:'center'}}>
+                      <div  className="LearnMoreHeader" style={{fontWeight:'bold'}}> Book Online</div>
+                      <div className="LearnMoreHeader">
+                          {filteredService.title}
+                      </div>
+                      <div  className="LearnMoreHeader">
+                          {parseDuration(filteredService.duration)} | {filteredService.cost}
+                      </div>
+                      <BookNowBTN apptID={filteredService.treatment_uid} />
+
+                      <div className="LearnMoreText" >6055 Meridian Ave, Ste. 40, San Jose, CA 95120, US
+                            4084717004
+                            leena@nityaayurveda.com
+                      </div> 
+                      <div  style={{fontWeight:'600', marginTop:'1rem'}}>
+                          Cancellation Policy: To cancel or reschedule, please contact us 24 hours in advance.
+                      </div> 
+                    </div>               
+              </div>
             </div>
           
           )) :
