@@ -18,20 +18,9 @@ class BookNowBTN extends Component {
         <br />
       <div style={{
               textAlign: "center",
-              //fontSize:"1.3rem",
-              //width:"300px",   
               color: "blue",
               textDecoration: "underline",
               font: "normal normal normal 22px/26px Hoefler Text"
-              //paddingTop: "20px",
-              //paddingBottom: "20px",
-              //marginLeft: "600px",
-              //fontWeight: "bolder",
-              //backgroundColor: "#b28d42",
-              //borderColor: "#b28d42",
-              //borderRadius: "100px",
-              //marginLeft:  "240px",
-              // textDecoration: "none",
             }} 
             aria-label={"click button to learn more."}
       >

@@ -3,6 +3,7 @@ import {Box, Button} from '@material-ui/core';
 
 import Consulting from './Consulting.jsx';
 import Treatments from "./Treaments.jsx";
+import ScrollToTop from "../Blog/ScrollToTop";
 
 import '../Home/Home.css';
 
@@ -21,7 +22,8 @@ export default function Services(){
     return(
     <div>
         <div className="HomeContainer" >
-            
+         <div hidden={true}>We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies.</div>
+          <ScrollToTop/>
             <div className="Card">
                 <div className="Service_Title">
                     Services

@@ -107,8 +107,6 @@ export default function ConfirmationPage(props) {
   return (
     <div
       style={{
-        // border: "dashed",
-        // height: "100vh",
         height: "auto",
         width: "100vw",
         maxWidth: "100%",
@@ -132,7 +130,6 @@ export default function ConfirmationPage(props) {
       >
         <div
           style={{
-            // border: "1px solid green",
             height: "144px",
             display: "flex",
             justifyContent: "center",
@@ -140,7 +137,6 @@ export default function ConfirmationPage(props) {
         >
           <div
             style={{
-              // border: "1px solid blue",
               display: "inline-block"
             }}
           >
@@ -252,16 +248,8 @@ export default function ConfirmationPage(props) {
                   justifyContent: 'center',
                   marginTop:'2rem'
                 } : {
-                  // position: 'absolute',
-                  // width: "280px",
-                  // maxWidth: '95%',
-                  // height: "210px",
-                  // height: '75vw',
-                  // paddingBottom: '75%',
                   width: '90%',
                   height: '10rem',
-                  // maxWidth: '95%',
-                  // height: '210px',
                   margin: '3rem 0 4rem 0',
                   borderRadius: '25px',
                   backgroundColor: '#E8E8E8',
@@ -278,7 +266,6 @@ export default function ConfirmationPage(props) {
                 loading="lazy"
               ></iframe>
               </div>
-            {/* </div> */}
           </div>
           <div
             style={dimensions.width > 810 ?  { 
@@ -303,8 +290,6 @@ export default function ConfirmationPage(props) {
             >
               If anything changes we will contact you: 
             </div>
-            {/* <br />
-            <br /> */}
             <div
               style={{
                 fontSize: '22px',
@@ -314,19 +299,14 @@ export default function ConfirmationPage(props) {
             >
               {location.state.apptInfo.first_name}
             </div>
-            {/* <br /> */}
             <div
               style={{
                 fontSize: '22px',
                 fontWeight: '300',
-                // margin: '24px 0 0 0'
               }}
             >
               {location.state.apptInfo.phone_no}
             </div>
-            {/* <br />
-            <br /> */}
-            {/* <br /> */}
             <div
               style={{
                 color: "#D3A625",
@@ -336,34 +316,22 @@ export default function ConfirmationPage(props) {
             >
               How to prepare for your consultation:
             </div>
-            {/* <br /> */}
-            {/* <br /> */}
+
             <div
               style={{
                 color: "#D3A625",
                 fontSize: '14px',
-                // padding: '50px 50px 50px 50px',
                 margin: '12px 0 0 0'
-                // display: 'inline-block',
-                // width: '50%',
-                // border: 'dashed'
               }}
             >
               Bringing these things to the consultation will help us accelerate the process.
             </div>
-            {/* <br /> */}
-            {/* <br /> */}
-            {/* <span>
-              List of your current medication, diet, and food preferences
-            </span> */}
+
             <div
               style={{
                 fontSize: '14px',
                 margin: '12px 0 0 0',
                 paddingBottom:'2rem'
-                // display: 'inline-block',
-                // width: '50%',
-                // border: 'dashed'
               }}
             >
               List of your current medication, diet, and food preferences

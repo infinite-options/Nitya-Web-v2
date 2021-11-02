@@ -11,6 +11,8 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
+import ScrollToTop from "../Blog/ScrollToTop";
+
 import '../Home/Home.css';
 
 export default function Contact(){
@@ -60,6 +62,7 @@ export default function Contact(){
 
     return(
       <div className="HomeContainer" >
+        <ScrollToTop/>
         <div className="Card" >
             <div className="CardGrid" >
             <div style={{ display:'flex', flexDirection:'column', alignItems:'center'}}>

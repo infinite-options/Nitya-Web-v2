@@ -33,42 +33,14 @@ const useStyles = makeStyles({
      width: "75%",
    },
   },
-  // h1: {
-  //   fontSize: "24px",
-  //   color: "#D3A625",
-  //   fontFamily: "Hoefler",
-  // },
-  h1: {
-    fontSize: "24px",
-    color: "#D3A625",
-    paddingTop: "15px",
-    fontFamily: "Hoefler",
-  },
-  content: {
-    fontSize: "22px",
-    fontFamily: "SFProDisplayRegular",
-    color: "#D3A625",
-    textAlign: "center",
-  },
+ 
   content2: {
     fontSize: "20px",
     // fontFamily: "SFProDisplayRegular",
     color: "#D3A625",
     textAlign: "left",
   },
-  content3: {
-    fontSize: "22px",
-    // fontFamily: "SFProDisplayRegular",
-    color: "#D3A625",
-    textAlign: "center",
-  },
-  selectTime: {
-    fontSize: "32px",
-    color: "#52330D",
-    fontFamily: "AvenirHeavy",
-    margin: "0 auto",
-    textAlign: "center",
-  },
+  
   selectTime2: {
     fontSize: "38px",
     color: "#D3A625",
@@ -76,11 +48,7 @@ const useStyles = makeStyles({
     margin: "0 auto",
     textAlign: "center",
   },
-  CalendarContainer: {
-    margin: "auto",
-    width: "60%",
-    backgroundColor: "white",
-  },
+ 
   bookButton: {
     width: "200px",
     height: "50px",
@@ -115,100 +83,8 @@ const useStyles = makeStyles({
       },
     },
   },
-  button: {
-    backgroundColor: "white",
-    border: "2px solid #D3A625",
-    color: "#D3A625",
-    padding: "15px 90px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "block",
-    fontSize: "20px",
-    borderRadius: "50px",
-    margin: "2px auto",
-    "&:hover": {
-      background: "#D3A625",
-      color: "white",
-    },
-    "&:focus": {
-      outline: "none",
-      boxShadow: "none",
-    },
-    "&:active": {
-      outline: "none",
-      boxShadow: "none",
-    },
-  },
-  buttonDisable: {
-    backgroundColor: "#D3A625",
-    border: "none",
-    color: "white",
-    padding: "15px 100px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "block",
-    fontSize: "20px",
-    borderRadius: "50px",
-    margin: "0 auto",
-    opacity: "50%",
-    boxShadow: "none",
-    "&:focus": {
-      outline: "none",
-      boxShadow: "none",
-    },
-    "&:active": {
-      outline: "none",
-      boxShadow: "none",
-    },
-  },
-  inputRow: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  date: {
-    fontSize: "42px",
-    fontFamily: "AvenirHeavy",
-    margin: "0 auto",
-    textAlign: "center",
-  },
-  calendarTimeTable: {
-    width: "100%",
-    margin: "0 auto",
-    // border: "solid blue",
-    height: "520px",
-  },
-  // calendarBox: {
-  //   width: "50%",
-  //   height: "550px",
-  //   padding: "20px",
-  //   backgroundColor: "#D3A625",
-  // },
-  calendarBox: {
-    marginLeft:'5rem',
-    width: "60%",
-  //  backgroundColor: "#D3A625",
-  },
-  // timeslotBox: {
-  // width: "50%",
-  // height: "350px",
-  //padding: "20px",
-  // },
-  timeslotBox: {
-    width: "100%",
-    // height: "350px",
-    height: "100%",
-    // display: "inline-block",
-    // overflow: "auto",
-    // display: "inline-block",
-    // flexDirection: "column",
-    // border: "dashed"
-    //padding: "20px",
-  },
-  center: {
-    margin: "0 auto",
-    // border: 'solid',
-    // height: '200px'
-  },
+  
+ 
   timeslotButton: {
     width: "10rem",
     height: "3rem",
@@ -239,38 +115,6 @@ const useStyles = makeStyles({
       outline: "none",
       boxShadow: "none",
     },
-  },
-
-  timeslotButtonBox: {
-    width: "100%",
-    // border: "1px solid green",
-    // overflow: "hidden",
-    // overflowY: "scroll",
-    // height: "300px",
-    borderTop: "1px solid rgb(178,141,66,0.5)",
-    // height: "426px",
-    // flexGrow: "1",
-    // overflow: "hidden",
-    height: "calc(100% - 100px)",
-    // margin: "0 auto",
-    overflowY: "scroll",
-    overflowX: "hidden",
-    "&::-webkit-scrollbar": {
-      width: "10px",
-      // border: "1px solid black",
-      borderRadius: "20px",
-      // padding: "1px 0",
-      backgroundColor: "white",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      border: "1px solid #000",
-      borderRadius: "20px",
-      // padding: "1px 0",
-      backgroundColor: "#52330D",
-    },
-  },
-  img: {
-    width: "100%",
   },
 });
 
@@ -614,47 +458,19 @@ export default function AppointmentPage(props) {
           >
             <div>
               <div>
-                {/* <h1 className={classes.selectTime}>Confirm Meeting</h1> */}
                 <div className={classes.selectTime2}>
                   <div className="TitleFontAppt">
                   Appointment scheduled for:
                     </div>
                 </div>
                 <br></br>
-                {/* <h1
-                  style={{
-                    // fontSize: "42x",
-                    // fontFamily: "AvenirHeavy",
-                    fontSize: "30px",
-                    margin: "0 auto",
-                    textAlign: "center",
-                    color: "#EB2020",
-                  }}
-                  hidden={timeSelected ? "hidden" : ""}
-                >
-                  Please pick a day and time to meet
-                </h1> */}
-                {/* <h1
-                  className={classes.date}
-                  hidden={!timeSelected ? "hidden" : ""}
-                >
-                  <span style={{}}>{dateString1}</span> at{" "}
-                  <span style={{}}>
-                    {formatTime(apiDateString, selectedTime)}
-                  </span>
-                </h1> */}
+           
                 <h1
-                  // className={classes.date}
                   style={{
-                    // fontSize: "42x",
-                    // fontFamily: "AvenirHeavy",
                     fontSize: "30px",
                     margin: "0 auto",
                     textAlign: "center",
-                    // color: "#EB2020"
-                  }}
-                  // hidden={!timeSelected ? "hidden" : ""}
-                >
+                  }}  >
                   <span>
                     {moment(location.state.date).format('ll')} {' '}
                     at {formatTime(location.state.date, location.state.time)}
@@ -677,7 +493,6 @@ export default function AppointmentPage(props) {
                   {parseDuration(elementToBeRendered.duration)} |{" "}
                   {elementToBeRendered.cost}
                 </p>
-                {/* <br /> */}
                 <img
                   src={elementToBeRendered.image_url}
                   className={classes.img}
@@ -739,12 +554,10 @@ export default function AppointmentPage(props) {
                     onHandleChange={handleNotesChange}
                   />
                 </div>
-                {/* <br></br> */}
                 <div
                   hidden={!infoSubmitted}
                   style={{
                     background: "white",
-                    // border: "dashed"
                   }}
                 >
                   <StripeElement
@@ -771,25 +584,16 @@ export default function AppointmentPage(props) {
                     justifyContent: "center",
                   }}
                 >
-                  {/* <div hidden={timeSelected ? "hidden" : ""}>
-                    <button className={classes.buttonDisable}>Confirm</button>
-                  </div> */}
-                  {/* <div hidden={timeSelected !== infoSubmitted ? "" : "hidden"}> */}
+                
 
                   <button
                     className={classes.bookButton}
-                    //disabled={!timeSelected}
                     hidden={infoSubmitted}
-                    // className={timeSelected ? (
-                    //   classes.button
-                    // ) : (
-                    //   classes.buttonDisable
-                    // )}
+                    
                     onClick={toggleKeys}
                   >
                     Book Appointment
                   </button>
-                  {/* </div> */}
                 </div>
               </div>
             </div>

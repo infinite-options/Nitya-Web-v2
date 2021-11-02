@@ -91,9 +91,7 @@ const useStyles = makeStyles((theme) => ({
   searchContainer: {
     display: "flex",
   },
-  inputRoot: {
-    color: "#594d2cs",
-  },
+
   inputInput: {
     padding: "10px",
     boxShadow: "none",
@@ -124,13 +122,7 @@ const useStyles = makeStyles((theme) => ({
       flexDirection: 'column',
     },
   },
-  cardMobile: {
-    display: "none",
-    "@media (max-width: 1100px)": {
-      display: "block",
-      textAlign: "center",
-    },
-  },
+
   blogImg: {
     width: "25rem",
     height: "20rem",
@@ -174,29 +166,6 @@ const useStyles = makeStyles((theme) => ({
     lineHeight: "1.4",
     textAlign: "justify",
     paddingBottom: "10px",
-  },
-  cardActions: {
-    display: "flex",
-    margin: "0 10px",
-    justifyContent: "space-between",
-    boxShadow: "none",
-    fontSize: "1.2rem",
-    fontFamily: "'Open Sans', sans-serif",
-    wordWrap: "break-word",
-    color: "#8d6f19",
-  },
-
-  author: {
-    display: "flex",
-  },
-  paginationContainer: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  btn: {
-    backgroundColor: "#d3a625",
-    color: "#ffffff",
-    boxShadow: "none",
   },
 }));
 
@@ -309,10 +278,6 @@ function Blogpage(props) {
 
           }}
         >
-          {/* <div className="TitleFontAppt" style={{ flex: '1' }}>
-            Ayurvedic Musings
-          </div> */}
-          {/* <div style={{ color: 'black' }}>{String(Auth.isAuth)}</div> */}
 
           <div hidden={Auth.isAuth === false}>
             <AddIcon
@@ -423,11 +388,6 @@ function Blogpage(props) {
 
           </div>
         ))}
-        {/* <div style={{ paddingBottom: "30px" }}>
-          <Button variant="contained" className={classes.btn} href="/addpost">
-            Add Blog Entry
-          </Button>
-        </div> */}
       </div>
     </div>
     </div>

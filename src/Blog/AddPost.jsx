@@ -36,12 +36,7 @@ const useStyles = makeStyles((theme) => ({
       margin: theme.spacing(1),
     },
   },
-  input: {
-    display: "none",
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2),
-  },
+
   btn: {
     backgroundColor: "#d3a625",
     color: "#ffffff",
@@ -51,7 +46,6 @@ const useStyles = makeStyles((theme) => ({
 
 function AddPost(props) {
   const classes = useStyles();
-  const history = useHistory();
   const [blog, setBlog] = useState(props.blog);
   const [blogTitle, setBlogTitle] = useState("");
   const [blogText, setBlogText] = useState("");
@@ -148,7 +142,6 @@ function AddPost(props) {
 
                   <div style={{ textAlign: 'left', flex: '1', display: 'flex', flexDirection: 'column' }} className={classes.root}>
                     <div>
-                      {/* <img src={blogImage} style={{ backgroundColor: '#DADADA', width: '200px', height: '200px' }} /> */}
                     </div>
                     <div className="App">
                       <ImageUploading

@@ -17,160 +17,13 @@ import Grid from '@material-ui/core/Grid';
 import { useHistory } from 'react-router';
 import { Link } from "react-router-dom";
 import '../Appointment/AppointmentPage.css';
+import { Button } from "@material-ui/core";
+
 // import moment from "moment";
 
 const useStyles = makeStyles({
-  container: {
-    margin: "50px auto",
-    width: "980px",
-    padding: "50px 50px",
-    backgroundColor: "white",
-  },
-  // h1: {
-  //   fontSize: "24px",
-  //   color: "#D3A625",
-  //   fontFamily: "Hoefler",
-  // },
-  h1: {
-    fontSize: "24px",
-    color: "#D3A625",
-    paddingTop: "15px",
-    fontFamily: "Hoefler",
-  },
-  content: {
-    fontSize: "22px",
-    fontFamily: "SFProDisplayRegular",
-    color: "#D3A625",
-    textAlign: "center",
-  },
-  content2: {
-    fontSize: "20px",
-    // fontFamily: "SFProDisplayRegular",
-    color: "#D3A625",
-    textAlign: "left",
-  },
-  content3: {
-    fontSize: "22px",
-    // fontFamily: "SFProDisplayRegular",
-    color: "#D3A625",
-    textAlign: "center",
-  },
-  selectTime: {
-    fontSize: "32px",
-    color: "#52330D",
-    fontFamily: "AvenirHeavy",
-    margin: "0 auto",
-    textAlign: "center",
-  },
-  selectTime2: {
-    fontSize: "24px",
-    color: "#D3A625",
-    fontFamily: "AvenirHeavy",
-    margin: "0 auto",
-    textAlign: "center",
-  },
-  
-  bookButton: {
-    width: "200px",
-    height: "50px",
-    backgroundColor: "#D3A625",
-    border: "2px solid #D3A625",
-    color: "white",
-    // padding: "0 10px 0 10px",
-    textDecoration: "none",
-    fontSize: "20px",
-    borderRadius: "50px",
-    fontFamily: "AvenirHeavy",
-    "&:hover": {
-      borderColor: "#52330D",
-      background: "#52330D",
-      color: "#white",
-    },
-    "&:focus": {
-      outline: "none",
-      boxShadow: "none",
-    },
-    "&:active": {
-      outline: "none",
-      boxShadow: "none",
-    },
-    "&:disabled": {
-      backgroundColor: "#D3A625",
-      color: "white",
-      opacity: "50%",
-      "&:hover": {
-        borderColor: "#D3A625",
-      },
-    },
-  },
-  button: {
-    backgroundColor: "white",
-    border: "2px solid #D3A625",
-    color: "#D3A625",
-    padding: "15px 90px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "block",
-    fontSize: "20px",
-    borderRadius: "50px",
-    margin: "2px auto",
-    "&:hover": {
-      background: "#D3A625",
-      color: "white",
-    },
-    "&:focus": {
-      outline: "none",
-      boxShadow: "none",
-    },
-    "&:active": {
-      outline: "none",
-      boxShadow: "none",
-    },
-  },
-  buttonDisable: {
-    backgroundColor: "#D3A625",
-    border: "none",
-    color: "white",
-    padding: "15px 100px",
-    textAlign: "center",
-    textDecoration: "none",
-    display: "block",
-    fontSize: "20px",
-    borderRadius: "50px",
-    margin: "0 auto",
-    opacity: "50%",
-    boxShadow: "none",
-    "&:focus": {
-      outline: "none",
-      boxShadow: "none",
-    },
-    "&:active": {
-      outline: "none",
-      boxShadow: "none",
-    },
-  },
-  inputRow: {
-    display: "flex",
-    justifyContent: "space-between",
-  },
-  date: {
-    fontSize: "42px",
-    fontFamily: "AvenirHeavy",
-    margin: "0 auto",
-    textAlign: "center",
-  },
-  calendarTimeTable: {
-    width: "100%",
-    margin: "0 auto",
-    // border: "solid blue",
-    height: "520px",
-  },
-  // calendarBox: {
-  //   width: "50%",
-  //   height: "550px",
-  //   padding: "20px",
-  //   backgroundColor: "#D3A625",
-  // },
+
+
   calendarBox: {
   marginLeft:'2rem',
   width: "80%",
@@ -178,34 +31,8 @@ const useStyles = makeStyles({
        marginLeft:'0rem',
       width: "100%",
     },
- 
-  
-  //  backgroundColor: "#D3A625",
-  },
-  // timeslotBox: {
-  // width: "50%",
-  // height: "350px",
-  //padding: "20px",
-  // },
-  timeslotBox: {
-    width: "100%",
-    // height: "350px",
-    height: "100%",
-    // display: "inline-block",
-    // overflow: "auto",
-    // display: "inline-block",
-    // flexDirection: "column",
-    // border: "dashed"
-    //padding: "20px",
   },
 
-
-  center: {
-    margin: "0 auto",
-    color:'black',
-    // border: 'solid',
-    // height: '200px'
-  },
   timeslotButton: {
     width: "10rem",
     height: "3rem",
@@ -236,38 +63,6 @@ const useStyles = makeStyles({
       outline: "none",
       boxShadow: "none",
     },
-  },
-
-  timeslotButtonBox: {
-    width: "100%",
-    // border: "1px solid green",
-    // overflow: "hidden",
-    // overflowY: "scroll",
-    // height: "300px",
-    borderTop: "1px solid rgb(178,141,66,0.5)",
-    // height: "426px",
-    // flexGrow: "1",
-    // overflow: "hidden",
-    height: "calc(100% - 100px)",
-    // margin: "0 auto",
-    overflowY: "scroll",
-    overflowX: "hidden",
-    "&::-webkit-scrollbar": {
-      width: "10px",
-      // border: "1px solid black",
-      borderRadius: "20px",
-      // padding: "1px 0",
-      backgroundColor: "white",
-    },
-    "&::-webkit-scrollbar-thumb": {
-      border: "1px solid #000",
-      borderRadius: "20px",
-      // padding: "1px 0",
-      backgroundColor: "#52330D",
-    },
-  },
-  img: {
-    width: "100%",
   },
 });
 
@@ -609,34 +404,25 @@ export default function AppointmentPage(props) {
       <br />
       {bookNowClicked ? (
         <div>
-          <div
-          className="Card"
-          //   className="CalendarContainer"
-          //   aria-label={"find a day to meet"}
-          //   style={{
-          //     // border: "dashed",
-          //    // maxWidth: "96%",
-          //   }}
-           >
+          <div className="Card">
             <div className="CardGrid">
               <div>
                 <div className="ApptPageTitle">
-                        {elementToBeRendered.title}
+                    {elementToBeRendered.title}
                 </div>
                 <div className="ApptPageText" >
-                        {elementToBeRendered.description} <br />
+                    {elementToBeRendered.description} <br />
                 </div>
                 <div className="ApptPageHeader">
-                        {parseDuration(elementToBeRendered.duration)} | {elementToBeRendered.cost}
+                    {parseDuration(elementToBeRendered.duration)} | {elementToBeRendered.cost}
                 </div>
                     {/* <BookNowBTN apptID={elementToBeRendered.treatment_uid} /> */}
                 <div style={{margin:'2rem'}}>
-                      <img
+                    <img
                       style={{width:'100%',height:'100%' ,objectFit:'cover'}}
-                        variant="top"
-                        src={elementToBeRendered.image_url}
-                        alt={"An image of" + elementToBeRendered.title}
-                      />
+                      variant="top"
+                      src={elementToBeRendered.image_url}
+                      alt={"An image of" + elementToBeRendered.title} />
                 </div>       
                 {/*                
                 <p className="ApptPageText" style={{ textAlign: "left" }}>
@@ -657,7 +443,6 @@ export default function AppointmentPage(props) {
                   style={{
                     textAlign: "center",
                     color:"#D3A625",
-                    //fontFamily: "AvenirHeavy",
                     fontWeight:'500',
                     fontSize: "30px",
                   }}
@@ -666,17 +451,14 @@ export default function AppointmentPage(props) {
                 </div>
                 {console.log("(Calendar) date: ", date)}
                 <Calendar
-                  //backgroundColor="#d3a625"
                   calendarType="US"
                   onClickDay={dateChange}
                   value={date}
                   minDate={minDate}
-                 // style={{backgroundColor:'black'}}
-                  // className={classes.center}
                   next2Label={null}
                   prev2Label={null}
                 />
-              </div>
+             </div>
               </div>
            
               <div style={{width:'100%', height:'100%'}}  >
@@ -687,20 +469,12 @@ export default function AppointmentPage(props) {
                     justifyContent:'space-between',
                     alignItems:'flex-start',
                     padding:'3%'
-                    // margin:'5%'
-                    // alignItems: "center",
-                    // maxHeight: "100px",
-                    // width: "100%",
-                    // border: "1px solid blue"
                   }}
                 >
                   <div
-                   // className={classes.h1}
                    className="TitleFontAppt"
                    style={{
-                   // textAlign: "center",
                     color:"#D3A625",
-                    //fontFamily: "AvenirHeavy",
                     fontWeight:'500',
                     fontSize: "30px",
                   }}
@@ -710,31 +484,22 @@ export default function AppointmentPage(props) {
                   <div
                     className="BodyFontAppt"
                     style={{
-                    //  textAlign: "left",
                       color: "#D3A625",
-                      // fontFamily: "AvenirHeavy",
                       fontSize: "18px",
-                      // border: "dashed"
-                      // border: "1px solid red",
-                     // height: "50%",
                     }}
                   >
                     Pacific Standard Time
                   </div>
                 </div>
-                {/* <div className={classes.timeslotButtonBox}> */}
-                {/* <Container style={{marginTop:'-3rem', marginLeft:'2rem'}} >
-                  {renderAvailableApptsVertical()}
-                {/* </div> 
-              </Container> */}
+        
                 <div style={{ display:'flex', justifyContent:'center'}}>
                 {renderAvailableApptsVertical()}
                 </div>
            
 
-                <div style={{ padding:'3%'}}>
+                <div style={{ padding:'3%'}} hidden={!buttonSelect}>
                   <button 
-                  hidden={!buttonSelect}
+                  
                   onClick={()=> history.push({pathname: `/${treatmentID}/confirm`,state: {date:apiDateString ,time :selectedTime}})}
                   className={classes.timeslotButton}
                     > 

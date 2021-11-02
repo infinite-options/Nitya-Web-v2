@@ -27,10 +27,7 @@ import { Markup } from 'interweave';
 import '../Home/Home.css'
 
 const useStyles = makeStyles((theme) => ({
-  blogpage: {
-    marginLeft: "auto",
-    marginRight: "auto",
-  },
+
   container: {
     marginTop:'5%',
     marginBottom:'5%',
@@ -90,9 +87,7 @@ const useStyles = makeStyles((theme) => ({
     display: "flex",
     color: 'black'
   },
-  inputRoot: {
-    color: "#594d2cs",
-  },
+
   inputInput: {
     padding: "10px",
     boxShadow: "none",
@@ -118,26 +113,8 @@ const useStyles = makeStyles((theme) => ({
     paddingRight: "30px",
     "@media (max-width: 1100px)": {},
   },
-  cardRow: {
-    "@media (max-width: 1100px)": {
-      display: "none",
-    },
-  },
-  cardMobile: {
-    display: "none",
-    "@media (max-width: 1100px)": {
-      display: "block",
-      textAlign: "center",
-    },
-  },
-  blogImg: {
-    width: "436px",
-    height: "327px",
-    "@media (max-width: 570px)": {
-      width: "90%",
-      height: "90%",
-    },
-  },
+
+
   header: {
     display: "flex",
     justifyContent: "flex-start",
@@ -149,9 +126,7 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '-2rem',
     },
   },
-  desc: {
-    marginLeft: "-50px",
-  },
+
   title: {
     color: "#D3A625",
     fontSize: "2rem",
@@ -177,19 +152,6 @@ const useStyles = makeStyles((theme) => ({
     fontFamily: "'Open Sans', sans-serif",
     wordWrap: "break-word",
     color: "#8d6f19",
-  },
-
-  author: {
-    display: "flex",
-  },
-  paginationContainer: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  btn: {
-    backgroundColor: "#d3a625",
-    color: "#ffffff",
-    boxShadow: "none",
   },
 }));
 
@@ -407,18 +369,8 @@ function FullBlog(props) {
                   </div>
                 )}
                 <div className={classes.content}>
-                  {/* <div>{post.blogText.replace('</br>', '\n')}</div> */}
                   <p style={{ fontSize: '32px' }}>{post.blogTitle}</p>
-                  {/* {
-                    post.blogText.split("\n").map(function (item, idx) {
-                      return (
-                        <span key={idx}>
-                          {item}
-                          <br />
-                        </span>
-                      )
-                    })
-                  } */}
+         
 
                   <Markup content={post.blogText} />
                 </div>

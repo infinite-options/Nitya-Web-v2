@@ -354,14 +354,12 @@ export default function Scheduler(props) {
           aria-label={"click button to book your appointment"}
           hidden={!props.infoSubmitted ? "hidden" : ""}
           style={{
-            // border: "dashed",
             marginTop:'1rem',
             display: "flex",
             justifyContent: "center"
           }}
         >
           <button 
-            // hidden={submitted ? "hidden" : ""} 
             disabled={submitted}
             onClick={bookAppt}
             className={classes.payButton}
