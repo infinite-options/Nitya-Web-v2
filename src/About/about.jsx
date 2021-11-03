@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
+import {Helmet} from "react-helmet";
 
 import Img from "../Assets/Images/card2.png";
 
@@ -9,7 +10,11 @@ import '../Home/Home.css';
 export default function About(){
     return(
         <div className="HomeContainer" >
-            <div hidden={true}>We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies</div>
+             <Helmet>
+                <title>About</title>
+                <meta name="description" content="We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies" />
+            </Helmet>
+       
         <ScrollToTop/>
         <div className="Card">
             <div className="CardGrid">

@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import {Box, Button} from '@material-ui/core';
+import {Helmet} from "react-helmet";
 
 import Consulting from './Consulting.jsx';
 import Treatments from "./Treaments.jsx";
@@ -22,7 +23,10 @@ export default function Services(){
     return(
     <div>
         <div className="HomeContainer" >
-         <div hidden={true}>We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies.</div>
+        <Helmet>
+                <title>Services</title>
+                <meta name="description" content="We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies." />
+        </Helmet>
           <ScrollToTop/>
             <div className="Card">
                 <div className="Service_Title">
