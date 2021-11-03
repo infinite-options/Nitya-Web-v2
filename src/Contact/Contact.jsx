@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import Axios from "axios";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import {Box, Button} from '@material-ui/core';
+import { Helmet } from "react-helmet";
 
 import card1 from "../Assets/Images/card1.jpg";
 
@@ -62,6 +63,10 @@ export default function Contact(){
 
     return(
       <div className="HomeContainer" >
+        <Helmet>
+        <title>Contact</title>
+        <meta name="description" content="6055 Meridian Ave  Ste #40, San Jose, CA 95120, US  Office: 408 471 7004" />
+      </Helmet>
         <ScrollToTop/>
         <div className="Card" >
             <div className="CardGrid" >

@@ -9,6 +9,7 @@ import {
 import { useHistory } from 'react-router';
 import axios from "axios";
 import Cookies from "universal-cookie";
+import { Helmet } from "react-helmet";
 
 import Navigation from './Navigation/navigation'
 import Home from './Home/Home';
@@ -73,6 +74,7 @@ function App() {
 
   return (
     <div className="App">
+
       <Router>
         <AuthContext.Provider
           value={{
@@ -192,6 +194,11 @@ function App() {
         </AuthContext.Provider>
 
       </Router>
+
+      <Helmet>
+        <title>Home</title>
+        <meta name="description" content="Nitya Ayurveda is a holistic healing center that offers classical Ayurvedic solutions for your health issues with herbal plans, diet and lifestyle guidance, and follow ups.  The center also offers Panchakarma (cleansing and purification treatments) and traditional Ayurvedic wellness therapies to maintain health, relaxation and rejuvenation." />
+      </Helmet>
 
     </div>
   );

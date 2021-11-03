@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 //import "typeface-raleway";
 import Blogpage from "./Blogpage";
 import ScrollToTop from "./ScrollToTop";
+import {Helmet} from "react-helmet";
 //import DocumentMeta from 'react-document-meta';
 
 function Blog() {
@@ -22,7 +23,10 @@ function Blog() {
   return (
     <>
       <div id="blog" className="page-container ">
-        {/* <DocumentMeta {...meta} /> */}
+          <Helmet>
+                    <title>Blog</title>
+                    <meta name="description" content="We address different topics in Ayurveda that may be of interest for those who are curious and interested in exploring Ayurvedic principles, philosophy and treatment practice" />
+                </Helmet>
         <div className="content-wrap">
           <ScrollToTop />
           <Blogpage />
