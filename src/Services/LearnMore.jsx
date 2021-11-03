@@ -7,6 +7,7 @@ import BookNowBTN from "./BookNowBtn";
 //import { height } from "@mui/system";
 //import { Typography } from "@material-ui/core";
 //import './consulting.css'
+import ScrollToTop from "../Blog/ScrollToTop";
 import './LearnMore.css'
 import { Markup } from 'interweave';
 import '../Home/Home.css';
@@ -52,6 +53,7 @@ export default function LearnMore(props) {
   return (
     <div className="HomeContainer" >
       
+      <ScrollToTop/>
         {/* <div className="Card"> */}
            
         {data != '' ? data

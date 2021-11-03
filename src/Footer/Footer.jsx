@@ -14,18 +14,18 @@ export default function Footer(){
         <div>
             <div className="FooterTextWrapper">
                     <div className = "FooterText">
-                    <div>6055 Meridian Ave, Ste. 40A,</div>
-                    <div>San Jose, CA 95120</div>
-                
+                        <div> 6055 Meridian Ave, Ste. 40A,</div>
+                        <div>San Jose, CA 95120</div>
                     </div>
+
                     <div className = "FooterText" >
-                    <div  style={{fontSize:'28px'}}>Leena Marathay</div>
-                    <div style={{marginTop:'1rem'}}>NAMA Certified Ayurvedic Practitioner</div>
+                        <div  style={{fontSize:'28px'}}>Leena Marathay</div>
+                        <div >NAMA Certified Ayurvedic Practitioner</div>
                     </div>
+
                     <div  className = "FooterText" style={{border:'0px'}}>
-                    <div>Office: 408 471 7004</div>
-                    <div>Email: Leena@nityaayurveda.com</div>
-                
+                        <div>Office: 408 471 7004</div>
+                        <div>Email: Leena@nityaayurveda.com</div>
                     </div>
                 
             </div>

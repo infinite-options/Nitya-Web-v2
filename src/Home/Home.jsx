@@ -14,7 +14,8 @@ export default function Home(){
         <div className="HomeContainer" >
            
             <ScrollToTop/>
-            <div >
+            {/* <div style={{border:'2px solid red'}}> */}
+            <div>
                 <Intro/>
             </div>
             <div >

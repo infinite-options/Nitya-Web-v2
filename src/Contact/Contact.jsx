@@ -103,7 +103,7 @@ export default function Contact(){
                       value={data.name}/>
             
                   <input
-                      type="phone"
+                      type="phone"  
                       name="phone"
                       id="phone"
                       className="CardInput"
@@ -150,7 +150,7 @@ export default function Contact(){
                     aria-label={"click button to submit your messsage session."}>
                                     
                         {/* <button className="ButtonFont" onClick={submit} style={{color:'white',fontSize:'20px', backgroundColor:'#C3A336', border:'0px',marginTop:'2rem', width:'50%', height:'3rem', cursor:'pointer'}} >Submit</button> */}
-                        <button className="CardButton" onClick={submit}  >Submit</button>
+                        <button className="CardButton" style={{marginRight:'0rem'}} onClick={submit}  >Submit</button>
                 </div>
               <br/>
                 <div style={{ display: "flex", justifyContent: "center" }}>

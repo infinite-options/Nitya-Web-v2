@@ -28,7 +28,7 @@ const useStyles = makeStyles({
     padding: "50px 50px",
     backgroundColor: "white",
     width:'60%',
-    "@media (max-width: 500px)": {
+    "@media (max-width: 1050px)": {
       marginLeft:'0.5rem',
      width: "75%",
    },
@@ -114,6 +114,13 @@ const useStyles = makeStyles({
       color: "white",
       outline: "none",
       boxShadow: "none",
+    },
+  },
+
+  img:{
+    width:'320px',
+    "@media (max-width: 1050px)": {
+      width:'280px',
     },
   },
 });
@@ -496,7 +503,7 @@ export default function AppointmentPage(props) {
                 <img
                   src={elementToBeRendered.image_url}
                   className={classes.img}
-                  style={{objectFit:'cover', width:'320px', textAlign:'left'}}
+                  style={{objectFit:'cover',  textAlign:'left'}}
                   alt=""
                 />
                 <br />

@@ -25,7 +25,7 @@ export default function Consulting(){
             { data
                 .filter((service) =>   service.category === "Consultation" )
                     .map((filteredService) => (
-                    <div style={{display:'flex',marginTop:'1rem', backgroundColor:'#DADADA'}}>
+                    <div className="ServiceContainer">
                         <div style={{width:'100%', flex:'1'}}>
                             <img
                                 style={{width:'100%',minHeight:'100%' ,objectFit:'cover'}}
