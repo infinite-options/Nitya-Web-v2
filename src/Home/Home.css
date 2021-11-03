@@ -231,7 +231,6 @@
  display:flex;
  justify-content:space-evenly;
  margin-left:7rem;
-
 }
 
 .FooterText{
@@ -252,6 +251,8 @@
   padding-left: 20%;
   padding-bottom: 5%;
 }
+
+
 
 @media screen and (max-width: 1050px) {
 
@@ -310,6 +311,12 @@
   background-color: #fff;
   color: #444;
   margin-top: 2rem;
+}
+
+.MobileImage{
+  width: 70%;
+  height: 2rem;
+  object-fit: contain;
 }
 
 }

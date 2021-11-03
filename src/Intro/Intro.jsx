@@ -11,7 +11,7 @@
 
         const history = useHistory()
         return(
-            <div className="Card">
+            <div className="Card" >
                  {/* <Helmet>
                     <title>Home</title>
                     <meta name="description" content="Nitya Ayurveda is a holistic healing center that offers classical Ayurvedic solutions for your health issues with herbal plans, diet and lifestyle guidance, and follow ups.  The center also offers Panchakarma (cleansing and purification treatments) and traditional Ayurvedic wellness therapies to maintain health, relaxation and rejuvenation." />

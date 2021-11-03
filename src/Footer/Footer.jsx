@@ -31,7 +31,7 @@ export default function Footer(){
             </div>
             <div class="wrapper">
                 <img src={Namacb} style={{  height:'7rem',justifySelf:'center', alignSelf:'center'}}/>
-                <img src={CAAM} style={{ height:'8rem', justifySelf:'center', alignSelf:'center'}}/>
+                <img src={CAAM} className="MobileImage" style={{ height:'8rem', justifySelf:'center', alignSelf:'center'}}/>
                 <InstagramIcon
                         fontSize="large"
                         className="instagram-icon"
