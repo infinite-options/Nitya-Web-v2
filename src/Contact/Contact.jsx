@@ -1,15 +1,67 @@
-    import React, { useEffect, useRef, useState } from "react";
-    import {Box, Button} from '@material-ui/core';
-    import { useHistory } from 'react-router';
-    import {Helmet} from "react-helmet";
+import React, { useEffect, useRef, useState } from "react";
+import Axios from "axios";
+import InstagramIcon from "@material-ui/icons/Instagram";
+import {Box, Button} from '@material-ui/core';
+import { Helmet } from "react-helmet";
 
-    import card1 from "../Assets/Images/card1.jpg";
+import card1 from "../Assets/Images/card1.jpg";
 
-    import '../Home/Home.css';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogContentText from '@material-ui/core/DialogContentText';
+// import DialogTitle from '@material-ui/core/DialogTitle';
 
-    export default function Intro(){
+import ScrollToTop from "../Blog/ScrollToTop";
 
-        const history = useHistory()
+import '../Home/Home.css';
+
+export default function Contact(){
+
+        const url =
+        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/addContact";
+      const [data, setData] = useState({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
+    
+      function submit() {
+      
+        Axios.post(url, {
+          name: data.name,
+          email: data.email,
+          subject: data.subject,
+          message: data.message,
+        })
+          .catch((error) => {
+            console.log(error.message);
+          })
+          .then((response) => {
+            console.log(response);
+            handleClickOpen()
+          });
+      }
+    
+      const [open, setOpen] = React.useState(false);
+    
+      const handleClickOpen = () => {
+        setOpen(true);
+      };
+    
+      const handleClose = () => {
+        setOpen(false);
+        window.location.reload(false);
+      };
+    
+      function handle(e) {
+        const newData = { ...data };
+        newData[e.target.id] = e.target.value;
+        setData(newData);
+      }
+
+        // const history = useHistory()
         return(
             <div className="HomeContainer" >
 
@@ -80,14 +132,8 @@
                     />  
                     </div> */}
                     {/* <button className="CardButton"> Test </button> */}
-                        <button
-                            className="CardButton"
-                            onClick={() => {
-                            history.push("/services")
-                            }}
-                            >
-                            Book a Session
-                        </button>
+                    <button className="CardButton" style={{marginRight:'1.8rem'}} onClick={submit}  >Submit</button>
+
                     </div>
                     <div>
                     {/* <img src={card1} className="CardImage" /> */}
