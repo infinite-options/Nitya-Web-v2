@@ -23,6 +23,7 @@ export default function Contact(){
       const [data, setData] = useState({
         name: "",
         email: "",
+        phone:"",
         subject: "",
         message: "",
       });
@@ -32,6 +33,7 @@ export default function Contact(){
         Axios.post(url, {
           name: data.name,
           email: data.email,
+          phone: data.phone,
           subject: data.subject,
           message: data.message,
         })
@@ -99,7 +101,7 @@ export default function Contact(){
                             className="NewInput"
                             placeholder="  Phone"
                            onChange={(e) => handle(e)}
-                           value={data.email}
+                           value={data.phone}
                          />
 
                         <input
@@ -127,7 +129,7 @@ export default function Contact(){
                         type="text"
                         name="message"
                         id="message"
-                        placeholder="  Type here"
+                        placeholder="  Type Message Here"
                         className="NewInput"
                         onChange={(e) => handle(e)}
                         value={data.message}
