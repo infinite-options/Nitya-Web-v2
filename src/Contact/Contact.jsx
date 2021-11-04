@@ -91,7 +91,7 @@ export default function Contact(){
 
               <div style={{display:'flex', flexDirection:'column',backgroundColor:'#DADADA',padding:'0% 3% 0% 3%'}}>
               {/* <div style={{ backgroundColor:'#DADADA', width:'auto', border:'2px solid blue'}}> */}
-                <div className="CardGrid" style={{padding:'0%', gridColumnGap:'5%'}}>
+                {/* <div className="CardGrid" style={{padding:'0%', gridColumnGap:'5%'}}> */}
                 
                   <input  
                       type="text"
@@ -111,7 +111,7 @@ export default function Contact(){
                       onChange={(e) => handle(e)}
                       value={data.email}/>
                       
-                </div>
+                {/* </div> */}
 
                 <input
                   type="email"
