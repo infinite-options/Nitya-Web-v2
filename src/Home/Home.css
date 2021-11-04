@@ -217,9 +217,12 @@
 /* Input for all the contact.jsx */
 .CardInput{
   font-family: SF Pro Display Regular ;
+  width: 20rem;
   height:3rem;
   margin-top:1rem;
   font-size:16px;
+  margin-right:1.8rem;
+  border: 2px solid red;
 }
 
 .wrapper {
@@ -347,7 +350,7 @@
 
 .Contact_Map{
   border: 0;
-  /* width: 80%; */
+  width: 100%;
   /* width: 15rem; */
   border-radius: 0%;
   height: 20rem;
