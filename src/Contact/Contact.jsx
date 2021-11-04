@@ -71,18 +71,19 @@ export default function Contact(){
                         <meta name="description" content="Nitya Ayurveda is a holistic healing center that offers classical Ayurvedic solutions for your health issues with herbal plans, diet and lifestyle guidance, and follow ups.  The center also offers Panchakarma (cleansing and purification treatments) and traditional Ayurvedic wellness therapies to maintain health, relaxation and rejuvenation." />
                     </Helmet> */}
                     <div className="CardGrid">
-                    <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center',border:'2px solid green'}}>
+                    <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                         {/* <div className="CardTitle">Helping your body heal itself</div> */}
                         <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact Us</div>
                         <div className="CardText"> 6055 Meridian Ave  Ste #40 <br></br> San Jose, CA 95120, USA </div>
-                        <div className="CardText"> Office: 408 471 7004</div>
+                        <div className="CardText" style={{marginBottom:'1rem'}}> Office: 408 471 7004</div>
+            
                         <input  
                             type="text"
                             name="name"
                             id="name"   
                             className="NewInput"
                             placeholder="  Full Name"
-                            style={{marginRight:'1.8rem'}}
+                            // style={{marginRight:'1.8rem'}}
                             // style={{
                             //     width:'75%',
                             //     height:'3rem',
