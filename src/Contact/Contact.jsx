@@ -75,8 +75,8 @@ export default function Contact(){
                     <div className="CardGrid">
                     <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
                         {/* <div className="CardTitle">Helping your body heal itself</div> */}
-                        <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact 1 Us </div>
-                        <div className="CardText"> 6055 Meridian Ave  Ste 2 #40 <br></br> San Jose, CA 95120, USA </div>
+                        <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact Us </div>
+                        <div className="CardText"> 6055 Meridian Ave  Ste #40 <br></br> San Jose, CA 95120, USA </div>
                         <div className="CardText" style={{marginBottom:'1rem'}}> Office: 408 471 7004</div>
             
                         <input  

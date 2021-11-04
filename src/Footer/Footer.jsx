@@ -4,6 +4,7 @@ import InstagramIcon from "@material-ui/icons/Instagram";
 import CAAM from "../Assets/Images/CAAM-logo.png";
 import Namacb from "../Assets/Images/namacb.png";
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet";
 import { useHistory, useLocation } from "react-router-dom";
 import '../Home/Home.css'
 
@@ -12,9 +13,15 @@ export default function Footer(){
 
     return(
         <div>
+            <Helmet>
+                <title>Address</title>
+                <meta name="description" content="Visit our San Jose Office" />
+            </Helmet>
+
+
             <div className="FooterTextWrapper">
                     <div className = "FooterText">
-                        <div> 6055 Meridian Ave, Ste 1. 40A,</div>
+                        <div>6055 Meridian Ave, Ste. 40A,</div>
                         <div>San Jose, CA 95120</div>
                     </div>
 
