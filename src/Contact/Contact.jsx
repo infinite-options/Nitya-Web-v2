@@ -24,7 +24,27 @@
                         <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact Us</div>
                         <div className="CardText"> 6055 Meridian Ave  Ste #40 <br></br> San Jose, CA 95120, USA </div>
                         <div className="CardText"> Office: 408 471 7004</div>
-                        <div>
+                        {/* <div>
+                        <input  
+                            type="text"
+                            name="name"
+                            id="name"   
+                            className="CardInput"
+                            placeholder="  Full Name"
+                         //   onChange={(e) => handle(e)}
+                         //   value={data.name}
+                         />
+                    
+                        <input
+                            type="phone"  
+                            name="phone"
+                            id="phone"
+                            className="CardInput"
+                            placeholder="  Phone"
+                         //   onChange={(e) => handle(e)}
+                         //   value={data.email}
+                         />
+
                         <input
                             type="email"
                             name="email"
@@ -34,7 +54,31 @@
                            // onChange={(e) => handle(e)}
                            // value={data.email}
                            />
-                           </div>
+
+                           
+                        <input
+                        type="text"
+                        name="subject"
+                        id="subject"
+                        placeholder="  Subject"
+                        className="CardInput"
+                    //    onChange={(e) => handle(e)}
+                    //    value={data.subject}
+                    />
+
+                        
+
+                        <textarea
+                        type="textarea"
+                        name="text"
+                        id="message"
+                        placeholder="  Type your message here"
+                        className="CardInput"
+                        style={{ paddingTop:'1rem', height: "139px"}}
+                    //    onChange={(e) => handle(e)}
+                    //    value={data.message}
+                    />  
+                    </div> */}
                     {/* <button className="CardButton"> Test </button> */}
                         <button
                             className="CardButton"
