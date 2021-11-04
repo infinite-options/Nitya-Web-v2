@@ -266,7 +266,7 @@
 
     /* Card Format for all Intro, About, Service & Contact */
 .Card{
-  width: 20rem;
+  width: 95%;
   /* width: clamp(200px, 50%, 600px); */
   height: auto;
 
