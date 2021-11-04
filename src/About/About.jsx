@@ -21,7 +21,7 @@ export default function About(){
             <div>
                 <div className="CardTitle">Leena Marathay</div>  
                 <p className="CardText">
-                <p>Leena is a NAMA (National Ayurvedic Medical Association)
+                <p>Leena 1 is a NAMA (National Ayurvedic Medical Association)
                 certified Ayurvedic Practitioner and an Ayurvedic Health and
                 Lifestyle Counselor.</p>
                 <p></p>

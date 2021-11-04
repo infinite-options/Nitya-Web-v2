@@ -14,7 +14,7 @@ export default function Footer(){
         <div>
             <div className="FooterTextWrapper">
                     <div className = "FooterText">
-                        <div> 6055 Meridian Ave, Ste. 40A,</div>
+                        <div> 6055 Meridian Ave, Ste 1. 40A,</div>
                         <div>San Jose, CA 95120</div>
                     </div>
 
