@@ -225,6 +225,15 @@
   border: 2px solid red;
 }
 
+.NewInput{
+
+  width:75%;
+  height:3rem;
+
+  margin-right:1.8rem;
+
+}
+
 .wrapper {
   display: grid;
   grid-template-columns: 33.3% 33.3% 33.3%;

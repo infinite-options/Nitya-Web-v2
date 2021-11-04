@@ -81,11 +81,57 @@ export default function Contact(){
                             name="name"
                             id="name"   
                             placeholder="  Full Name"
-                            style={{
-                                width:'75%',
-                                height:'3rem',
-                                marginRight:'1.8rem'}}
+                            // style={{
+                            //     width:'75%',
+                            //     height:'3rem',
+                            //     marginRight:'1.8rem'}}
+                            className="NewInput"
                          />
+
+                        <input
+                            type="phone"  
+                            name="phone"
+                            id="phone"
+                            className="NewInput"
+                            placeholder="  Phone"
+                         //   onChange={(e) => handle(e)}
+                         //   value={data.email}
+                         />
+
+                        <input
+                            type="email"
+                            name="email"
+                            id="email"
+                            className="NewInput"
+                            placeholder="  Email"
+                           // onChange={(e) => handle(e)}
+                           // value={data.email}
+                           />
+
+                           
+                        <input
+                        type="text"
+                        name="subject"
+                        id="subject"
+                        placeholder="  Subject"
+                        className="NewInput"
+                    //    onChange={(e) => handle(e)}
+                    //    value={data.subject}
+                    />
+
+                        
+
+                        <textarea
+                        type="textarea"
+                        name="text"
+                        id="message"
+                        placeholder="  Type your message here"
+                        className="CardInput"
+                        style={{ paddingTop:'1rem', height: "139px"}}
+                    //    onChange={(e) => handle(e)}
+                    //    value={data.message}
+                    />  
+
                         {/* <div>
                         <input  
                             type="text"
@@ -142,7 +188,7 @@ export default function Contact(){
                     />  
                     </div> */}
                     {/* <button className="CardButton"> Test </button> */}
-                    <button className="CardButton" style={{marginRight:'1.8rem'}} onClick={submit}  >Submit</button>
+                    <button className="CardButton"  onClick={submit}  >Submit</button>
 
                     </div>
                     <div>
