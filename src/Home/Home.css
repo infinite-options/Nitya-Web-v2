@@ -266,7 +266,8 @@
 
     /* Card Format for all Intro, About, Service & Contact */
 .Card{
-  width: 95%;
+  width: 20rem;
+  /* width: 95%; */
   /* width: clamp(200px, 50%, 600px); */
   height: auto;
 
@@ -346,7 +347,8 @@
 
 .Contact_Map{
   border: 0;
-  width: 95%;
+  width: 90%;
+  /* width: 15rem; */
   border-radius: 0%;
   height: 20rem;
   margin-right:0rem;
