@@ -82,6 +82,7 @@ export default function Contact(){
                             id="name"   
                             className="NewInput"
                             placeholder="  Full Name"
+                            style={{marginRight:'1.8rem'}}
                             // style={{
                             //     width:'75%',
                             //     height:'3rem',
@@ -120,6 +121,18 @@ export default function Contact(){
                         onChange={(e) => handle(e)}
                         value={data.subject}
                     />
+
+                    <input
+                        type="text"
+                        name="message"
+                        id="message"
+                        placeholder="  Type here"
+                        className="NewInput"
+                        onChange={(e) => handle(e)}
+                        value={data.message}
+                    />
+
+
 
                         
 
