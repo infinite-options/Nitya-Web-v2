@@ -57,7 +57,7 @@ export default function Contact() {
     <div className="Container">
         <div className="Intro_Container_Grid">
             <div style={{textAlign:'center'}}>
-            <div className= "Title_Contact">Contact Us</div>
+            <div className= "Title_Contact">Contact 3 Us</div>
             <div className= "Body_Contact"> 6055 Meridian Ave #40, San Jose, CA 95120, USA </div>
             <div className= "Body_Contact" >Office: 408 471 7004</div>
             <iframe

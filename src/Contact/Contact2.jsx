@@ -74,7 +74,7 @@ export default function Contact(){
             {/* <div> */}
             <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
 
-                <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact Us</div>
+                <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact 2 Us</div>
                 <div className="CardText"> 6055 Meridian Ave  Ste #40 <br></br> San Jose, CA 95120, USA </div>
                 <div className="CardText"> Office: 408 471 7004</div>
                 {/* <div className="CardText"> <p>Leena is a NAMA (National Ayurvedic Medical Association)

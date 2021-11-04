@@ -191,7 +191,7 @@
 
 /* -------------- Contact ------------------------------------------------*/
 
-/* Title Text "Contact Us" in Contact.jsx */
+/* Title Text "Contact 4 Us" in Contact.jsx */
 .Title_Contact{
   font-family:  Hoefler Text ;
   font-style: italic;
@@ -230,6 +230,7 @@
   width:75%;
   height:3rem;
 
+  margin-right: 1.8rem;
   /* margin-right:1.8rem; */
 
 }
@@ -357,6 +358,17 @@
   background-color:#DADADA
 }
 
+.NewInput{
+
+  width:75%;
+  height:3rem;
+
+  margin-right: 0rem;
+
+  /* margin-right:1.8rem; */
+
+}
+
 .Contact_Map{
   border: 0;
   width: 100%;
@@ -364,6 +376,7 @@
   border-radius: 0%;
   height: 20rem;
   margin-right:0rem;
+  margin-top: 2rem;
   margin-bottom: 2rem;
 }
 
