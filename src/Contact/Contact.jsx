@@ -76,6 +76,16 @@ export default function Contact(){
                         <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact Us</div>
                         <div className="CardText"> 6055 Meridian Ave  Ste #40 <br></br> San Jose, CA 95120, USA </div>
                         <div className="CardText"> Office: 408 471 7004</div>
+                        <input  
+                            type="text"
+                            name="name"
+                            id="name"   
+                            placeholder="  Full Name"
+                            style={{
+                                width:'75%',
+                                height:'3rem',
+                                marginRight:'1.8rem'}}
+                         />
                         {/* <div>
                         <input  
                             type="text"
