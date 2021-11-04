@@ -70,7 +70,10 @@ export default function Contact(){
         <ScrollToTop/>
         <div className="Card" >
             <div className="CardGrid" >
-            <div style={{ display:'flex', flexDirection:'column', alignItems:'center'}}>
+            {/* <div style={{ display:'flex', flexDirection:'column', alignItems:'center'}}> */}
+            {/* <div> */}
+            <div style={{ display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center'}}>
+
                 <div className="CardTitle" style={{marginBottom:'2rem'}}>Contact Us</div>
                 <div className="CardText"> 6055 Meridian Ave  Ste #40 <br></br> San Jose, CA 95120, USA </div>
                 <div className="CardText"> Office: 408 471 7004</div>
@@ -89,7 +92,9 @@ export default function Contact(){
 
             </div>
 
-              <div style={{display:'flex', flexDirection:'column',backgroundColor:'#DADADA',padding:'0% 3% 0% 3%'}}>
+              {/* <div style={{display:'flex', flexDirection:'column',backgroundColor:'#DADADA',padding:'0% 3% 0% 3%',border:'2px solid green'}}> */}
+              <div  style={{display:'flex', flexDirection:'column',backgroundColor:'#DADADA'}}>
+
               {/* <div style={{ backgroundColor:'#DADADA', width:'auto', border:'2px solid blue'}}> */}
                 {/* <div className="CardGrid" style={{padding:'0%', gridColumnGap:'5%'}}> */}
                 
