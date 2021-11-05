@@ -17,6 +17,7 @@ import Grid from '@material-ui/core/Grid';
 import { useHistory } from 'react-router';
 import { Link } from "react-router-dom";
 import '../Appointment/AppointmentPage.css';
+import {Helmet} from "react-helmet";
 import { Button } from "@material-ui/core";
 
 // import moment from "moment";

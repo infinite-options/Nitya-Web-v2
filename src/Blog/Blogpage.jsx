@@ -26,6 +26,7 @@ import { Markup } from 'interweave';
 import { ReactComponent as ShareBtn } from "../Assets/Images/ios-share-alt.svg";
 import { AuthContext } from "../auth/AuthContext";
 import AddIcon from '@material-ui/icons/Add';
+import {Helmet} from "react-helmet";
 import '../Appointment/AppointmentPage.css'
 import '../Home/Home.css'
 const useStyles = makeStyles((theme) => ({
