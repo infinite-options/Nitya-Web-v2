@@ -263,6 +263,10 @@ function Blogpage(props) {
 
   return (
     <div className="HomeContainer" >
+      <Helmet>
+        <title>Blog</title>
+        <meta name="description" content="Ayurvedic Musings about health, recipies and living well" />
+      </Helmet>
     <div className={classes.blogpage} id="blogpage">
       <div className="CardTitle" style={{margin:'2rem'}}>
         Blog

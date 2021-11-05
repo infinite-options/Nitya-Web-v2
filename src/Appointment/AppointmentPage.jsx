@@ -401,6 +401,10 @@ export default function AppointmentPage(props) {
   return (
     <div className="HomeContainer">
       <ScrollToTop />
+      <Helmet>
+        <title>Book an Appointment</title>
+        <meta name="description" content="Book an Appointment that's convenient to you" />
+      </Helmet>
       <br />
       {bookNowClicked ? (
         <div>
