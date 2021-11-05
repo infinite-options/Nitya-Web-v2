@@ -143,6 +143,7 @@ const useStyles = makeStyles((theme) => ({
       height: "90%",
     },
   },
+  
   header: {
     display: "flex",
     justifyContent: "space-between",
@@ -154,6 +155,7 @@ const useStyles = makeStyles((theme) => ({
       width: "100%",
     },
   },
+
   desc: {
     paddingLeft: '10%',
     marginLeft: "-50px",
@@ -163,12 +165,14 @@ const useStyles = makeStyles((theme) => ({
       marginLeft: '0px'
     },
   },
+
   title: {
     color: "black",
     fontStyle: "italic",
     fontSize: "2rem",
     lineHeight: "1.6",
   },
+
   content: {
     fontSize: "1.2rem",
     fontFamily: "SF Pro Display",

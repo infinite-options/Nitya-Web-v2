@@ -6,15 +6,16 @@ import { Helmet } from "react-helmet";
 
 import card1 from "../Assets/Images/card1.jpg";
 
-// import Dialog from '@material-ui/core/Dialog';
-// import DialogActions from '@material-ui/core/DialogActions';
-// import DialogContent from '@material-ui/core/DialogContent';
-// import DialogContentText from '@material-ui/core/DialogContentText';
-// import DialogTitle from '@material-ui/core/DialogTitle';
+import Dialog from '@material-ui/core/Dialog';
+import DialogActions from '@material-ui/core/DialogActions';
+import DialogContent from '@material-ui/core/DialogContent';
+import DialogContentText from '@material-ui/core/DialogContentText';
+import DialogTitle from '@material-ui/core/DialogTitle';
 
 import ScrollToTop from "../Blog/ScrollToTop";
 
 import '../Home/Home.css';
+import { set } from "js-cookie";
 
 export default function Contact(){
 
@@ -54,7 +55,11 @@ export default function Contact(){
     
       const handleClose = () => {
         setOpen(false);
-        window.location.reload(false);
+        data.name = ""
+        data.email = ""
+        data.phone = ""
+        data.subject = ""
+        data.message = ""
       };
     
       function handle(e) {
@@ -137,6 +142,24 @@ export default function Contact(){
                     </div>
                     </div>
                 </div>
+                <Dialog
+                    open={open}
+                    onClose={handleClose}
+                    aria-labelledby="alert-dialog-title"
+                    aria-describedby="alert-dialog-description"
+                  >
+                    <DialogTitle id="alert-dialog-title">{"Message Recieved"}</DialogTitle>
+                    <DialogContent>
+                      <DialogContentText id="alert-dialog-description">
+                        Thanks for your Message! We have sent a copy to your email.
+                      </DialogContentText>
+                    </DialogContent>
+                    <DialogActions>
+                      <Button onClick={handleClose} color="primary">
+                        Close
+                      </Button>
+                    </DialogActions>
+                </Dialog>
            </div>
         )
     }
