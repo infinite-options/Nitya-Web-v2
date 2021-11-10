@@ -128,6 +128,12 @@ function App() {
 
               </Route>
 
+              <Route path="/:blog_uid/addpost">
+
+                <AddPost />
+
+              </Route>
+
               <Route path="/signup">
 
                 <SignUp />

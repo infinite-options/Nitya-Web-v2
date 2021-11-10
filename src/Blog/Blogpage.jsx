@@ -27,6 +27,9 @@ import { ReactComponent as ShareBtn } from "../Assets/Images/ios-share-alt.svg";
 import { AuthContext } from "../auth/AuthContext";
 import AddIcon from '@material-ui/icons/Add';
 import {Helmet} from "react-helmet";
+import DeleteForeverSharpIcon from '@material-ui/icons/DeleteForeverSharp';
+import EditSharpIcon from '@material-ui/icons/EditSharp';
+import ScrollToTop from "./ScrollToTop";
 import '../Appointment/AppointmentPage.css'
 import '../Home/Home.css'
 const useStyles = makeStyles((theme) => ({
@@ -140,7 +143,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#8d6f19",
     fontSize: "1.2rem",
     paddingBottom: "10px",
-    width: "250px",
+    width: "30rem",
     "@media (max-width: 570px)": {
       width: "100%",
     },
@@ -148,6 +151,8 @@ const useStyles = makeStyles((theme) => ({
   desc: {
     paddingLeft: '10%',
     marginLeft: "-50px",
+    display:'flex',
+    flexDirection:'column',
     "@media (max-width: 500px)": {
       textAlign: 'left',
       paddingLeft: '0px',
@@ -262,12 +267,21 @@ function Blogpage(props) {
     { title: `living well`, path: `/living well` },
   ];
 
+  function handleDelete(blog_id){
+    axios.post(`https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/deleteBlog/${blog_id}`)
+    .then((response) => {
+      console.log("delete",response.data)
+      window.location.reload()
+    }); 
+  }
+
   return (
     <div className="HomeContainer" >
       <Helmet>
         <title>Blog</title>
         <meta name="description" content="Ayurvedic Musings about health, recipies and living well" />
       </Helmet>
+      <ScrollToTop/>
     <div className={classes.blogpage} id="blogpage">
       <div className="CardTitle" style={{margin:'2rem'}}>
         Blog
@@ -355,7 +369,7 @@ function Blogpage(props) {
                 <div className={classes.desc}>
                   <div className={classes.header}>
                     {convertDate(post.postedOn)}
-
+                  
                     <Menu
                       elevation={0}
                       getContentAnchorEl={null}
@@ -374,6 +388,20 @@ function Blogpage(props) {
                       onClose={handleClose}
                     >
                     </Menu>
+                    <div>
+                    {/* http://localhost:4000/api/v2/deleteBlog/150-000048 */}
+                    <DeleteForeverSharpIcon
+                      style={{ cursor: 'pointer' }}
+                    onClick={() => {
+                      handleDelete(post.blog_uid)
+                    }} />
+                    <EditSharpIcon   
+                     size='lg'
+                     style={{ cursor: 'pointer' }}
+                      onClick={() => {
+                      history.push(`/${post.blog_uid}/addpost`)
+                    }}/>
+                    </div>
                   </div>
                   <Link
                     to={`/${post.blog_uid}/fullblog`}
@@ -389,6 +417,9 @@ function Blogpage(props) {
                     </div>
                   </Link>
                 </div>
+
+                
+                  
               </div>
             </div>
 
