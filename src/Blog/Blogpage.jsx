@@ -388,7 +388,7 @@ function Blogpage(props) {
                       onClose={handleClose}
                     >
                     </Menu>
-                    <div>
+                    <div hidden={Auth.isAuth === false}>
                     {/* http://localhost:4000/api/v2/deleteBlog/150-000048 */}
                     <DeleteForeverSharpIcon
                       style={{ cursor: 'pointer' }}
