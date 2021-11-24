@@ -14,22 +14,21 @@ import Calendar from "react-calendar";
 import "./calendar.css";
 import { Container } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
-import { useHistory } from 'react-router';
+import { useHistory, useLocation } from 'react-router-dom';
 import { Link } from "react-router-dom";
 import '../Appointment/AppointmentPage.css';
 import {Helmet} from "react-helmet";
 import { Button } from "@material-ui/core";
+import moment from "moment";
 
 // import moment from "moment";
 
 const useStyles = makeStyles({
-
-
   calendarBox: {
-  marginLeft:'2rem',
-  width: "80%",
+    marginLeft: "2rem",
+    width: "80%",
     "@media (max-width: 500px)": {
-       marginLeft:'0rem',
+      marginLeft: "0rem",
       width: "100%",
     },
   },
@@ -48,6 +47,7 @@ const useStyles = makeStyles({
     borderRadius: "50px",
     display: "block",
     margin: "6px auto",
+    
     "&:hover": {
       background: "#D3A625",
       color: "white",
@@ -66,10 +66,12 @@ const useStyles = makeStyles({
     },
   },
 });
-
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function AppointmentPage(props) {
   console.log("(AppointmentPage) props: ", props);
-
+  const location = useLocation();
+  const access_token = location.state.accessToken;
+  console.log("(AppointmentPage) accessToken: ", access_token);
   const classes = useStyles();
   const history = useHistory()
 
@@ -131,6 +133,17 @@ export default function AppointmentPage(props) {
     }
   });
 
+  function convert(value) {
+    var hms = "02:04:33"; // your input string
+    var a = value.split(":"); // split it at the colons
+
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
+
+    return seconds + 1
+  }
+
+ 
   // parse duration
   const parseDuration = (rawDuration) => {
     if (rawDuration === undefined) {
@@ -284,6 +297,16 @@ export default function AppointmentPage(props) {
       12: "Dec",
       "": "",
     };
+    console.log('dateformat2', date)
+    console.log(
+      "dateformat2",
+      months[doubleDigitMonth(date)] +
+        " " +
+        doubleDigitDay(date) +
+        ", " +
+        date.getFullYear() +
+        " "
+    );
     return (
       months[doubleDigitMonth(date)] +
       " " +
@@ -296,6 +319,15 @@ export default function AppointmentPage(props) {
 
   // This one is for doing the sendToDatabase Post Call
   const dateFormat3 = (date) => {
+    console.log("dateformat3", date);
+    console.log(
+      "dateformat3",
+      date.getFullYear() +
+        "-" +
+        doubleDigitMonth(date) +
+        "-" +
+        doubleDigitDay(date)
+    );
     return (
       date.getFullYear() +
       "-" +
@@ -346,10 +378,11 @@ export default function AppointmentPage(props) {
       // strTime += minutes < 10 ? ":0" + minutes : ":" + minutes; // get minutes
       // strTime += seconds < 10 ? ":0" + seconds : ":" + seconds; // get seconds
       // strTime += hours >= 12 ? " P.M." : " A.M."; // get AM/PM
-
-      var newDate = new Date(date + " " + time);
-      var hours = newDate.getHours();
+      
+      var newDate = new Date((date + "T" + time).replace(/\s/, "T"));
+      var hours = newDate.getHours()
       var minutes = newDate.getMinutes();
+
       var ampm = hours >= 12 ? "pm" : "am";
       hours = hours % 12;
       hours = hours ? hours : 12; // the hour '0' should be '12'
@@ -360,8 +393,10 @@ export default function AppointmentPage(props) {
   }
 
   //get appt
-  useEffect(() => {
+ /*  useEffect(() => {
     if (dateHasBeenChanged) {
+      console.log('407',duration)
+      
       axios
         .get(
           "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
@@ -370,30 +405,130 @@ export default function AppointmentPage(props) {
             duration
         )
         .then((res) => {
-          console.log("This is the information we got" + res.data);
+          console.log("This is the information we got" + res);
           setTimeSlots(res.data.result);
           console.log("Timeslots Array " + timeSlots);
         });
     }
     setDateHasBeenChanged(false);
-  });
+  }); */
+  
+    useEffect(() => {
+      if (dateHasBeenChanged) {
+        const headers = {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+          Authorization: "Bearer " + access_token,
+        };
+        const data = {
+          timeMin: apiDateString + "T08:00:00-0800",
+          timeMax: apiDateString + "T20:00:00-0800",
+          items: [
+            {
+              id: "primary",
+            },
+          ],
+        };
+        console.log(headers);
+
+        console.log(data);
+        axios
+          .post(
+            `https://www.googleapis.com/calendar/v3/freeBusy?key=${API_KEY}`,
+            data,
+            {
+              headers: headers,
+            }
+          )
+          .then((response) => {
+            let busy = response.data.calendars.primary.busy;
+            let start_time =
+              Date.parse(apiDateString + "T08:00:00-0800") / 1000;
+            let end_time = Date.parse(apiDateString + "T20:00:00-0800") / 1000;
+            let free = [];
+            console.log("busy", busy);
+            console.log("busy", start_time, end_time);
+            let appt_start_time = start_time;
+
+            let seconds = convert(duration);
+            console.log("busy 407", seconds);
+            // Loop through each appt slot in the search range.
+            while (appt_start_time < end_time) {
+              // Add 29:59 to the appt start time so we know where the appt will end.
+              let appt_end_time = appt_start_time + seconds;
+
+              // For each appt slot, loop through the current appts to see if it falls
+              // in a slot that is already taken.
+              let slot_available = true;
+
+              busy.forEach((times) => {
+                let this_start = Date.parse(times["start"]) / 1000;
+                let this_end = Date.parse(times["end"]) / 1000;
+
+                // If the appt start time or appt end time falls on a current appt, slot is taken.
+                if (
+                  (appt_start_time >= this_start &&
+                    appt_start_time < this_end) ||
+                  (appt_end_time >= this_start && appt_end_time < this_end)
+                ) {
+                  slot_available = false;
+                  return; // No need to continue if it's taken.
+                }
+              });
+
+              // If we made it through all appts and the slot is still available, it's an open slot.
+              if (slot_available) {
+                console.log("Open appt at: ", new Date(appt_start_time * 1000));
+                free.push(
+                  moment(new Date(appt_start_time * 1000)).format("hh:mm:ss")
+                );
+                console.log(
+                  "Open appt at: ",
+                  moment(new Date(appt_start_time * 1000)).format("hh:mm:ss")
+                );
+                console.log("Open appt at: ", free);
+                
+              }
+
+              // + duration minutes
+              appt_start_time += convert(duration);
+              
+            }
+            setTimeSlots(free);
+          })
+          .catch((error) => {
+            console.log("error", error);
+          });
+      }
+      setDateHasBeenChanged(false);
+      
+    });
 
   function renderAvailableApptsVertical() {
+    console.log('TimeSlots',timeSlots)
+    
     return (
-      <Grid container xs={11}  >
-      {timeSlots.map((element) => (
-        <button
-          className={classes.timeslotButton}
-          onClick={() => selectApptTime(element.begin_time)}
-        >
-          {formatTime(apiDateString, element.begin_time)}
-        </button>
-    ))}
-    </Grid>
-    )
+      <Grid container xs={11}>
+        {/* {timeSlots.map((number) => (
+          <li>{number}</li>
+        ))} */}
+        
+        {timeSlots.map(function (element) {
+          return (
+            <button
+              className={classes.timeslotButton}
+              onClick={() => selectApptTime(element)}
+            >
+              {element}
+            </button>
+          );
+        })}
+      </Grid>
+    );
   }
 
   function selectApptTime(element) {
+    console.log('selected time', element)
     setSelectedTime(element);
     setTimeSelected(true);
     setButtonSelect(true)
