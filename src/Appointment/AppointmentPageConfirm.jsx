@@ -17,6 +17,7 @@ import { Container } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 //import { fontFamily } from "@mui/system";
 import '../Appointment/AppointmentPage.css';
+import { publishTheCalenderEvent } from "./GoogleApiService";
 
 // import moment from "moment";
 
@@ -126,12 +127,12 @@ const useStyles = makeStyles({
 });
 
 export default function AppointmentPage(props) {
-  console.log("(AppointmentPage) props: ", props);
+  
 
   const classes = useStyles();
   const location = useLocation();
   // moment().format();
-
+  console.log("(AppointmentPage) props: ", props, location.state.signedin);
   //strip use states
   const { treatmentID } = useParams();
   const [stripePromise, setStripePromise] = useState(null);
@@ -399,17 +400,31 @@ export default function AppointmentPage(props) {
       // strTime += minutes < 10 ? ":0" + minutes : ":" + minutes; // get minutes
       // strTime += seconds < 10 ? ":0" + seconds : ":" + seconds; // get seconds
       // strTime += hours >= 12 ? " P.M." : " A.M."; // get AM/PM
-
-      var newDate = new Date(date + " " + time);
+      console.log(date, time);
+      var newDate = new Date((date + "T" + time).replace(/\s/, "T"));
       var hours = newDate.getHours();
       var minutes = newDate.getMinutes();
-      var ampm = hours >= 12 ? "pm" : "am";
+      console.log(hours,minutes)
+      var ampm = hours >= 12 && 1<= hours && hours < 8  ? "pm" : "am";
+      console.log(ampm);
       hours = hours % 12;
+      console.log(hours);
       hours = hours ? hours : 12; // the hour '0' should be '12'
+      console.log(hours);
       minutes = minutes < 10 ? "0" + minutes : minutes;
+      console.log(minutes);
       var strTime = hours + ":" + minutes + " " + ampm;
+      console.log(strTime);
       return strTime;
     }
+  }
+    function convert(value) {
+    var a = value.split(":"); // split it at the colons
+
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
+
+    return seconds + 1
   }
 
   //get appt
@@ -449,12 +464,43 @@ export default function AppointmentPage(props) {
     setTimeSelected(true);
   }
 
+  const submit = (e) => {
+    e.preventDefault();
+     
+    let start_time = moment(location.state.date).format();
+    let duration = convert(elementToBeRendered.duration);
+    let et = Date.parse(start_time) / 1000 + duration;
+    let end_time = new Date(et * 1000);
+    
+    var event = {
+      summary: elementToBeRendered.title,
+      
+      location: "6055 Meridian Ave #40, San Jose, CA, 95120",
+      creator: {
+        email: "support@nityaayurveda.com",
+        self: true,
+      },
+      organizer: {
+        email: "support@nityaayurveda.com",
+        self: true,
+      },
+      start: {
+        dateTime: start_time,
+      },
+      end: {
+        dateTime: end_time,
+      },
+      attendees: email,
+    };
+    publishTheCalenderEvent(event);
+    
+  };
 
   return (
     <div style={{ backgroundColor: "#DADADA" }}>
       <ScrollToTop />
       <br />
-      {bookNowClicked ? (
+      {bookNowClicked || location.state.signedin ? (
         <div>
           
           <div
@@ -597,7 +643,7 @@ export default function AppointmentPage(props) {
                     className={classes.bookButton}
                     hidden={infoSubmitted}
                     
-                    onClick={toggleKeys}
+                    onClick={toggleKeys, submit}
                   >
                     Book Appointment
                   </button>

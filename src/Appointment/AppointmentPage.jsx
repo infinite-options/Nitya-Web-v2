@@ -109,6 +109,7 @@ export default function AppointmentPage(props) {
   const [dateString1, setDateString1] = useState(null);
   const [apiDateString, setApiDateString] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
+  const [timeAASlots, setTimeAASlots] = useState([]);
   const [duration, setDuration] = useState(null);
   const cost = elementToBeRendered.cost;
 
@@ -134,7 +135,6 @@ export default function AppointmentPage(props) {
   });
 
   function convert(value) {
-    var hms = "02:04:33"; // your input string
     var a = value.split(":"); // split it at the colons
 
     // minutes are worth 60 seconds. Hours are worth 60 minutes.
@@ -430,7 +430,6 @@ export default function AppointmentPage(props) {
           ],
         };
         console.log(headers);
-
         console.log(data);
         axios
           .post(
@@ -446,17 +445,14 @@ export default function AppointmentPage(props) {
               Date.parse(apiDateString + "T08:00:00-0800") / 1000;
             let end_time = Date.parse(apiDateString + "T20:00:00-0800") / 1000;
             let free = [];
-            console.log("busy", busy);
-            console.log("busy", start_time, end_time);
             let appt_start_time = start_time;
 
-            let seconds = convert(duration);
-            console.log("busy 407", seconds);
+            let seconds = convert(duration);;
             // Loop through each appt slot in the search range.
             while (appt_start_time < end_time) {
-              // Add 29:59 to the appt start time so we know where the appt will end.
+              // Add appt duration to the appt start time so we know where the appt will end.
               let appt_end_time = appt_start_time + seconds;
-
+            
               // For each appt slot, loop through the current appts to see if it falls
               // in a slot that is already taken.
               let slot_available = true;
@@ -464,12 +460,11 @@ export default function AppointmentPage(props) {
               busy.forEach((times) => {
                 let this_start = Date.parse(times["start"]) / 1000;
                 let this_end = Date.parse(times["end"]) / 1000;
-
                 // If the appt start time or appt end time falls on a current appt, slot is taken.
                 if (
                   (appt_start_time >= this_start &&
                     appt_start_time < this_end) ||
-                  (appt_end_time >= this_start && appt_end_time < this_end)
+                  (appt_end_time > this_start && appt_end_time <= this_end)
                 ) {
                   slot_available = false;
                   return; // No need to continue if it's taken.
@@ -477,28 +472,34 @@ export default function AppointmentPage(props) {
               });
 
               // If we made it through all appts and the slot is still available, it's an open slot.
-              if (slot_available) {
-                console.log("Open appt at: ", new Date(appt_start_time * 1000));
-                free.push(
+              if (slot_available) {  free.push(
                   moment(new Date(appt_start_time * 1000)).format("hh:mm:ss")
                 );
-                console.log(
-                  "Open appt at: ",
-                  moment(new Date(appt_start_time * 1000)).format("hh:mm:ss")
-                );
-                console.log("Open appt at: ", free);
-                
               }
-
               // + duration minutes
-              appt_start_time += convert(duration);
-              
+              appt_start_time += (60 * 30);
             }
             setTimeSlots(free);
           })
           .catch((error) => {
             console.log("error", error);
           });
+
+          // axios
+          //   .get(
+          //     "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
+          //       apiDateString +
+          //       "/" +
+          //       duration
+          //   )
+          //   .then((res) => {
+          //     console.log("This is the information we got" + res);
+          //     res.data.result.map((r)=>{
+          //       timeAASlots.push(r["begin_time"]);
+          //     })
+              
+          //     console.log("Timeslots Array " + timeAASlots);
+          //   });
       }
       setDateHasBeenChanged(false);
       
@@ -506,6 +507,7 @@ export default function AppointmentPage(props) {
 
   function renderAvailableApptsVertical() {
     console.log('TimeSlots',timeSlots)
+    console.log("TimeSlotsAA", timeAASlots);
     
     return (
       <Grid container xs={11}>

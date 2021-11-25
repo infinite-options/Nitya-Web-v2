@@ -4,7 +4,6 @@ import {
   signInToGoogle,
   initClient,
   getSignedInUserEmail,
-  signOutFromGoogle,
 } from "../Appointment/GoogleApiService";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
@@ -44,13 +43,7 @@ export default function BookNowBTN (props){
     }
     console.log('booknowbtn', successfull)
   };
-  const _signOutFromGoogle = () => {
-    let status = signOutFromGoogle();
-    if (status) {
-      setSignedIn(false);
-      setgoogleAuthedEmail(null);
-    }
-  };
+  
   useEffect(() => {
     let url = BASE_URL + "customerToken/";
     let customer_uid = "100-000281";
@@ -166,6 +159,7 @@ export default function BookNowBTN (props){
           //getAcessToken();
 
           getAuthToGoogle();
+          setSignedIn(true)
 
           {
             console.log("bookbtn1", accessToken);
@@ -175,7 +169,7 @@ export default function BookNowBTN (props){
         <Link
           to={{
             pathname: `/${tID}/appt`,
-            state: { accessToken: accessToken },
+            state: { accessToken: accessToken},
           }}
           // to={`/${tID}/appt`}
           // params={{ accessToken: accessToken }}
