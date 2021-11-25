@@ -393,7 +393,7 @@ export default function AppointmentPage(props) {
   }
 
   //get appt
- /*  useEffect(() => {
+  useEffect(() => {
     if (dateHasBeenChanged) {
       console.log('407',duration)
       
@@ -406,12 +406,17 @@ export default function AppointmentPage(props) {
         )
         .then((res) => {
           console.log("This is the information we got" + res);
-          setTimeSlots(res.data.result);
-          console.log("Timeslots Array " + timeSlots);
+          // setTimeAASlots(res.data.result);
+          // console.log("Timeslots Array " + timeSlots);
+
+          res.data.result.map((r)=>{
+                timeAASlots.push(r["begin_time"]);
+              })
+          setTimeAASlots(timeAASlots)
         });
     }
     setDateHasBeenChanged(false);
-  }); */
+  }); 
   
     useEffect(() => {
       if (dateHasBeenChanged) {
@@ -473,7 +478,7 @@ export default function AppointmentPage(props) {
 
               // If we made it through all appts and the slot is still available, it's an open slot.
               if (slot_available) {  free.push(
-                  moment(new Date(appt_start_time * 1000)).format("hh:mm:ss")
+                  moment(new Date(appt_start_time * 1000)).format("HH:mm:ss")
                 );
               }
               // + duration minutes
@@ -485,21 +490,6 @@ export default function AppointmentPage(props) {
             console.log("error", error);
           });
 
-          // axios
-          //   .get(
-          //     "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
-          //       apiDateString +
-          //       "/" +
-          //       duration
-          //   )
-          //   .then((res) => {
-          //     console.log("This is the information we got" + res);
-          //     res.data.result.map((r)=>{
-          //       timeAASlots.push(r["begin_time"]);
-          //     })
-              
-          //     console.log("Timeslots Array " + timeAASlots);
-          //   });
       }
       setDateHasBeenChanged(false);
       
@@ -509,22 +499,23 @@ export default function AppointmentPage(props) {
     console.log('TimeSlots',timeSlots)
     console.log("TimeSlotsAA", timeAASlots);
     
+    let result = timeSlots.filter(
+      (o1) => timeAASlots.some((o2) => o1 === o2)
+    );
+    console.log('Merged',result);
     return (
       <Grid container xs={11}>
-        {/* {timeSlots.map((number) => (
-          <li>{number}</li>
-        ))} */}
-        
-        {timeSlots.map(function (element) {
+        {result.map(function (element) {
           return (
             <button
               className={classes.timeslotButton}
               onClick={() => selectApptTime(element)}
             >
-              {element}
+              {formatTime(apiDateString,element)}
             </button>
           );
         })}
+        
       </Grid>
     );
   }
@@ -642,7 +633,7 @@ export default function AppointmentPage(props) {
                 <div style={{ padding:'3%'}} hidden={!buttonSelect}>
                   <button 
                   
-                  onClick={()=> history.push({pathname: `/${treatmentID}/confirm`,state: {date:apiDateString ,time :selectedTime}})}
+                  onClick={()=> history.push({pathname: `/${treatmentID}/confirm`,state: {date:apiDateString ,time :selectedTime, accessToken:access_token}})}
                   className={classes.timeslotButton}
                     > 
                   Continue 

@@ -125,15 +125,18 @@ const useStyles = makeStyles({
     },
   },
 });
-
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function AppointmentPage(props) {
   
 
   const classes = useStyles();
   const location = useLocation();
   // moment().format();
-  console.log("(AppointmentPage) props: ", props, location.state.signedin);
+  console.log("(AppointmentPageConfirm) props: ", props);
   //strip use states
+  const access_token = location.state.accessToken;
+  console.log("(AppointmentPageConfirm) accessToken: ", access_token);
+
   const { treatmentID } = useParams();
   const [stripePromise, setStripePromise] = useState(null);
   let PUBLISHABLE_KEY = "pk_test_51Ihyn......0wa0SR2JG";
@@ -405,7 +408,7 @@ export default function AppointmentPage(props) {
       var hours = newDate.getHours();
       var minutes = newDate.getMinutes();
       console.log(hours,minutes)
-      var ampm = hours >= 12 && 1<= hours && hours < 8  ? "pm" : "am";
+      var ampm = hours >= 12 ? "pm" : "am";
       console.log(ampm);
       hours = hours % 12;
       console.log(hours);
@@ -466,12 +469,14 @@ export default function AppointmentPage(props) {
 
   const submit = (e) => {
     e.preventDefault();
-     
-    let start_time = moment(location.state.date).format();
+    
+    let st = location.state.date + "T" + location.state.time;
+    let start_time = moment(new Date(st)).format();
+    console.log(start_time);
     let duration = convert(elementToBeRendered.duration);
     let et = Date.parse(start_time) / 1000 + duration;
-    let end_time = new Date(et * 1000);
-    
+    let end_time = moment(new Date(et * 1000)).format();
+    console.log((end_time));
     var event = {
       summary: elementToBeRendered.title,
       
@@ -492,7 +497,28 @@ export default function AppointmentPage(props) {
       },
       attendees: email,
     };
-    publishTheCalenderEvent(event);
+    console.log(event)
+    publishTheCalenderEvent(event)
+    // const headers = {
+    //       "Content-Type": "application/json",
+    //       "Accept": "application/json",
+    //       "Authorization": "Bearer " + access_token,
+    //     };
+    // axios
+    //       .post(
+    //         `https://www.googleapis.com/calendar/v3/events?key=${API_KEY}`,
+    //         event,
+    //         {
+    //           headers: headers,
+    //         }
+    //       )
+    //       .then((response) => {
+            
+              
+    //       })
+    //       .catch((error) => {
+    //         console.log("error", error);
+    //       });
     
   };
 
