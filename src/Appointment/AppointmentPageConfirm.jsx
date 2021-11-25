@@ -268,8 +268,57 @@ export default function AppointmentPage(props) {
             );
           }
         });
+
+
+      let st = location.state.date + "T" + location.state.time;
+      let start_time = moment(new Date(st)).format();
+      console.log(start_time);
+      let duration = convert(elementToBeRendered.duration);
+      let et = Date.parse(start_time) / 1000 + duration;
+      let end_time = moment(new Date(et * 1000)).format();
+      console.log(end_time);
+      var event = {
+        summary: elementToBeRendered.title,
+
+        location: "6055 Meridian Ave #40, San Jose, CA, 95120",
+        creator: {
+          email: "support@nityaayurveda.com",
+          self: true,
+        },
+        organizer: {
+          email: "support@nityaayurveda.com",
+          self: true,
+        },
+        start: {
+          dateTime: start_time,
+        },
+        end: {
+          dateTime: end_time,
+        },
+        attendees: email,
+      };
+      console.log(event);
+      //publishTheCalenderEvent(event)
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + access_token,
+      };
+      axios
+        .post(
+          `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${API_KEY}`,
+          event,
+          {
+            headers: headers,
+          }
+        )
+        .then((response) => {})
+        .catch((error) => {
+          console.log("error", error);
+        });
     } else {
       // Fetch public key live
+
       console.log("fetching public key live");
       axios
         .get(
@@ -297,6 +346,53 @@ export default function AppointmentPage(props) {
               "(2 PaymentDetails) error: " + JSON.stringify(err.response)
             );
           }
+        });
+
+      let st = location.state.date + "T" + location.state.time;
+      let start_time = moment(new Date(st)).format();
+      console.log(start_time);
+      let duration = convert(elementToBeRendered.duration);
+      let et = Date.parse(start_time) / 1000 + duration;
+      let end_time = moment(new Date(et * 1000)).format();
+      console.log(end_time);
+      var event = {
+        summary: elementToBeRendered.title,
+
+        location: "6055 Meridian Ave #40, San Jose, CA, 95120",
+        creator: {
+          email: "support@nityaayurveda.com",
+          self: true,
+        },
+        organizer: {
+          email: "support@nityaayurveda.com",
+          self: true,
+        },
+        start: {
+          dateTime: start_time,
+        },
+        end: {
+          dateTime: end_time,
+        },
+        attendees: email,
+      };
+      console.log(event);
+      //publishTheCalenderEvent(event)
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + access_token,
+      };
+      axios
+        .post(
+          `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${API_KEY}`,
+          event,
+          {
+            headers: headers,
+          }
+        )
+        .then((response) => {})
+        .catch((error) => {
+          console.log("error", error);
         });
     }
   }
@@ -498,27 +594,24 @@ export default function AppointmentPage(props) {
       attendees: email,
     };
     console.log(event)
-    publishTheCalenderEvent(event)
-    // const headers = {
-    //       "Content-Type": "application/json",
-    //       "Accept": "application/json",
-    //       "Authorization": "Bearer " + access_token,
-    //     };
-    // axios
-    //       .post(
-    //         `https://www.googleapis.com/calendar/v3/events?key=${API_KEY}`,
-    //         event,
-    //         {
-    //           headers: headers,
-    //         }
-    //       )
-    //       .then((response) => {
-            
-              
-    //       })
-    //       .catch((error) => {
-    //         console.log("error", error);
-    //       });
+    //publishTheCalenderEvent(event)
+    const headers = {
+          "Content-Type": "application/json",
+          "Accept": "application/json",
+          "Authorization": "Bearer " + access_token,
+        };
+    axios
+      .post(
+        `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${API_KEY}`,
+        event,
+        {
+          headers: headers,
+        }
+      )
+      .then((response) => {})
+      .catch((error) => {
+        console.log("error", error);
+      });
     
   };
 
@@ -669,7 +762,7 @@ export default function AppointmentPage(props) {
                     className={classes.bookButton}
                     hidden={infoSubmitted}
                     
-                    onClick={toggleKeys, submit}
+                    onClick={toggleKeys}
                   >
                     Book Appointment
                   </button>
