@@ -6,7 +6,7 @@ import { Switch, Route, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
 import AppointmentConfirmationPage from "./confirmationPage";
 import { Button } from "@material-ui/core";
-
+import moment from "moment";
 const useStyles = makeStyles({
   container: {
     margin: "50px auto",
@@ -97,7 +97,7 @@ const useStyles = makeStyles({
 });
 
 export const ApptContext = React.createContext();
-
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function Scheduler(props) {
   const elements = useElements();
   const stripe = useStripe();
@@ -193,10 +193,68 @@ export default function Scheduler(props) {
     // setApptConfirmed(true);
   }
 
-    
+  function convert(value) {
+    var a = value.split(":"); // split it at the colons
 
-      
-    
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
+
+    return seconds + 1;
+  }
+
+  function creatEvent(){
+    console.log(props.date, props.selectedTime)
+    let st = props.treatmentDate + "T" + props.treatmentTime;
+    let start_time = moment(new Date(st)).format();
+    console.log(start_time);
+    let duration = convert(props.duration);
+    let et = Date.parse(start_time) / 1000 + duration;
+    let end_time = moment(new Date(et * 1000)).format();
+    console.log(end_time);
+    var event = {
+      summary: props.treatmentName,
+
+      location: "6055 Meridian Ave #40, San Jose, CA, 95120",
+      creator: {
+        email: "support@nityaayurveda.com",
+        self: true,
+      },
+      organizer: {
+        email: "support@nityaayurveda.com",
+        self: true,
+      },
+      start: {
+        dateTime: start_time,
+      },
+      end: {
+        dateTime: end_time,
+      },
+      attendees: [
+        {
+          email: props.email,
+        },
+      ],
+    };
+    console.log(event);
+    //publishTheCalenderEvent(event)
+    const headers = {
+      "Content-Type": "application/json",
+      Accept: "application/json",
+      Authorization: "Bearer " + props.accessToken,
+    };
+    axios
+      .post(
+        `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${API_KEY}`,
+        event,
+        {
+          headers: headers,
+        }
+      )
+      .then((response) => {})
+      .catch((error) => {
+        console.log("error", error);
+      });
+  }
 
   const [changeLoadingState, setLoadingState] = useState(false);
   const [customerUid, setcustomerUid] = useState('');
@@ -282,6 +340,7 @@ export default function Scheduler(props) {
                     "confirmedCardPayment result: " + JSON.stringify(result)
                   );
                   sendToDatabase();
+                  creatEvent();
                 })
                 .catch((err) => {
                   console.log(err);

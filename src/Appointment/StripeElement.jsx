@@ -12,6 +12,7 @@ export default function StripeElement(props) {
   return (
     <Elements stripe={props.stripePromise}>
       <Scheduler
+        accessToken={props.accessToken}
         treatmentID={props.treatmentID}
         notes={props.notes}
         infoSubmitted={props.infoSubmitted}
@@ -21,6 +22,8 @@ export default function StripeElement(props) {
         date={props.date}
         purchaseDate={props.purchaseDate}
         selectedTime={props.selectedTime}
+        treatmentDate={props.treatmentDate}
+        treatmentTime={props.treatmentTime}
         cost={props.cost}
         treatmentName={props.treatmentName}
         duration={props.duration}

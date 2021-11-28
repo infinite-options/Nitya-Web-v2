@@ -17,7 +17,6 @@ import { Container } from "@material-ui/core";
 import Grid from '@material-ui/core/Grid';
 //import { fontFamily } from "@mui/system";
 import '../Appointment/AppointmentPage.css';
-import { publishTheCalenderEvent } from "./GoogleApiService";
 
 // import moment from "moment";
 
@@ -268,54 +267,6 @@ export default function AppointmentPage(props) {
             );
           }
         });
-
-
-      let st = location.state.date + "T" + location.state.time;
-      let start_time = moment(new Date(st)).format();
-      console.log(start_time);
-      let duration = convert(elementToBeRendered.duration);
-      let et = Date.parse(start_time) / 1000 + duration;
-      let end_time = moment(new Date(et * 1000)).format();
-      console.log(end_time);
-      var event = {
-        summary: elementToBeRendered.title,
-
-        location: "6055 Meridian Ave #40, San Jose, CA, 95120",
-        creator: {
-          email: "support@nityaayurveda.com",
-          self: true,
-        },
-        organizer: {
-          email: "support@nityaayurveda.com",
-          self: true,
-        },
-        start: {
-          dateTime: start_time,
-        },
-        end: {
-          dateTime: end_time,
-        },
-        attendees: email,
-      };
-      console.log(event);
-      //publishTheCalenderEvent(event)
-      const headers = {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Bearer " + access_token,
-      };
-      axios
-        .post(
-          `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${API_KEY}`,
-          event,
-          {
-            headers: headers,
-          }
-        )
-        .then((response) => {})
-        .catch((error) => {
-          console.log("error", error);
-        });
     } else {
       // Fetch public key live
 
@@ -348,52 +299,6 @@ export default function AppointmentPage(props) {
           }
         });
 
-      let st = location.state.date + "T" + location.state.time;
-      let start_time = moment(new Date(st)).format();
-      console.log(start_time);
-      let duration = convert(elementToBeRendered.duration);
-      let et = Date.parse(start_time) / 1000 + duration;
-      let end_time = moment(new Date(et * 1000)).format();
-      console.log(end_time);
-      var event = {
-        summary: elementToBeRendered.title,
-
-        location: "6055 Meridian Ave #40, San Jose, CA, 95120",
-        creator: {
-          email: "support@nityaayurveda.com",
-          self: true,
-        },
-        organizer: {
-          email: "support@nityaayurveda.com",
-          self: true,
-        },
-        start: {
-          dateTime: start_time,
-        },
-        end: {
-          dateTime: end_time,
-        },
-        attendees: email,
-      };
-      console.log(event);
-      //publishTheCalenderEvent(event)
-      const headers = {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Bearer " + access_token,
-      };
-      axios
-        .post(
-          `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${API_KEY}`,
-          event,
-          {
-            headers: headers,
-          }
-        )
-        .then((response) => {})
-        .catch((error) => {
-          console.log("error", error);
-        });
     }
   }
 
@@ -563,57 +468,7 @@ export default function AppointmentPage(props) {
     setTimeSelected(true);
   }
 
-  const submit = (e) => {
-    e.preventDefault();
-    
-    let st = location.state.date + "T" + location.state.time;
-    let start_time = moment(new Date(st)).format();
-    console.log(start_time);
-    let duration = convert(elementToBeRendered.duration);
-    let et = Date.parse(start_time) / 1000 + duration;
-    let end_time = moment(new Date(et * 1000)).format();
-    console.log((end_time));
-    var event = {
-      summary: elementToBeRendered.title,
-      
-      location: "6055 Meridian Ave #40, San Jose, CA, 95120",
-      creator: {
-        email: "support@nityaayurveda.com",
-        self: true,
-      },
-      organizer: {
-        email: "support@nityaayurveda.com",
-        self: true,
-      },
-      start: {
-        dateTime: start_time,
-      },
-      end: {
-        dateTime: end_time,
-      },
-      attendees: email,
-    };
-    console.log(event)
-    //publishTheCalenderEvent(event)
-    const headers = {
-          "Content-Type": "application/json",
-          "Accept": "application/json",
-          "Authorization": "Bearer " + access_token,
-        };
-    axios
-      .post(
-        `https://www.googleapis.com/calendar/v3/calendars/primary/events?key=${API_KEY}`,
-        event,
-        {
-          headers: headers,
-        }
-      )
-      .then((response) => {})
-      .catch((error) => {
-        console.log("error", error);
-      });
-    
-  };
+  
 
   return (
     <div style={{ backgroundColor: "#DADADA" }}>
@@ -621,7 +476,6 @@ export default function AppointmentPage(props) {
       <br />
       {bookNowClicked || location.state.signedin ? (
         <div>
-          
           <div
             className={classes.container}
             style={{
@@ -632,27 +486,28 @@ export default function AppointmentPage(props) {
               <div>
                 <div className={classes.selectTime2}>
                   <div className="TitleFontAppt">
-                  Appointment scheduled for:
-                    </div>
+                    Appointment scheduled for:
+                  </div>
                 </div>
                 <br></br>
-           
+
                 <h1
                   style={{
                     fontSize: "30px",
                     margin: "0 auto",
                     textAlign: "center",
-                  }}  >
+                  }}
+                >
                   <span>
-                    {moment(location.state.date).format('ll')} {' '}
-                    at {formatTime(location.state.date, location.state.time)}
+                    {moment(location.state.date).format("ll")} at{" "}
+                    {formatTime(location.state.date, location.state.time)}
                   </span>
                 </h1>
               </div>
             </div>
             <br />
-            <div className="ApptConfirmContainer" >
-              <div >
+            <div className="ApptConfirmContainer">
+              <div>
                 <p className={classes.content2} style={{ textAlign: "left" }}>
                   <span
                     style={{
@@ -668,7 +523,7 @@ export default function AppointmentPage(props) {
                 <img
                   src={elementToBeRendered.image_url}
                   className={classes.img}
-                  style={{objectFit:'cover',  textAlign:'left'}}
+                  style={{ objectFit: "cover", textAlign: "left" }}
                   alt=""
                 />
                 <br />
@@ -682,7 +537,7 @@ export default function AppointmentPage(props) {
                   Office: (408) 471-7004
                 </p>
               </div>
-              <div  className="ApptConfirmTextBox">
+              <div className="ApptConfirmTextBox">
                 <div
                   style={{
                     marginBottom: "10px",
@@ -711,7 +566,7 @@ export default function AppointmentPage(props) {
                 >
                   <SimpleForm
                     field="Phone Number - 10 digits only"
-                    maxLength='10'
+                    maxLength="10"
                     onHandleChange={handlePhoneNumChange}
                   />
                 </div>
@@ -733,6 +588,7 @@ export default function AppointmentPage(props) {
                   }}
                 >
                   <StripeElement
+                    accessToken={access_token}
                     stripePromise={stripePromise}
                     treatmentID={treatmentID}
                     treatmentName={elementToBeRendered.title}
@@ -741,10 +597,15 @@ export default function AppointmentPage(props) {
                     fName={fName}
                     email={email}
                     phoneNum={phoneNum}
-                    date={moment(location.state.date).format('ll')}
-                    selectedTime={formatTime(location.state.date, location.state.time)}
+                    date={moment(location.state.date).format("ll")}
+                    selectedTime={formatTime(
+                      location.state.date,
+                      location.state.time
+                    )}
                     purchaseDate={purchaseDate}
                     cost={cost}
+                    treatmentDate={location.state.date}
+                    treatmentTime={location.state.time}
                     duration={elementToBeRendered.duration}
                     image_url={elementToBeRendered.image_url}
                   />
@@ -756,12 +617,9 @@ export default function AppointmentPage(props) {
                     justifyContent: "center",
                   }}
                 >
-                
-
                   <button
                     className={classes.bookButton}
                     hidden={infoSubmitted}
-                    
                     onClick={toggleKeys}
                   >
                     Book Appointment
