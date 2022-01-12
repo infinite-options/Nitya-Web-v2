@@ -62,22 +62,10 @@ export default function Home() {
           <Typography
             style={{ textAlign: "left", color: "#FFFFFF", marginLeft: "2rem" }}
           >
-            <span
-              className="title"
-              // style={{
-              //   font: "italic normal normal 32px Hoefler Text",
-              // }}
-            >
-              ‘Eating Right for Your Body Type’
-            </span>
-            &nbsp;&nbsp;&nbsp;
-            <span
-              className="subTitle"
-              // style={{
-              //   fontSize: "28px",
-              // }}
-            >
-              In-person/Online Workshop
+            <span className="title">‘Eating Right for Your Body Type’</span>
+            <span className="subTitle">
+              {" "}
+              &nbsp;&nbsp;&nbsp;In-person/Online Workshop
             </span>
           </Typography>
           &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -86,16 +74,6 @@ export default function Home() {
               history.push("/seminar");
             }}
             className="seminarBtn"
-            // style={{
-            //   background: "#FFFFFF 0% 0% no-repeat padding-box",
-            //   borderRadius: "50px",
-            //   font: "normal normal normal 24px/29px Hoefler Text",
-            //   color: "#D3A625",
-            //   textTransform: "none",
-            //   border: "none",
-            //   cursor: "pointer",
-            //   padding: "0.7rem 4rem",
-            // }}
           >
             Register
           </div>

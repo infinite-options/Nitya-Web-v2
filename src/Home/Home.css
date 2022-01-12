@@ -292,7 +292,7 @@
 .textConfirm {
   text-align: center;
   font: normal normal normal 23px SF Pro Display;
-  color: #000000;
+  color: #d3a625;
 }
 .registerBtn {
   background: #d3a625;
@@ -454,14 +454,14 @@
 @media only screen and (max-width: 570px) {
   .title {
     font-family: Hoefler Text;
-    font-size: 24px;
+    font-size: 20px;
     font-style: italic;
   }
   .subTitle {
-    font-size: 20px;
+    font-size: 18px;
   }
   .inputField {
-    height: 40%;
+    height: 30%;
     width: 80%;
   }
   .textTitle {
@@ -480,8 +480,8 @@
     border: none;
     font: normal normal normal 17px/20px Hoefler Text;
     color: #ffffff;
-    margin-top: 5rem;
-    margin-bottom: 5rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
     padding: 0.7rem 4rem;
     cursor: pointer;
   }
