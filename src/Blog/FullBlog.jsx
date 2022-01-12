@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from "react";
-
-import { fade } from "@material-ui/core/styles";
 import { makeStyles } from "@material-ui/core/styles";
 import {
   AppBar,
@@ -16,21 +14,19 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
 import ShareOutline from "@material-ui/icons/ShareOutlined";
 import SearchIcon from "@material-ui/icons/Search";
 import AuthorIcon from "@material-ui/icons/AccountCircle";
-import ReplyIcon from '@material-ui/icons/Reply';
+import ReplyIcon from "@material-ui/icons/Reply";
 import { useParams } from "react-router";
 import ScrollToTop from "./ScrollToTop";
-import { Markup } from 'interweave';
-import '../Home/Home.css'
+import { Markup } from "interweave";
+import "../Home/Home.css";
 
 const useStyles = makeStyles((theme) => ({
-
   container: {
-    marginTop:'5%',
-    marginBottom:'5%',
+    marginTop: "5%",
+    marginBottom: "5%",
     backgroundColor: "white",
     marginRight: "200px",
     marginLeft: "200px",
@@ -85,7 +81,7 @@ const useStyles = makeStyles((theme) => ({
   },
   searchContainer: {
     display: "flex",
-    color: 'black'
+    color: "black",
   },
 
   inputInput: {
@@ -94,8 +90,8 @@ const useStyles = makeStyles((theme) => ({
     outline: "none",
     width: "450px",
     borderRadius: "0px",
-    border: '0px',
-    borderBottom: '1px solid black',
+    border: "0px",
+    borderBottom: "1px solid black",
     "&::placeholder": {
       color: "black",
     },
@@ -114,7 +110,6 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 1100px)": {},
   },
 
-
   header: {
     display: "flex",
     justifyContent: "flex-start",
@@ -123,7 +118,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     "@media (max-width: 570px)": {
       width: "130%",
-      marginLeft: '-2rem',
+      marginLeft: "-2rem",
     },
   },
 
@@ -141,7 +136,7 @@ const useStyles = makeStyles((theme) => ({
     textAlign: "justify",
     paddingTop: "30px",
     paddingBottom: "10px",
-    padding: '10%',
+    padding: "10%",
   },
   cardActions: {
     display: "flex",
@@ -246,149 +241,160 @@ function FullBlog(props) {
   ];
 
   return (
-    <div className="HomeContainer" >
-    <div >
-      <ScrollToTop />
-      <AppBar className={classes.appbar} position="static">
-        <Toolbar>
-          <Container maxWidth="md" className={classes.navbarDisplayFlex}>
-            <List
-              component="nav"
-              aria-labelledby="main navigation"
-              className={classes.navDisplayFlex}
-            >
-              {navLinks.map(({ title, path }) => (
-                <a
-                  href={path}
-                  key={title}
-                  className={classes.linkText}
-                  style={{ textDecoration: "none", color: 'black' }}
-                >
-                  <ListItem button>
-                    <ListItemText primary={title} />
-                  </ListItem>
-                </a>
-              ))}
-            </List>
-          </Container>
-          <div className={classes.searchContainer}>
-            <div className={classes.search}>
-              <form onSubmit={submitSearch}>
-                <input
-                  type="text"
-                  className={classes.inputInput}
-                  placeholder="Search..."
-                />
-              </form>
-            </div>
-            <div className={classes.searchIconDiv}>
-              <SearchIcon fontSize="small" />
-            </div>
-          </div>
-        </Toolbar>
-      </AppBar>
-      <div className={classes.container}>
-        {getBlogId.map((post) => (
-          <div className="blogPostContainer">
-            <Card className={classes.card}>
-              <div>
-
-                <div style={{ color: 'black', marginLeft: '8%' }} className={classes.header}>
-                  <IconButton
-                    size="lg"
-                    onClick={handleClick}
-                    aria-label="click to share post"
+    <div className="HomeContainer">
+      <div>
+        <ScrollToTop />
+        <AppBar className={classes.appbar} position="static">
+          <Toolbar>
+            <Container maxWidth="md" className={classes.navbarDisplayFlex}>
+              <List
+                component="nav"
+                aria-labelledby="main navigation"
+                className={classes.navDisplayFlex}
+              >
+                {navLinks.map(({ title, path }) => (
+                  <a
+                    href={path}
+                    key={title}
+                    className={classes.linkText}
+                    style={{ textDecoration: "none", color: "black" }}
                   >
-                    <AuthorIcon style={{ marginTop: '-0.7rem' }} />
-                  </IconButton>
-                  &nbsp; &nbsp;
-                  {post.author} &nbsp; &nbsp; <li></li>  {convertDate(post.postedOn)}{" "}
-
-                  <ReplyIcon
-                    onClick={handleClick}
-                    size="sm"
-                    style={{ marginLeft: '1rem', transform: 'scaleX(-1)', color: '#D3A625', marginBottom: '-0.3rem' }}
-                    aria-label="click to share post">
-                  </ReplyIcon>
-
-
-
-                  <Menu
-                    elevation={0}
-                    getContentAnchorEl={null}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "center",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "center",
-                    }}
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  >
-                    <MenuItem
-                      style={{
-                        color: "#594d2c",
-                        width: "200px",
-                        height: "50px",
-                        padding: "0",
-                        fontSize: "1.5rem",
-                      }}
-                      position="bottom"
-                      onClick={handleClose}
-                    >
-                      <IconButton
-                        fontSize="small"
-                        aria-label="click to share post"
-                      >
-                        <ShareOutline />
-                      </IconButton>
-                      Share Post
-                    </MenuItem>
-                  </Menu>
-                </div>
-
-                <div style={{ textAlign: 'left', fontSize: '52px', color: 'black', marginLeft: '10%' }} className={classes.title}>
-                  <p>{post.blogTitle}</p>
-                </div>
-
-                {!!post.blogImage && (
-                  <div className={classes.img}>
-                    <img
-                      src={post.blogImage}
-                      style={{
-                        width: "1000px",
-                        height: "600px",
-                      }}
-                      onError={(e) => (e.target.style.display = "none")}
-                    />
-                  </div>
-                )}
-                <div className={classes.content}>
-                  <p style={{ fontSize: '32px' }}>{post.blogTitle}</p>
-         
-
-                  <Markup content={post.blogText} />
-                </div>
-
-                <hr style={{ color: "#8d6f19" }}></hr>
-                <div className={classes.cardActions}>
-                  <Typography>Views &nbsp;&nbsp; Comments</Typography>
-
-                  <IconButton className={classes.icon}>
-                    <FavoriteBorderIcon />
-                  </IconButton>
-                </div>
+                    <ListItem button>
+                      <ListItemText primary={title} />
+                    </ListItem>
+                  </a>
+                ))}
+              </List>
+            </Container>
+            <div className={classes.searchContainer}>
+              <div className={classes.search}>
+                <form onSubmit={submitSearch}>
+                  <input
+                    type="text"
+                    className={classes.inputInput}
+                    placeholder="Search..."
+                  />
+                </form>
               </div>
-            </Card>
-          </div>
-        ))}
+              <div className={classes.searchIconDiv}>
+                <SearchIcon fontSize="small" />
+              </div>
+            </div>
+          </Toolbar>
+        </AppBar>
+        <div className={classes.container}>
+          {getBlogId.map((post) => (
+            <div className="blogPostContainer">
+              <Card className={classes.card}>
+                <div>
+                  <div
+                    style={{ color: "black", marginLeft: "8%" }}
+                    className={classes.header}
+                  >
+                    <IconButton
+                      size="lg"
+                      onClick={handleClick}
+                      aria-label="click to share post"
+                    >
+                      <AuthorIcon style={{ marginTop: "-0.7rem" }} />
+                    </IconButton>
+                    &nbsp; &nbsp;
+                    {post.author} &nbsp; &nbsp; <li></li>{" "}
+                    {convertDate(post.postedOn)}{" "}
+                    <ReplyIcon
+                      onClick={handleClick}
+                      size="sm"
+                      style={{
+                        marginLeft: "1rem",
+                        transform: "scaleX(-1)",
+                        color: "#D3A625",
+                        marginBottom: "-0.3rem",
+                      }}
+                      aria-label="click to share post"
+                    ></ReplyIcon>
+                    <Menu
+                      elevation={0}
+                      getContentAnchorEl={null}
+                      anchorOrigin={{
+                        vertical: "bottom",
+                        horizontal: "center",
+                      }}
+                      transformOrigin={{
+                        vertical: "top",
+                        horizontal: "center",
+                      }}
+                      id="simple-menu"
+                      anchorEl={anchorEl}
+                      keepMounted
+                      open={Boolean(anchorEl)}
+                      onClose={handleClose}
+                    >
+                      <MenuItem
+                        style={{
+                          color: "#594d2c",
+                          width: "200px",
+                          height: "50px",
+                          padding: "0",
+                          fontSize: "1.5rem",
+                        }}
+                        position="bottom"
+                        onClick={handleClose}
+                      >
+                        <IconButton
+                          fontSize="small"
+                          aria-label="click to share post"
+                        >
+                          <ShareOutline />
+                        </IconButton>
+                        Share Post
+                      </MenuItem>
+                    </Menu>
+                  </div>
+
+                  <div
+                    style={{
+                      textAlign: "left",
+                      fontSize: "52px",
+                      color: "black",
+                      marginLeft: "10%",
+                    }}
+                    className={classes.title}
+                  >
+                    <p>{post.blogTitle}</p>
+                  </div>
+
+                  {!!post.blogImage && (
+                    <div className={classes.img}>
+                      <img
+                        src={post.blogImage}
+                        style={{
+                          width: "1000px",
+                          height: "600px",
+                        }}
+                        onError={(e) => (e.target.style.display = "none")}
+                      />
+                    </div>
+                  )}
+                  <div className={classes.content}>
+                    <p style={{ fontSize: "32px" }}>{post.blogTitle}</p>
+
+                    <Markup content={post.blogText} />
+                  </div>
+
+                  <hr style={{ color: "#8d6f19" }}></hr>
+                  <div className={classes.cardActions}>
+                    <Typography>Views &nbsp;&nbsp; Comments</Typography>
+
+                    <IconButton className={classes.icon}>
+                      <FavoriteBorderIcon />
+                    </IconButton>
+                  </div>
+                </div>
+              </Card>
+            </div>
+          ))}
+        </div>
       </div>
-    </div>
     </div>
   );
 }

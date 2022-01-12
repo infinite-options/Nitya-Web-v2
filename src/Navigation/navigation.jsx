@@ -1,8 +1,6 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState } from "react";
 import { FiMenu, FiX } from "react-icons/fi";
 import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
-import { useHistory, useLocation } from "react-router-dom";
 import InstagramIcon from "@material-ui/icons/Instagram";
 import Logo from "../Assets/Images/Logo.png";
 import "./Navbar.css";
@@ -48,17 +46,7 @@ const Navbar = () => {
     <nav className="navbar">
       <div className="emptyDiv"></div>
       <Link to="/" className="nav-logobar" onClick={closeMenu}>
-        <img
-          className="nav-logo"
-          src={Logo}
-          // style={{
-          //   maxHeight: "100%",
-          //   height: "auto",
-          //   width: "10rem",
-          //   maxHeight: "100%",
-          //   objectFit: "contain",
-          // }}
-        />
+        <img className="nav-logo" src={Logo} />
       </Link>
       <div onClick={handleClick} className="nav-icon">
         {open ? <FiX /> : <FiMenu />}
@@ -111,10 +99,6 @@ const Navbar = () => {
       </ul>
 
       <div className="emptyDiv1">
-        {/* <AccountCircleIcon 
-      size='large'
-      style={{color:'#ad8131', marginRight:'0.5rem', marginTop:'0.3rem'}}/> */}
-
         <InstagramIcon
           fontSize="large"
           className="instagram-icon"

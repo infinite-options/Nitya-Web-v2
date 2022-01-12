@@ -1,15 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
-import Box from "@material-ui/core/Box";
-import { Button } from "@material-ui/core";
+import { Grid, Typography } from "@material-ui/core";
 import Intro from "../Intro/Intro.jsx";
 import About from "../About/About.jsx";
 import Services from "../Services/Services.jsx";
 import Contact from "../Contact/Contact.jsx";
 import ScrollToTop from "../Blog/ScrollToTop";
-
 import "./Home.css";
-import { Grid, Typography } from "@material-ui/core";
 
 export default function Home() {
   const history = useHistory();

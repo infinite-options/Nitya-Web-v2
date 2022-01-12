@@ -5,42 +5,37 @@ import { useLocation, useParams } from "react-router";
 import ScrollToTop from "../Blog/ScrollToTop";
 import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { Row, Col } from "reactstrap";
+import { Col } from "reactstrap";
 import SimpleForm from "./simpleForm";
 import SimpleFormText from "./simpleFormText";
 import { makeStyles } from "@material-ui/core/styles";
 import { MyContext } from "../App";
-import moment from 'moment'
-import Calendar from "react-calendar";
+import moment from "moment";
 import "./calendar.css";
-import { Container } from "@material-ui/core";
-import Grid from '@material-ui/core/Grid';
-//import { fontFamily } from "@mui/system";
-import '../Appointment/AppointmentPage.css';
+import "../Appointment/AppointmentPage.css";
 
 // import moment from "moment";
-
 
 const useStyles = makeStyles({
   container: {
     margin: "50px auto",
-   // width: "980px",
+    // width: "980px",
     padding: "50px 50px",
     backgroundColor: "white",
-    width:'60%',
+    width: "60%",
     "@media (max-width: 1050px)": {
-      marginLeft:'0.5rem',
-     width: "75%",
-   },
+      marginLeft: "0.5rem",
+      width: "75%",
+    },
   },
- 
+
   content2: {
     fontSize: "20px",
     // fontFamily: "SFProDisplayRegular",
     color: "#D3A625",
     textAlign: "left",
   },
-  
+
   selectTime2: {
     fontSize: "38px",
     color: "#D3A625",
@@ -48,11 +43,11 @@ const useStyles = makeStyles({
     margin: "0 auto",
     textAlign: "center",
   },
- 
+
   bookButton: {
     width: "200px",
     height: "50px",
-    cursor:'pointer',
+    cursor: "pointer",
     backgroundColor: "#D3A625",
     border: "2px solid #D3A625",
     color: "white",
@@ -83,8 +78,7 @@ const useStyles = makeStyles({
       },
     },
   },
-  
- 
+
   timeslotButton: {
     width: "10rem",
     height: "3rem",
@@ -117,17 +111,15 @@ const useStyles = makeStyles({
     },
   },
 
-  img:{
-    width:'320px',
+  img: {
+    width: "320px",
     "@media (max-width: 1050px)": {
-      width:'280px',
+      width: "280px",
     },
   },
 });
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function AppointmentPage(props) {
-  
-
   const classes = useStyles();
   const location = useLocation();
   // moment().format();
@@ -171,7 +163,7 @@ export default function AppointmentPage(props) {
   const cost = elementToBeRendered.cost;
 
   useEffect(() => {
-    console.log()
+    console.log();
   }, []);
 
   useEffect(() => {
@@ -298,7 +290,6 @@ export default function AppointmentPage(props) {
             );
           }
         });
-
     }
   }
 
@@ -338,9 +329,9 @@ export default function AppointmentPage(props) {
       "07": "Jul",
       "08": "Aug",
       "09": "Sep",
-      "10": "Oct",
-      "11": "Nov",
-      "12": "Dec",
+      10: "Oct",
+      11: "Nov",
+      12: "Dec",
       "": "",
     };
     return (
@@ -408,7 +399,7 @@ export default function AppointmentPage(props) {
       var newDate = new Date((date + "T" + time).replace(/\s/, "T"));
       var hours = newDate.getHours();
       var minutes = newDate.getMinutes();
-      console.log(hours,minutes)
+      console.log(hours, minutes);
       var ampm = hours >= 12 ? "pm" : "am";
       console.log(ampm);
       hours = hours % 12;
@@ -422,13 +413,13 @@ export default function AppointmentPage(props) {
       return strTime;
     }
   }
-    function convert(value) {
+  function convert(value) {
     var a = value.split(":"); // split it at the colons
 
     // minutes are worth 60 seconds. Hours are worth 60 minutes.
     var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
 
-    return seconds + 1
+    return seconds + 1;
   }
 
   //get appt
@@ -452,7 +443,7 @@ export default function AppointmentPage(props) {
 
   function renderAvailableApptsVertical() {
     return timeSlots.map((element) => (
-      <Col  xs={3}>
+      <Col xs={3}>
         <button
           className={classes.timeslotButton}
           onClick={() => selectApptTime(element.begin_time)}
@@ -467,8 +458,6 @@ export default function AppointmentPage(props) {
     setSelectedTime(element);
     setTimeSelected(true);
   }
-
-  
 
   return (
     <div style={{ backgroundColor: "#DADADA" }}>

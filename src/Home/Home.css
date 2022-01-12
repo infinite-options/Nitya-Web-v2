@@ -283,6 +283,20 @@
   color: #000000;
   letter-spacing: 0.47px;
   padding: 0.5rem;
+  margin-top: 2rem;
+}
+.donationField {
+  background: #ffffff 0% 0% no-repeat padding-box;
+  border: 2px solid #d3a625;
+  border-radius: 25px;
+  height: 40px;
+  width: 100%;
+  text-align: left;
+  font: normal normal normal 19px/23px SF Pro Display;
+  color: #000000;
+  letter-spacing: 0.47px;
+  padding: 0.5rem;
+  margin-top: 1rem;
 }
 .textTitle {
   text-align: center;
@@ -300,8 +314,8 @@
   border: none;
   font: normal normal normal 24px/29px Hoefler Text;
   color: #ffffff;
-  margin-top: 5rem;
-  margin-bottom: 5rem;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
   padding: 0.7rem 4rem;
   cursor: pointer;
 }
@@ -461,6 +475,10 @@
     font-size: 18px;
   }
   .inputField {
+    height: 30%;
+    width: 80%;
+  }
+  .donationField {
     height: 30%;
     width: 80%;
   }

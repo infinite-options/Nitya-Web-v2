@@ -1,15 +1,3 @@
-/**
- * This form component is based on the code provided by the following Geeks for Geeks article:
- * https://www.geeksforgeeks.org/reactjs-forms/
- *
- * Separate tutorial on how to lift state up to ancestor component:
- * https://www.youtube.com/watch?v=dQw4w9WgXcQ
- *
- * https://reactjs.org/docs/lifting-state-up.html
- *
- * I have modified it down so that the form only has one label + input pair.
- **/
-
 import React, { Component } from "react";
 
 class Form extends Component {
@@ -21,7 +9,7 @@ class Form extends Component {
 
   handleChange(event) {
     this.props.onHandleChange(event.target.value);
-    console.log("event",event.target.id)
+    console.log("event", event.target.id);
   }
 
   render() {
@@ -33,10 +21,18 @@ class Form extends Component {
             name="variable"
             placeholder={this.props.field}
             value={info}
-            id = {this.props.field === 'Email Address' ? 'email' : ''}
-            pattern={this.props.field === 'Email Address' ? "^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$": ''}
-            maxLength = {this.props.field === 'Phone Number - 10 digits only' ? '10' : '100'}
-            type={this.props.field === 'Email Address' ? 'email' : ''}
+            id={this.props.field === "Email Address" ? "email" : ""}
+            pattern={
+              this.props.field === "Email Address"
+                ? "^([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x22([^\x0d\x22\x5c\x80-\xff]|\x5c[\x00-\x7f])*\x22))*\x40([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d)(\x2e([^\x00-\x20\x22\x28\x29\x2c\x2e\x3a-\x3c\x3e\x40\x5b-\x5d\x7f-\xff]+|\x5b([^\x0d\x5b-\x5d\x80-\xff]|\x5c[\x00-\x7f])*\x5d))*$"
+                : ""
+            }
+            maxLength={
+              this.props.field === "Phone Number - 10 digits only"
+                ? "10"
+                : "100"
+            }
+            type={this.props.field === "Email Address" ? "email" : ""}
             onChange={this.handleChange}
             style={{
               padding: "10px",

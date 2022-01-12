@@ -1,11 +1,8 @@
-import React, { useEffect, useState, useContext } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { useElements, useStripe, CardElement } from "@stripe/react-stripe-js";
 import { makeStyles } from "@material-ui/core/styles";
-import { Switch, Route, Link } from "react-router-dom";
 import { useHistory } from "react-router-dom";
-import AppointmentConfirmationPage from "./confirmationPage";
-import { Button } from "@material-ui/core";
 import moment from "moment";
 const useStyles = makeStyles({
   container: {

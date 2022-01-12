@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { fade } from "@material-ui/core/styles";
+
 import { makeStyles } from "@material-ui/core/styles";
-import { Row, Col } from "reactstrap";
+import { Col } from "reactstrap";
 import { Link, useHistory } from "react-router-dom";
 import {
   AppBar,
@@ -12,23 +11,18 @@ import {
   ListItem,
   ListItemText,
   Menu,
-  MenuItem,
-  Button,
 } from "@material-ui/core";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
 import FavoriteBorderIcon from "@material-ui/icons/FavoriteBorder";
-import MoreVertIcon from "@material-ui/icons/MoreVert";
-import ShareOutline from "@material-ui/icons/ShareOutlined";
 import SearchIcon from "@material-ui/icons/Search";
 import defaultImg from "../Assets/Images/Blog-Default-Img.png";
-import { Markup } from 'interweave';
+import { Markup } from "interweave";
 import { ReactComponent as ShareBtn } from "../Assets/Images/ios-share-alt.svg";
-import '../Home/Home.css'
+import "../Home/Home.css";
 import { AuthContext } from "../auth/AuthContext";
 
-
-import AddIcon from '@material-ui/icons/Add';
+import AddIcon from "@material-ui/icons/Add";
 
 const useStyles = makeStyles((theme) => ({
   blogpage: {
@@ -53,7 +47,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: "white",
     boxShadow: "none",
     padding: "4px",
-    color: 'black',
+    color: "black",
     "@media (max-width: 880px)": {
       display: "none",
     },
@@ -102,7 +96,7 @@ const useStyles = makeStyles((theme) => ({
     width: "450px",
     borderRadius: "15px",
     border: "none",
-    borderBottom: '1px solid black',
+    borderBottom: "1px solid black",
     "&::placeholder": {
       color: "#C3A336",
     },
@@ -120,10 +114,10 @@ const useStyles = makeStyles((theme) => ({
     "@media (max-width: 1100px)": {},
   },
   cardRow: {
-    display: 'flex',
+    display: "flex",
     "@media (max-width: 500px)": {
-      display: 'flex',
-      flexDirection: 'column',
+      display: "flex",
+      flexDirection: "column",
     },
   },
   cardMobile: {
@@ -138,7 +132,7 @@ const useStyles = makeStyles((theme) => ({
     height: "20rem",
     "@media (max-width: 500px)": {
       width: "100%",
-      marginLeft: '-30px',
+      marginLeft: "-30px",
       height: "90%",
     },
   },
@@ -154,12 +148,12 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   desc: {
-    paddingLeft: '10%',
+    paddingLeft: "10%",
     marginLeft: "-50px",
     "@media (max-width: 500px)": {
-      textAlign: 'left',
-      paddingLeft: '0px',
-      marginLeft: '0px'
+      textAlign: "left",
+      paddingLeft: "0px",
+      marginLeft: "0px",
     },
   },
   title: {
@@ -293,233 +287,253 @@ function Blogpage(props) {
   ];
 
   return (
-    <div className="HomeContainer" >
-    <div className={classes.blogpage} id="blogpage">
-    <div style={{ fontSize: '56px', color: "#C3A336", fontStyle: 'italic', textAlign:'center' }}>
-        Blog
-      </div>
-      <div className={classes.container}>
+    <div className="HomeContainer">
+      <div className={classes.blogpage} id="blogpage">
         <div
           style={{
-            display: 'flex',
-            justifyContent: 'space-evenly',
-            textAlign: "center",
+            fontSize: "56px",
             color: "#C3A336",
-            fontSize: "31px",
-            padding: "10px",
-
+            fontStyle: "italic",
+            textAlign: "center",
           }}
         >
-          {/* <div className="TitleFontAppt" style={{ flex: '1' }}>
+          Blog
+        </div>
+        <div className={classes.container}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-evenly",
+              textAlign: "center",
+              color: "#C3A336",
+              fontSize: "31px",
+              padding: "10px",
+            }}
+          >
+            {/* <div className="TitleFontAppt" style={{ flex: '1' }}>
             Ayurvedic Musings
           </div> */}
-          {/* <div style={{ color: 'black' }}>{String(Auth.isAuth)}</div> */}
+            {/* <div style={{ color: 'black' }}>{String(Auth.isAuth)}</div> */}
 
-          <div hidden={Auth.isAuth === false}>
-            <AddIcon
-              size='lg'
-              style={{ cursor: 'pointer' }}
-              onClick={() => {
-                history.push('/addPost')
-              }}
-            />
-          </div>
-        </div>
-
-        <AppBar className={classes.appbar} position="static">
-          <Toolbar>
-            <Container maxWidth="md" className={classes.navbarDisplayFlex}>
-              <List
-                component="nav"
-                aria-labelledby="main navigation"
-                className={classes.navDisplayFlex}
-              >
-                {navLinks.map(({ title, path }) => (
-                  <a
-                    href={path}
-                    key={title}
-                    className={classes.linkText}
-                    style={{ textDecoration: "none" }}
-                  >
-                    <ListItem button>
-                      <ListItemText primary={title} />
-                    </ListItem>
-                  </a>
-                ))}
-              </List>
-            </Container>
-            <div className={classes.searchContainer}>
-              <div className={classes.search}>
-                <form onSubmit={submitSearch}>
-                  <input
-                    type="text"
-                    className={classes.inputInput}
-                    placeholder="Search..."
-                  />
-                </form>
-              </div>
-              <div className={classes.searchIconDiv}>
-                <SearchIcon fontSize="large" />
-              </div>
+            <div hidden={Auth.isAuth === false}>
+              <AddIcon
+                size="lg"
+                style={{ cursor: "pointer" }}
+                onClick={() => {
+                  history.push("/addPost");
+                }}
+              />
             </div>
-          </Toolbar>
-        </AppBar>
+          </div>
 
-        {data.filter((service) =>   service.blogCategory === "Living Well" )
-         .map((post) => (
-          <div className="blogPostContainer">
-            <div className={classes.card}>
-              <div style={{ display: 'flex' }} className={classes.cardRow}>
-                <div>
-                  <div>
-                    <img
-                      src={
-                        post.blogImage !== "NULL" && post.blogImage
-                          ? post.blogImage
-                          : defaultImg
-                      }
-                      className={classes.blogImg}
-                      onError={(e) => (e.target.style.display = "none")}
-                    />
-                  </div>
-                </div>
-                <div style={{ paddingLeft: '10%' }} className={classes.desc}>
-                  <div className={classes.header}>
-                    {convertDate(post.postedOn)}
-                    <div
-                      style={{
-                        height: "6px",
-                        width: "6px",
-                        backgroundColor: "#d28d42",
-                        borderRadius: "3px",
-                        marginTop: "auto",
-                        marginBottom: "auto",
-                      }}
-                    />
-                    3 mins
-                    <Menu
-                      elevation={0}
-                      getContentAnchorEl={null}
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "center",
-                      }}
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "center",
-                      }}
-                      id="simple-menu"
-                      anchorEl={anchorEl}
-                      keepMounted
-                      open={Boolean(anchorEl)}
-                      onClose={handleClose}
+          <AppBar className={classes.appbar} position="static">
+            <Toolbar>
+              <Container maxWidth="md" className={classes.navbarDisplayFlex}>
+                <List
+                  component="nav"
+                  aria-labelledby="main navigation"
+                  className={classes.navDisplayFlex}
+                >
+                  {navLinks.map(({ title, path }) => (
+                    <a
+                      href={path}
+                      key={title}
+                      className={classes.linkText}
+                      style={{ textDecoration: "none" }}
                     >
-                    </Menu>
-                  </div>
-                  <Link
-                    to={`/${post.blog_uid}/fullblog`}
-                    style={{ textDecoration: "none" }}
-                  >
+                      <ListItem button>
+                        <ListItemText primary={title} />
+                      </ListItem>
+                    </a>
+                  ))}
+                </List>
+              </Container>
+              <div className={classes.searchContainer}>
+                <div className={classes.search}>
+                  <form onSubmit={submitSearch}>
+                    <input
+                      type="text"
+                      className={classes.inputInput}
+                      placeholder="Search..."
+                    />
+                  </form>
+                </div>
+                <div className={classes.searchIconDiv}>
+                  <SearchIcon fontSize="large" />
+                </div>
+              </div>
+            </Toolbar>
+          </AppBar>
+
+          {data
+            .filter((service) => service.blogCategory === "Living Well")
+            .map((post) => (
+              <div className="blogPostContainer">
+                <div className={classes.card}>
+                  <div style={{ display: "flex" }} className={classes.cardRow}>
                     <div>
-                      <div className={classes.title}>
-                        <div style={{ textAlign: 'left' }}>{post.blogTitle}</div>
-                      </div>
-                      <div className={classes.content} style={{ width: '100%', marginRight: '0px' }}>
-                        <Markup content={post.blogSummary} />
+                      <div>
+                        <img
+                          src={
+                            post.blogImage !== "NULL" && post.blogImage
+                              ? post.blogImage
+                              : defaultImg
+                          }
+                          className={classes.blogImg}
+                          onError={(e) => (e.target.style.display = "none")}
+                        />
                       </div>
                     </div>
-                  </Link>
+                    <div
+                      style={{ paddingLeft: "10%" }}
+                      className={classes.desc}
+                    >
+                      <div className={classes.header}>
+                        {convertDate(post.postedOn)}
+                        <div
+                          style={{
+                            height: "6px",
+                            width: "6px",
+                            backgroundColor: "#d28d42",
+                            borderRadius: "3px",
+                            marginTop: "auto",
+                            marginBottom: "auto",
+                          }}
+                        />
+                        3 mins
+                        <Menu
+                          elevation={0}
+                          getContentAnchorEl={null}
+                          anchorOrigin={{
+                            vertical: "bottom",
+                            horizontal: "center",
+                          }}
+                          transformOrigin={{
+                            vertical: "top",
+                            horizontal: "center",
+                          }}
+                          id="simple-menu"
+                          anchorEl={anchorEl}
+                          keepMounted
+                          open={Boolean(anchorEl)}
+                          onClose={handleClose}
+                        ></Menu>
+                      </div>
+                      <Link
+                        to={`/${post.blog_uid}/fullblog`}
+                        style={{ textDecoration: "none" }}
+                      >
+                        <div>
+                          <div className={classes.title}>
+                            <div style={{ textAlign: "left" }}>
+                              {post.blogTitle}
+                            </div>
+                          </div>
+                          <div
+                            className={classes.content}
+                            style={{ width: "100%", marginRight: "0px" }}
+                          >
+                            <Markup content={post.blogSummary} />
+                          </div>
+                        </div>
+                      </Link>
+                    </div>
+                  </div>
                 </div>
-              </div>
-            </div>
-            <Card className={classes.cardMobile}>
-              <img
-                src={
-                  post.blogImage !== "NULL" && post.blogImage
-                    ? post.blogImage
-                    : defaultImg
-                }
-                className={classes.blogImg}
-                onError={(e) => (e.target.style.display = "none")}
-              />
-              <Col className={classes.desc} style={{ margin: "0px" }}>
-                <div className={classes.header} style={{ marginTop: "20px" }}>
-                  {convertDate(post.postedOn)}
-                  <div
-                    style={{
-                      height: "6px",
-                      width: "6px",
-                      backgroundColor: "#d28d42",
-                      borderRadius: "3px",
-                      marginTop: "auto",
-                      marginBottom: "auto",
-                    }}
+                <Card className={classes.cardMobile}>
+                  <img
+                    src={
+                      post.blogImage !== "NULL" && post.blogImage
+                        ? post.blogImage
+                        : defaultImg
+                    }
+                    className={classes.blogImg}
+                    onError={(e) => (e.target.style.display = "none")}
                   />
-                  3 mins
-                  {/* <IconButton
+                  <Col className={classes.desc} style={{ margin: "0px" }}>
+                    <div
+                      className={classes.header}
+                      style={{ marginTop: "20px" }}
+                    >
+                      {convertDate(post.postedOn)}
+                      <div
+                        style={{
+                          height: "6px",
+                          width: "6px",
+                          backgroundColor: "#d28d42",
+                          borderRadius: "3px",
+                          marginTop: "auto",
+                          marginBottom: "auto",
+                        }}
+                      />
+                      3 mins
+                      {/* <IconButton
                       onClick={handleClick}
                       style={{ float: "right" }}
                       aria-label="click to share post"
                     >
                       <MoreVertIcon />
                     </IconButton> */}
-                  <Menu
-                    elevation={0}
-                    getContentAnchorEl={null}
-                    anchorOrigin={{
-                      vertical: "bottom",
-                      horizontal: "center",
-                    }}
-                    transformOrigin={{
-                      vertical: "top",
-                      horizontal: "center",
-                    }}
-                    id="simple-menu"
-                    anchorEl={anchorEl}
-                    keepMounted
-                    open={Boolean(anchorEl)}
-                    onClose={handleClose}
-                  ></Menu>
-                </div>
-                <Link
-                  to={`/${post.blog_uid}/fullblog`}
-                  style={{ textDecoration: "none" }}
-                >
-                  <div>
-                    <div className={classes.title}>
-                      <p>{post.blogTitle}</p>
+                      <Menu
+                        elevation={0}
+                        getContentAnchorEl={null}
+                        anchorOrigin={{
+                          vertical: "bottom",
+                          horizontal: "center",
+                        }}
+                        transformOrigin={{
+                          vertical: "top",
+                          horizontal: "center",
+                        }}
+                        id="simple-menu"
+                        anchorEl={anchorEl}
+                        keepMounted
+                        open={Boolean(anchorEl)}
+                        onClose={handleClose}
+                      ></Menu>
                     </div>
-                    <div className={classes.content} style={{ width: '100%' }}>
-                      <Markup content={post.blogSummary} />
-                    </div>
-                  </div>
-                </Link>
-                <hr style={{ color: "#C3A336" }}></hr>
-                <div className={classes.cardActions}>
-                  <p>
-                    <span>Views &nbsp;&nbsp; Comments</span>
-                  </p>
+                    <Link
+                      to={`/${post.blog_uid}/fullblog`}
+                      style={{ textDecoration: "none" }}
+                    >
+                      <div>
+                        <div className={classes.title}>
+                          <p>{post.blogTitle}</p>
+                        </div>
+                        <div
+                          className={classes.content}
+                          style={{ width: "100%" }}
+                        >
+                          <Markup content={post.blogSummary} />
+                        </div>
+                      </div>
+                    </Link>
+                    <hr style={{ color: "#C3A336" }}></hr>
+                    <div className={classes.cardActions}>
+                      <p>
+                        <span>Views &nbsp;&nbsp; Comments</span>
+                      </p>
 
-                  <div>
-                    <IconButton style={{ color: "#C3A336" }}>
-                      <FavoriteBorderIcon />
-                    </IconButton>
-                    <IconButton>
-                      <ShareBtn style={{ height: "24px" }} />
-                    </IconButton>
-                  </div>
-                </div>
-              </Col>
-            </Card>
-          </div>
-        ))}
-        {/* <div style={{ paddingBottom: "30px" }}>
+                      <div>
+                        <IconButton style={{ color: "#C3A336" }}>
+                          <FavoriteBorderIcon />
+                        </IconButton>
+                        <IconButton>
+                          <ShareBtn style={{ height: "24px" }} />
+                        </IconButton>
+                      </div>
+                    </div>
+                  </Col>
+                </Card>
+              </div>
+            ))}
+          {/* <div style={{ paddingBottom: "30px" }}>
           <Button variant="contained" className={classes.btn} href="/addpost">
             Add Blog Entry
           </Button>
         </div> */}
+        </div>
       </div>
-    </div>
     </div>
   );
 }
