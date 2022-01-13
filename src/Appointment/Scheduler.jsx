@@ -328,7 +328,7 @@ export default function Scheduler(props) {
         console.log("clientSecret from createPaymentIntent: " + result.data);
         clientSecret = result.data;
 
-        console.log("calling createPayment gMethod...");
+        console.log("calling createPayment gMethod...", clientSecret);
 
         const paymentMethod = stripe
           .createPaymentMethod({

@@ -76,11 +76,6 @@ export default function SeminarRegister() {
     axios
       .post(BASE_URL + "SeminarRegister", register)
       .then((response) => {
-        setFirstName("");
-        setLastName("");
-
-        setCity("");
-        setState("");
         setAttendMode("In-Person");
         setMode({
           inPerson: true,
@@ -107,7 +102,7 @@ export default function SeminarRegister() {
     console.log("fetching public key");
     axios
       .get(
-        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYA"
+        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYATEST"
       )
       .then((result) => {
         console.log(
@@ -197,9 +192,11 @@ export default function SeminarRegister() {
         <div>
           {showDonation ? (
             <div className="Card">
-              <Elements stripe={stripePromise}>
-                <DonationElement />
-              </Elements>
+              <DonationElement
+                stripePromise={stripePromise}
+                firstName={firstName}
+                email={email}
+              />
             </div>
           ) : (
             <div className="Card">
