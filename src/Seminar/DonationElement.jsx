@@ -9,7 +9,17 @@ export default function DonationElement(props) {
 
   return (
     <Elements stripe={props.stripePromise}>
-      <Donation firstName={props.firstName} email={props.email} />
+      <Donation
+        first_name={props.first_name}
+        last_name={props.last_name}
+        email={props.email}
+        city={props.city}
+        state={props.state}
+        mode={props.mode}
+        notes={props.notes}
+        registered={props.registered}
+        setRegistered={props.setRegistered}
+      />
     </Elements>
   );
 }

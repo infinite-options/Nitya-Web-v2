@@ -39,6 +39,8 @@ export default function SeminarRegister() {
     online: false,
   });
   const [attendMode, setAttendMode] = useState("In-Person");
+  const [notes, setNotes] = useState("");
+  const [donation, setDonation] = useState("");
   const [stripePromise, setStripePromise] = useState(null);
   const [registered, setRegistered] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
@@ -71,6 +73,8 @@ export default function SeminarRegister() {
       city: city,
       state: state,
       mode: attendMode,
+      notes: notes,
+      donation: donation,
     };
 
     axios
@@ -99,34 +103,67 @@ export default function SeminarRegister() {
   }
 
   function toggleKeys() {
-    console.log("fetching public key");
-    axios
-      .get(
-        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYATEST"
-      )
-      .then((result) => {
-        console.log(
-          "(1 PaymentDetails) Stripe-key then result (1): " +
-            JSON.stringify(result)
-        );
-
-        let tempStripePromise = loadStripe(result.data.publicKey);
-
-        console.log("(1 PaymentDetails) setting state with stripePromise");
-
-        setStripePromise(tempStripePromise);
-
-        console.log(tempStripePromise);
-        console.log("(1 PaymentDetails) stripePromise set!");
-      })
-      .catch((err) => {
-        console.log(err);
-        if (err.response) {
+    if (notes == "NITYATEST") {
+      // Fetch public key
+      console.log("fetching public key");
+      axios
+        .get(
+          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYATEST"
+        )
+        .then((result) => {
           console.log(
-            "(1 PaymentDetails) error: " + JSON.stringify(err.response)
+            "(1 PaymentDetails) Stripe-key then result (1): " +
+              JSON.stringify(result)
           );
-        }
-      });
+
+          let tempStripePromise = loadStripe(result.data.publicKey);
+
+          console.log("(1 PaymentDetails) setting state with stripePromise");
+
+          setStripePromise(tempStripePromise);
+
+          console.log(tempStripePromise);
+          console.log("(1 PaymentDetails) stripePromise set!");
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response) {
+            console.log(
+              "(1 PaymentDetails) error: " + JSON.stringify(err.response)
+            );
+          }
+        });
+    } else {
+      // Fetch public key live
+      console.log("fetching public key live");
+      axios
+        .get(
+          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYA"
+        )
+        .then((result) => {
+          console.log(
+            "(2 PaymentDetails) Stripe-key then result (1): " +
+              JSON.stringify(result)
+          );
+
+          let tempStripePromise = loadStripe(result.data.publicKey);
+
+          console.log("(2 PaymentDetails) setting state with stripePromise");
+
+          console.log(tempStripePromise);
+          setStripePromise(tempStripePromise);
+
+          console.log("(2 PaymentDetails) stripePromise set!");
+        })
+        .catch((err) => {
+          console.log(err);
+          if (err.response) {
+            console.log(
+              "(2 PaymentDetails) error: " + JSON.stringify(err.response)
+            );
+          }
+        });
+    }
   }
 
   return (
@@ -171,6 +208,10 @@ export default function SeminarRegister() {
             <button
               className="registerBtn"
               onClick={() => {
+                window.scrollTo({
+                  behavior: "smooth",
+                  below: 300,
+                });
                 setShowDonation(true);
                 setRegistered(false);
                 toggleKeys();
@@ -189,17 +230,108 @@ export default function SeminarRegister() {
           </div>
         </div>
       ) : (
-        <div>
-          {showDonation ? (
-            <div className="Card">
-              <DonationElement
-                stripePromise={stripePromise}
-                firstName={firstName}
-                email={email}
-              />
+        <div className="Card">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div className="CardTitle">Register</div>
+            <div style={{ marginTop: "3rem" }}></div>
+            <input
+              className="inputField"
+              id="First Name"
+              type="text"
+              placeholder="First Name"
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+              required
+            />
+            <br />
+            <input
+              className="inputField"
+              id="Last Name"
+              type="text"
+              placeholder="Last Name"
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
+              required
+            />
+            <br />
+            <input
+              className="inputField"
+              id="Email"
+              type="text"
+              placeholder="Email Address"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
+            />
+            <br />
+            <input
+              className="inputField"
+              id="City"
+              type="text"
+              placeholder="City"
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
+            />
+            <br />
+            <input
+              className="inputField"
+              id="sweep_referrer"
+              type="text"
+              placeholder="State"
+              onChange={(e) => setState(e.target.value)}
+              value={state}
+            />
+            <br />
+            <Typography className="textTitle">
+              How do you plan on attending the workshop?
+            </Typography>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <YellowRadio
+                      checked={mode.inPerson}
+                      onChange={(e) => handleMode(e)}
+                      name="modeInPerson"
+                    />
+                  }
+                  label="In-person"
+                />
+                <FormControlLabel
+                  control={
+                    <YellowRadio
+                      checked={mode.online}
+                      onChange={(e) => handleMode(e)}
+                      name="modeOnline"
+                    />
+                  }
+                  label="Online"
+                />
+              </FormGroup>
             </div>
-          ) : (
-            <div className="Card">
+            <input
+              className="inputField"
+              id="notes"
+              type="text"
+              placeholder="notes"
+              onChange={(e) => setNotes(e.target.value)}
+              value={notes}
+            />
+            <br />
+            {showDonation ? (
               <div
                 style={{
                   display: "flex",
@@ -207,103 +339,51 @@ export default function SeminarRegister() {
                   alignItems: "center",
                 }}
               >
-                <div className="CardTitle">Register</div>
-                <div style={{ marginTop: "3rem" }}></div>
-                <input
-                  className="inputField"
-                  id="First Name"
-                  type="text"
-                  placeholder="First Name"
-                  onChange={(e) => setFirstName(e.target.value)}
-                  value={firstName}
-                  required
+                <DonationElement
+                  stripePromise={stripePromise}
+                  first_name={firstName}
+                  last_name={lastName}
+                  email={email}
+                  city={city}
+                  state={state}
+                  mode={attendMode}
+                  notes={notes}
+                  registered={registered}
+                  setRegistered={setRegistered}
                 />
-                <br />
-                <input
-                  className="inputField"
-                  id="Last Name"
-                  type="text"
-                  placeholder="Last Name"
-                  onChange={(e) => setLastName(e.target.value)}
-                  value={lastName}
-                  required
-                />
-                <br />
-                <input
-                  className="inputField"
-                  id="Email"
-                  type="text"
-                  placeholder="Email Address"
-                  onChange={(e) => setEmail(e.target.value)}
-                  value={email}
-                  required
-                />
-                <br />
-                <input
-                  className="inputField"
-                  id="City"
-                  type="text"
-                  placeholder="City"
-                  onChange={(e) => setCity(e.target.value)}
-                  value={city}
-                />
-                <br />
-                <input
-                  className="inputField"
-                  id="sweep_referrer"
-                  type="text"
-                  placeholder="State"
-                  onChange={(e) => setState(e.target.value)}
-                  value={state}
-                />
-                <br />
-                <Typography className="textTitle">
-                  How do you plan on attending the workshop?
-                </Typography>
-                <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                    justifyContent: "space-between",
-                  }}
-                >
-                  <FormGroup>
-                    <FormControlLabel
-                      control={
-                        <YellowRadio
-                          checked={mode.inPerson}
-                          onChange={(e) => handleMode(e)}
-                          name="modeInPerson"
-                        />
-                      }
-                      label="In-person"
-                    />
-                    <FormControlLabel
-                      control={
-                        <YellowRadio
-                          checked={mode.online}
-                          onChange={(e) => handleMode(e)}
-                          name="modeOnline"
-                        />
-                      }
-                      label="Online"
-                    />
-                  </FormGroup>
-                </div>
-                <br />
-                <button
-                  className="registerBtn"
-                  onClick={() => {
-                    register();
-                    confirmation();
-                  }}
-                >
-                  Register Now
-                </button>
               </div>
+            ) : null}
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <button
+                className="registerBtn"
+                hidden={showDonation}
+                onClick={() => {
+                  register();
+                  confirmation();
+                }}
+              >
+                Register Only
+              </button>
+              <button
+                className="registerBtn"
+                hidden={showDonation}
+                onClick={() => {
+                  // register();
+                  // confirmation();
+                  setShowDonation(true);
+                  toggleKeys();
+                }}
+              >
+                Register and Donate
+              </button>
             </div>
-          )}
+          </div>
         </div>
       )}
     </div>

@@ -14,6 +14,7 @@ import "../Home/Home.css";
 const BASE_URL = process.env.REACT_APP_SERVER_BASE_URI;
 
 export default function Donation(props) {
+  console.log("in donation");
   const history = useHistory();
   const elements = useElements();
   const stripe = useStripe();
@@ -52,6 +53,39 @@ export default function Donation(props) {
     console.log("response", customerUid);
   }, [customerUidState]);
 
+  function register() {
+    var register = {
+      first_name: props.first_name,
+      last_name: props.last_name,
+      email: props.email,
+      city: props.city,
+      state: props.state,
+      mode: props.mode,
+      notes: props.notes,
+      donation: donation,
+    };
+
+    console.log(register);
+    axios
+      .post(BASE_URL + "SeminarRegister", register)
+      .then((response) => {
+        //window.scrollTo({ behavior: "smooth", top: 620 });
+        //props.setRegistered(true);
+        history.push("/donationConfirm");
+      })
+      .catch((error) => {
+        console.log("error", error);
+      });
+  }
+  function confirmation() {
+    axios
+      .post(BASE_URL + `RegistrationConfirmation/${props.email}`)
+      .then((response) => {})
+      .catch((error) => {
+        console.log("error", error);
+      });
+  }
+
   async function bookAppt() {
     setCustomerUidState(!customerUidState);
     const temp = {
@@ -67,7 +101,7 @@ export default function Donation(props) {
     axios
       .post(postURL, {
         customer_uid: customerUid,
-        business_code: "NITYATEST",
+        business_code: props.notes === "NITYATEST" ? "NITYATEST" : "NITYA",
         payment_summary: temp,
       })
       .then(function (result) {
@@ -80,7 +114,7 @@ export default function Donation(props) {
           clientSecret,
           result.data.billingDetails
         );
-        window.scrollTo({ behavior: "smooth", top: 620 });
+        //window.scrollTo({ behavior: "smooth", top: 620 });
         const paymentMethod = stripe
           .createPaymentMethod({
             type: "card",
@@ -102,6 +136,8 @@ export default function Donation(props) {
                   console.log(
                     "confirmedCardPayment result: " + JSON.stringify(result)
                   );
+                  register();
+                  confirmation();
                   setSubmitted(true);
                 })
                 .catch((err) => {
@@ -137,8 +173,14 @@ export default function Donation(props) {
       </Helmet>
 
       <ScrollToTop />
-      {submitted ? (
-        <div className="Card">
+
+      <div style={{ width: "60rem", backgroundColor: "white" }}>
+        <div>
+          {/* <div className="CardTitle">Donation</div> */}
+
+          <div className="textTitle" style={{ marginTop: "3rem" }}>
+            Please enter any amount you see fit.
+          </div>
           <div
             style={{
               display: "flex",
@@ -146,62 +188,30 @@ export default function Donation(props) {
               alignItems: "center",
             }}
           >
-            <div className="CardTitle">Donation</div>
-
-            <div className="textTitle" style={{ marginTop: "3rem" }}>
-              Thank you. We really appreciate your contribution.
-            </div>
-
+            <input
+              className="donationField"
+              id="Donation"
+              type="text"
+              placeholder="Donation"
+              onChange={(e) => setDonation(e.target.value)}
+              value={donation}
+              required
+            />
+            <CardElement
+              elementRef={(c) => (this._element = c)}
+              className="donationField"
+            />
             <button
               className="registerBtn"
               onClick={() => {
-                history.push("/");
+                bookAppt();
               }}
             >
-              Back to Home
+              Pay Now
             </button>
           </div>
         </div>
-      ) : (
-        <div className="Card">
-          <div>
-            <div className="CardTitle">Donation</div>
-
-            <div className="textTitle" style={{ marginTop: "3rem" }}>
-              Please enter any amount you see fit.
-            </div>
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <input
-                className="donationField"
-                id="Donation"
-                type="text"
-                placeholder="Donation"
-                onChange={(e) => setDonation(e.target.value)}
-                value={donation}
-                required
-              />
-              <CardElement
-                elementRef={(c) => (this._element = c)}
-                className="donationField"
-              />
-              <button
-                className="registerBtn"
-                onClick={() => {
-                  bookAppt();
-                }}
-              >
-                Pay Now
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
+      </div>
     </div>
   );
 }

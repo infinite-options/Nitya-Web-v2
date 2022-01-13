@@ -25,6 +25,8 @@ import AddPost from "./Blog/AddPost";
 import ConfirmationPage from "./Appointment/confirmationPage";
 import { AuthContext } from "./auth/AuthContext";
 import SeminarRegister from "./Seminar/SeminarRegister";
+import DonationConfirmation from "./Seminar/DonationConfirmation";
+import DonationElement from "./Seminar/DonationElement";
 
 export const MyContext = React.createContext();
 
@@ -106,7 +108,12 @@ function App() {
               <Route path="/apptconfirm">
                 <ConfirmationPage />
               </Route>
-
+              <Route path="/donationConfirm">
+                <DonationConfirmation />
+              </Route>
+              <Route path="/donation">
+                <DonationElement />
+              </Route>
               <Route path="/addpost">
                 <AddPost />
               </Route>
