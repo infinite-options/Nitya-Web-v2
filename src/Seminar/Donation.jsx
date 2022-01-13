@@ -87,7 +87,7 @@ export default function Donation(props) {
   }
 
   async function bookAppt() {
-    setCustomerUidState(!customerUidState);
+    //setCustomerUidState(!customerUidState);
     const temp = {
       tax: 0,
       total: donation,
@@ -100,7 +100,7 @@ export default function Donation(props) {
       "https://huo8rhh76i.execute-api.us-west-1.amazonaws.com/dev/api/v2/createPaymentIntent";
     axios
       .post(postURL, {
-        customer_uid: customerUid,
+        customer_uid: "100-000001",
         business_code: props.notes === "NITYATEST" ? "NITYATEST" : "NITYA",
         payment_summary: temp,
       })

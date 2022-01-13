@@ -176,7 +176,7 @@ export default function SeminarRegister() {
         />
       </Helmet>
 
-      <ScrollToTop />
+      {/* <ScrollToTop /> */}
       <div className="Card">
         <img
           src={SeminarImg}

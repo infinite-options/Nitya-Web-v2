@@ -19,7 +19,6 @@ export default function DonationConfirmation() {
         />
       </Helmet>
 
-      <ScrollToTop />
       <div className="Card">
         <img
           src={SeminarImg}
