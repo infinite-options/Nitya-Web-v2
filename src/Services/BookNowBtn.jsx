@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import {
   signInToGoogle,
@@ -7,21 +7,21 @@ import {
 } from "../Appointment/GoogleApiService";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
-import './BookNowBtn.css';
-import '../Home/Home.css';
+import "./BookNowBtn.css";
+import "../Home/Home.css";
 
 const BASE_URL = process.env.REACT_APP_SERVER_BASE_URI;
 
-export default function BookNowBTN (props){
-  console.log('BookNowBtn props', props)
+export default function BookNowBTN(props) {
+  console.log("BookNowBtn props", props);
   const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
-  const [tID,setTID] = useState(props.apptID)
-  const [accessToken, setAccessToken] = useState('');
+  const [tID, setTID] = useState(props.apptID);
+  const [accessToken, setAccessToken] = useState("");
   const [signedin, setSignedIn] = useState(false);
   const [bookNow, setBookNow] = useState(false);
   const [googleAuthedEmail, setgoogleAuthedEmail] = useState(null);
-  const [idToken, setIdToken] = useState('');
+  const [idToken, setIdToken] = useState("");
   useEffect(() => {
     initClient((success) => {
       if (success) {
@@ -42,25 +42,22 @@ export default function BookNowBTN (props){
     if (successfull) {
       getGoogleAuthorizedEmail();
     }
-    console.log('booknowbtn', successfull)
+    console.log("booknowbtn", successfull);
   };
-  
+
   useEffect(() => {
     let url = BASE_URL + "customerToken/";
     let customer_uid = "100-000281";
     axios
       .get(url + customer_uid)
       .then((response) => {
-        console.log("in events", response);
         let url =
           "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=";
 
         var old_at = response["data"]["user_access_token"];
-        console.log("in events", old_at);
         var refreshToken = response["data"]["user_refresh_token"];
         setAccessToken(old_at);
         let checkExp_url = url + old_at;
-        console.log("in events", checkExp_url);
         fetch(
           `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`,
           {
@@ -68,9 +65,7 @@ export default function BookNowBTN (props){
           }
         )
           .then((response) => {
-            console.log("in events", response);
             if (response["status"] === 400) {
-              console.log("in events if");
               let authorization_url =
                 "https://accounts.google.com/o/oauth2/token";
 
@@ -111,7 +106,6 @@ export default function BookNowBTN (props){
                   console.log("new accesstoken", at);
                   setAccessToken(at);
                   setIdToken(id_token);
-                  console.log("in events", at);
                   let url = BASE_URL + "UpdateAccessToken/";
                   axios
                     .post(url + customer_uid, {
@@ -161,8 +155,8 @@ export default function BookNowBTN (props){
           //getAcessToken();
 
           getAuthToGoogle();
-          setSignedIn(true)
-          setBookNow(true)
+          setSignedIn(true);
+          setBookNow(true);
           {
             console.log("bookbtn1", accessToken);
           }
@@ -171,7 +165,7 @@ export default function BookNowBTN (props){
         <Link
           to={{
             pathname: `/${tID}/appt`,
-            state: { accessToken: accessToken},
+            state: { accessToken: accessToken },
           }}
           // to={`/${tID}/appt`}
           // params={{ accessToken: accessToken }}
@@ -195,4 +189,4 @@ export default function BookNowBTN (props){
       </Button>
     </div>
   );
-  }
+}

@@ -244,6 +244,7 @@ export default function Scheduler(props) {
         {
           email: props.email,
         },
+        { email: "Lmarathay@gmail.com" },
       ],
     };
     console.log(event);
