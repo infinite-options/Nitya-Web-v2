@@ -42,7 +42,6 @@ export default function SeminarRegister() {
   const [stripePromise, setStripePromise] = useState(null);
   const [registered, setRegistered] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
-
   const handleMode = (event) => {
     var optionPick = event.target.name;
     var newModeObj = {};
@@ -88,6 +87,8 @@ export default function SeminarRegister() {
           online: false,
         });
         setRegistered(true);
+
+        window.scrollTo({ behavior: "smooth", top: 620 });
       })
       .catch((error) => {
         console.log("error", error);
@@ -106,7 +107,7 @@ export default function SeminarRegister() {
     console.log("fetching public key");
     axios
       .get(
-        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYATEST"
+        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYA"
       )
       .then((result) => {
         console.log(
@@ -132,6 +133,7 @@ export default function SeminarRegister() {
         }
       });
   }
+
   return (
     <div className="HomeContainer">
       <Helmet>
@@ -149,7 +151,9 @@ export default function SeminarRegister() {
           style={{ width: "100%", height: "100%" }}
           className="CardImage"
         />
+        <div style={{ height: "auto" }}></div>
       </div>
+      <div></div>
       {registered ? (
         <div className="Card">
           <div

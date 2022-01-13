@@ -128,24 +128,24 @@ export default function SeminarRegister() {
         </div>
       ) : (
         <div className="Card">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-            }}
-          >
+          <div>
             <div className="CardTitle">Donation</div>
 
             <div className="textTitle" style={{ marginTop: "3rem" }}>
               Please enter any amount you see fit.
             </div>
-            <div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
               <input
                 className="donationField"
-                id="donation"
+                id="Donation"
                 type="text"
-                placeholder="donation"
+                placeholder="Donation"
                 onChange={(e) => setDonation(e.target.value)}
                 value={donation}
                 required
@@ -154,15 +154,15 @@ export default function SeminarRegister() {
                 elementRef={(c) => (this._element = c)}
                 className="donationField"
               />
+              <button
+                className="registerBtn"
+                onClick={() => {
+                  bookAppt();
+                }}
+              >
+                Pay Now
+              </button>
             </div>
-            <button
-              className="registerBtn"
-              onClick={() => {
-                bookAppt();
-              }}
-            >
-              Pay Now
-            </button>
           </div>
         </div>
       )}
