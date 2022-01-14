@@ -319,6 +319,18 @@
   padding: 0.7rem 4rem;
   cursor: pointer;
 }
+.showRegBtn {
+  background: #d3a625;
+  border-radius: 50px;
+  border: none;
+  font: normal normal normal 24px/29px Hoefler Text;
+  color: #ffffff;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  margin-left: 5rem;
+  padding: 0.7rem 4rem;
+  cursor: pointer;
+}
 .seminarBtn {
   background: #ffffff 0% 0% no-repeat padding-box;
   border-radius: 50px;
@@ -500,6 +512,18 @@
     color: #ffffff;
     margin-top: 1rem;
     margin-bottom: 2rem;
+    padding: 0.7rem 4rem;
+    cursor: pointer;
+  }
+  .showRegBtn {
+    background: #d3a625;
+    border-radius: 50px;
+    border: none;
+    font: normal normal normal 24px/29px Hoefler Text;
+    color: #ffffff;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    margin-left: 5rem;
     padding: 0.7rem 4rem;
     cursor: pointer;
   }

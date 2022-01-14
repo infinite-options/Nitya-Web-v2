@@ -69,9 +69,7 @@ export default function Donation(props) {
     axios
       .post(BASE_URL + "SeminarRegister", register)
       .then((response) => {
-        //window.scrollTo({ behavior: "smooth", top: 620 });
-        //props.setRegistered(true);
-        history.push("/donationConfirm");
+        window.scrollTo({ behavior: "smooth", top: 620 });
       })
       .catch((error) => {
         console.log("error", error);
@@ -136,8 +134,12 @@ export default function Donation(props) {
                   console.log(
                     "confirmedCardPayment result: " + JSON.stringify(result)
                   );
-                  register();
-                  confirmation();
+                  if (props.notes === "NITYATEST") {
+                    register();
+                    confirmation();
+                  }
+
+                  window.scrollTo({ behavior: "smooth", top: 620 });
                   setSubmitted(true);
                 })
                 .catch((err) => {
@@ -173,14 +175,8 @@ export default function Donation(props) {
       </Helmet>
 
       <ScrollToTop />
-
-      <div style={{ width: "60rem", backgroundColor: "white" }}>
-        <div>
-          {/* <div className="CardTitle">Donation</div> */}
-
-          <div className="textTitle" style={{ marginTop: "3rem" }}>
-            Please enter any amount you see fit.
-          </div>
+      {submitted ? (
+        <div className="Card">
           <div
             style={{
               display: "flex",
@@ -188,30 +184,62 @@ export default function Donation(props) {
               alignItems: "center",
             }}
           >
-            <input
-              className="donationField"
-              id="Donation"
-              type="text"
-              placeholder="Donation"
-              onChange={(e) => setDonation(e.target.value)}
-              value={donation}
-              required
-            />
-            <CardElement
-              elementRef={(c) => (this._element = c)}
-              className="donationField"
-            />
+            <div className="CardTitle">Donation</div>
+
+            <div className="textTitle" style={{ marginTop: "3rem" }}>
+              Thank you. We really appreciate your contribution.
+            </div>
+
             <button
               className="registerBtn"
               onClick={() => {
-                bookAppt();
+                history.push("/");
               }}
             >
-              Pay Now
+              Back to Home
             </button>
           </div>
         </div>
-      </div>
+      ) : (
+        <div className="Card">
+          <div>
+            <div className="CardTitle">Donation</div>
+
+            <div className="textTitle" style={{ marginTop: "3rem" }}>
+              Please enter any amount you see fit.
+            </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+              }}
+            >
+              <input
+                className="donationField"
+                id="Donation"
+                type="text"
+                placeholder="Donation"
+                onChange={(e) => setDonation(e.target.value)}
+                value={donation}
+                required
+              />
+              <CardElement
+                elementRef={(c) => (this._element = c)}
+                className="donationField"
+              />
+              <button
+                className="registerBtn"
+                onClick={() => {
+                  bookAppt();
+                }}
+              >
+                Pay Now
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
