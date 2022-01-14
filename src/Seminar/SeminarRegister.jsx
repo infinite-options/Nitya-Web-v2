@@ -43,6 +43,7 @@ export default function SeminarRegister() {
   const [donation, setDonation] = useState("");
   const [stripePromise, setStripePromise] = useState(null);
   const [registered, setRegistered] = useState(false);
+  const [registeredConfirm, setRegisteredConfirm] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
   const handleMode = (event) => {
     var optionPick = event.target.name;
@@ -121,7 +122,7 @@ export default function SeminarRegister() {
           console.log("(1 PaymentDetails) setting state with stripePromise");
 
           setStripePromise(tempStripePromise);
-          window.scrollTo({ behavior: "smooth", top: 620 });
+          //window.scrollTo({ behavior: "smooth", top: 620 });
           console.log(tempStripePromise);
           console.log("(1 PaymentDetails) stripePromise set!");
         })
@@ -152,7 +153,7 @@ export default function SeminarRegister() {
 
           console.log(tempStripePromise);
           setStripePromise(tempStripePromise);
-          window.scrollTo({ behavior: "smooth", top: 620 });
+          //window.scrollTo({ behavior: "smooth", top: 620 });
           console.log("(2 PaymentDetails) stripePromise set!");
         })
         .catch((err) => {
@@ -207,15 +208,18 @@ export default function SeminarRegister() {
             </div>
             <button
               className="registerBtn"
+              hidden={registeredConfirm}
               onClick={() => {
+                //setRegistered(false);
+                setRegisteredConfirm(true);
                 setShowDonation(true);
-                setRegistered(false);
                 toggleKeys();
               }}
             >
               Make a Donation
             </button>
             <button
+              hidden={registeredConfirm}
               className="registerBtn"
               onClick={() => {
                 history.push("/");
@@ -223,10 +227,167 @@ export default function SeminarRegister() {
             >
               Back to Home
             </button>
+            {showDonation ? (
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                }}
+              >
+                <DonationElement
+                  stripePromise={stripePromise}
+                  first_name={firstName}
+                  last_name={lastName}
+                  email={email}
+                  city={city}
+                  state={state}
+                  mode={attendMode}
+                  notes={notes}
+                  registered={registeredConfirm}
+                />
+              </div>
+            ) : null}
           </div>
         </div>
       ) : (
         <div className="Card">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div className="CardTitle">Register</div>
+            <div style={{ marginTop: "3rem" }}></div>
+            <input
+              className="inputField"
+              id="First Name"
+              type="text"
+              placeholder="First Name"
+              onChange={(e) => setFirstName(e.target.value)}
+              value={firstName}
+              required
+            />
+            <br />
+            <input
+              className="inputField"
+              id="Last Name"
+              type="text"
+              placeholder="Last Name"
+              onChange={(e) => setLastName(e.target.value)}
+              value={lastName}
+              required
+            />
+            <br />
+            <input
+              className="inputField"
+              id="Email"
+              type="text"
+              placeholder="Email Address"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+              required
+            />
+            <br />
+            <input
+              className="inputField"
+              id="City"
+              type="text"
+              placeholder="City"
+              onChange={(e) => setCity(e.target.value)}
+              value={city}
+            />
+            <br />
+            <input
+              className="inputField"
+              id="sweep_referrer"
+              type="text"
+              placeholder="State"
+              onChange={(e) => setState(e.target.value)}
+              value={state}
+            />
+            <br />
+            <Typography className="textTitle">
+              How do you plan on attending the workshop?
+            </Typography>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "space-between",
+              }}
+            >
+              <FormGroup>
+                <FormControlLabel
+                  control={
+                    <YellowRadio
+                      checked={mode.inPerson}
+                      onChange={(e) => handleMode(e)}
+                      name="modeInPerson"
+                    />
+                  }
+                  label="In-person"
+                />
+                <FormControlLabel
+                  control={
+                    <YellowRadio
+                      checked={mode.online}
+                      onChange={(e) => handleMode(e)}
+                      name="modeOnline"
+                    />
+                  }
+                  label="Online"
+                />
+              </FormGroup>
+            </div>
+            <input
+              className="inputField"
+              id="notes"
+              type="text"
+              placeholder="Any questions?"
+              onChange={(e) => setNotes(e.target.value)}
+              value={notes}
+            />
+            <br />
+            <Typography className="textTitle">
+              $10 Donation suggested but not required.
+            </Typography>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                justifyContent: "space-between",
+              }}
+            >
+              <button
+                className="registerBtn"
+                hidden={showDonation}
+                onClick={() => {
+                  register();
+                  confirmation();
+                }}
+              >
+                Register Only
+              </button>
+              <button
+                className="showRegBtn"
+                hidden={showDonation}
+                onClick={() => {
+                  // register();
+                  // confirmation();
+
+                  toggleKeys();
+                  setShowDonation(true);
+                }}
+              >
+                Register <br />
+                and Donate
+              </button>
+            </div>
+          </div>
           {showDonation ? (
             <div
               style={{
@@ -244,145 +405,10 @@ export default function SeminarRegister() {
                 state={state}
                 mode={attendMode}
                 notes={notes}
+                registered={registeredConfirm}
               />
             </div>
-          ) : (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                alignItems: "center",
-              }}
-            >
-              <div className="CardTitle">Register</div>
-              <div style={{ marginTop: "3rem" }}></div>
-              <input
-                className="inputField"
-                id="First Name"
-                type="text"
-                placeholder="First Name"
-                onChange={(e) => setFirstName(e.target.value)}
-                value={firstName}
-                required
-              />
-              <br />
-              <input
-                className="inputField"
-                id="Last Name"
-                type="text"
-                placeholder="Last Name"
-                onChange={(e) => setLastName(e.target.value)}
-                value={lastName}
-                required
-              />
-              <br />
-              <input
-                className="inputField"
-                id="Email"
-                type="text"
-                placeholder="Email Address"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
-                required
-              />
-              <br />
-              <input
-                className="inputField"
-                id="City"
-                type="text"
-                placeholder="City"
-                onChange={(e) => setCity(e.target.value)}
-                value={city}
-              />
-              <br />
-              <input
-                className="inputField"
-                id="sweep_referrer"
-                type="text"
-                placeholder="State"
-                onChange={(e) => setState(e.target.value)}
-                value={state}
-              />
-              <br />
-              <Typography className="textTitle">
-                How do you plan on attending the workshop?
-              </Typography>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  alignItems: "center",
-                  justifyContent: "space-between",
-                }}
-              >
-                <FormGroup>
-                  <FormControlLabel
-                    control={
-                      <YellowRadio
-                        checked={mode.inPerson}
-                        onChange={(e) => handleMode(e)}
-                        name="modeInPerson"
-                      />
-                    }
-                    label="In-person"
-                  />
-                  <FormControlLabel
-                    control={
-                      <YellowRadio
-                        checked={mode.online}
-                        onChange={(e) => handleMode(e)}
-                        name="modeOnline"
-                      />
-                    }
-                    label="Online"
-                  />
-                </FormGroup>
-              </div>
-              <input
-                className="inputField"
-                id="notes"
-                type="text"
-                placeholder="Any questions?"
-                onChange={(e) => setNotes(e.target.value)}
-                value={notes}
-              />
-              <br />
-              <Typography className="textTitle">
-                $10 Donation suggested but not required.
-              </Typography>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "row",
-                  justifyContent: "space-between",
-                }}
-              >
-                <button
-                  className="registerBtn"
-                  hidden={showDonation}
-                  onClick={() => {
-                    register();
-                    confirmation();
-                  }}
-                >
-                  Register Only
-                </button>
-                <button
-                  className="showRegBtn"
-                  hidden={showDonation}
-                  onClick={() => {
-                    // register();
-                    // confirmation();
-                    setShowDonation(true);
-                    toggleKeys();
-                  }}
-                >
-                  Register <br />
-                  and Donate
-                </button>
-              </div>
-            </div>
-          )}
+          ) : null}
         </div>
       )}
     </div>

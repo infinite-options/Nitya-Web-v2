@@ -165,18 +165,39 @@ export default function Donation(props) {
   }
 
   return (
-    <div className="HomeContainer">
-      <Helmet>
-        <title>Seminar Registration</title>
-        <meta
-          name="description"
-          content="We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies"
-        />
-      </Helmet>
-
-      <ScrollToTop />
-      {submitted ? (
+    <div>
+      {/* {props.registered ? (
         <div className="Card">
+          <div
+            style={{
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+            }}
+          >
+            <div className="CardTitle">Registration Confirmed</div>
+            <div className="textConfirm" style={{ marginTop: "3rem" }}>
+              Congrats! You are now registered for the workshop.
+              <br />
+              We have sent a confirmation email to
+              <div className="textTitle">{props.email}</div>
+            </div>
+            <div className="textTitle" style={{ marginTop: "3rem" }}>
+              Please check your email for workshop details.
+            </div>
+          </div>
+        </div>
+      ) : null} */}
+
+      {submitted ? (
+        <div
+          className="Card"
+          style={{
+            width: "60rem",
+
+            backgroundColor: "white",
+          }}
+        >
           <div
             style={{
               display: "flex",
