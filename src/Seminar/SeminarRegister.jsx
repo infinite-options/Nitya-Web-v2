@@ -342,13 +342,13 @@ export default function SeminarRegister() {
                 className="inputField"
                 id="notes"
                 type="text"
-                placeholder="Any questions..."
+                placeholder="Any questions?"
                 onChange={(e) => setNotes(e.target.value)}
                 value={notes}
               />
               <br />
               <Typography className="textTitle">
-                10$ Donation suggested but not required.
+                $10 Donation suggested but not required.
               </Typography>
               <div
                 style={{
