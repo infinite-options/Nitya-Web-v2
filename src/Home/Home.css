@@ -316,8 +316,9 @@
   color: #ffffff;
   margin-top: 2rem;
   margin-bottom: 2rem;
-  padding: 0.7rem 4rem;
+  padding: 0.7rem 2rem;
   cursor: pointer;
+  width: 18rem;
 }
 .showRegBtn {
   background: #d3a625;
@@ -328,8 +329,9 @@
   margin-top: 2rem;
   margin-bottom: 2rem;
   margin-left: 5rem;
-  padding: 0.7rem 4rem;
+  padding: 0.7rem 2rem;
   cursor: pointer;
+  width: 18rem;
 }
 .seminarBtn {
   background: #ffffff 0% 0% no-repeat padding-box;
@@ -508,24 +510,23 @@
     background: #d3a625;
     border-radius: 50px;
     border: none;
-    font: normal normal normal 17px/20px Hoefler Text;
+    font: normal normal normal 13px hoefler Text;
     color: #ffffff;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    padding: 0.7rem 4rem;
     cursor: pointer;
+    width: 7rem;
   }
   .showRegBtn {
     background: #d3a625;
     border-radius: 50px;
     border: none;
-    font: normal normal normal 24px/29px Hoefler Text;
+    font: normal normal normal 13px hoefler Text;
     color: #ffffff;
     margin-top: 1rem;
     margin-bottom: 2rem;
-    margin-left: 5rem;
-    padding: 0.7rem 4rem;
     cursor: pointer;
+    width: 7rem;
   }
   .CardTitle {
     font-family: Hoefler Text Bold;

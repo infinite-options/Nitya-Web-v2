@@ -10,6 +10,7 @@ import {
 } from "@stripe/react-stripe-js";
 import ScrollToTop from "../Blog/ScrollToTop";
 import "../Home/Home.css";
+import { Typography } from "@material-ui/core";
 
 const BASE_URL = process.env.REACT_APP_SERVER_BASE_URI;
 
@@ -21,6 +22,7 @@ export default function Donation(props) {
   const [customerUid, setcustomerUid] = useState("");
   const [customerUidState, setCustomerUidState] = useState(false);
   const [donation, setDonation] = useState("");
+  const [errors, setErrors] = useState("");
   const [submitted, setSubmitted] = useState(false);
   console.log(props);
   useEffect(() => {
@@ -86,6 +88,7 @@ export default function Donation(props) {
 
   async function bookAppt() {
     //setCustomerUidState(!customerUidState);
+
     const temp = {
       tax: 0,
       total: donation,
@@ -163,10 +166,16 @@ export default function Donation(props) {
         }
       });
   }
-
+  console.log(donation, errors);
+  const showError = () => {
+    if (donation != "") {
+      return null;
+    }
+    return <Typography style={{ color: "red" }}>{errors}</Typography>;
+  };
   return (
     <div>
-      {/* {props.registered ? (
+      {props.registered ? (
         <div className="Card">
           <div
             style={{
@@ -187,7 +196,7 @@ export default function Donation(props) {
             </div>
           </div>
         </div>
-      ) : null} */}
+      ) : null}
 
       {submitted ? (
         <div
@@ -245,6 +254,9 @@ export default function Donation(props) {
                 value={donation}
                 required
               />
+
+              {showError()}
+
               <CardElement
                 elementRef={(c) => (this._element = c)}
                 className="donationField"
@@ -253,6 +265,10 @@ export default function Donation(props) {
                 className="registerBtn"
                 onClick={() => {
                   bookAppt();
+                  console.log(donation.length);
+                  if (donation.length === 0) {
+                    setErrors("Please enter a valid donation amount");
+                  }
                 }}
               >
                 Pay Now
