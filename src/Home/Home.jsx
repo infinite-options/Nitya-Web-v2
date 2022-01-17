@@ -43,19 +43,7 @@ export default function Home() {
       <ScrollToTop />
 
       {seminarActive ? (
-        <Grid
-          style={{
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "#D3A625 0% 0% no-repeat padding-box",
-            opacity: 1,
-            minHeight: "40px",
-            padding: "10px 10px",
-            width: "100%",
-            margin: "0",
-          }}
-        >
+        <Grid className="SeminarHeader">
           <Typography
             style={{ textAlign: "left", color: "#FFFFFF", marginLeft: "2rem" }}
           >

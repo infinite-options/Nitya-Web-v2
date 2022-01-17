@@ -288,10 +288,18 @@
 .FooterTitle {
   color: #c3a336;
   font-size: 28px;
-  text-align: left;
-  border: 2px solid blue;
-  padding-left: 20%;
-  padding-bottom: 5%;
+  text-align: center;
+}
+.SeminarHeader {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #d3a625 0% 0% no-repeat padding-box;
+  opacity: 1;
+  min-height: 40px;
+  padding: 10px 10px;
+  width: 100%;
+  margin-right: 20px;
 }
 .title {
   font-family: Hoefler Text;
@@ -595,6 +603,31 @@
     min-height: 100%;
     object-fit: cover;
   }
+  .FooterTextWrapper {
+    color: #c3a336;
+    font-size: 18px;
+    /* display:flex;
+ justify-content:space-evenly; */
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    align-items: flex-end;
+    margin-top: 2rem;
+  }
+
+  .FooterText {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-right: 2px solid #424242;
+    /* margin-top:1rem; */
+    padding: 1rem;
+  }
+
+  .FooterTitle {
+    color: #c3a336;
+    font-size: 28px;
+    text-align: center;
+  }
 }
 
 @media only screen and (max-width: 570px) {
@@ -809,5 +842,30 @@
   .NewInput {
     width: 95%;
     height: 3rem;
+  }
+  .FooterTextWrapper {
+    color: #c3a336;
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    align-items: flex-start;
+    /* margin-top: 2rem; */
+  }
+
+  .FooterText {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-right: 2px solid #424242;
+    /* margin-top:1rem; */
+    /* padding: 1rem; */
+  }
+
+  .FooterTitle {
+    color: #c3a336;
+    font-size: 20px;
+    text-align: center;
+    /* padding-left: 20%;
+    padding-bottom: 5%; */
   }
 }

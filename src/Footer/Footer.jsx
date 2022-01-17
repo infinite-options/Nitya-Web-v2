@@ -23,7 +23,7 @@ export default function Footer() {
         </div>
 
         <div className="FooterText">
-          <div style={{ fontSize: "28px" }}>Leena Marathay</div>
+          <div className="FooterTitle">Leena Marathay</div>
           <div>NAMA Certified Ayurvedic Practitioner</div>
         </div>
 
