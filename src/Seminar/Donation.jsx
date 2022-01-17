@@ -176,7 +176,7 @@ export default function Donation(props) {
   return (
     <div>
       {props.registered ? (
-        <div className="Card">
+        <div>
           <div
             style={{
               display: "flex",
@@ -185,13 +185,13 @@ export default function Donation(props) {
             }}
           >
             <div className="CardTitle">Registration Confirmed</div>
-            <div className="textConfirm" style={{ marginTop: "3rem" }}>
+            <div className="textConfirm" style={{ marginTop: "2rem" }}>
               Congrats! You are now registered for the workshop.
               <br />
               We have sent a confirmation email to
               <div className="textTitle">{props.email}</div>
             </div>
-            <div className="textTitle" style={{ marginTop: "3rem" }}>
+            <div className="textTitle" style={{ marginTop: "2rem" }}>
               Please check your email for workshop details.
             </div>
           </div>
@@ -199,14 +199,7 @@ export default function Donation(props) {
       ) : null}
 
       {submitted ? (
-        <div
-          className="Card"
-          style={{
-            width: "60rem",
-
-            backgroundColor: "white",
-          }}
-        >
+        <div>
           <div
             style={{
               display: "flex",
@@ -216,7 +209,7 @@ export default function Donation(props) {
           >
             <div className="CardTitle">Donation</div>
 
-            <div className="textTitle" style={{ marginTop: "3rem" }}>
+            <div className="textTitle" style={{ marginTop: "1rem" }}>
               Thank you. We really appreciate your contribution.
             </div>
 
@@ -231,7 +224,7 @@ export default function Donation(props) {
           </div>
         </div>
       ) : (
-        <div className="Card">
+        <div>
           <div>
             <div className="CardTitle">Donation</div>
 

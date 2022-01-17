@@ -142,15 +142,7 @@ export default function BookNowBTN(props) {
       style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}
     >
       <Button
-        style={{
-          backgroundColor: "#D3A625",
-          border: "none",
-          borderRadius: "4px",
-          width: "135px",
-          height: "auto",
-          align: "center",
-          textDecorationLine: "none",
-        }}
+        className="BookNowBtn"
         onClick={() => {
           //getAcessToken();
 
@@ -171,20 +163,7 @@ export default function BookNowBTN(props) {
           // params={{ accessToken: accessToken }}
           style={{ textDecoration: "none" }}
         >
-          <p
-            className="BookNowBtn"
-            style={{
-              color: "white",
-              display: "flex",
-              justifyContent: "center",
-              fontSize: "24px",
-              padding: "0px",
-              margin: "5px",
-              textDecoration: "none",
-            }}
-          >
-            Book Now
-          </p>
+          <p className="BookNowBtn">Book Now</p>
         </Link>
       </Button>
     </div>

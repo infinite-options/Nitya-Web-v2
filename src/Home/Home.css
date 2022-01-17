@@ -52,18 +52,26 @@
   /* padding: 5%;  */
 
   background-color: white;
+  display: flex;
+  flex-direction: column;
 }
 
 .CardGrid {
   display: grid;
   grid-template-columns: repeat(2, auto);
   /* grid-column-gap: 5% ; */
-
+  justify-content: center;
   margin: 0px;
   /* padding: 0%; */
   padding: 3%;
 }
-
+.IntroGrid {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  flex: 1;
+}
 .CardImage {
   object-fit: contain;
   height: 100%;
@@ -76,7 +84,7 @@
   font-size: 52px;
   font-style: italic;
   /* font-weight: bold; */
-  margin-right: 1.8rem;
+  margin-right: 0rem;
   padding: 0px;
   text-align: center;
 }
@@ -179,6 +187,7 @@
 
 .ServiceContainer {
   display: flex;
+  width: 100%;
   margin-top: 1rem;
   background-color: #dadada;
 }
@@ -343,6 +352,12 @@
   cursor: pointer;
   padding: 0.7rem 4rem;
 }
+
+.ServiceImg {
+  width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
 @media screen and (min-width: 500px) and (max-width: 900px) {
   /* Card Format for all Intro, About, Service & Contact */
   .Card {
@@ -359,9 +374,217 @@
 
   .CardGrid {
     display: grid;
-    grid-template-columns: repeat(1, auto);
+    grid-template-columns: repeat(2, auto);
     /* grid-column-gap: 5% ; */
+    justify-content: center;
+    margin: 0px;
+    /* padding: 0%; */
+    padding: 3%;
+  }
+  .IntroGrid {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+  }
 
+  .CardTitle {
+    font-family: Hoefler Text Bold;
+    color: #d3a625;
+    font-size: 52px;
+    font-style: italic;
+    /* font-weight: bold; */
+    margin-right: 0rem;
+    padding: 0px;
+    text-align: center;
+  }
+
+  .CardButton {
+    text-transform: none;
+    background-color: #d3a625;
+    color: white;
+
+    font-size: 24px;
+
+    width: 75%;
+    height: 3rem;
+
+    margin-right: 0rem;
+    margin-top: 2rem;
+    border: 0px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    cursor: pointer;
+  }
+
+  .CardImage {
+    object-fit: contain;
+    height: 20rem;
+    width: 100%;
+  }
+
+  .CardText {
+    font-family: SF Pro Display Regular;
+    color: #d3a625;
+    font-size: 20px;
+    margin-right: 0rem;
+    margin-bottom: 1rem;
+    /* padding-left:5%; */
+    /* padding-right:5%; */
+    flex: 1;
+  }
+  /* -------------- Services ------------------------------------------------*/
+
+  /* Title "Services" on Home.jsx */
+  .Service_Title {
+    font-family: Hoefler Text Bold;
+    color: #d3a625;
+    font-size: 52px;
+    font-style: italic;
+    text-align: center;
+    /* align-items: center;*/
+    /* font-weight: bold;  */
+    margin: 2rem;
+    /* background-color:#DADADA; */
+  }
+
+  /* Services Switch Button Container for "Consulting" & "Treatments" */
+  .Services_Button_Contianer {
+    display: flex;
+    justify-content: center;
+  }
+
+  /* Services Switch Button Styles for "Consulting" & "Treatments" */
+  .Services_Button {
+    text-transform: none;
+    background-color: black;
+    font-size: 24px;
+    width: 50%;
+    height: 3rem;
+    margin-left: 2rem;
+  }
+
+  /* Title Text For each Service Card */
+  .Services_Title_Font {
+    font-family: Hoefler Text;
+    font-size: 28px;
+    text-align: center;
+    letter-spacing: 0.6px;
+    color: #000000;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  /* Body Text for each Service Card */
+  .Services_Body_Font {
+    font-family: SF Pro Display Regular;
+    text-align: center;
+    font-size: 16px;
+    font-weight: normal;
+    letter-spacing: 0.55px;
+    color: #000000;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 1rem;
+  }
+
+  .ServiceContainer {
+    display: flex;
+    margin-top: 1rem;
+    background-color: #dadada;
+  }
+  .NewInput {
+    width: 75%;
+    height: 3rem;
+
+    margin-right: 0rem;
+  }
+  .Contact_Map {
+    border: 0;
+    width: 100%;
+    /* width: 15rem; */
+    border-radius: 0%;
+    height: 20rem;
+    margin-right: 0rem;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .FooterTextWrapper {
+    color: #c3a336;
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    margin-left: 0rem;
+    /* border:2px solid blue */
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: repeat(1, auto);
+    /* grid-row-gap: 10%; */
+    background-color: #fff;
+    color: #444;
+    margin-top: 2rem;
+  }
+
+  .MobileImage {
+    width: 70%;
+    height: 2rem;
+    object-fit: contain;
+  }
+
+  .FooterText {
+    text-align: center;
+    border-right: 0px solid #424242;
+    /* border: 2px solid green; */
+    margin-top: 2rem;
+    padding-right: 0rem;
+    padding: 0rem;
+  }
+
+  .ServiceImg {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+  }
+}
+
+@media only screen and (max-width: 570px) {
+  .Card {
+    width: 80%;
+    /* width: 95%; */
+    /* width: clamp(200px, 50%, 600px); */
+    height: auto;
+
+    margin: 5% 0% 5% 0%;
+    /* padding: 5%;  */
+
+    background-color: white;
+  }
+
+  .CardGrid {
+    display: flex;
+    flex-direction: column;
+    /* grid-column-gap: 5% ; */
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    /* padding: 0%; */
+    padding: 3%;
+  }
+  .IntroGrid {
+    display: flex;
+    flex-direction: column;
+    /* grid-column-gap: 5% ; */
+    align-items: center;
+    justify-content: center;
     margin: 0px;
     /* padding: 0%; */
     padding: 3%;
@@ -415,78 +638,51 @@
     /* padding-right:5%; */
     flex: 1;
   }
+  .Services_Title_Font {
+    font-family: Hoefler Text;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.6px;
+    color: #000000;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  /* Body Text for each Service Card */
+  .Services_Body_Font {
+    font-family: SF Pro Display Regular;
+    text-align: center;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.55px;
+    color: #000000;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 1rem;
+  }
 
   .ServiceContainer {
     display: flex;
     flex-direction: column;
+    align-items: center;
     margin-top: 1rem;
     background-color: #dadada;
+    width: 120%;
+    margin-left: 4rem;
   }
-
-  .NewInput {
-    width: 75%;
-    height: 3rem;
-
-    margin-right: 0rem;
-
-    /* margin-right:1.8rem; */
-  }
-
-  .Contact_Map {
-    border: 0;
+  .ServiceImg {
     width: 100%;
-    /* width: 15rem; */
-    border-radius: 0%;
-    height: 20rem;
-    margin-right: 0rem;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
+    min-height: 100%;
+    object-fit: cover;
   }
 
-  .FooterTextWrapper {
-    color: #c3a336;
-    font-size: 18px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-left: 0rem;
-    /* border:2px solid blue */
-  }
-
-  .wrapper {
-    display: grid;
-    grid-template-columns: repeat(1, auto);
-    /* grid-row-gap: 10%; */
-    background-color: #fff;
-    color: #444;
-    margin-top: 2rem;
-  }
-
-  .MobileImage {
-    width: 70%;
-    height: 2rem;
-    object-fit: contain;
-  }
-
-  .FooterText {
-    text-align: center;
-    border-right: 0px solid #424242;
-    /* border: 2px solid green; */
-    margin-top: 2rem;
-    padding-right: 0rem;
-    padding: 0rem;
-  }
-}
-
-@media only screen and (max-width: 570px) {
   .title {
     font-family: Hoefler Text;
-    font-size: 20px;
+    font-size: 18px;
     font-style: italic;
   }
   .subTitle {
-    font-size: 18px;
+    font-size: 16px;
   }
   .inputField {
     height: 30%;
@@ -534,7 +730,7 @@
     font-size: 26px;
     font-style: italic;
     /* font-weight: bold; */
-    margin-right: 1.8rem;
+    margin-right: 0rem;
     padding: 0px;
     text-align: center;
   }

@@ -63,14 +63,7 @@ export default function Contact() {
     <div className="HomeContainer">
       <div className="Card">
         <div className="CardGrid">
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-            }}
-          >
+          <div style={{ justifyContent: "center" }}>
             <div className="CardTitle" style={{ marginBottom: "2rem" }}>
               Contact Us{" "}
             </div>

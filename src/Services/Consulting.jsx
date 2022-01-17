@@ -31,12 +31,7 @@ export default function Consulting() {
             <div className="ServiceContainer">
               <div style={{ width: "100%", flex: "1" }}>
                 <img
-                  style={{
-                    width: "100%",
-                    minHeight: "100%",
-                    objectFit: "cover",
-                  }}
-                  variant="top"
+                  className="ServiceImg"
                   src={filteredService.image_url}
                   alt={"An image of" + filteredService.title}
                 />
