@@ -126,7 +126,13 @@ export default function Contact() {
               value={data.message}
             />
 
-            <button className="CardButton" onClick={submit}>
+            <button
+              className="ContactButton"
+              style={{
+                marginBottom: "2rem",
+              }}
+              onClick={submit}
+            >
               Submit
             </button>
           </div>
