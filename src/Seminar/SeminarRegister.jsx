@@ -29,6 +29,9 @@ const YellowRadio = withStyles({
 
 export default function SeminarRegister() {
   const history = useHistory();
+  const [fNErrors, setFNErrors] = useState("");
+  const [lNErrors, setLNErrors] = useState("");
+  const [emailErrors, setEmailErrors] = useState("");
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
@@ -167,6 +170,24 @@ export default function SeminarRegister() {
         });
     }
   }
+  const showFNError = () => {
+    if (firstName != "") {
+      return null;
+    }
+    return <Typography style={{ color: "red" }}>{fNErrors}</Typography>;
+  };
+  const showLNError = () => {
+    if (lastName != "") {
+      return null;
+    }
+    return <Typography style={{ color: "red" }}>{lNErrors}</Typography>;
+  };
+  const showEmailError = () => {
+    if (email != "") {
+      return null;
+    }
+    return <Typography style={{ color: "red" }}>{emailErrors}</Typography>;
+  };
 
   return (
     <div className="HomeContainer">
@@ -276,6 +297,7 @@ export default function SeminarRegister() {
                 required
               />
               <br />
+
               <input
                 className="inputField"
                 id="Last Name"
@@ -285,6 +307,7 @@ export default function SeminarRegister() {
                 value={lastName}
                 required
               />
+
               <br />
               <input
                 className="inputField"
@@ -295,6 +318,7 @@ export default function SeminarRegister() {
                 value={email}
                 required
               />
+
               <br />
               <input
                 className="inputField"
@@ -360,6 +384,10 @@ export default function SeminarRegister() {
               <Typography className="textTitle">
                 $10 Donation suggested but not required.
               </Typography>
+              {showFNError()}
+              {showLNError()}
+              {showEmailError()}
+              {console.log(emailErrors, fNErrors, lNErrors)}
               <div
                 style={{
                   display: "flex",
@@ -370,8 +398,16 @@ export default function SeminarRegister() {
                   className="registerBtn"
                   hidden={showDonation}
                   onClick={() => {
-                    register();
-                    confirmation();
+                    if (firstName.length === 0) {
+                      setFNErrors("Please enter your first name");
+                    } else if (lastName.length === 0) {
+                      setLNErrors("Please enter your last name");
+                    } else if (email.length === 0) {
+                      setEmailErrors("Please enter your email address");
+                    } else {
+                      register();
+                      confirmation();
+                    }
                   }}
                 >
                   Register Only
@@ -380,9 +416,17 @@ export default function SeminarRegister() {
                   className="showRegBtn"
                   hidden={showDonation}
                   onClick={() => {
-                    setPayNow(true);
-                    setShowDonation(true);
-                    toggleKeys();
+                    if (firstName.length === 0) {
+                      setFNErrors("Please enter your first name");
+                    } else if (lastName.length === 0) {
+                      setLNErrors("Please enter your last name");
+                    } else if (email.length === 0) {
+                      setEmailErrors("Please enter your email address");
+                    } else {
+                      setPayNow(true);
+                      setShowDonation(true);
+                      toggleKeys();
+                    }
                   }}
                 >
                   Register <br />
