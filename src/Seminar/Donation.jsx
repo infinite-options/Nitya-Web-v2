@@ -137,10 +137,9 @@ export default function Donation(props) {
                   console.log(
                     "confirmedCardPayment result: " + JSON.stringify(result)
                   );
-                  if (props.notes === "NITYATEST") {
-                    register();
-                    confirmation();
-                  }
+
+                  register();
+                  confirmation();
 
                   window.scrollTo({ behavior: "smooth", top: 620 });
                   setSubmitted(true);
