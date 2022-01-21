@@ -37,6 +37,7 @@ export default function SeminarRegister() {
   const [email, setEmail] = useState("");
   const [city, setCity] = useState("");
   const [state, setState] = useState("");
+  const [numAttendees, setNumAttendees] = useState("");
   const [mode, setMode] = useState({
     inPerson: true,
     online: false,
@@ -80,6 +81,7 @@ export default function SeminarRegister() {
       mode: attendMode,
       notes: notes,
       donation: donation,
+      num_attendees: numAttendees,
     };
 
     axios
@@ -99,8 +101,11 @@ export default function SeminarRegister() {
       });
   }
   function confirmation() {
+    var name = {
+      name: firstName,
+    };
     axios
-      .post(BASE_URL + `RegistrationConfirmation/${email}`)
+      .post(BASE_URL + `RegistrationConfirmation/${email}`, name)
       .then((response) => {})
       .catch((error) => {
         console.log("error", error);
@@ -270,6 +275,7 @@ export default function SeminarRegister() {
                 state={state}
                 mode={attendMode}
                 notes={notes}
+                numAttendees={numAttendees}
                 registered={registeredConfirm}
               />
             </div>
@@ -372,6 +378,18 @@ export default function SeminarRegister() {
                   />
                 </FormGroup>
               </div>
+              <Typography className="textTitle">
+                Number of people attending the workshop?
+              </Typography>
+              <input
+                className="inputField"
+                id="notes"
+                type="text"
+                placeholder="Number of attendees"
+                onChange={(e) => setNumAttendees(e.target.value)}
+                value={numAttendees}
+              />
+              <br />
               <input
                 className="inputField"
                 id="notes"
@@ -453,6 +471,7 @@ export default function SeminarRegister() {
                 state={state}
                 mode={attendMode}
                 notes={notes}
+                numAttendees={numAttendees}
                 registered={registeredConfirm}
               />
             </div>

@@ -628,6 +628,19 @@
     font-size: 28px;
     text-align: center;
   }
+  .donationField {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border: 2px solid #d3a625;
+    border-radius: 25px;
+    height: 40px;
+    width: 50%;
+    text-align: left;
+    font: normal normal normal 19px/23px SF Pro Display;
+    color: #000000;
+    letter-spacing: 0.47px;
+    padding: 0.5rem;
+    margin-top: 1rem;
+  }
 }
 
 @media only screen and (max-width: 570px) {

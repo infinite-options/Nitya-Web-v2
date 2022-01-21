@@ -29,13 +29,12 @@ export default function Donation(props) {
     const tempFind = [];
 
     const body = {
-      phone_num: "",
       email: props.email,
     };
     // sendToDatabase();
     axios
       .post(
-        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/findCustomer",
+        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/findSeminarUID",
         body
       )
       .then((response) => {
@@ -45,14 +44,12 @@ export default function Donation(props) {
         }
         console.log("response", tempFind);
         for (var i = 0; i < tempFind.length; i++) {
-          if (props.email === tempFind[i].customer_email) {
-            console.log("response", tempFind[i].customer_uid);
-            setcustomerUid(tempFind[i].customer_uid);
+          if (props.email === tempFind[i].email) {
+            console.log("response", tempFind[i].seminar_uid);
+            setcustomerUid(tempFind[i].seminar_uid);
           }
         }
       });
-
-    console.log("response", customerUid);
   }, [customerUidState]);
 
   function register() {
@@ -64,6 +61,7 @@ export default function Donation(props) {
       state: props.state,
       mode: props.mode,
       notes: props.notes,
+      num_attendees: props.numAttendees,
       donation: donation,
     };
 
@@ -78,14 +76,17 @@ export default function Donation(props) {
       });
   }
   function confirmation() {
+    var name = {
+      name: props.first_name,
+    };
     axios
-      .post(BASE_URL + `RegistrationConfirmation/${props.email}`)
+      .post(BASE_URL + `RegistrationConfirmation/${props.email}`, name)
       .then((response) => {})
       .catch((error) => {
         console.log("error", error);
       });
   }
-
+  console.log("response", customerUid);
   async function bookAppt() {
     //setCustomerUidState(!customerUidState);
 
@@ -137,9 +138,22 @@ export default function Donation(props) {
                   console.log(
                     "confirmedCardPayment result: " + JSON.stringify(result)
                   );
-
-                  register();
-                  confirmation();
+                  if (props.registered === true) {
+                    console.log("in if");
+                    let data = {
+                      donation: donation,
+                    };
+                    axios
+                      .post(BASE_URL + `UpdateRegister/${customerUid}`, data)
+                      .then((response) => {})
+                      .catch((error) => {
+                        console.log("error", error);
+                      });
+                  } else {
+                    console.log("in else");
+                    register();
+                    confirmation();
+                  }
 
                   window.scrollTo({ behavior: "smooth", top: 620 });
                   setSubmitted(true);

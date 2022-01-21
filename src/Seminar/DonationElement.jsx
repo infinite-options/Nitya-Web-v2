@@ -17,6 +17,7 @@ export default function DonationElement(props) {
         state={props.state}
         mode={props.mode}
         notes={props.notes}
+        numAttendees={props.numAttendees}
         registered={props.registered}
       />
     </Elements>
