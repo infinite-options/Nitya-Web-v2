@@ -101,10 +101,10 @@ export default function LearnMore(props) {
                   </div>
                   <BookNowBTN apptID={filteredService.treatment_uid} />
 
-                  <div className="LearnMoreText">
+                  {/* <div className="LearnMoreText">
                     6055 Meridian Ave, Ste. 40, San Jose, CA 95120, US
                     4084717004 leena@nityaayurveda.com
-                  </div>
+                  </div> */}
                   <div style={{ fontWeight: "600", marginTop: "1rem" }}>
                     Cancellation Policy: To cancel or reschedule, please contact
                     us 24 hours in advance.
