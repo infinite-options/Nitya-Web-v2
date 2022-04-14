@@ -62,7 +62,7 @@ export default function SocialLogin() {
   const [socialSignUpModalShow, setSocialSignUpModalShow] = useState(false);
   const [loginSuccessful, setLoginSuccessful] = useState(false);
 
-  let redirecturi = "https://nityaayurveda.com";
+  let redirecturi = "https://www.nityaayurveda.com";
 
   const responseGoogle = (response) => {
     console.log("response", response);
@@ -546,7 +546,7 @@ export default function SocialLogin() {
               isSignedIn={false}
               disable={true}
               cookiePolicy={"single_host_origin"}
-              redirectUri="https://nityaayurveda.com"
+              redirectUri="https://www.nityaayurveda.com"
               scope="https://www.googleapis.com/auth/calendar"
               //redirectUri="http://localhost:3000"
               onSuccess={responseGoogle}
