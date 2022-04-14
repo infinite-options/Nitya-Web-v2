@@ -22,7 +22,9 @@ export default function BookNowBTN(props) {
   const [bookNow, setBookNow] = useState(false);
   const [googleAuthedEmail, setgoogleAuthedEmail] = useState(null);
   const [idToken, setIdToken] = useState("");
-
+  useEffect(() => {
+    getAccessToken();
+  }, [bookNow]);
   // useEffect(() => {
   //   let url = BASE_URL + "customerToken/";
   //   let customer_uid = "100-000281";
@@ -114,7 +116,7 @@ export default function BookNowBTN(props) {
 
   const getAccessToken = () => {
     let url = BASE_URL + "customerToken/";
-    let customer_uid = "100-000281";
+    let customer_uid = "100-000090";
     axios
       .get(url + customer_uid)
       .then((response) => {
@@ -194,6 +196,7 @@ export default function BookNowBTN(props) {
                   console.log(err);
                 });
             } else {
+              console.log("here", old_at);
               setAccessToken(old_at);
             }
           })
