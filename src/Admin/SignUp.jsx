@@ -9,6 +9,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import SocialLogin from "./SocialLogin";
 
+import ScrollToTop from "../Blog/ScrollToTop";
 const eye = ""; //<FontAwesomeIcon icon={faEye} />;
 
 const pageColor = "#b28d42";
@@ -139,6 +140,7 @@ export default function SignUp() {
 
   return (
     <div className={classes.root}>
+      <ScrollToTop />
       <div className={classes.container}>
         <div className={classes.pageText} style={{ paddingBottom: "20px" }}>
           Sign Up

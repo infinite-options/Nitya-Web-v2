@@ -4,7 +4,7 @@ import Cookies from "js-cookie";
 import { useHistory, withRouter } from "react-router";
 import axios from "axios";
 import { Button, Typography } from "@material-ui/core";
-
+import ScrollToTop from "../Blog/ScrollToTop";
 import Google from "../Assets/Images/Google.svg";
 import { Col, Form, Modal, Row } from "react-bootstrap";
 import { AuthContext } from "../auth/AuthContext";
@@ -73,17 +73,17 @@ function AdminLogin(props) {
     console.log(response);
     if (response.profileObj) {
       let email = response.profileObj.email;
-      let ta_id = "";
+      let customer_uid = "";
       setEmail(response.profileObj.email);
       setSocialId(response.googleId);
-      axios.get(BASE_URL + `taTokenEmail/${email}`).then((response) => {
+      axios.get(BASE_URL + `UserTokenEmail/${email}`).then((response) => {
         console.log(
           "in events",
-          response["data"]["ta_unique_id"],
-          response["data"]["ta_google_auth_token"]
+          response["data"]["customer_uid"],
+          response["data"]["user_access_token"]
         );
         console.log("in events", response);
-        setAccessToken(response["data"]["ta_google_auth_token"]);
+        setAccessToken(response["data"]["user_access_token"]);
         let url =
           "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=";
 
@@ -93,11 +93,11 @@ function AdminLogin(props) {
           pathname: "/home",
           state: email,
         });
-        setUserID(response["data"]["ta_unique_id"]);
-        ta_id = response["data"]["ta_unique_id"];
-        var old_at = response["data"]["ta_google_auth_token"];
+        setUserID(response["data"]["customer_uid"]);
+        customer_uid = response["data"]["customer_uid"];
+        var old_at = response["data"]["user_access_token"];
         console.log("in events", old_at);
-        var refreshToken = response["data"]["ta_google_refresh_token"];
+        var refreshToken = response["data"]["user_refresh_token"];
 
         let checkExp_url = url + old_at;
         console.log("in events", checkExp_url);
@@ -151,7 +151,7 @@ function AdminLogin(props) {
                   setAccessToken(at);
                   setIdToken(id_token);
                   console.log("in events", at);
-                  let url = BASE_URL + `UpdateAccessToken/${ta_id}`;
+                  let url = BASE_URL + `UpdateAccessToken/${customer_uid}`;
                   axios
                     .post(url, {
                       google_auth_token: at,
@@ -184,13 +184,40 @@ function AdminLogin(props) {
     axios
       .get(BASE_URL + "UserSocialLogin/" + email)
       .then((res) => {
-        console.log("loginSocialTA in events", res.data.result);
-        if (res.data.result !== false) {
+        console.log("loginSocialTA in events", res.data.result.result);
+        if (res.data.result.result !== false) {
           // setUserID(res.data.result[0]);
-
-          setAccessToken(res.data.result[1]);
-          setLoggedIn(true);
           history.push("/blog");
+          setAccessToken(res.data.result.result[0].user_access_token);
+
+          Auth.setIsAuth(true);
+          Auth.isLoggedIn(true);
+          setError("");
+          console.log("Login success");
+          let customerInfo = res.data.result.result[0];
+
+          Auth.setIsAuth(true);
+          Cookies.set("login-session", "good");
+          Cookies.set("customer_uid", customerInfo.customer_uid);
+          Cookies.set("role", customerInfo.role);
+
+          let newAccountType = customerInfo.role.toLowerCase();
+          switch (newAccountType) {
+            case "admin":
+              Auth.setAuthLevel(2);
+              props.history.push("/blog");
+              break;
+
+            case "customer":
+              Auth.setAuthLevel(0);
+              props.history.push("/home");
+              break;
+
+            default:
+              Auth.setAuthLevel(1);
+              props.history.push("/home");
+              break;
+          }
           console.log("Login successful");
           console.log(email);
 
@@ -627,6 +654,7 @@ function AdminLogin(props) {
 
   return (
     <div className={classes.root}>
+      <ScrollToTop />
       <div className={classes.container}>
         <div className={classes.pageText} style={{ paddingBottom: "20px" }}>
           Login

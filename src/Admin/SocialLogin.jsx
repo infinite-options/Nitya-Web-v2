@@ -76,7 +76,8 @@ export default function SocialLogin() {
       client_id: CLIENT_ID,
       client_secret: CLIENT_SECRET,
       // redirect_uri: "http://localhost:3000",
-      redirect_uri: redirecturi,
+      // redirect_uri: redirecturi,
+      redirect_uri: "postmessage",
       grant_type: "authorization_code",
     };
 
@@ -546,9 +547,10 @@ export default function SocialLogin() {
               isSignedIn={false}
               disable={true}
               cookiePolicy={"single_host_origin"}
-              redirectUri="https://www.nityaayurveda.com"
+              //redirectUri="https://www.nityaayurveda.com"
               scope="https://www.googleapis.com/auth/calendar"
-              //redirectUri="http://localhost:3000"
+              // redirectUri="http://localhost:3000"
+              redirectUri="postmessage"
               onSuccess={responseGoogle}
               onFailure={responseGoogle}
               render={(renderProps) => (
