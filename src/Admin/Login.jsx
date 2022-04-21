@@ -184,38 +184,38 @@ function AdminLogin(props) {
     axios
       .get(BASE_URL + "UserSocialLogin/" + email)
       .then((res) => {
-        console.log("loginSocialTA in events", res.data.result.result);
-        if (res.data.result.result !== false) {
+        console.log("loginSocialTA in events", res);
+        if (res.data.result !== false) {
           // setUserID(res.data.result[0]);
           history.push("/blog");
-          setAccessToken(res.data.result.result[0].user_access_token);
 
           Auth.setIsAuth(true);
           Auth.isLoggedIn(true);
           setError("");
           console.log("Login success");
           let customerInfo = res.data.result.result[0];
-
+          console.log("Login success, customerInfo");
           Auth.setIsAuth(true);
           Cookies.set("login-session", "good");
           Cookies.set("customer_uid", customerInfo.customer_uid);
           Cookies.set("role", customerInfo.role);
-
+          setAccessToken(res.data.result.result[0].user_access_token);
           let newAccountType = customerInfo.role.toLowerCase();
+          console.log(newAccountType);
           switch (newAccountType) {
             case "admin":
               Auth.setAuthLevel(2);
-              props.history.push("/blog");
+              history.push("/blog");
               break;
 
             case "customer":
               Auth.setAuthLevel(0);
-              props.history.push("/home");
+              history.push("/home");
               break;
 
             default:
               Auth.setAuthLevel(1);
-              props.history.push("/home");
+              history.push("/home");
               break;
           }
           console.log("Login successful");
@@ -226,6 +226,7 @@ function AdminLogin(props) {
           axios
             .get(BASE_URL + "GetUserEmailId/" + email)
             .then((response) => {
+              console.log("GetUserEmailId", response);
               if (response.data.message === "User ID doesnt exist") {
                 console.log("log in error");
                 // history.push('/signup');
@@ -421,30 +422,33 @@ function AdminLogin(props) {
                       history.push("/blog");
                       Auth.setIsAuth(true);
                       Auth.isLoggedIn(true);
+
                       setError("");
                       console.log("Login success");
                       let customerInfo = res.data.result[0];
-
+                      console.log("Login success, customerInfo");
                       Auth.setIsAuth(true);
                       Cookies.set("login-session", "good");
                       Cookies.set("customer_uid", customerInfo.customer_uid);
                       Cookies.set("role", customerInfo.role);
 
                       let newAccountType = customerInfo.role.toLowerCase();
+                      console.log(newAccountType);
                       switch (newAccountType) {
                         case "admin":
                           Auth.setAuthLevel(2);
-                          props.history.push("/blog");
+                          history.push("/blog");
+                          console.log("here");
                           break;
 
                         case "customer":
                           Auth.setAuthLevel(0);
-                          props.history.push("/home");
+                          history.push("/home");
                           break;
 
                         default:
                           Auth.setAuthLevel(1);
-                          props.history.push("/home");
+                          history.push("/home");
                           break;
                       }
                     } else if (res.data.code === 406 || res.data.code === 404) {

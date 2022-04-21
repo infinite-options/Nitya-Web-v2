@@ -121,6 +121,8 @@ const useStyles = makeStyles((theme) => ({
   blogImg: {
     width: "25rem",
     height: "20rem",
+    objectFit: "cover",
+    objectPosition: "top",
     "@media (max-width: 500px)": {
       width: "100%",
       marginLeft: "-30px",

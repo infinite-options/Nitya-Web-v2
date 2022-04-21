@@ -29,8 +29,25 @@ export default function Consulting() {
           .filter((service) => service.category === "Consultation")
           .map((filteredService) => (
             <div className="ServiceContainer">
-              <div style={{ width: "100%", flex: "1" }}>
+              <div
+                style={{
+                  width: "100%",
+                  display: "flex",
+                  flex: "1",
+                  backgroundColor: "#DADADA",
+                  justifyContent: "center",
+                  maxHeight: "100%",
+                }}
+              >
                 <img
+                  style={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: " scale-down",
+                    // width: "100%",
+                    // minHeight: "95%",
+                    // objectFit: "cover",
+                  }}
                   className="ServiceImg"
                   src={filteredService.image_url}
                   alt={"An image of" + filteredService.title}

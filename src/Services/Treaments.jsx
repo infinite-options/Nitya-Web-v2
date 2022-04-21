@@ -37,21 +37,21 @@ export default function Treatments() {
               <div
                 style={{
                   width: "100%",
-                  // display: "flex",
+                  display: "flex",
                   flex: "1",
-                  // backgroundColor: "white",
-                  // justifyContent: "center",
+                  backgroundColor: "#DADADA",
+                  justifyContent: "center",
+                  maxHeight: "100%",
                 }}
               >
                 <img
                   style={{
-                    // maxWidth: "100%",
-                    // maxHeight: "100%",
-                    // objectFit: " scale-down",
-                    // position: "bottom",
-                    width: "100%",
-                    minHeight: "100%",
-                    objectFit: "cover",
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                    objectFit: "scale-down",
+                    // width: "100%",
+                    // minHeight: "95%",
+                    // objectFit: "cover",
                   }}
                   variant="top"
                   src={filteredService.image_url}
