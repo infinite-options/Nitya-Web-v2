@@ -135,7 +135,7 @@ const useStyles = makeStyles((theme) => ({
     color: "#8d6f19",
     fontSize: "1.2rem",
     paddingBottom: "10px",
-    width: "30rem",
+    // width: "30rem",
     "@media (max-width: 570px)": {
       width: "100%",
     },
@@ -383,7 +383,10 @@ function Blogpage(props) {
                         open={Boolean(anchorEl)}
                         onClose={handleClose}
                       ></Menu>
-                      <div hidden={Auth.isAuth === false}>
+                      <div
+                        hidden={Auth.isAuth === false}
+                        style={{ marginRight: "15%" }}
+                      >
                         {/* http://localhost:4000/api/v2/deleteBlog/150-000048 */}
                         <DeleteForeverSharpIcon
                           style={{ cursor: "pointer" }}
@@ -406,13 +409,15 @@ function Blogpage(props) {
                     >
                       <div>
                         <div className={classes.title}>
-                          <div style={{ textAlign: "left" }}>
+                          <div
+                            style={{ textAlign: "left", marginRight: "15%" }}
+                          >
                             {post.blogTitle}
                           </div>
                         </div>
                         <div
                           className={classes.content}
-                          style={{ marginRight: "5%" }}
+                          style={{ marginRight: "15%" }}
                         >
                           <Markup content={post.blogSummary} />
                         </div>
