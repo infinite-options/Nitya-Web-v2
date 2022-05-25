@@ -32,7 +32,7 @@ export default function Footer() {
           <div>Email: Leena@nityaayurveda.com</div>
         </div>
       </div>
-      <div class="wrapper">
+      <div className="FooterTextWrapper">
         <img
           src={Namacb}
           style={{ height: "7rem", justifySelf: "center", alignSelf: "center" }}

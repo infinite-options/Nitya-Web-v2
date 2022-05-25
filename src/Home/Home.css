@@ -574,6 +574,14 @@
     padding: 0px;
     text-align: center;
   }
+  .wrapper {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    /* grid-row-gap: 10%; */
+    background-color: #fff;
+    color: #444;
+    margin-top: 2rem;
+  }
   .seminarBtn {
     background: #ffffff 0% 0% no-repeat padding-box;
     border-radius: 50px;
