@@ -124,14 +124,14 @@
     position: absolute;
     text-align: center;
     width: 100%;
-    top: 80px;
+    top: 13vh;
     left: -150%;
     transition: 0.2s all;
   }
 
   .nav-links.active {
     background: white;
-    left: -10%;
+    left: 0%;
   }
 
   .nav-item {
