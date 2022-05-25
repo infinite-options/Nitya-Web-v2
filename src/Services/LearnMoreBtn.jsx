@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class BookNowBTN extends Component {
+class LearnMoreBtn extends Component {
   constructor(props) {
     super(props);
     // this.state = { apptID: "330-000006" };
@@ -33,4 +33,4 @@ class BookNowBTN extends Component {
   }
 }
 
-export default BookNowBTN;
+export default LearnMoreBtn;

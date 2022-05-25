@@ -10,6 +10,7 @@ import {
   ListItemText,
   Menu,
 } from "@material-ui/core";
+import ReactPlayer from "react-player";
 import Container from "@material-ui/core/Container";
 import SearchIcon from "@material-ui/icons/Search";
 import defaultImg from "../Assets/Images/Blog-Default-Img.png";
@@ -172,6 +173,7 @@ function Blogpage(props) {
   const [anchorEl, setanchorEl] = useState(null);
   const classes = useStyles();
   const [data, setData] = useState([]);
+  const [play, setPlay] = useState(false);
   const history = useHistory();
   const Auth = useContext(AuthContext);
 
@@ -351,7 +353,28 @@ function Blogpage(props) {
                 <div className={classes.cardRow}>
                   <div>
                     <div>
-                      <img
+                      {console.log(post.blogImage.split("/")[4])}
+                      {post.blogImage.split("/")[4] == "blogs" ? (
+                        <img
+                          src={
+                            post.blogImage !== "NULL" && post.blogImage
+                              ? post.blogImage
+                              : defaultImg
+                          }
+                          className={classes.blogImg}
+                          onError={(e) => (e.target.style.display = "none")}
+                        />
+                      ) : (
+                        <div onClick={() => setPlay(!play)}>
+                          <ReactPlayer
+                            width="25rem"
+                            height="25rem"
+                            url={post.blogImage}
+                            playing={play}
+                          />
+                        </div>
+                      )}
+                      {/* <img
                         src={
                           post.blogImage !== "NULL" && post.blogImage
                             ? post.blogImage
@@ -359,7 +382,7 @@ function Blogpage(props) {
                         }
                         className={classes.blogImg}
                         onError={(e) => (e.target.style.display = "none")}
-                      />
+                      /> */}
                     </div>
                   </div>
                   <div className={classes.desc}>

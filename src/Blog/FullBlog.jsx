@@ -10,6 +10,7 @@ import {
   Menu,
   MenuItem,
 } from "@material-ui/core";
+import ReactPlayer from "react-player";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import Card from "@material-ui/core/Card";
@@ -155,6 +156,7 @@ function FullBlog(props) {
   const classes = useStyles();
   const [getBlogId, setBlogId] = useState([]);
   const { blog_uid } = useParams();
+  const [play, setPlay] = useState(false);
 
   const getDataById = async () => {
     const res = await fetch(
@@ -350,7 +352,6 @@ function FullBlog(props) {
                       </MenuItem>
                     </Menu>
                   </div>
-
                   <div
                     style={{
                       textAlign: "left",
@@ -362,8 +363,8 @@ function FullBlog(props) {
                   >
                     <p>{post.blogTitle}</p>
                   </div>
-
-                  {!!post.blogImage && (
+                  {!!post.blogImage &&
+                  post.blogImage.split("/")[4] == "blogs" ? (
                     <div className={classes.img}>
                       <img
                         src={post.blogImage}
@@ -374,13 +375,17 @@ function FullBlog(props) {
                         onError={(e) => (e.target.style.display = "none")}
                       />
                     </div>
-                  )}
+                  ) : (
+                    <div className={classes.img} onClick={() => setPlay(!play)}>
+                      <ReactPlayer url={post.blogImage} playing={play} />
+                    </div>
+                  )}{" "}
+                  (
                   <div className={classes.content}>
                     <p style={{ fontSize: "32px" }}>{post.blogTitle}</p>
 
                     <Markup content={post.blogText} />
                   </div>
-
                   <hr style={{ color: "#8d6f19" }}></hr>
                   <div className={classes.cardActions}>
                     <Typography>Views &nbsp;&nbsp; Comments</Typography>

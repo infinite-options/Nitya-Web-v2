@@ -437,7 +437,12 @@ export default function AppointmentPage(props) {
           let end_time = Date.parse(apiDateString + "T20:00:00-0800") / 1000;
           let free = [];
           let appt_start_time = start_time;
-
+          console.log(
+            "freebusy busy times",
+            busy,
+            apiDateString + "T08:00:00-0800",
+            apiDateString + "T20:00:00-0800"
+          );
           let seconds = convert(duration);
           // Loop through each appt slot in the search range.
           while (appt_start_time < end_time) {
@@ -451,6 +456,12 @@ export default function AppointmentPage(props) {
             busy.forEach((times) => {
               let this_start = Date.parse(times["start"]) / 1000;
               let this_end = Date.parse(times["end"]) / 1000;
+              console.log(
+                "freebusy busy times",
+                busy,
+                times["start"],
+                times["end"]
+              );
               // If the appt start time or appt end time falls on a current appt, slot is taken.
               if (
                 (appt_start_time >= this_start && appt_start_time < this_end) ||
@@ -460,7 +471,7 @@ export default function AppointmentPage(props) {
                 return; // No need to continue if it's taken.
               }
             });
-
+            console.log("freebusy", free);
             // If we made it through all appts and the slot is still available, it's an open slot.
             if (slot_available) {
               free.push(
@@ -470,6 +481,7 @@ export default function AppointmentPage(props) {
             // + duration minutes
             appt_start_time += 60 * 30;
           }
+          console.log("freebusy", free);
           setTimeSlots(free);
         })
         .catch((error) => {
