@@ -22,7 +22,7 @@
   margin: 5px;
   text-decoration: none;
 }
-@media only screen and (max-width: 570px) {
+@media screen and (min-width: 500px) and (max-width: 900px) {
   .BookNowBtn {
     font-family: Hoefler Text;
     background-color: #d3a625;

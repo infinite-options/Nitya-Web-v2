@@ -3,6 +3,7 @@ import LearnMoreBTN from "./LearnMoreBtn";
 import BookNowBTN from "../Services/BookNowBtn";
 import axios from "axios";
 
+import "../Home/Home.css";
 export default function Treatments() {
   const [data, setData] = useState([]);
 
@@ -18,7 +19,7 @@ export default function Treatments() {
   }, []);
 
   return (
-    <div className="Card" style={{ margin: "0%" }}>
+    <div className="ServiceCard">
       <div
         className="CardGrid"
         style={{ gridTemplateColumns: "repeat(1, auto)", height: "auto" }}
@@ -49,9 +50,6 @@ export default function Treatments() {
                     maxWidth: "100%",
                     maxHeight: "100%",
                     objectFit: "scale-down",
-                    // width: "100%",
-                    // minHeight: "95%",
-                    // objectFit: "cover",
                   }}
                   variant="top"
                   src={filteredService.image_url}
@@ -66,6 +64,7 @@ export default function Treatments() {
                     flexDirection: "column",
                     justifyContent: "center",
                     marginTop: "2rem",
+                    marginBottom: "2rem",
                   }}
                 >
                   <div className="Services_Title_Font">

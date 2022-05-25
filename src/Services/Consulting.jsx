@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LearnMoreBTN from "./LearnMoreBtn";
 import BookNowBTN from "../Services/BookNowBtn";
-
 import "../Home/Home.css";
 
 export default function Consulting() {
@@ -20,15 +19,22 @@ export default function Consulting() {
   }, []);
 
   return (
-    <div className="Card" style={{ margin: "0%" }}>
+    <div className="ServiceCard">
       <div
         className="CardGrid"
-        style={{ gridTemplateColumns: "repeat(1, auto)" }}
+        style={{ gridTemplateColumns: "repeat(1, auto)", height: "auto" }}
       >
         {data
           .filter((service) => service.category === "Consultation")
           .map((filteredService) => (
-            <div className="ServiceContainer">
+            <div
+              style={{
+                display: "flex",
+                backgroundColor: "#DADADA",
+                marginTop: "2rem",
+                maxHeight: "282px",
+              }}
+            >
               <div
                 style={{
                   width: "100%",
@@ -44,9 +50,6 @@ export default function Consulting() {
                     maxWidth: "100%",
                     maxHeight: "100%",
                     objectFit: " scale-down",
-                    // width: "100%",
-                    // minHeight: "95%",
-                    // objectFit: "cover",
                   }}
                   className="ServiceImg"
                   src={filteredService.image_url}
