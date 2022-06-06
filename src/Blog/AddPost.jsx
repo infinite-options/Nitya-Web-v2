@@ -136,14 +136,14 @@ function AddPost(props) {
   };
 
 
-  const updateData = () => {
+  const updateData = (index) => {
    // postData.item_photo = file.obj; // change to File object
 
     let formData = new FormData();
 
-    console.log("FIle",  images[0].file)
-    formData.append('filename',  images[0].file.name); 
-    formData.append('item_photo', images[0].file); 
+    console.log("FIle",  images[index].file)
+    formData.append('filename',  images[index].file.name);
+    formData.append('item_photo', images[index].file);
 
     axios.post("https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/uploadImage", formData)
     .then((response) => {
@@ -214,7 +214,7 @@ function AddPost(props) {
                                 <img src={blogEditImage == "" ? image.data_url : blogEditImage} alt="" width="100" />
                                 <div className="image-item__btn-wrapper">
                                   {/* <button onClick={() => onImageUpdate(index)}>Update</button> */}
-                                  <button onClick={() => updateData()}>Upload</button>
+                                  <button onClick={() => updateData(index)}>Upload</button>
                                   <button onClick={() => onImageRemove(index)}>Remove</button>
                                 </div>
                               </div>  
