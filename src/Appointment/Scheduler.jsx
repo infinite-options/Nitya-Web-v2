@@ -165,7 +165,18 @@ export default function Scheduler(props) {
   };
 
   function sendToDatabase() {
-    console.log("create appt");
+    console.log("create appt", {
+      first_name: props.fName,
+      last_name: "",
+      email: props.email,
+      phone_no: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
+      appt_treatment_uid: props.treatmentID, //TREATMENT INFO #1
+      notes: props.notes,
+      appt_date: moment(props.date).format("YYYY-MM-DD"),
+      appt_time: convertTime12to24(props.selectedTime),
+      purchase_price: props.cost, //TREATMENT INFO #2
+      purchase_date: dateFormat3(props.purchaseDate),
+    });
     const postURL =
       "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/createAppointment";
     axios
@@ -226,6 +237,12 @@ export default function Scheduler(props) {
     var event = {
       summary: props.treatmentName,
       location: "6055 Meridian Ave #40, San Jose, CA, 95120",
+      description:
+        "Name: " +
+        props.fName +
+        "\n" +
+        "Phone No: " +
+        props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       creator: {
         email: "support@nityaayurveda.com",
         self: true,
