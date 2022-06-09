@@ -149,7 +149,7 @@ export default function Scheduler(props) {
     }
   }, [apptInfo]);
   const convertTime12to24 = (time12h) => {
-    let time = time12h.slice(0, -2);
+    let time = time12h.slice(0, -3);
     let modifier = time12h.slice(-2);
     console.log(time, modifier);
     if (time === "12") {
@@ -158,6 +158,7 @@ export default function Scheduler(props) {
 
     if (modifier === "PM" || modifier === "pm") {
       time = parseInt(time, 10) + 12 + ":00";
+      console.log("here", time);
     }
     console.log(time);
     return `${time}`;
@@ -224,7 +225,6 @@ export default function Scheduler(props) {
     console.log(end_time);
     var event = {
       summary: props.treatmentName,
-
       location: "6055 Meridian Ave #40, San Jose, CA, 95120",
       creator: {
         email: "support@nityaayurveda.com",
