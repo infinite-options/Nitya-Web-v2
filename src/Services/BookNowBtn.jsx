@@ -22,7 +22,7 @@ export default function BookNowBTN(props) {
 
   const getAccessToken = () => {
     let url = BASE_URL + "customerToken/";
-    let customer_uid = "100-000093";
+    let customer_uid = "100-000091";
     axios
       .get(url + customer_uid)
       .then((response) => {

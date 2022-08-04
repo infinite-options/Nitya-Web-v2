@@ -380,7 +380,6 @@ function FullBlog(props) {
                       <ReactPlayer url={post.blogImage} playing={play} />
                     </div>
                   )}{" "}
-                  (
                   <div className={classes.content}>
                     <p style={{ fontSize: "32px" }}>{post.blogTitle}</p>
 
