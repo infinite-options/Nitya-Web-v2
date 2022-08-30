@@ -176,91 +176,6 @@ export default function AppointmentPage(props) {
     return parsedDuration;
   };
 
-  // handle form changes
-  const handleFullNameChange = (newFName) => {
-    setFName(newFName);
-  };
-
-  const handleEmailChange = (newEmail) => {
-    setEmail(newEmail);
-  };
-
-  const handlePhoneNumChange = (newPhoneNum) => {
-    setPhoneNum(newPhoneNum);
-  };
-
-  const handleNotesChange = (newNotes) => {
-    setNotes(newNotes);
-  };
-
-  //for stripe
-  function toggleKeys() {
-    setUseTestKeys(!useTestKeys);
-    setInfoSubmitted(true);
-
-    if (notes === "NITYATEST") {
-      // Fetch public key
-      console.log("fetching public key");
-      axios
-        .get(
-          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYATEST"
-        )
-        .then((result) => {
-          console.log(
-            "(1 PaymentDetails) Stripe-key then result (1): " +
-              JSON.stringify(result)
-          );
-
-          let tempStripePromise = loadStripe(result.data.publicKey);
-
-          console.log("(1 PaymentDetails) setting state with stripePromise");
-
-          setStripePromise(tempStripePromise);
-
-          console.log(tempStripePromise);
-          console.log("(1 PaymentDetails) stripePromise set!");
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response) {
-            console.log(
-              "(1 PaymentDetails) error: " + JSON.stringify(err.response)
-            );
-          }
-        });
-    } else {
-      // Fetch public key live
-      console.log("fetching public key live");
-      axios
-        .get(
-          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYA"
-        )
-        .then((result) => {
-          console.log(
-            "(2 PaymentDetails) Stripe-key then result (1): " +
-              JSON.stringify(result)
-          );
-
-          let tempStripePromise = loadStripe(result.data.publicKey);
-
-          console.log("(2 PaymentDetails) setting state with stripePromise");
-
-          console.log(tempStripePromise);
-          setStripePromise(tempStripePromise);
-
-          console.log("(2 PaymentDetails) stripePromise set!");
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response) {
-            console.log(
-              "(2 PaymentDetails) error: " + JSON.stringify(err.response)
-            );
-          }
-        });
-    }
-  }
-
   // for appt
   //String formatting functions for the date variable
 
@@ -399,6 +314,8 @@ export default function AppointmentPage(props) {
   //get appt
   useEffect(() => {
     if (dateHasBeenChanged) {
+      let hoursMode = "";
+      hoursMode = attendMode === "Online" ? "Online" : "Office";
       console.log("407", duration);
 
       axios
@@ -406,7 +323,9 @@ export default function AppointmentPage(props) {
           "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
             apiDateString +
             "/" +
-            duration
+            duration +
+            "/" +
+            hoursMode
         )
         .then((res) => {
           console.log("This is the information we got" + res);
@@ -429,9 +348,13 @@ export default function AppointmentPage(props) {
         Accept: "application/json",
         Authorization: "Bearer " + access_token,
       };
+      const morningTime =
+        attendMode === "Online" ? "T08:00:00-0800" : "T09:00:00-0800";
+      const eveningTime =
+        attendMode === "Online" ? "T20:00:00-0800" : "T20:00:00-0800";
       const data = {
-        timeMin: apiDateString + "T08:00:00-0800",
-        timeMax: apiDateString + "T20:00:00-0800",
+        timeMin: apiDateString + morningTime,
+        timeMax: apiDateString + eveningTime,
         items: [
           {
             id: "primary",
@@ -450,16 +373,11 @@ export default function AppointmentPage(props) {
         )
         .then((response) => {
           let busy = response.data.calendars.primary.busy;
-          let start_time = Date.parse(apiDateString + "T08:00:00-0800") / 1000;
-          let end_time = Date.parse(apiDateString + "T20:00:00-0800") / 1000;
+          let start_time = Date.parse(apiDateString + morningTime) / 1000;
+          let end_time = Date.parse(apiDateString + eveningTime) / 1000;
           let free = [];
           let appt_start_time = start_time;
-          console.log(
-            "freebusy busy times",
-            busy,
-            apiDateString + "T08:00:00-0800",
-            apiDateString + "T20:00:00-0800"
-          );
+
           let seconds = convert(duration);
           // Loop through each appt slot in the search range.
           while (appt_start_time < end_time) {

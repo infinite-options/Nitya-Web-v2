@@ -529,7 +529,7 @@ export default function AppointmentPage(props) {
                 >
                   <span>
                     {moment(location.state.date).format("ll")} at{" "}
-                    {formatTime(location.state.date, location.state.time)} for{" "}
+                    {formatTime(location.state.date, location.state.time)} -{" "}
                     {location.state.mode}
                   </span>
                 </h1>
