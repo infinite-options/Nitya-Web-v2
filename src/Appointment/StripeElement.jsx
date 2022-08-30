@@ -22,6 +22,9 @@ export default function StripeElement(props) {
         selectedTime={props.selectedTime}
         treatmentDate={props.treatmentDate}
         treatmentTime={props.treatmentTime}
+        mode={props.mode}
+        age={props.age}
+        gender={props.gender}
         cost={props.cost}
         treatmentName={props.treatmentName}
         duration={props.duration}

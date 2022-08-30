@@ -1,20 +1,31 @@
 import React, { useState, useEffect, useContext } from "react";
-
-import StripeElement from "./StripeElement";
-import { useLocation, useParams } from "react-router";
-import ScrollToTop from "../Blog/ScrollToTop";
-import { loadStripe } from "@stripe/stripe-js";
-import axios from "axios";
 import { Col } from "reactstrap";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { useLocation, useParams } from "react-router";
+import { loadStripe } from "@stripe/stripe-js";
+import { Radio } from "@material-ui/core";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import axios from "axios";
+import StripeElement from "./StripeElement";
+import moment from "moment";
+import { MyContext } from "../App";
 import SimpleForm from "./simpleForm";
 import SimpleFormText from "./simpleFormText";
-import { makeStyles } from "@material-ui/core/styles";
-import { MyContext } from "../App";
-import moment from "moment";
+import ScrollToTop from "../Blog/ScrollToTop";
 import "./calendar.css";
 import "../Appointment/AppointmentPage.css";
 
 // import moment from "moment";
+const YellowRadio = withStyles({
+  root: {
+    color: "#D3A625",
+    "&$checked": {
+      color: "#D3A625",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 const useStyles = makeStyles({
   container: {
@@ -150,7 +161,12 @@ export default function AppointmentPage(props) {
   const { serviceArr, servicesLoaded } = useContext(MyContext);
   const [elementToBeRendered, setElementToBeRendered] = useState([]);
   const treatment_uid = treatmentID;
-
+  const [gender, setGender] = useState({
+    male: false,
+    female: true,
+  });
+  const [selectGender, setSelectGender] = useState("Female");
+  const [age, setAge] = useState(null);
   //for axios.get
   const [date, setDate] = useState(new Date());
   const [minDate, setMinDate] = useState(new Date());
@@ -206,8 +222,32 @@ export default function AppointmentPage(props) {
 
     return parsedDuration;
   };
-
+  const handleGender = (event) => {
+    var optionPick = event.target.name;
+    console.log(optionPick);
+    var newGenderObj = {};
+    var newGender = "";
+    if (optionPick === "female") {
+      newGenderObj = {
+        male: false,
+        female: true,
+      };
+      newGender = "Female";
+    } else {
+      newGenderObj = {
+        male: true,
+        female: false,
+      };
+      newGender = "Male";
+    }
+    console.log(newGenderObj);
+    setGender(newGenderObj);
+    setSelectGender(newGender);
+  };
   // handle form changes
+  const handleAgeChange = (newAge) => {
+    setAge(newAge);
+  };
   const handleFullNameChange = (newFName) => {
     setFName(newFName);
   };
@@ -489,7 +529,8 @@ export default function AppointmentPage(props) {
                 >
                   <span>
                     {moment(location.state.date).format("ll")} at{" "}
-                    {formatTime(location.state.date, location.state.time)}
+                    {formatTime(location.state.date, location.state.time)} for{" "}
+                    {location.state.mode}
                   </span>
                 </h1>
               </div>
@@ -537,7 +578,42 @@ export default function AppointmentPage(props) {
                     onHandleChange={handleFullNameChange}
                   />
                 </div>
-
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <YellowRadio
+                        checked={gender.female}
+                        onChange={(e) => handleGender(e)}
+                        name="female"
+                      />
+                    }
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    control={
+                      <YellowRadio
+                        checked={gender.male}
+                        onChange={(e) => handleGender(e)}
+                        name="male"
+                      />
+                    }
+                    label="Male"
+                  />
+                  <SimpleForm field="Age" onHandleChange={handleAgeChange} />
+                </div>
+                <div
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                ></div>
                 <div
                   style={{
                     marginBottom: "10px",
@@ -591,6 +667,9 @@ export default function AppointmentPage(props) {
                       location.state.date,
                       location.state.time
                     )}
+                    mode={location.state.mode}
+                    age={age}
+                    gender={selectGender}
                     purchaseDate={purchaseDate}
                     cost={cost}
                     treatmentDate={location.state.date}

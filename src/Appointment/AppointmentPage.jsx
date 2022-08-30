@@ -1,17 +1,30 @@
 import React, { useState, useEffect, useContext } from "react";
-import { useParams } from "react-router";
-import ScrollToTop from "../Blog/ScrollToTop";
-import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
-import { MyContext } from "../App";
-import Calendar from "react-calendar";
-import "./calendar.css";
-import Grid from "@material-ui/core/Grid";
-import { useHistory, useLocation } from "react-router-dom";
-import "../Appointment/AppointmentPage.css";
 import { Helmet } from "react-helmet";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { useHistory, useLocation } from "react-router-dom";
+import { useParams } from "react-router";
+import { loadStripe } from "@stripe/stripe-js";
+import { Radio } from "@material-ui/core";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import moment from "moment";
+import Grid from "@material-ui/core/Grid";
+import Calendar from "react-calendar";
+import { MyContext } from "../App";
+import ScrollToTop from "../Blog/ScrollToTop";
+import "./calendar.css";
+import "../Appointment/AppointmentPage.css";
+
+const YellowRadio = withStyles({
+  root: {
+    color: "#D3A625",
+    "&$checked": {
+      color: "#D3A625",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 const useStyles = makeStyles({
   calendarBox: {
@@ -80,7 +93,11 @@ export default function AppointmentPage(props) {
   const [email, setEmail] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [notes, setNotes] = useState("");
-
+  const [mode, setMode] = useState({
+    inPerson: true,
+    online: false,
+  });
+  const [attendMode, setAttendMode] = useState("In-Person");
   // for hide & show
   const [infoSubmitted, setInfoSubmitted] = useState(false);
   // const [bookNowClicked, setBookNowClicked] = useState(false);
@@ -512,7 +529,28 @@ export default function AppointmentPage(props) {
       </Grid>
     );
   }
-
+  const handleMode = (event) => {
+    var optionPick = event.target.name;
+    console.log(optionPick);
+    var newModeObj = {};
+    var newMode = "";
+    if (optionPick === "inPerson") {
+      newModeObj = {
+        inPerson: true,
+        online: false,
+      };
+      newMode = "In-Person";
+    } else {
+      newModeObj = {
+        inPerson: false,
+        online: true,
+      };
+      newMode = "Online";
+    }
+    console.log(newModeObj);
+    setMode(newModeObj);
+    setAttendMode(newMode);
+  };
   function selectApptTime(element) {
     console.log("selected time", element);
     setSelectedTime(element);
@@ -561,6 +599,38 @@ export default function AppointmentPage(props) {
 
               {/* Right hand side of the Container */}
               <div className={classes.calendarBox}>
+                <div className="TitleFontAppt">Pick an Appointment Type</div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginTop: "1rem",
+                    marginBottom: "2rem",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <YellowRadio
+                        checked={mode.inPerson}
+                        onChange={(e) => handleMode(e)}
+                        name="inPerson"
+                      />
+                    }
+                    label="In-person"
+                  />
+                  <FormControlLabel
+                    control={
+                      <YellowRadio
+                        checked={mode.online}
+                        onChange={(e) => handleMode(e)}
+                        name="online"
+                      />
+                    }
+                    label="Online"
+                  />
+                </div>
                 <div className="TitleFontAppt">Pick an Appointment Date</div>
                 {console.log("(Calendar) date: ", date)}
                 <Calendar
@@ -607,6 +677,7 @@ export default function AppointmentPage(props) {
                       state: {
                         date: apiDateString,
                         time: selectedTime,
+                        mode: attendMode,
                         accessToken: access_token,
                       },
                     })

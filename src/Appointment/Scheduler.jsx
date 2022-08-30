@@ -172,6 +172,9 @@ export default function Scheduler(props) {
       phone_no: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       appt_treatment_uid: props.treatmentID, //TREATMENT INFO #1
       notes: props.notes,
+      mode: props.mode,
+      age: props.age,
+      gender: props.gender,
       appt_date: moment(props.date).format("YYYY-MM-DD"),
       appt_time: convertTime12to24(props.selectedTime),
       purchase_price: props.cost, //TREATMENT INFO #2
@@ -187,6 +190,9 @@ export default function Scheduler(props) {
         phone_no: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
         appt_treatment_uid: props.treatmentID, //TREATMENT INFO #1
         notes: props.notes,
+        mode: props.mode,
+        age: props.age,
+        gender: props.gender,
         appt_date: moment(props.date).format("YYYY-MM-DD"),
         appt_time: convertTime12to24(props.selectedTime),
         purchase_price: props.cost, //TREATMENT INFO #2
@@ -210,6 +216,9 @@ export default function Scheduler(props) {
       purchase_price: props.cost,
       duration: props.duration,
       image_url: props.image_url,
+      mode: props.mode,
+      age: props.age,
+      gender: props.gender,
     });
     // history.push("/apptconfirm", {apptInfo});
     console.log("create appt", apptInfo);
