@@ -97,10 +97,16 @@ function AdminLogin(props) {
         console.log("in events", old_at);
         var refreshToken = response["data"]["user_refresh_token"];
 
-        axios
-          .get(
-            `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`
-          )
+        // axios
+        //   .get(
+        //     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`
+        //   )
+        fetch(
+          `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`,
+          {
+            method: "GET",
+          }
+        )
           .then((response) => {
             console.log("in events", response);
             if (response["status"] === 400) {

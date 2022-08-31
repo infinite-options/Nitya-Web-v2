@@ -542,32 +542,48 @@ export default function AppointmentPage(props) {
     console.log("Merged", result, selectedButton);
     return (
       <Grid container xs={11}>
-        {result.map(function (element, i) {
-          return (
-            <button
-              key={i}
-              className={classes.timeslotButton}
-              style={{
-                width: "10rem",
-                height: "3rem",
-                maxWidth: "80%",
-                backgroundColor: i === selectedButton ? "#D3A625" : "white",
-                border: "2px solid #D3A625",
-                color: i === selectedButton ? "white" : "#D3A625",
-                // padding: "15px 90px",
-                textAlign: "center",
-                textDecoration: "none",
-                fontSize: "20px",
-                borderRadius: "50px",
-                display: "block",
-                margin: "6px auto",
-              }}
-              onClick={() => selectApptTime(element, i)}
-            >
-              {formatTime(apiDateString, element)}
-            </button>
-          );
-        })}
+        {result.length > 0 ? (
+          result.map(function (element, i) {
+            return (
+              <button
+                key={i}
+                className={classes.timeslotButton}
+                style={{
+                  width: "10rem",
+                  height: "3rem",
+                  maxWidth: "80%",
+                  backgroundColor: i === selectedButton ? "#D3A625" : "white",
+                  border: "2px solid #D3A625",
+                  color: i === selectedButton ? "white" : "#D3A625",
+                  // padding: "15px 90px",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  fontSize: "20px",
+                  borderRadius: "50px",
+                  display: "block",
+                  margin: "6px auto",
+                }}
+                onClick={() => selectApptTime(element, i)}
+              >
+                {formatTime(apiDateString, element)}
+              </button>
+            );
+          })
+        ) : (
+          <div className="ApptPageHeader">
+            {attendMode === "Online" ? (
+              <div>
+                No online appointments are available. Please choose another
+                date.
+              </div>
+            ) : (
+              <div>
+                No in-person appointments are available. Please choose another
+                date or check for online appointments.
+              </div>
+            )}
+          </div>
+        )}
       </Grid>
     );
   }

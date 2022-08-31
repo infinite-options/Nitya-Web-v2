@@ -623,3 +623,250 @@
     padding-bottom: 5%; */
   }
 }
+
+@media screen and (min-width: 200px) and (max-width: 400px) {
+  .Card {
+    width: 80%;
+    height: auto;
+    margin: 5% 0% 5% 0%;
+    background-color: white;
+  }
+
+  .CardGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    padding: 3%;
+  }
+
+  .IntroGrid {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 0px;
+    padding: 3%;
+  }
+
+  .CardTitle {
+    font-family: Hoefler Text Bold;
+    color: #d3a625;
+    font-size: 52px;
+    font-style: italic;
+    margin-right: 0rem;
+    padding: 0px;
+    text-align: center;
+  }
+
+  .CardButton {
+    text-transform: none;
+    background-color: #d3a625;
+    color: white;
+    font-size: 24px;
+    width: 75%;
+    height: 3rem;
+    margin-right: 0rem;
+    margin-top: 2rem;
+    border: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .ContactButton {
+    text-transform: none;
+    background-color: #d3a625;
+    color: white;
+    font-size: 17px;
+    width: 100%;
+    height: 3rem;
+    margin-right: 0rem;
+    margin-top: 2rem;
+    border: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .CardImage {
+    object-fit: contain;
+    height: 20rem;
+    width: 100%;
+  }
+
+  .CardText {
+    font-family: SF Pro Display Regular;
+    color: #d3a625;
+    font-size: 20px;
+    margin-right: 0rem;
+    margin-bottom: 1rem;
+    flex: 1;
+  }
+
+  .Services_Title_Font {
+    font-family: Hoefler Text;
+    font-size: 16px;
+    text-align: center;
+    letter-spacing: 0.6px;
+    color: #000000;
+    padding-left: 5%;
+    padding-right: 5%;
+  }
+
+  /* Body Text for each Service Card */
+  .Services_Body_Font {
+    font-family: SF Pro Display Regular;
+    text-align: center;
+    font-size: 12px;
+    font-weight: normal;
+    letter-spacing: 0.55px;
+    color: #000000;
+    padding-left: 5%;
+    padding-right: 5%;
+    margin-top: 1rem;
+  }
+
+  .ServiceContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 1rem;
+    background-color: #dadada;
+    width: 120%;
+    margin-left: 4rem;
+  }
+
+  .ServiceCard {
+    width: 100%;
+    margin: 0%;
+  }
+
+  .ServiceImg {
+    width: 100%;
+    min-height: 100%;
+    object-fit: cover;
+  }
+
+  .title {
+    font-family: Hoefler Text;
+    font-size: 18px;
+    font-style: italic;
+  }
+
+  .subTitle {
+    font-size: 16px;
+  }
+
+  .inputField {
+    height: 30%;
+    width: 80%;
+  }
+
+  .donationField {
+    height: 30%;
+    width: 80%;
+  }
+
+  .textTitle {
+    text-align: center;
+    font: normal normal normal 14px SF Pro Display;
+    color: #000000;
+  }
+
+  .textConfirm {
+    text-align: center;
+    font: normal normal normal 14px SF Pro Display;
+    color: #d3a625;
+  }
+
+  .registerBtn {
+    background: #d3a625;
+    border-radius: 50px;
+    border: none;
+    font: normal normal normal 13px hoefler Text;
+    color: #ffffff;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    width: 7rem;
+  }
+
+  .showRegBtn {
+    background: #d3a625;
+    border-radius: 50px;
+    border: none;
+    font: normal normal normal 13px hoefler Text;
+    color: #ffffff;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    cursor: pointer;
+    width: 7rem;
+  }
+
+  .CardTitle {
+    font-family: Hoefler Text Bold;
+    color: #d3a625;
+    font-size: 26px;
+    font-style: italic;
+    /* font-weight: bold; */
+    margin-right: 0rem;
+    padding: 0px;
+    text-align: center;
+  }
+
+  .wrapper {
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    /* grid-row-gap: 10%; */
+    background-color: #fff;
+    color: #444;
+    margin-top: 2rem;
+  }
+
+  .seminarBtn {
+    background: #ffffff 0% 0% no-repeat padding-box;
+    border-radius: 50px;
+    font: normal normal normal 17px/20px Hoefler Text;
+    color: #d3a625;
+    text-transform: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.7rem 2rem;
+    margin-right: 2rem;
+  }
+
+  .NewInput {
+    width: 95%;
+    height: 3rem;
+  }
+
+  .FooterTextWrapper {
+    color: #c3a336;
+    font-size: 12px;
+    display: grid;
+    grid-template-columns: repeat(3, auto);
+    align-items: flex-start;
+    /* margin-top: 2rem; */
+  }
+
+  .FooterText {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    border-right: 2px solid #424242;
+    /* margin-top:1rem; */
+    /* padding: 1rem; */
+  }
+
+  .FooterTitle {
+    color: #c3a336;
+    font-size: 20px;
+    text-align: center;
+    /* padding-left: 20%;
+    padding-bottom: 5%; */
+  }
+}

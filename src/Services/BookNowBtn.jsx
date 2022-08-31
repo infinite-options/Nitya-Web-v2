@@ -25,6 +25,9 @@ export default function BookNowBTN(props) {
     let customer_uid = "100-000093";
     axios
       .get(url + customer_uid)
+      // fetch(url + customer_uid, {
+      //   method: "GET",
+      // })
       .then((response) => {
         // console.log("in events", response);
         // setSignedIn(true);
@@ -33,12 +36,18 @@ export default function BookNowBTN(props) {
         // console.log("in events", old_at);
         var refreshToken = response["data"]["user_refresh_token"];
 
-        axios
-          .get(
-            `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`
-          )
+        // axios
+        //   .get(
+        //     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`
+        //   )
+        fetch(
+          `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`,
+          {
+            method: "GET",
+          }
+        )
           .then((response) => {
-            // console.log("in events", response);
+            console.log("in events", response);
             if (response["status"] === 400) {
               // console.log("in events if");
               let authorization_url =
@@ -58,7 +67,7 @@ export default function BookNowBTN(props) {
                 formBody.push(encodedKey + "=" + encodedValue);
               }
               formBody = formBody.join("&");
-
+              console.log(details);
               fetch(authorization_url, {
                 method: "POST",
                 headers: {
