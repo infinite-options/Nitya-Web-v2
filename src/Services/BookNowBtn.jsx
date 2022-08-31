@@ -15,38 +15,32 @@ export default function BookNowBTN(props) {
   const [accessToken, setAccessToken] = useState("");
   const [signedin, setSignedIn] = useState(false);
   const [bookNow, setBookNow] = useState(false);
-  const [idToken, setIdToken] = useState("");
+
   useEffect(() => {
     getAccessToken();
   }, []);
 
   const getAccessToken = () => {
     let url = BASE_URL + "customerToken/";
-    let customer_uid = "100-000091";
+    let customer_uid = "100-000093";
     axios
       .get(url + customer_uid)
       .then((response) => {
-        console.log("in events", response);
-        let url =
-          "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=";
+        // console.log("in events", response);
+        // setSignedIn(true);
 
-        setSignedIn(true);
         var old_at = response["data"]["user_access_token"];
-        console.log("in events", old_at);
+        // console.log("in events", old_at);
         var refreshToken = response["data"]["user_refresh_token"];
 
-        let checkExp_url = url + old_at;
-        console.log("in events", checkExp_url);
-        fetch(
-          `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`,
-          {
-            method: "GET",
-          }
-        )
+        axios
+          .get(
+            `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`
+          )
           .then((response) => {
-            console.log("in events", response);
+            // console.log("in events", response);
             if (response["status"] === 400) {
-              console.log("in events if");
+              // console.log("in events if");
               let authorization_url =
                 "https://accounts.google.com/o/oauth2/token";
 
@@ -77,16 +71,16 @@ export default function BookNowBTN(props) {
                   return response.json();
                 })
                 .then((responseData) => {
-                  console.log(responseData);
+                  // console.log(responseData);
                   return responseData;
                 })
                 .then((data) => {
-                  console.log(data);
+                  // console.log(data);
                   let at = data["access_token"];
                   var id_token = data["id_token"];
                   setAccessToken(at);
-                  setIdToken(id_token);
-                  console.log("in events", at);
+                  // setIdToken(id_token);
+                  // console.log("in events", at);
                   let url = BASE_URL + "UpdateAccessToken/";
                   axios
                     .post(url + customer_uid, {
@@ -94,15 +88,15 @@ export default function BookNowBTN(props) {
                     })
                     .then((response) => {})
                     .catch((err) => {
-                      console.log(err);
+                      // console.log(err);
                     });
                   return accessToken;
                 })
                 .catch((err) => {
-                  console.log(err);
+                  // console.log(err);
                 });
             } else {
-              console.log("here", old_at);
+              // console.log("here", old_at);
               setAccessToken(old_at);
             }
           })
@@ -126,13 +120,8 @@ export default function BookNowBTN(props) {
       <Button
         className="BookNowBtn"
         onClick={() => {
-          // getAccessToken();
-          // getAuthToGoogle();
           setSignedIn(true);
           setBookNow(true);
-          {
-            console.log("bookbtn1", accessToken);
-          }
         }}
       >
         <Link

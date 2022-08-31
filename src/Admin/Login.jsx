@@ -84,8 +84,6 @@ function AdminLogin(props) {
         );
         console.log("in events", response);
         setAccessToken(response["data"]["user_access_token"]);
-        let url =
-          "https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=";
 
         console.log("Login successful");
         console.log(email);
@@ -99,14 +97,10 @@ function AdminLogin(props) {
         console.log("in events", old_at);
         var refreshToken = response["data"]["user_refresh_token"];
 
-        let checkExp_url = url + old_at;
-        console.log("in events", checkExp_url);
-        fetch(
-          `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`,
-          {
-            method: "GET",
-          }
-        )
+        axios
+          .get(
+            `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`
+          )
           .then((response) => {
             console.log("in events", response);
             if (response["status"] === 400) {

@@ -4,9 +4,7 @@ import { Helmet } from "react-helmet";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useHistory, useLocation } from "react-router-dom";
 import { useParams } from "react-router";
-import { loadStripe } from "@stripe/stripe-js";
 import { Radio } from "@material-ui/core";
-import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import moment from "moment";
 import Grid from "@material-ui/core/Grid";
@@ -77,29 +75,14 @@ export default function AppointmentPage(props) {
   console.log("(AppointmentPage) accessToken: ", access_token);
   const classes = useStyles();
   const history = useHistory();
-
-  // moment().format();
-
-  //strip use states
   const { treatmentID } = useParams();
-  const [stripePromise, setStripePromise] = useState(null);
-  let PUBLISHABLE_KEY = "pk_test_51Ihyn......0wa0SR2JG";
-  const [useTestKeys, setUseTestKeys] = useState(true);
-
   // form use states, Axios.Post
-  const [purchaseDate, setPurchaseDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(null);
-  const [fName, setFName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [notes, setNotes] = useState("");
   const [mode, setMode] = useState({
     inPerson: true,
     online: false,
   });
   const [attendMode, setAttendMode] = useState("In-Person");
-  // for hide & show
-  const [infoSubmitted, setInfoSubmitted] = useState(false);
   // const [bookNowClicked, setBookNowClicked] = useState(false);
   const [bookNowClicked, setBookNowClicked] = useState(true);
   const [timeSelected, setTimeSelected] = useState(false);
@@ -108,9 +91,9 @@ export default function AppointmentPage(props) {
   const [elementToBeRendered, setElementToBeRendered] = useState([]);
   const treatment_uid = treatmentID;
 
-  //for axios.get
-  const [date, setDate] = useState(new Date());
-  const [minDate, setMinDate] = useState(new Date());
+  var currentDate = new Date(+new Date() + 86400000);
+  const [date, setDate] = useState(currentDate);
+  const [minDate, setMinDate] = useState(currentDate);
   const [dateString, setDateString] = useState(null);
   const [dateHasBeenChanged, setDateHasBeenChanged] = useState(true);
   const [dateString1, setDateString1] = useState(null);
@@ -118,9 +101,8 @@ export default function AppointmentPage(props) {
   const [timeSlots, setTimeSlots] = useState([]);
   const [timeAASlots, setTimeAASlots] = useState([]);
   const [duration, setDuration] = useState(null);
-  const cost = elementToBeRendered.cost;
-
   const [buttonSelect, setButtonSelect] = useState(false);
+  const [selectedButton, setSelectedButton] = useState("");
 
   useEffect(() => {
     console.log();
@@ -310,7 +292,133 @@ export default function AppointmentPage(props) {
       return strTime;
     }
   }
+  useEffect(() => {
+    if (attendMode && duration !== null) {
+      let hoursMode = "";
+      hoursMode = attendMode === "Online" ? "Online" : "Office";
+      console.log("407", duration, apiDateString);
+      let date =
+        apiDateString >
+        moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
+          ? apiDateString
+          : moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD");
+      console.log("apiDateString", apiDateString, date);
+      setApiDateString(date);
+      axios
+        .get(
+          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
+            date +
+            "/" +
+            duration +
+            "/" +
+            hoursMode
+        )
+        .then((res) => {
+          console.log("This is the information we got" + res);
+          // setTimeAASlots(res.data.result);
+          // console.log("Timeslots Array " + timeSlots);
 
+          res.data.result.map((r) => {
+            timeAASlots.push(r["begin_time"]);
+          });
+          setTimeAASlots(timeAASlots);
+        });
+    }
+    setDateHasBeenChanged(false);
+  }, [servicesLoaded, duration, attendMode]);
+
+  useEffect(() => {
+    if (attendMode && duration !== null) {
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + access_token,
+      };
+
+      let date =
+        apiDateString >
+        moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
+          ? apiDateString
+          : moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD");
+      console.log("apiDateString", apiDateString, date);
+      setApiDateString(date);
+      const morningTime =
+        attendMode === "Online" ? "T08:00:00-0800" : "T09:00:00-0800";
+      const eveningTime =
+        attendMode === "Online" ? "T20:00:00-0800" : "T20:00:00-0800";
+      const data = {
+        timeMin: date + morningTime,
+        timeMax: date + eveningTime,
+        items: [
+          {
+            id: "primary",
+          },
+        ],
+      };
+      console.log(headers);
+      console.log(data);
+      axios
+        .post(
+          `https://www.googleapis.com/calendar/v3/freeBusy?key=${API_KEY}`,
+          data,
+          {
+            headers: headers,
+          }
+        )
+        .then((response) => {
+          let busy = response.data.calendars.primary.busy;
+          let start_time = Date.parse(date + morningTime) / 1000;
+          let end_time = Date.parse(date + eveningTime) / 1000;
+          let free = [];
+          let appt_start_time = start_time;
+
+          let seconds = convert(duration);
+          // Loop through each appt slot in the search range.
+          while (appt_start_time < end_time) {
+            // Add appt duration to the appt start time so we know where the appt will end.
+            let appt_end_time = appt_start_time + seconds;
+
+            // For each appt slot, loop through the current appts to see if it falls
+            // in a slot that is already taken.
+            let slot_available = true;
+
+            busy.forEach((times) => {
+              let this_start = Date.parse(times["start"]) / 1000;
+              let this_end = Date.parse(times["end"]) / 1000;
+              console.log(
+                "freebusy busy times",
+                busy,
+                times["start"],
+                times["end"]
+              );
+              // If the appt start time or appt end time falls on a current appt, slot is taken.
+              if (
+                (appt_start_time >= this_start && appt_start_time < this_end) ||
+                (appt_end_time > this_start && appt_end_time <= this_end)
+              ) {
+                slot_available = false;
+                return; // No need to continue if it's taken.
+              }
+            });
+            console.log("freebusy", free);
+            // If we made it through all appts and the slot is still available, it's an open slot.
+            if (slot_available) {
+              free.push(
+                moment(new Date(appt_start_time * 1000)).format("HH:mm:ss")
+              );
+            }
+            // + duration minutes
+            appt_start_time += 60 * 30;
+          }
+          console.log("freebusy", free);
+          setTimeSlots(free);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    }
+    setDateHasBeenChanged(false);
+  }, [servicesLoaded, duration, attendMode]);
   //get appt
   useEffect(() => {
     if (dateHasBeenChanged) {
@@ -431,14 +539,30 @@ export default function AppointmentPage(props) {
     console.log("TimeSlotsAA", timeAASlots);
 
     let result = timeSlots.filter((o1) => timeAASlots.some((o2) => o1 === o2));
-    console.log("Merged", result);
+    console.log("Merged", result, selectedButton);
     return (
       <Grid container xs={11}>
-        {result.map(function (element) {
+        {result.map(function (element, i) {
           return (
             <button
+              key={i}
               className={classes.timeslotButton}
-              onClick={() => selectApptTime(element)}
+              style={{
+                width: "10rem",
+                height: "3rem",
+                maxWidth: "80%",
+                backgroundColor: i === selectedButton ? "#D3A625" : "white",
+                border: "2px solid #D3A625",
+                color: i === selectedButton ? "white" : "#D3A625",
+                // padding: "15px 90px",
+                textAlign: "center",
+                textDecoration: "none",
+                fontSize: "20px",
+                borderRadius: "50px",
+                display: "block",
+                margin: "6px auto",
+              }}
+              onClick={() => selectApptTime(element, i)}
             >
               {formatTime(apiDateString, element)}
             </button>
@@ -469,8 +593,9 @@ export default function AppointmentPage(props) {
     setMode(newModeObj);
     setAttendMode(newMode);
   };
-  function selectApptTime(element) {
+  function selectApptTime(element, i) {
     console.log("selected time", element);
+    setSelectedButton(i);
     setSelectedTime(element);
     setTimeSelected(true);
     setButtonSelect(true);
@@ -550,7 +675,7 @@ export default function AppointmentPage(props) {
                   />
                 </div>
                 <div className="TitleFontAppt">Pick an Appointment Date</div>
-                {console.log("(Calendar) date: ", date)}
+                {console.log("(Calendar) date: ", minDate)}
                 <Calendar
                   calendarType="US"
                   onClickDay={dateChange}
