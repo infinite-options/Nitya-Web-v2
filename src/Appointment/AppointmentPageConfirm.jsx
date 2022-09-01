@@ -29,14 +29,17 @@ const YellowRadio = withStyles({
 
 const useStyles = makeStyles({
   container: {
-    margin: "50px auto",
-    // width: "980px",
-    padding: "50px 50px",
+    margin: "20px",
+    width: "100%",
+    // padding: "20px",
     backgroundColor: "white",
-    width: "60%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    // width: "60%",
     "@media (max-width: 1050px)": {
-      marginLeft: "0.5rem",
-      width: "75%",
+      // marginLeft: "0.5rem",
+      width: "100%",
     },
   },
 
@@ -504,13 +507,8 @@ export default function AppointmentPage(props) {
       <ScrollToTop />
       <br />
       {bookNowClicked || location.state.signedin ? (
-        <div className="Card">
-          <div
-            className={classes.container}
-            style={{
-              padding: "40px 40px",
-            }}
-          >
+        <div className="Card" style={{ alignItems: "center" }}>
+          <div className={classes.container}>
             <div>
               <div>
                 <div className={classes.selectTime2}>
