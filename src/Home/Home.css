@@ -37,6 +37,8 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0%;
+  margin: 0%;
   /* grid-template-columns: repeat(1, auto); */
 }
 
@@ -624,9 +626,9 @@
   }
 }
 
-@media screen and (min-width: 200px) and (max-width: 400px) {
+@media screen and (min-width: 200px) and (max-width: 500px) {
   .Card {
-    width: 80%;
+    width: 100%;
     height: auto;
     margin: 5% 0% 5% 0%;
     background-color: white;
@@ -696,6 +698,7 @@
     object-fit: contain;
     height: 20rem;
     width: 100%;
+    padding:0%
   }
 
   .CardText {
@@ -848,7 +851,7 @@
     color: #c3a336;
     font-size: 12px;
     display: grid;
-    grid-template-columns: repeat(3, auto);
+    grid-template-columns: repeat(1, auto);
     align-items: flex-start;
     /* margin-top: 2rem; */
   }
@@ -868,5 +871,8 @@
     text-align: center;
     /* padding-left: 20%;
     padding-bottom: 5%; */
+  }
+  .MobileImage{
+    width: 90%;
   }
 }

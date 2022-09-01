@@ -500,11 +500,11 @@ export default function AppointmentPage(props) {
   }
 
   return (
-    <div style={{ backgroundColor: "#DADADA" }}>
+    <div className="HomeContainer">
       <ScrollToTop />
       <br />
       {bookNowClicked || location.state.signedin ? (
-        <div>
+        <div className="Card">
           <div
             className={classes.container}
             style={{

@@ -26,26 +26,23 @@ import "../Home/Home.css";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    marginTop: "5%",
     marginBottom: "5%",
     backgroundColor: "white",
-    marginRight: "200px",
-    marginLeft: "200px",
     fontFamily: "Hoefler Text",
-    "@media (max-width: 1430px)": {
-      marginRight: "100px",
-      marginLeft: "100px",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      margin: "5% 0% 5% 0%",
+      width: "100%",
     },
-    "@media (max-width: 1100px)": {
-      marginRight: "50px",
-      marginLeft: "50px",
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      margin: " 5% 0% 5% 0%",
+      width: "100%",
     },
   },
   appbar: {
     backgroundColor: "white",
     boxShadow: "none",
     padding: "4px",
-    "@media (max-width: 880px)": {
+    "@media (min-width: 200px) and (max-width: 700px)": {
       display: "none",
     },
   },
@@ -102,15 +99,43 @@ const useStyles = makeStyles((theme) => ({
   },
 
   card: {
-    display: "flex",
-    boxShadow: "none",
-    paddingTop: "30px",
-    paddingBottom: "30px",
-    paddingLeft: "30px",
-    paddingRight: "30px",
-    "@media (max-width: 1100px)": {},
-  },
+    height: "auto",
+    margin: "5% 5% 5% 5%",
+    backgroundColor: "white",
+    // display: "flex",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      width: "100%",
 
+      margin: "1% 1% 1% 1%",
+    },
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      width: "100%",
+      margin: "1% 1% 1% 1%",
+    },
+  },
+  blogImg: {
+    // width: "25rem",
+    // height: "20rem",
+    objectFit: "cover",
+    objectPosition: "top",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "80%",
+    height: "80%",
+    margin: "0%",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      objectFit: "fill",
+      width: "100%",
+      height: "100%",
+    },
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      objectFit: "fill",
+      width: "100%",
+      height: "100%",
+    },
+  },
   header: {
     display: "flex",
     justifyContent: "flex-start",
@@ -119,7 +144,7 @@ const useStyles = makeStyles((theme) => ({
     width: "100%",
     "@media (max-width: 570px)": {
       width: "130%",
-      marginLeft: "-2rem",
+      // marginLeft: "-2rem",
     },
   },
 
@@ -127,6 +152,18 @@ const useStyles = makeStyles((theme) => ({
     color: "#D3A625",
     fontSize: "2rem",
     lineHeight: "1",
+    textAlign: "left",
+    fontSize: "52px",
+    color: "black",
+    marginLeft: "5%",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      fontSize: "32px",
+      marginLeft: "1%",
+    },
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      fontSize: "32px",
+      marginLeft: "1%",
+    },
   },
   content: {
     fontSize: "1.2rem",
@@ -138,6 +175,14 @@ const useStyles = makeStyles((theme) => ({
     paddingTop: "30px",
     paddingBottom: "10px",
     padding: "10%",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      fontSize: "20px",
+      padding: "5%",
+    },
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      fontSize: "20px",
+      padding: "5%",
+    },
   },
   cardActions: {
     display: "flex",
@@ -286,11 +331,22 @@ function FullBlog(props) {
         </AppBar>
         <div className={classes.container}>
           {getBlogId.map((post) => (
-            <div className="blogPostContainer">
+            <div>
               <Card className={classes.card}>
-                <div>
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
                   <div
-                    style={{ color: "black", marginLeft: "8%" }}
+                    style={{
+                      color: "black",
+                      marginLeft: "0%",
+                      marginTop: "1rem",
+                    }}
                     className={classes.header}
                   >
                     <IconButton
@@ -298,7 +354,7 @@ function FullBlog(props) {
                       onClick={handleClick}
                       aria-label="click to share post"
                     >
-                      <AuthorIcon style={{ marginTop: "-0.7rem" }} />
+                      <AuthorIcon style={{ marginTop: "-0.8rem" }} />
                     </IconButton>
                     &nbsp; &nbsp;
                     {post.author} &nbsp; &nbsp; <li></li>{" "}
@@ -354,44 +410,47 @@ function FullBlog(props) {
                   </div>
                   <div
                     style={{
-                      textAlign: "left",
-                      fontSize: "52px",
-                      color: "black",
-                      marginLeft: "10%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      alignItems: "center",
                     }}
-                    className={classes.title}
                   >
-                    <p>{post.blogTitle}</p>
-                  </div>
-                  {!!post.blogImage &&
-                  post.blogImage.split("/")[4] == "blogs" ? (
-                    <div className={classes.img}>
+                    <div className={classes.title}>
+                      <p>{post.blogTitle}</p>
+                    </div>
+                    {!!post.blogImage &&
+                    post.blogImage.split("/")[4] == "blogs" ? (
                       <img
                         src={post.blogImage}
-                        style={{
-                          width: "1000px",
-                          height: "600px",
-                        }}
+                        // style={{
+                        //   width: "1000px",
+                        //   height: "600px",
+                        // }}
+                        className={classes.blogImg}
                         onError={(e) => (e.target.style.display = "none")}
                       />
-                    </div>
-                  ) : (
-                    <div className={classes.img} onClick={() => setPlay(!play)}>
-                      <ReactPlayer url={post.blogImage} playing={play} />
-                    </div>
-                  )}{" "}
-                  <div className={classes.content}>
-                    <p style={{ fontSize: "32px" }}>{post.blogTitle}</p>
+                    ) : (
+                      <div
+                        className={classes.blogImg}
+                        onClick={() => setPlay(!play)}
+                      >
+                        <ReactPlayer url={post.blogImage} playing={play} />
+                      </div>
+                    )}
+                    <div className={classes.content}>
+                      <p className={classes.title}>{post.blogTitle}</p>
 
-                    <Markup content={post.blogText} />
-                  </div>
-                  <hr style={{ color: "#8d6f19" }}></hr>
-                  <div className={classes.cardActions}>
-                    <Typography>Views &nbsp;&nbsp; Comments</Typography>
+                      <Markup content={post.blogText} />
+                    </div>
+                    <hr style={{ color: "#8d6f19" }}></hr>
+                    <div className={classes.cardActions}>
+                      <Typography>Views &nbsp;&nbsp; Comments</Typography>
 
-                    <IconButton className={classes.icon}>
-                      <FavoriteBorderIcon />
-                    </IconButton>
+                      <IconButton className={classes.icon}>
+                        <FavoriteBorderIcon />
+                      </IconButton>
+                    </div>
                   </div>
                 </div>
               </Card>

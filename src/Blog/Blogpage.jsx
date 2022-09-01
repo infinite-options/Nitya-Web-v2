@@ -25,8 +25,15 @@ import "../Appointment/AppointmentPage.css";
 import "../Home/Home.css";
 const useStyles = makeStyles((theme) => ({
   blogpage: {
-    marginLeft: "auto",
-    marginRight: "auto",
+    margin: "3% 0% 3% 0%",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      margin: "5% 0% 5% 0%",
+      width: "80%",
+    },
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      margin: " 5% 0% 5% 0%",
+      width: "100%",
+    },
   },
   container: {
     marginBottom: "5%",
@@ -34,13 +41,28 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "200px",
     marginLeft: "200px",
     fontFamily: "Hoefler Text",
-    "@media (max-width: 1430px)": {
-      marginRight: "100px",
-      marginLeft: "100px",
+    justifyContent: "center",
+    alignItems: "center",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      margin: "5% 0% 5% 0%",
+      width: "100%",
     },
-    "@media (max-width: 1100px)": {
-      marginRight: "50px",
-      marginLeft: "50px",
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      margin: " 5% 0% 5% 0%",
+      width: "100%",
+    },
+  },
+  card: {
+    // width: "100%",
+    height: "auto",
+    margin: "1% 5% 5% 1%",
+    backgroundColor: "white",
+    // display: "flex",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      width: "50%",
+    },
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      width: "100%",
     },
   },
   appbar: {
@@ -103,14 +125,14 @@ const useStyles = makeStyles((theme) => ({
     },
   },
 
-  card: {
-    display: "block",
-    boxShadow: "none",
-    paddingTop: "30px",
-    paddingBottom: "30px",
-    paddingLeft: "30px",
-    "@media (max-width: 1100px)": {},
-  },
+  // card: {
+  //   display: "block",
+  //   boxShadow: "none",
+  //   paddingTop: "30px",
+  //   paddingBottom: "30px",
+  //   paddingLeft: "30px",
+  //   "@media (max-width: 1100px)": {},
+  // },
   cardRow: {
     display: "flex",
     "@media (max-width: 500px)": {
@@ -124,9 +146,9 @@ const useStyles = makeStyles((theme) => ({
     height: "20rem",
     objectFit: "cover",
     objectPosition: "top",
-    "@media (max-width: 500px)": {
+    "@media (max-width: 700px)": {
       width: "100%",
-      marginLeft: "-30px",
+      // marginLeft: "-15px",
       height: "90%",
     },
   },
@@ -142,14 +164,15 @@ const useStyles = makeStyles((theme) => ({
     },
   },
   desc: {
-    paddingLeft: "10%",
-    marginLeft: "-50px",
+    // padding: "5%",
+    // marginLeft: "-40px",
     display: "flex",
     flexDirection: "column",
-    "@media (max-width: 500px)": {
-      textAlign: "left",
-      paddingLeft: "0px",
-      marginLeft: "0px",
+    "@media (min-width: 700px) and (max-width: 900px)": {
+      width: "50%",
+    },
+    "@media (min-width: 200px) and (max-width: 700px)": {
+      width: "100%",
     },
   },
   title: {
@@ -165,7 +188,7 @@ const useStyles = makeStyles((theme) => ({
     color: "black",
     lineHeight: "1.4",
     textAlign: "justify",
-    paddingBottom: "10px",
+    padding: "10px",
   },
 }));
 
@@ -349,9 +372,9 @@ function Blogpage(props) {
 
           {data.map((post) => (
             <div className="blogPostContainer">
-              <div className={classes.card}>
+              <div>
                 <div className={classes.cardRow}>
-                  <div>
+                  <div className={classes.card}>
                     <div>
                       {console.log(post.blogImage.split("/")[4])}
                       {post.blogImage.split("/")[4] == "blogs" ? (
@@ -408,7 +431,7 @@ function Blogpage(props) {
                       ></Menu>
                       <div
                         hidden={Auth.isAuth === false}
-                        style={{ marginRight: "15%" }}
+                        // style={{ }}
                       >
                         {/* http://localhost:4000/api/v2/deleteBlog/150-000048 */}
                         <DeleteForeverSharpIcon
@@ -432,16 +455,11 @@ function Blogpage(props) {
                     >
                       <div>
                         <div className={classes.title}>
-                          <div
-                            style={{ textAlign: "left", marginRight: "15%" }}
-                          >
+                          <div style={{ textAlign: "left" }}>
                             {post.blogTitle}
                           </div>
                         </div>
-                        <div
-                          className={classes.content}
-                          style={{ marginRight: "15%" }}
-                        >
+                        <div className={classes.content} style={{}}>
                           <Markup content={post.blogSummary} />
                         </div>
                       </div>

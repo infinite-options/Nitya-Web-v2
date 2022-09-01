@@ -707,21 +707,14 @@ export default function AppointmentPage(props) {
               <div
                 style={{
                   display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
                   justifyContent: "space-between",
-                  alignItems: "flex-start",
-                  padding: "3%",
+                  marginBottom: "2rem",
                 }}
               >
                 <div className="TitleFontAppt">Pick an Appointment Time</div>
-                <div
-                  className="BodyFontAppt"
-                  style={{
-                    color: "#D3A625",
-                    fontSize: "18px",
-                  }}
-                >
-                  Pacific Standard Time
-                </div>
+                <div className="BodyFontAppt">Pacific Standard Time</div>
               </div>
 
               <div style={{ display: "flex", justifyContent: "center" }}>
