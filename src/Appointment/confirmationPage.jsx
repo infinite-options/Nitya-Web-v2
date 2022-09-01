@@ -82,7 +82,7 @@ export default function ConfirmationPage(props) {
   return (
     <div className="HomeContainer">
       <div className="Card">
-        <div className="TitleFontAppt" style={{ padding: "1rem" }}>
+        <div className="TitleFontAppt" style={{ marginTop: "1rem" }}>
           <div>Booking Confirmed</div>
           <div className="CardText" style={{ marginTop: "1rem" }}>
             We have sent a confirmation email to:
@@ -111,7 +111,7 @@ export default function ConfirmationPage(props) {
             </div>
           </div>
 
-          <div style={{ margin: "1rem", width: "25rem" }}>
+          <div style={{ padding: "1rem" }}>
             <div
               style={{
                 color: "#D3A625",
