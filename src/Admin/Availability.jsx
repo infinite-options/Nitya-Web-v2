@@ -627,7 +627,7 @@ function Availability() {
     console.log(sundayFieldsOffice);
     const fields = [...sundayFieldsOffice];
     console.log(i, event.target.value);
-    fields[i][event.target.name] = event.target.value;
+    fields[0][event.target.name] = event.target.value;
     console.log(fields);
     setSundayFieldsOffice(fields);
   }
@@ -635,7 +635,7 @@ function Availability() {
     console.log(mondayFieldsOffice);
     const fields = [...mondayFieldsOffice];
     console.log(i, event.target.value);
-    fields[i][event.target.name] = event.target.value;
+    fields[0][event.target.name] = event.target.value;
     console.log(fields);
     setMondayFieldsOffice(fields);
   }
@@ -643,7 +643,7 @@ function Availability() {
     console.log(tuesdayFieldsOffice);
     const fields = [...tuesdayFieldsOffice];
     console.log(i, event.target.value);
-    fields[i][event.target.name] = event.target.value;
+    fields[0][event.target.name] = event.target.value;
     console.log(fields);
     setTuesdayFieldsOffice(fields);
   }
@@ -651,7 +651,7 @@ function Availability() {
     console.log(wednesdayFieldsOffice);
     const fields = [...wednesdayFieldsOffice];
     console.log(i, event.target.value);
-    fields[i][event.target.name] = event.target.value;
+    fields[0][event.target.name] = event.target.value;
     console.log(fields);
     setWednesdayFieldsOffice(fields);
   }
@@ -659,7 +659,7 @@ function Availability() {
     console.log(thursdayFieldsOffice);
     const fields = [...thursdayFieldsOffice];
     console.log(i, event.target.value);
-    fields[i][event.target.name] = event.target.value;
+    fields[0][event.target.name] = event.target.value;
     console.log(fields);
     setThursdayFieldsOffice(fields);
   }
@@ -667,7 +667,7 @@ function Availability() {
     console.log(fridayFieldsOffice);
     const fields = [...fridayFieldsOffice];
     console.log(i, event.target.value);
-    fields[i][event.target.name] = event.target.value;
+    fields[0][event.target.name] = event.target.value;
     console.log(fields);
     setFridayFieldsOffice(fields);
   }
@@ -675,7 +675,7 @@ function Availability() {
     console.log(saturdayFieldsOffice);
     const fields = [...saturdayFieldsOffice];
     console.log(i, event.target.value);
-    fields[i][event.target.name] = event.target.value;
+    fields[0][event.target.name] = event.target.value;
     console.log(fields);
     setSaturdayFieldsOffice(fields);
   }
