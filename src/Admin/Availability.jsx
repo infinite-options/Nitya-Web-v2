@@ -110,6 +110,7 @@ function Availability() {
   const [open, setOpen] = useState(false);
   const [openDelete, setOpenDelete] = useState(false);
   const [openUpdate, setOpenUpdate] = useState(false);
+  const [edit, setEdit] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [dateUnavailable, setDateUnavailable] = useState("");
   const [startTime, setStartTime] = useState("");
@@ -523,7 +524,25 @@ function Availability() {
         getUnavailabilty();
       });
   }
-
+  function handleUpdate(time) {
+    console.log(time, startTime, endTime);
+    let info = {
+      id: time.prac_avail_uid,
+      date: time.date,
+      start_time_notavailable:
+        startTime === "" ? time.start_time_notavailable : startTime,
+      end_time_notavailable:
+        endTime === "" ? time.end_time_notavailable : endTime,
+    };
+    console.log(info);
+    axios.put(BASE_URL + "updateUnavailability", info).then((response) => {
+      console.log("updated", response.data);
+      getUnavailabilty();
+      setEdit(!edit);
+      setStartTime("");
+      setEndTime("");
+    });
+  }
   // console.log(dateUnavailable, startTime, endTime);
 
   const convertTime12to24 = (time12h) => {
@@ -2187,10 +2206,32 @@ function Availability() {
                   >
                     <td className={classes.tableCells}>{time.date}</td>
                     <td className={classes.tableCells}>
-                      {time.start_time_notavailable}
+                      {edit ? (
+                        <input
+                          type="time"
+                          step="2"
+                          id="start_time_notavailable"
+                          name="start_time_notavailable"
+                          defaultValue={time.start_time_notavailable}
+                          onChange={(e) => setStartTime(e.target.value)}
+                        />
+                      ) : (
+                        time.start_time_notavailable
+                      )}
                     </td>
                     <td className={classes.tableCells}>
-                      {time.end_time_notavailable}
+                      {edit ? (
+                        <input
+                          type="time"
+                          step="2"
+                          id="end_time_notavailable"
+                          name="end_time_notavailable"
+                          defaultValue={time.end_time_notavailable}
+                          onChange={(e) => setEndTime(e.target.value)}
+                        />
+                      ) : (
+                        time.end_time_notavailable
+                      )}
                     </td>
                     <td className={classes.tableCells}>
                       <DeleteForeverSharpIcon
@@ -2203,9 +2244,9 @@ function Availability() {
                       <EditSharpIcon
                         size="lg"
                         style={{ cursor: "pointer" }}
-                        // onClick={() => {
-                        //   history.push(`/${post.prac_avail_uid}/addpost`);
-                        // }}
+                        onClick={() => {
+                          edit ? handleUpdate(time) : setEdit(!edit);
+                        }}
                       />
                     </td>
                   </tr>
@@ -2261,6 +2302,7 @@ function Availability() {
               type="time"
               id="stime"
               name="stime"
+              step="2"
               value={startTime}
               onChange={(e) => setStartTime(e.target.value)}
               style={{ width: "50%", margin: "1rem" }}
@@ -2272,6 +2314,7 @@ function Availability() {
               type="time"
               id="etime"
               name="etime"
+              step="2"
               value={endTime}
               onChange={(e) => setEndTime(e.target.value)}
               style={{ width: "50%", margin: "1rem" }}
