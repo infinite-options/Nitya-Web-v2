@@ -12,6 +12,7 @@ import {
   Modal,
   Box,
   Typography,
+  Button,
 } from "@material-ui/core";
 import ReactPlayer from "react-player";
 import Container from "@material-ui/core/Container";
@@ -497,32 +498,18 @@ function Blogpage(props) {
         </div>
         {console.log(Auth)}
       </div>
-      <div
-        // hidden={Auth.isAuth === false}
-        style={{
-          // display: "flex",
-          // justifyContent: "space-between",
-          // alignItems: "center",
-          padding: "10px",
-          width: "80%",
-        }}
-      >
-        <div
+      <div hidden={Auth.isAuth === false}>
+        <Button
           style={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            padding: "10px",
-            width: "100%",
+            backgroundColor: "#d3a625",
+            color: "white",
+            marginTop: "1rem",
+            marginBottom: "1rem",
           }}
+          onClick={() => handleOpenAvailabilityModal()}
         >
-          <button
-            className="AdminButton"
-            onClick={() => handleOpenAvailabilityModal()}
-          >
-            Practitioner Availabilty
-          </button>
-        </div>
+          Practitioner Availabilty
+        </Button>
       </div>
     </div>
   );

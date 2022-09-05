@@ -1624,7 +1624,7 @@ function Availability() {
                   width: "50%",
                 }}
               >
-                <h1>No Views</h1>
+                <h1>Loading</h1>
               </Col>
             ) : (
               <Col
@@ -2125,7 +2125,7 @@ function Availability() {
                   width: "50%",
                 }}
               >
-                <h1>No Views</h1>
+                <h1>Loading</h1>
               </Col>
             ) : (
               <Col
@@ -2192,7 +2192,7 @@ function Availability() {
                     <td className={classes.tableCells}>
                       {time.end_time_notavailable}
                     </td>
-                    <td>
+                    <td className={classes.tableCells}>
                       <DeleteForeverSharpIcon
                         style={{ cursor: "pointer" }}
                         onClick={() => {

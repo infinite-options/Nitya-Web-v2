@@ -394,23 +394,7 @@
   width: 100%;
   margin: 0%;
 }
-.AdminButton {
-  text-transform: none;
-  background-color: #d3a625;
-  color: white;
-  font-size: 25px;
-  width: 50%;
-  height: 3rem;
-  padding: 1%;
-  margin: 1%;
-  margin-top: 2rem;
-  border: 0px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  text-align: center;
-  cursor: pointer;
-}
+
 
 
 @media screen and (min-width: 500px) and (max-width: 900px) {
@@ -641,21 +625,7 @@
     /* padding-left: 20%;
     padding-bottom: 5%; */
   }
-    .AdminButton {
-      text-transform: none;
-      background-color: #d3a625;
-      color: white;
-      font-size: 24px;
-      width: 50%;
-      height: 3rem;
-      padding: 5%;
-      margin-top: 2rem;
-      border: 0px;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      cursor: pointer;
-    }
+    
 }
 
 @media screen and (min-width: 200px) and (max-width: 500px) {
@@ -907,20 +877,5 @@
   .MobileImage{
     width: 90%;
   }
-  .AdminButton {
-    text-transform: none;
-    background-color: #d3a625;
-    color: white;
-    font-size: 15px;
-    width: 50%;
-    height: 3rem;
-    padding: 1%;
-    margin: 1%;
-    margin-top: 2rem;
-    border: 0px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-  }
+  
 }
