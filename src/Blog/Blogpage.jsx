@@ -9,6 +9,9 @@ import {
   ListItem,
   ListItemText,
   Menu,
+  Modal,
+  Box,
+  Typography,
 } from "@material-ui/core";
 import ReactPlayer from "react-player";
 import Container from "@material-ui/core/Container";
@@ -23,12 +26,28 @@ import EditSharpIcon from "@material-ui/icons/EditSharp";
 import ScrollToTop from "./ScrollToTop";
 import "../Appointment/AppointmentPage.css";
 import "../Home/Home.css";
+const style = {
+  position: "absolute",
+  top: "50%",
+  left: "50%",
+  transform: "translate(-50%, -50%)",
+  width: 400,
+  bgcolor: "background.paper",
+  border: "2px solid #000",
+  boxShadow: 24,
+  p: 4,
+};
+
 const useStyles = makeStyles((theme) => ({
   blogpage: {
-    margin: "3% 0% 3% 0%",
+    width: "100%",
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     "@media (min-width: 700px) and (max-width: 900px)": {
       margin: "5% 0% 5% 0%",
-      width: "80%",
+      width: "100%",
     },
     "@media (min-width: 200px) and (max-width: 700px)": {
       margin: " 5% 0% 5% 0%",
@@ -38,9 +57,12 @@ const useStyles = makeStyles((theme) => ({
   container: {
     marginBottom: "5%",
     backgroundColor: "white",
-    marginRight: "200px",
-    marginLeft: "200px",
+    // marginRight: "200px",
+    // marginLeft: "200px",
+    margin: "5% 5% 5% 5%",
     fontFamily: "Hoefler Text",
+    // display: "flex",
+    // flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
     "@media (min-width: 700px) and (max-width: 900px)": {
@@ -197,8 +219,11 @@ function Blogpage(props) {
   const classes = useStyles();
   const [data, setData] = useState([]);
   const [play, setPlay] = useState(false);
+
   const history = useHistory();
   const Auth = useContext(AuthContext);
+
+  const handleOpenAvailabilityModal = () => history.push("/availability");
 
   const fetchData = async () => {
     const res = await fetch(
@@ -469,6 +494,34 @@ function Blogpage(props) {
               </div>
             </div>
           ))}
+        </div>
+        {console.log(Auth)}
+      </div>
+      <div
+        // hidden={Auth.isAuth === false}
+        style={{
+          // display: "flex",
+          // justifyContent: "space-between",
+          // alignItems: "center",
+          padding: "10px",
+          width: "80%",
+        }}
+      >
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            padding: "10px",
+            width: "100%",
+          }}
+        >
+          <button
+            className="AdminButton"
+            onClick={() => handleOpenAvailabilityModal()}
+          >
+            Practitioner Availabilty
+          </button>
         </div>
       </div>
     </div>

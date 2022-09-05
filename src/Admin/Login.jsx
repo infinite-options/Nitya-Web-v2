@@ -154,7 +154,7 @@ function AdminLogin(props) {
                   let url = BASE_URL + `UpdateAccessToken/${customer_uid}`;
                   axios
                     .post(url, {
-                      google_auth_token: at,
+                      user_access_token: at,
                     })
                     .then((response) => {})
                     .catch((err) => {
