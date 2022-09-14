@@ -293,6 +293,7 @@ export default function AppointmentPage(props) {
     }
   }
   useEffect(() => {
+    setTimeAASlots([]);
     if (attendMode && duration !== null) {
       let hoursMode = "";
       hoursMode = attendMode === "Online" ? "Online" : "Office";
@@ -314,14 +315,15 @@ export default function AppointmentPage(props) {
             hoursMode
         )
         .then((res) => {
-          console.log("This is the information we got" + res);
           // setTimeAASlots(res.data.result);
           // console.log("Timeslots Array " + timeSlots);
-
-          res.data.result.map((r) => {
-            timeAASlots.push(r["begin_time"]);
-          });
-          setTimeAASlots(timeAASlots);
+          let timeSlotsAA = [];
+          if (JSON.stringify(res.data.result.length) > 0) {
+            res.data.result.map((r) => {
+              timeSlotsAA.push(r["begin_time"]);
+            });
+          }
+          setTimeAASlots(timeSlotsAA);
         });
     }
     setDateHasBeenChanged(false);
@@ -329,6 +331,7 @@ export default function AppointmentPage(props) {
 
   useEffect(() => {
     if (attendMode && duration !== null) {
+      setTimeSlots([]);
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -422,6 +425,7 @@ export default function AppointmentPage(props) {
   //get appt
   useEffect(() => {
     if (dateHasBeenChanged) {
+      setTimeAASlots([]);
       let hoursMode = "";
       hoursMode = attendMode === "Online" ? "Online" : "Office";
       console.log("407", duration);
@@ -436,14 +440,13 @@ export default function AppointmentPage(props) {
             hoursMode
         )
         .then((res) => {
-          console.log("This is the information we got" + res);
-          // setTimeAASlots(res.data.result);
-          // console.log("Timeslots Array " + timeSlots);
-
-          res.data.result.map((r) => {
-            timeAASlots.push(r["begin_time"]);
-          });
-          setTimeAASlots(timeAASlots);
+          let timeSlotsAA = [];
+          if (JSON.stringify(res.data.result.length) > 0) {
+            res.data.result.map((r) => {
+              timeSlotsAA.push(r["begin_time"]);
+            });
+          }
+          setTimeAASlots(timeSlotsAA);
         });
     }
     setDateHasBeenChanged(false);
@@ -451,6 +454,7 @@ export default function AppointmentPage(props) {
 
   useEffect(() => {
     if (dateHasBeenChanged) {
+      setTimeSlots([]);
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
@@ -588,6 +592,8 @@ export default function AppointmentPage(props) {
     );
   }
   const handleMode = (event) => {
+    setTimeSlots([]);
+    setTimeAASlots([]);
     var optionPick = event.target.name;
     console.log(optionPick);
     var newModeObj = {};
