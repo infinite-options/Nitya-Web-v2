@@ -295,40 +295,40 @@ export default function Scheduler(props) {
   }
 
   const [changeLoadingState, setLoadingState] = useState(false);
-  const [customerUid, setcustomerUid] = useState("");
+  // const [customerUid, setcustomerUid] = useState("");
   const [customerUidState, setCustomerUidState] = useState(false);
 
-  useEffect(() => {
-    const tempFind = [];
+  // useEffect(() => {
+  //   const tempFind = [];
 
-    const body = {
-      phone_num: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
-      email: props.email,
-    };
-    // sendToDatabase();
-    axios
-      .post(
-        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/findCustomer",
-        body
-      )
-      .then((response) => {
-        console.log("response", response);
-        for (var i = 0; i < response.data.result.length; i++) {
-          tempFind.push(response.data.result[i]);
-        }
-        console.log("response", tempFind);
-        for (var i = 0; i < tempFind.length; i++) {
-          if (props.email === tempFind[i].customer_email) {
-            if (props.phoneNum === tempFind[i].customer_phone_num) {
-              console.log("response", tempFind[i].customer_uid);
-              setcustomerUid(tempFind[i].customer_uid);
-            }
-          }
-        }
-      });
+  //   const body = {
+  //     phone_num: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
+  //     email: props.email,
+  //   };
+  //   // sendToDatabase();
+  //   axios
+  //     .post(
+  //       "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/findCustomer",
+  //       body
+  //     )
+  //     .then((response) => {
+  //       console.log("response", response);
+  //       for (var i = 0; i < response.data.result.length; i++) {
+  //         tempFind.push(response.data.result[i]);
+  //       }
+  //       console.log("response", tempFind);
+  //       for (var i = 0; i < tempFind.length; i++) {
+  //         if (props.email === tempFind[i].customer_email) {
+  //           if (props.phoneNum === tempFind[i].customer_phone_num) {
+  //             console.log("response", tempFind[i].customer_uid);
+  //             setcustomerUid(tempFind[i].customer_uid);
+  //           }
+  //         }
+  //       }
+  //     });
 
-    console.log("response", customerUid);
-  }, [customerUidState]);
+  //   console.log("response", customerUid);
+  // }, [customerUidState]);
 
   async function bookAppt() {
     const price = props.cost.split(" ", 1);
@@ -346,7 +346,7 @@ export default function Scheduler(props) {
       "https://huo8rhh76i.execute-api.us-west-1.amazonaws.com/dev/api/v2/createPaymentIntent";
     axios
       .post(postURL, {
-        customer_uid: customerUid,
+        customer_uid: props.customerUid,
         business_code: props.notes === "NITYATEST" ? "NITYATEST" : "NITYA",
         payment_summary: temp,
       })

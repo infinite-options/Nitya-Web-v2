@@ -179,6 +179,7 @@ export default function AppointmentPage(props) {
   const [apiDateString, setApiDateString] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
   const [duration, setDuration] = useState(null);
+  const [customerUid, setcustomerUid] = useState("");
   const cost = elementToBeRendered.cost;
 
   useEffect(() => {
@@ -334,6 +335,37 @@ export default function AppointmentPage(props) {
           }
         });
     }
+    const tempFind = [];
+
+    const body = {
+      first_name: fName,
+      last_name: "",
+      phone_num: phoneNum.replace(/[^a-z\d\s]+/gi, ""),
+      email: email,
+    };
+    // sendToDatabase();
+    axios
+      .post(
+        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/findCustomer",
+        body
+      )
+      .then((response) => {
+        console.log("response", response);
+        for (var i = 0; i < response.data.result.length; i++) {
+          tempFind.push(response.data.result[i]);
+        }
+        console.log("response", tempFind);
+        for (var i = 0; i < tempFind.length; i++) {
+          if (email === tempFind[i].customer_email) {
+            if (phoneNum === tempFind[i].customer_phone_num) {
+              console.log("response", tempFind[i].customer_uid);
+              setcustomerUid(tempFind[i].customer_uid);
+            }
+          }
+        }
+      });
+
+    console.log("response", customerUid);
   }
 
   // for appt
@@ -652,6 +684,7 @@ export default function AppointmentPage(props) {
                 >
                   <StripeElement
                     accessToken={access_token}
+                    customerUid={customerUid}
                     stripePromise={stripePromise}
                     treatmentID={treatmentID}
                     treatmentName={elementToBeRendered.title}

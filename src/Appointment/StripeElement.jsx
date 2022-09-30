@@ -12,6 +12,7 @@ export default function StripeElement(props) {
       <Scheduler
         accessToken={props.accessToken}
         treatmentID={props.treatmentID}
+        customerUid={props.customerUid}
         notes={props.notes}
         infoSubmitted={props.infoSubmitted}
         fName={props.fName}
