@@ -340,6 +340,7 @@ export default function AppointmentPage(props) {
     const body = {
       first_name: fName,
       last_name: "",
+      role: "CUSTOMER",
       phone_num: phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       email: email,
     };

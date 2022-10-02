@@ -20,8 +20,22 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
+
+  const required =
+    errorMessage === "Please fill out all fields" ? (
+      <span className="ms-1" style={{ color: "red", fontSize: "12px" }}>
+        *
+      </span>
+    ) : (
+      ""
+    );
 
   function submit() {
+    if (data.email === "") {
+      setErrorMessage("Please fill out all fields");
+      return;
+    }
     Axios.post(url, {
       name: data.name,
       email: data.email,
@@ -34,6 +48,7 @@ export default function Contact() {
       })
       .then((response) => {
         console.log(response);
+        setErrorMessage("");
         handleClickOpen();
       });
   }
@@ -104,7 +119,9 @@ export default function Contact() {
               placeholder="  Email"
               onChange={(e) => handle(e)}
               value={data.email}
+              required
             />
+            {data.email === "" ? required : ""}
 
             <input
               type="text"
@@ -125,6 +142,14 @@ export default function Contact() {
               onChange={(e) => handle(e)}
               value={data.message}
             />
+            <div
+              className="text-center"
+              style={errorMessage === "" ? { visibility: "hidden" } : {}}
+            >
+              <p style={{ color: "red", fontSize: "12px" }}>
+                {errorMessage || "error"}
+              </p>
+            </div>
 
             <button
               className="ContactButton"
