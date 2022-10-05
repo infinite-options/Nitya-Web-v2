@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import LearnMoreBTN from "./LearnMoreBtn";
 import BookNowBTN from "../Services/BookNowBtn";
+import loadinggif from "../Assets/Images/loading.gif";
 import "../Home/Home.css";
 
 export default function Consulting() {
@@ -24,61 +25,67 @@ export default function Consulting() {
         className="CardGrid"
         style={{ gridTemplateColumns: "repeat(1, auto)", height: "auto" }}
       >
-        {data
-          .filter((service) => service.category === "Consultation")
-          .map((filteredService) => (
-            <div
-              style={{
-                display: "flex",
-                backgroundColor: "#DADADA",
-                marginTop: "2rem",
-                maxHeight: "282px",
-              }}
-            >
+        {data.length > 0 ? (
+          data
+            .filter((service) => service.category === "Consultation")
+            .map((filteredService) => (
               <div
                 style={{
-                  width: "100%",
                   display: "flex",
-                  flex: "1",
                   backgroundColor: "#DADADA",
-                  justifyContent: "center",
-                  maxHeight: "100%",
+                  marginTop: "2rem",
+                  maxHeight: "282px",
                 }}
               >
-                <img
-                  style={{
-                    maxWidth: "100%",
-                    maxHeight: "100%",
-                    objectFit: " scale-down",
-                  }}
-                  className="ServiceImg"
-                  src={filteredService.image_url}
-                  alt={"An image of" + filteredService.title}
-                />
-              </div>
-              <div style={{ flex: "1" }}>
                 <div
                   style={{
                     width: "100%",
                     display: "flex",
-                    flexDirection: "column",
+                    flex: "1",
+                    backgroundColor: "#DADADA",
                     justifyContent: "center",
-                    marginTop: "2rem",
-                    marginBottom: "2rem",
+                    maxHeight: "100%",
                   }}
                 >
-                  <div className="Services_Title_Font">
-                    {filteredService.title}
+                  <img
+                    style={{
+                      maxWidth: "100%",
+                      maxHeight: "100%",
+                      objectFit: " scale-down",
+                    }}
+                    className="ServiceImg"
+                    src={filteredService.image_url}
+                    alt={"An image of" + filteredService.title}
+                  />
+                </div>
+                <div style={{ flex: "1" }}>
+                  <div
+                    style={{
+                      width: "100%",
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      marginTop: "2rem",
+                      marginBottom: "2rem",
+                    }}
+                  >
+                    <div className="Services_Title_Font">
+                      {filteredService.title}
+                    </div>
+                    <div className="Services_Body_Font">
+                      {filteredService.description} <br />
+                    </div>
+                    <LearnMoreBTN apptID={filteredService.treatment_uid} />
+                    <BookNowBTN apptID={filteredService.treatment_uid} />
                   </div>
-                  <div className="Services_Body_Font">
-                    {filteredService.description} <br />
-                  </div>
-                  <LearnMoreBTN apptID={filteredService.treatment_uid} />
-                  <BookNowBTN apptID={filteredService.treatment_uid} />
                 </div>
               </div>
-            </div>
-          ))}
+            ))
+        ) : (
+          <div>
+            <img src={loadinggif} alt="LOADING" className="loading-img"></img>
+          </div>
+        )}
       </div>
     </div>
   );
