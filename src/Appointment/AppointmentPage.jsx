@@ -1,35 +1,35 @@
 import React, { useState, useEffect, useContext } from "react";
-
-import StripeElement from "./StripeElement";
-import { useParams } from "react-router";
-import ScrollToTop from "../Blog/ScrollToTop";
-import { loadStripe } from "@stripe/stripe-js";
 import axios from "axios";
-//import { Row, Col } from "reactstrap";
-import SimpleForm from "./simpleForm";
-import SimpleFormText from "./simpleFormText";
-import { makeStyles } from "@material-ui/core/styles";
-import { MyContext } from "../App";
+import { Helmet } from "react-helmet";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { useHistory, useLocation } from "react-router-dom";
+import { useParams } from "react-router";
+import { Radio } from "@material-ui/core";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import moment from "moment";
+import Grid from "@material-ui/core/Grid";
 import Calendar from "react-calendar";
+import { MyContext } from "../App";
+import ScrollToTop from "../Blog/ScrollToTop";
 import "./calendar.css";
-import { Container } from "@material-ui/core";
-import Grid from '@material-ui/core/Grid';
-import { useHistory } from 'react-router';
-import { Link } from "react-router-dom";
-import '../Appointment/AppointmentPage.css';
-import {Helmet} from "react-helmet";
-import { Button } from "@material-ui/core";
+import "../Appointment/AppointmentPage.css";
 
-// import moment from "moment";
+const YellowRadio = withStyles({
+  root: {
+    color: "#D3A625",
+    "&$checked": {
+      color: "#D3A625",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 const useStyles = makeStyles({
-
-
   calendarBox: {
-  marginLeft:'2rem',
-  width: "80%",
+    marginLeft: "2rem",
+    width: "80%",
     "@media (max-width: 500px)": {
-       marginLeft:'0rem',
+      marginLeft: "0rem",
       width: "100%",
     },
   },
@@ -48,6 +48,7 @@ const useStyles = makeStyles({
     borderRadius: "50px",
     display: "block",
     margin: "6px auto",
+
     "&:hover": {
       background: "#D3A625",
       color: "white",
@@ -66,31 +67,22 @@ const useStyles = makeStyles({
     },
   },
 });
-
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function AppointmentPage(props) {
   console.log("(AppointmentPage) props: ", props);
-
+  const location = useLocation();
+  const access_token = location.state.accessToken;
+  console.log("(AppointmentPage) accessToken: ", access_token);
   const classes = useStyles();
-  const history = useHistory()
-
-  // moment().format();
-
-  //strip use states
+  const history = useHistory();
   const { treatmentID } = useParams();
-  const [stripePromise, setStripePromise] = useState(null);
-  let PUBLISHABLE_KEY = "pk_test_51Ihyn......0wa0SR2JG";
-  const [useTestKeys, setUseTestKeys] = useState(true);
-
   // form use states, Axios.Post
-  const [purchaseDate, setPurchaseDate] = useState(new Date());
   const [selectedTime, setSelectedTime] = useState(null);
-  const [fName, setFName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [notes, setNotes] = useState("");
-
-  // for hide & show
-  const [infoSubmitted, setInfoSubmitted] = useState(false);
+  const [mode, setMode] = useState({
+    inPerson: true,
+    online: false,
+  });
+  const [attendMode, setAttendMode] = useState("In-Person");
   // const [bookNowClicked, setBookNowClicked] = useState(false);
   const [bookNowClicked, setBookNowClicked] = useState(true);
   const [timeSelected, setTimeSelected] = useState(false);
@@ -99,22 +91,21 @@ export default function AppointmentPage(props) {
   const [elementToBeRendered, setElementToBeRendered] = useState([]);
   const treatment_uid = treatmentID;
 
-  //for axios.get
-  const [date, setDate] = useState(new Date());
-  const [minDate, setMinDate] = useState(new Date());
+  var currentDate = new Date(+new Date() + 86400000);
+  const [date, setDate] = useState(currentDate);
+  const [minDate, setMinDate] = useState(currentDate);
   const [dateString, setDateString] = useState(null);
   const [dateHasBeenChanged, setDateHasBeenChanged] = useState(true);
   const [dateString1, setDateString1] = useState(null);
   const [apiDateString, setApiDateString] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
+  const [timeAASlots, setTimeAASlots] = useState([]);
   const [duration, setDuration] = useState(null);
-  const cost = elementToBeRendered.cost;
-
-
   const [buttonSelect, setButtonSelect] = useState(false);
+  const [selectedButton, setSelectedButton] = useState("");
 
   useEffect(() => {
-    console.log()
+    console.log();
   }, []);
 
   useEffect(() => {
@@ -130,6 +121,15 @@ export default function AppointmentPage(props) {
       });
     }
   });
+
+  function convert(value) {
+    var a = value.split(":"); // split it at the colons
+
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
+
+    return seconds + 1;
+  }
 
   // parse duration
   const parseDuration = (rawDuration) => {
@@ -157,91 +157,6 @@ export default function AppointmentPage(props) {
 
     return parsedDuration;
   };
-
-  // handle form changes
-  const handleFullNameChange = (newFName) => {
-    setFName(newFName);
-  };
-
-  const handleEmailChange = (newEmail) => {
-    setEmail(newEmail);
-  };
-
-  const handlePhoneNumChange = (newPhoneNum) => {
-    setPhoneNum(newPhoneNum);
-  };
-
-  const handleNotesChange = (newNotes) => {
-    setNotes(newNotes);
-  };
-
-  //for stripe
-  function toggleKeys() {
-    setUseTestKeys(!useTestKeys);
-    setInfoSubmitted(true);
-
-    if (notes === "NITYATEST") {
-      // Fetch public key
-      console.log("fetching public key");
-      axios
-        .get(
-          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYATEST"
-        )
-        .then((result) => {
-          console.log(
-            "(1 PaymentDetails) Stripe-key then result (1): " +
-              JSON.stringify(result)
-          );
-
-          let tempStripePromise = loadStripe(result.data.publicKey);
-
-          console.log("(1 PaymentDetails) setting state with stripePromise");
-
-          setStripePromise(tempStripePromise);
-
-          console.log(tempStripePromise);
-          console.log("(1 PaymentDetails) stripePromise set!");
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response) {
-            console.log(
-              "(1 PaymentDetails) error: " + JSON.stringify(err.response)
-            );
-          }
-        });
-    } else {
-      // Fetch public key live
-      console.log("fetching public key live");
-      axios
-        .get(
-          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/stripe_key/NITYA"
-        )
-        .then((result) => {
-          console.log(
-            "(2 PaymentDetails) Stripe-key then result (1): " +
-              JSON.stringify(result)
-          );
-
-          let tempStripePromise = loadStripe(result.data.publicKey);
-
-          console.log("(2 PaymentDetails) setting state with stripePromise");
-
-          console.log(tempStripePromise);
-          setStripePromise(tempStripePromise);
-
-          console.log("(2 PaymentDetails) stripePromise set!");
-        })
-        .catch((err) => {
-          console.log(err);
-          if (err.response) {
-            console.log(
-              "(2 PaymentDetails) error: " + JSON.stringify(err.response)
-            );
-          }
-        });
-    }
-  }
 
   // for appt
   //String formatting functions for the date variable
@@ -284,6 +199,16 @@ export default function AppointmentPage(props) {
       12: "Dec",
       "": "",
     };
+    console.log("dateformat2", date);
+    console.log(
+      "dateformat2",
+      months[doubleDigitMonth(date)] +
+        " " +
+        doubleDigitDay(date) +
+        ", " +
+        date.getFullYear() +
+        " "
+    );
     return (
       months[doubleDigitMonth(date)] +
       " " +
@@ -296,6 +221,15 @@ export default function AppointmentPage(props) {
 
   // This one is for doing the sendToDatabase Post Call
   const dateFormat3 = (date) => {
+    console.log("dateformat3", date);
+    console.log(
+      "dateformat3",
+      date.getFullYear() +
+        "-" +
+        doubleDigitMonth(date) +
+        "-" +
+        doubleDigitDay(date)
+    );
     return (
       date.getFullYear() +
       "-" +
@@ -313,7 +247,6 @@ export default function AppointmentPage(props) {
   };
 
   const dateChange = (date) => {
-   
     setDate(date);
     dateStringChange(date);
     // setTimeSelected(true);
@@ -347,9 +280,10 @@ export default function AppointmentPage(props) {
       // strTime += seconds < 10 ? ":0" + seconds : ":" + seconds; // get seconds
       // strTime += hours >= 12 ? " P.M." : " A.M."; // get AM/PM
 
-      var newDate = new Date(date + " " + time);
+      var newDate = new Date((date + "T" + time).replace(/\s/, "T"));
       var hours = newDate.getHours();
       var minutes = newDate.getMinutes();
+
       var ampm = hours >= 12 ? "pm" : "am";
       hours = hours % 12;
       hours = hours ? hours : 12; // the hour '0' should be '12'
@@ -358,45 +292,335 @@ export default function AppointmentPage(props) {
       return strTime;
     }
   }
+  useEffect(() => {
+    setTimeAASlots([]);
+    if (attendMode && duration !== null) {
+      let hoursMode = "";
+      hoursMode = attendMode === "Online" ? "Online" : "Office";
+      console.log("407", duration, apiDateString);
+      let date =
+        apiDateString >
+        moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
+          ? apiDateString
+          : moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD");
+      console.log("apiDateString", apiDateString, date);
+      setApiDateString(date);
+      axios
+        .get(
+          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
+            date +
+            "/" +
+            duration +
+            "/" +
+            hoursMode
+        )
+        .then((res) => {
+          // setTimeAASlots(res.data.result);
+          // console.log("Timeslots Array " + timeSlots);
+          let timeSlotsAA = [];
+          if (JSON.stringify(res.data.result.length) > 0) {
+            res.data.result.map((r) => {
+              timeSlotsAA.push(r["begin_time"]);
+            });
+          }
+          setTimeAASlots(timeSlotsAA);
+        });
+    }
+    setDateHasBeenChanged(false);
+  }, [servicesLoaded, duration, attendMode]);
 
+  useEffect(() => {
+    if (attendMode && duration !== null) {
+      setTimeSlots([]);
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + access_token,
+      };
+
+      let date =
+        apiDateString >
+        moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
+          ? apiDateString
+          : moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD");
+      console.log("apiDateString", apiDateString, date);
+      setApiDateString(date);
+      const morningTime =
+        attendMode === "Online" ? "T08:00:00-0800" : "T09:00:00-0800";
+      const eveningTime =
+        attendMode === "Online" ? "T20:00:00-0800" : "T20:00:00-0800";
+      const data = {
+        timeMin: date + morningTime,
+        timeMax: date + eveningTime,
+        items: [
+          {
+            id: "primary",
+          },
+        ],
+      };
+      console.log(headers);
+      console.log(data);
+      axios
+        .post(
+          `https://www.googleapis.com/calendar/v3/freeBusy?key=${API_KEY}`,
+          data,
+          {
+            headers: headers,
+          }
+        )
+        .then((response) => {
+          let busy = response.data.calendars.primary.busy;
+          let start_time = Date.parse(date + morningTime) / 1000;
+          let end_time = Date.parse(date + eveningTime) / 1000;
+          let free = [];
+          let appt_start_time = start_time;
+
+          let seconds = convert(duration);
+          // Loop through each appt slot in the search range.
+          while (appt_start_time < end_time) {
+            // Add appt duration to the appt start time so we know where the appt will end.
+            let appt_end_time = appt_start_time + seconds;
+
+            // For each appt slot, loop through the current appts to see if it falls
+            // in a slot that is already taken.
+            let slot_available = true;
+
+            busy.forEach((times) => {
+              let this_start = Date.parse(times["start"]) / 1000;
+              let this_end = Date.parse(times["end"]) / 1000;
+              console.log(
+                "freebusy busy times",
+                busy,
+                times["start"],
+                times["end"]
+              );
+              // If the appt start time or appt end time falls on a current appt, slot is taken.
+              if (
+                (appt_start_time >= this_start && appt_start_time < this_end) ||
+                (appt_end_time > this_start && appt_end_time <= this_end)
+              ) {
+                slot_available = false;
+                return; // No need to continue if it's taken.
+              }
+            });
+            console.log("freebusy", free);
+            // If we made it through all appts and the slot is still available, it's an open slot.
+            if (slot_available) {
+              free.push(
+                moment(new Date(appt_start_time * 1000)).format("HH:mm:ss")
+              );
+            }
+            // + duration minutes
+            appt_start_time += 60 * 30;
+          }
+          console.log("freebusy", free);
+          setTimeSlots(free);
+        })
+        .catch((error) => {
+          console.log("error", error);
+        });
+    }
+    setDateHasBeenChanged(false);
+  }, [servicesLoaded, duration, attendMode]);
   //get appt
   useEffect(() => {
     if (dateHasBeenChanged) {
+      setTimeAASlots([]);
+      let hoursMode = "";
+      hoursMode = attendMode === "Online" ? "Online" : "Office";
+      console.log("407", duration);
+
       axios
         .get(
           "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
             apiDateString +
             "/" +
-            duration
+            duration +
+            "/" +
+            hoursMode
         )
         .then((res) => {
-          console.log("This is the information we got" + res.data);
-          setTimeSlots(res.data.result);
-          console.log("Timeslots Array " + timeSlots);
+          let timeSlotsAA = [];
+          if (JSON.stringify(res.data.result.length) > 0) {
+            res.data.result.map((r) => {
+              timeSlotsAA.push(r["begin_time"]);
+            });
+          }
+          setTimeAASlots(timeSlotsAA);
+        });
+    }
+    setDateHasBeenChanged(false);
+  });
+
+  useEffect(() => {
+    if (dateHasBeenChanged) {
+      setTimeSlots([]);
+      const headers = {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+        Authorization: "Bearer " + access_token,
+      };
+      const morningTime =
+        attendMode === "Online" ? "T08:00:00-0800" : "T09:00:00-0800";
+      const eveningTime =
+        attendMode === "Online" ? "T20:00:00-0800" : "T20:00:00-0800";
+      const data = {
+        timeMin: apiDateString + morningTime,
+        timeMax: apiDateString + eveningTime,
+        items: [
+          {
+            id: "primary",
+          },
+        ],
+      };
+      console.log(headers);
+      console.log(data);
+      axios
+        .post(
+          `https://www.googleapis.com/calendar/v3/freeBusy?key=${API_KEY}`,
+          data,
+          {
+            headers: headers,
+          }
+        )
+        .then((response) => {
+          let busy = response.data.calendars.primary.busy;
+          let start_time = Date.parse(apiDateString + morningTime) / 1000;
+          let end_time = Date.parse(apiDateString + eveningTime) / 1000;
+          let free = [];
+          let appt_start_time = start_time;
+
+          let seconds = convert(duration);
+          // Loop through each appt slot in the search range.
+          while (appt_start_time < end_time) {
+            // Add appt duration to the appt start time so we know where the appt will end.
+            let appt_end_time = appt_start_time + seconds;
+
+            // For each appt slot, loop through the current appts to see if it falls
+            // in a slot that is already taken.
+            let slot_available = true;
+
+            busy.forEach((times) => {
+              let this_start = Date.parse(times["start"]) / 1000;
+              let this_end = Date.parse(times["end"]) / 1000;
+              console.log(
+                "freebusy busy times",
+                busy,
+                times["start"],
+                times["end"]
+              );
+              // If the appt start time or appt end time falls on a current appt, slot is taken.
+              if (
+                (appt_start_time >= this_start && appt_start_time < this_end) ||
+                (appt_end_time > this_start && appt_end_time <= this_end)
+              ) {
+                slot_available = false;
+                return; // No need to continue if it's taken.
+              }
+            });
+            console.log("freebusy", free);
+            // If we made it through all appts and the slot is still available, it's an open slot.
+            if (slot_available) {
+              free.push(
+                moment(new Date(appt_start_time * 1000)).format("HH:mm:ss")
+              );
+            }
+            // + duration minutes
+            appt_start_time += 60 * 30;
+          }
+          console.log("freebusy", free);
+          setTimeSlots(free);
+        })
+        .catch((error) => {
+          console.log("error", error);
         });
     }
     setDateHasBeenChanged(false);
   });
 
   function renderAvailableApptsVertical() {
-    return (
-      <Grid container xs={11}  >
-      {timeSlots.map((element) => (
-        <button
-          className={classes.timeslotButton}
-          onClick={() => selectApptTime(element.begin_time)}
-        >
-          {formatTime(apiDateString, element.begin_time)}
-        </button>
-    ))}
-    </Grid>
-    )
-  }
+    console.log("TimeSlots", timeSlots);
+    console.log("TimeSlotsAA", timeAASlots);
 
-  function selectApptTime(element) {
+    let result = timeSlots.filter((o1) => timeAASlots.some((o2) => o1 === o2));
+    console.log("Merged", result, selectedButton);
+    return (
+      <Grid container xs={11}>
+        {result.length > 0 ? (
+          result.map(function (element, i) {
+            return (
+              <button
+                key={i}
+                className={classes.timeslotButton}
+                style={{
+                  width: "10rem",
+                  height: "3rem",
+                  maxWidth: "80%",
+                  backgroundColor: i === selectedButton ? "#D3A625" : "white",
+                  border: "2px solid #D3A625",
+                  color: i === selectedButton ? "white" : "#D3A625",
+                  // padding: "15px 90px",
+                  textAlign: "center",
+                  textDecoration: "none",
+                  fontSize: "20px",
+                  borderRadius: "50px",
+                  display: "block",
+                  margin: "6px auto",
+                }}
+                onClick={() => selectApptTime(element, i)}
+              >
+                {formatTime(apiDateString, element)}
+              </button>
+            );
+          })
+        ) : (
+          <div className="ApptPageHeader">
+            {attendMode === "Online" ? (
+              <div>
+                No online appointments are available. Please choose another
+                date.
+              </div>
+            ) : (
+              <div>
+                No in-person appointments are available. Please choose another
+                date or check for online appointments.
+              </div>
+            )}
+          </div>
+        )}
+      </Grid>
+    );
+  }
+  const handleMode = (event) => {
+    setTimeSlots([]);
+    setTimeAASlots([]);
+    var optionPick = event.target.name;
+    console.log(optionPick);
+    var newModeObj = {};
+    var newMode = "";
+    if (optionPick === "inPerson") {
+      newModeObj = {
+        inPerson: true,
+        online: false,
+      };
+      newMode = "In-Person";
+    } else {
+      newModeObj = {
+        inPerson: false,
+        online: true,
+      };
+      newMode = "Online";
+    }
+    console.log(newModeObj);
+    setMode(newModeObj);
+    setAttendMode(newMode);
+  };
+  function selectApptTime(element, i) {
+    console.log("selected time", element);
+    setSelectedButton(i);
     setSelectedTime(element);
     setTimeSelected(true);
-    setButtonSelect(true)
+    setButtonSelect(true);
   }
 
   return (
@@ -404,7 +628,10 @@ export default function AppointmentPage(props) {
       <ScrollToTop />
       <Helmet>
         <title>Book an Appointment</title>
-        <meta name="description" content="Book an Appointment that's convenient to you" />
+        <meta
+          name="description"
+          content="Book an Appointment that's convenient to you"
+        />
       </Helmet>
       <br />
       {bookNowClicked ? (
@@ -412,49 +639,65 @@ export default function AppointmentPage(props) {
           <div className="Card">
             <div className="CardGrid">
               <div>
-                <div className="ApptPageTitle">
-                    {elementToBeRendered.title}
-                </div>
-                <div className="ApptPageText" >
-                    {elementToBeRendered.description} <br />
+                <div className="ApptPageTitle">{elementToBeRendered.title}</div>
+                <div className="ApptPageText">
+                  {elementToBeRendered.description} <br />
                 </div>
                 <div className="ApptPageHeader">
-                    {parseDuration(elementToBeRendered.duration)} | {elementToBeRendered.cost}
+                  {parseDuration(elementToBeRendered.duration)} |{" "}
+                  {elementToBeRendered.cost}
                 </div>
-                    {/* <BookNowBTN apptID={elementToBeRendered.treatment_uid} /> */}
-                <div style={{margin:'2rem'}}>
-                    <img
-                      style={{width:'100%',height:'100%' ,objectFit:'cover'}}
-                      variant="top"
-                      src={elementToBeRendered.image_url}
-                      alt={"An image of" + elementToBeRendered.title} />
-                </div>       
-                {/*                
-                <p className="ApptPageText" style={{ textAlign: "left" }}>
-                  6055 Meridian Ave #40
-                  <br />
-                  San Jose, CA, 95120
-                  <br />
-                  <br />
-                  Office: (408) 471-7004
-                </p> */}
+
+                <div style={{ margin: "2rem" }}>
+                  <img
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                    }}
+                    variant="top"
+                    src={elementToBeRendered.image_url}
+                    alt={"An image of" + elementToBeRendered.title}
+                  />
+                </div>
               </div>
 
-              
-            {/* Right hand side of the Container */}
-            <div className={classes.calendarBox}>
+              {/* Right hand side of the Container */}
+              <div className={classes.calendarBox}>
+                <div className="TitleFontAppt">Pick an Appointment Type</div>
                 <div
-                  className="TitleFontAppt"
-                  // style={{
-                  //   textAlign: "center",
-                  //   color:"#D3A625",
-                  //   fontWeight:'500',
-                  //   fontSize: "30px",
-                  // }}
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginTop: "1rem",
+                    marginBottom: "2rem",
+                  }}
                 >
-                   Pick an Appointment Date
+                  <FormControlLabel
+                    control={
+                      <YellowRadio
+                        checked={mode.inPerson}
+                        onChange={(e) => handleMode(e)}
+                        name="inPerson"
+                      />
+                    }
+                    label="In-person"
+                  />
+                  <FormControlLabel
+                    control={
+                      <YellowRadio
+                        checked={mode.online}
+                        onChange={(e) => handleMode(e)}
+                        name="online"
+                      />
+                    }
+                    label="Online"
+                  />
                 </div>
-                {console.log("(Calendar) date: ", date)}
+                <div className="TitleFontAppt">Pick an Appointment Date</div>
+                {console.log("(Calendar) date: ", minDate)}
                 <Calendar
                   calendarType="US"
                   onClickDay={dateChange}
@@ -463,58 +706,47 @@ export default function AppointmentPage(props) {
                   next2Label={null}
                   prev2Label={null}
                 />
-             </div>
               </div>
-           
-              <div style={{width:'100%', height:'100%'}}  >
-                <div
-                  style={{
-                  
-                    display: "flex",
-                    justifyContent:'space-between',
-                    alignItems:'flex-start',
-                    padding:'3%'
-                  }}
-                >
-                  <div
-                   className="TitleFontAppt"
-                  //  style={{
-                  //   color:"#D3A625",
-                  //   fontWeight:'500',
-                  //   fontSize: "30px",
-                  // }}
-                  >
-                   Pick an Appointment Time
-                  </div>
-                  <div
-                    className="BodyFontAppt"
-                    style={{
-                      color: "#D3A625",
-                      fontSize: "18px",
-                    }}
-                  >
-                    Pacific Standard Time
-                  </div>
-                </div>
-        
-                <div style={{ display:'flex', justifyContent:'center'}}>
+            </div>
+
+            <div style={{ width: "100%", height: "100%" }}>
+              <div
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  justifyContent: "space-between",
+                  marginBottom: "2rem",
+                }}
+              >
+                <div className="TitleFontAppt">Pick an Appointment Time</div>
+                <div className="BodyFontAppt">Pacific Standard Time</div>
+              </div>
+
+              <div style={{ display: "flex", justifyContent: "center" }}>
                 {renderAvailableApptsVertical()}
-                </div>
-           
+              </div>
 
-                <div style={{ padding:'3%'}} hidden={!buttonSelect}>
-                  <button 
-                  
-                  onClick={()=> history.push({pathname: `/${treatmentID}/confirm`,state: {date:apiDateString ,time :selectedTime}})}
+              <div style={{ padding: "3%" }} hidden={!buttonSelect}>
+                <button
+                  onClick={() =>
+                    history.push({
+                      pathname: `/${treatmentID}/confirm`,
+                      state: {
+                        date: apiDateString,
+                        time: selectedTime,
+                        mode: attendMode,
+                        accessToken: access_token,
+                      },
+                    })
+                  }
                   className={classes.timeslotButton}
-                    > 
-                  Continue 
-                  </button>
-                </div>
-               </div>
-
+                >
+                  Continue
+                </button>
+              </div>
+            </div>
           </div>
-          
         </div>
       ) : (
         ""

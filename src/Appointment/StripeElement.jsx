@@ -1,9 +1,7 @@
-import React, { useContext, useState, useEffect } from "react";
-import { Box } from "@material-ui/core";
-import { Elements, CardElement, useStripe } from "@stripe/react-stripe-js";
-import { loadStripe } from "@stripe/stripe-js";
-//import StripeCheckout from "./StripeCheckout";
-import { makeStyles } from "@material-ui/core/styles";
+import React from "react";
+
+import { Elements } from "@stripe/react-stripe-js";
+
 import Scheduler from "./Scheduler";
 
 export default function StripeElement(props) {
@@ -12,7 +10,9 @@ export default function StripeElement(props) {
   return (
     <Elements stripe={props.stripePromise}>
       <Scheduler
+        accessToken={props.accessToken}
         treatmentID={props.treatmentID}
+        customerUid={props.customerUid}
         notes={props.notes}
         infoSubmitted={props.infoSubmitted}
         fName={props.fName}
@@ -21,6 +21,11 @@ export default function StripeElement(props) {
         date={props.date}
         purchaseDate={props.purchaseDate}
         selectedTime={props.selectedTime}
+        treatmentDate={props.treatmentDate}
+        treatmentTime={props.treatmentTime}
+        mode={props.mode}
+        age={props.age}
+        gender={props.gender}
         cost={props.cost}
         treatmentName={props.treatmentName}
         duration={props.duration}

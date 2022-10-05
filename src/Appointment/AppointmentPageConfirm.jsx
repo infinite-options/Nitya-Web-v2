@@ -1,46 +1,55 @@
 import React, { useState, useEffect, useContext } from "react";
-
-import StripeElement from "./StripeElement";
+import { Col } from "reactstrap";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useLocation, useParams } from "react-router";
-import ScrollToTop from "../Blog/ScrollToTop";
 import { loadStripe } from "@stripe/stripe-js";
+import { Radio } from "@material-ui/core";
+import FormGroup from "@material-ui/core/FormGroup";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
 import axios from "axios";
-import { Row, Col } from "reactstrap";
+import StripeElement from "./StripeElement";
+import moment from "moment";
+import { MyContext } from "../App";
 import SimpleForm from "./simpleForm";
 import SimpleFormText from "./simpleFormText";
-import { makeStyles } from "@material-ui/core/styles";
-import { MyContext } from "../App";
-import moment from 'moment'
-import Calendar from "react-calendar";
+import ScrollToTop from "../Blog/ScrollToTop";
 import "./calendar.css";
-import { Container } from "@material-ui/core";
-import Grid from '@material-ui/core/Grid';
-//import { fontFamily } from "@mui/system";
-import '../Appointment/AppointmentPage.css';
+import "../Appointment/AppointmentPage.css";
 
 // import moment from "moment";
-
+const YellowRadio = withStyles({
+  root: {
+    color: "#D3A625",
+    "&$checked": {
+      color: "#D3A625",
+    },
+  },
+  checked: {},
+})((props) => <Radio color="default" {...props} />);
 
 const useStyles = makeStyles({
   container: {
-    margin: "50px auto",
-   // width: "980px",
-    padding: "50px 50px",
+    margin: "20px",
+    width: "100%",
+    // padding: "20px",
     backgroundColor: "white",
-    width:'60%',
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    // width: "60%",
     "@media (max-width: 1050px)": {
-      marginLeft:'0.5rem',
-     width: "75%",
-   },
+      // marginLeft: "0.5rem",
+      width: "100%",
+    },
   },
- 
+
   content2: {
     fontSize: "20px",
     // fontFamily: "SFProDisplayRegular",
     color: "#D3A625",
     textAlign: "left",
   },
-  
+
   selectTime2: {
     fontSize: "38px",
     color: "#D3A625",
@@ -48,11 +57,11 @@ const useStyles = makeStyles({
     margin: "0 auto",
     textAlign: "center",
   },
- 
+
   bookButton: {
     width: "200px",
     height: "50px",
-    cursor:'pointer',
+    cursor: "pointer",
     backgroundColor: "#D3A625",
     border: "2px solid #D3A625",
     color: "white",
@@ -83,8 +92,7 @@ const useStyles = makeStyles({
       },
     },
   },
-  
- 
+
   timeslotButton: {
     width: "10rem",
     height: "3rem",
@@ -117,22 +125,23 @@ const useStyles = makeStyles({
     },
   },
 
-  img:{
-    width:'320px',
+  img: {
+    width: "320px",
     "@media (max-width: 1050px)": {
-      width:'280px',
+      width: "280px",
     },
   },
 });
-
+const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function AppointmentPage(props) {
-  console.log("(AppointmentPage) props: ", props);
-
   const classes = useStyles();
   const location = useLocation();
   // moment().format();
-
+  console.log("(AppointmentPageConfirm) props: ", props);
   //strip use states
+  const access_token = location.state.accessToken;
+  console.log("(AppointmentPageConfirm) accessToken: ", access_token);
+
   const { treatmentID } = useParams();
   const [stripePromise, setStripePromise] = useState(null);
   let PUBLISHABLE_KEY = "pk_test_51Ihyn......0wa0SR2JG";
@@ -155,7 +164,12 @@ export default function AppointmentPage(props) {
   const { serviceArr, servicesLoaded } = useContext(MyContext);
   const [elementToBeRendered, setElementToBeRendered] = useState([]);
   const treatment_uid = treatmentID;
-
+  const [gender, setGender] = useState({
+    male: false,
+    female: true,
+  });
+  const [selectGender, setSelectGender] = useState("Female");
+  const [age, setAge] = useState(null);
   //for axios.get
   const [date, setDate] = useState(new Date());
   const [minDate, setMinDate] = useState(new Date());
@@ -165,10 +179,11 @@ export default function AppointmentPage(props) {
   const [apiDateString, setApiDateString] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
   const [duration, setDuration] = useState(null);
+  const [customerUid, setcustomerUid] = useState("");
   const cost = elementToBeRendered.cost;
 
   useEffect(() => {
-    console.log()
+    console.log();
   }, []);
 
   useEffect(() => {
@@ -211,8 +226,32 @@ export default function AppointmentPage(props) {
 
     return parsedDuration;
   };
-
+  const handleGender = (event) => {
+    var optionPick = event.target.name;
+    console.log(optionPick);
+    var newGenderObj = {};
+    var newGender = "";
+    if (optionPick === "female") {
+      newGenderObj = {
+        male: false,
+        female: true,
+      };
+      newGender = "Female";
+    } else {
+      newGenderObj = {
+        male: true,
+        female: false,
+      };
+      newGender = "Male";
+    }
+    console.log(newGenderObj);
+    setGender(newGenderObj);
+    setSelectGender(newGender);
+  };
   // handle form changes
+  const handleAgeChange = (newAge) => {
+    setAge(newAge);
+  };
   const handleFullNameChange = (newFName) => {
     setFName(newFName);
   };
@@ -266,6 +305,7 @@ export default function AppointmentPage(props) {
         });
     } else {
       // Fetch public key live
+
       console.log("fetching public key live");
       axios
         .get(
@@ -295,6 +335,38 @@ export default function AppointmentPage(props) {
           }
         });
     }
+    const tempFind = [];
+
+    const body = {
+      first_name: fName,
+      last_name: "",
+      role: "CUSTOMER",
+      phone_num: phoneNum.replace(/[^a-z\d\s]+/gi, ""),
+      email: email,
+    };
+    // sendToDatabase();
+    axios
+      .post(
+        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/findCustomer",
+        body
+      )
+      .then((response) => {
+        console.log("response", response);
+        for (var i = 0; i < response.data.result.length; i++) {
+          tempFind.push(response.data.result[i]);
+        }
+        console.log("response", tempFind);
+        for (var i = 0; i < tempFind.length; i++) {
+          if (email === tempFind[i].customer_email) {
+            if (phoneNum === tempFind[i].customer_phone_num) {
+              console.log("response", tempFind[i].customer_uid);
+              setcustomerUid(tempFind[i].customer_uid);
+            }
+          }
+        }
+      });
+
+    console.log("response", customerUid);
   }
 
   // for appt
@@ -333,9 +405,9 @@ export default function AppointmentPage(props) {
       "07": "Jul",
       "08": "Aug",
       "09": "Sep",
-      "10": "Oct",
-      "11": "Nov",
-      "12": "Dec",
+      10: "Oct",
+      11: "Nov",
+      12: "Dec",
       "": "",
     };
     return (
@@ -399,17 +471,31 @@ export default function AppointmentPage(props) {
       // strTime += minutes < 10 ? ":0" + minutes : ":" + minutes; // get minutes
       // strTime += seconds < 10 ? ":0" + seconds : ":" + seconds; // get seconds
       // strTime += hours >= 12 ? " P.M." : " A.M."; // get AM/PM
-
-      var newDate = new Date(date + " " + time);
+      console.log(date, time);
+      var newDate = new Date((date + "T" + time).replace(/\s/, "T"));
       var hours = newDate.getHours();
       var minutes = newDate.getMinutes();
+      console.log(hours, minutes);
       var ampm = hours >= 12 ? "pm" : "am";
+      console.log(ampm);
       hours = hours % 12;
+      console.log(hours);
       hours = hours ? hours : 12; // the hour '0' should be '12'
+      console.log(hours);
       minutes = minutes < 10 ? "0" + minutes : minutes;
+      console.log(minutes);
       var strTime = hours + ":" + minutes + " " + ampm;
+      console.log(strTime);
       return strTime;
     }
+  }
+  function convert(value) {
+    var a = value.split(":"); // split it at the colons
+
+    // minutes are worth 60 seconds. Hours are worth 60 minutes.
+    var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
+
+    return seconds + 1;
   }
 
   //get appt
@@ -433,7 +519,7 @@ export default function AppointmentPage(props) {
 
   function renderAvailableApptsVertical() {
     return timeSlots.map((element) => (
-      <Col  xs={3}>
+      <Col xs={3}>
         <button
           className={classes.timeslotButton}
           onClick={() => selectApptTime(element.begin_time)}
@@ -449,45 +535,40 @@ export default function AppointmentPage(props) {
     setTimeSelected(true);
   }
 
-
   return (
-    <div style={{ backgroundColor: "#DADADA" }}>
+    <div className="HomeContainer">
       <ScrollToTop />
       <br />
-      {bookNowClicked ? (
-        <div>
-          
-          <div
-            className={classes.container}
-            style={{
-              padding: "40px 40px",
-            }}
-          >
+      {bookNowClicked || location.state.signedin ? (
+        <div className="Card" style={{ alignItems: "center" }}>
+          <div className={classes.container}>
             <div>
               <div>
                 <div className={classes.selectTime2}>
                   <div className="TitleFontAppt">
-                  Appointment scheduled for:
-                    </div>
+                    Appointment scheduled for:
+                  </div>
                 </div>
                 <br></br>
-           
+
                 <h1
                   style={{
                     fontSize: "30px",
                     margin: "0 auto",
                     textAlign: "center",
-                  }}  >
+                  }}
+                >
                   <span>
-                    {moment(location.state.date).format('ll')} {' '}
-                    at {formatTime(location.state.date, location.state.time)}
+                    {moment(location.state.date).format("ll")} at{" "}
+                    {formatTime(location.state.date, location.state.time)} -{" "}
+                    {location.state.mode}
                   </span>
                 </h1>
               </div>
             </div>
             <br />
-            <div className="ApptConfirmContainer" >
-              <div >
+            <div className="ApptConfirmContainer">
+              <div>
                 <p className={classes.content2} style={{ textAlign: "left" }}>
                   <span
                     style={{
@@ -503,7 +584,7 @@ export default function AppointmentPage(props) {
                 <img
                   src={elementToBeRendered.image_url}
                   className={classes.img}
-                  style={{objectFit:'cover',  textAlign:'left'}}
+                  style={{ objectFit: "cover", textAlign: "left" }}
                   alt=""
                 />
                 <br />
@@ -517,7 +598,7 @@ export default function AppointmentPage(props) {
                   Office: (408) 471-7004
                 </p>
               </div>
-              <div  className="ApptConfirmTextBox">
+              <div className="ApptConfirmTextBox">
                 <div
                   style={{
                     marginBottom: "10px",
@@ -528,7 +609,42 @@ export default function AppointmentPage(props) {
                     onHandleChange={handleFullNameChange}
                   />
                 </div>
-
+                <div
+                  style={{
+                    display: "flex",
+                    flexDirection: "row",
+                    alignItems: "center",
+                    justifyContent: "space-between",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <FormControlLabel
+                    control={
+                      <YellowRadio
+                        checked={gender.female}
+                        onChange={(e) => handleGender(e)}
+                        name="female"
+                      />
+                    }
+                    label="Female"
+                  />
+                  <FormControlLabel
+                    control={
+                      <YellowRadio
+                        checked={gender.male}
+                        onChange={(e) => handleGender(e)}
+                        name="male"
+                      />
+                    }
+                    label="Male"
+                  />
+                  <SimpleForm field="Age" onHandleChange={handleAgeChange} />
+                </div>
+                <div
+                  style={{
+                    marginBottom: "10px",
+                  }}
+                ></div>
                 <div
                   style={{
                     marginBottom: "10px",
@@ -546,7 +662,7 @@ export default function AppointmentPage(props) {
                 >
                   <SimpleForm
                     field="Phone Number - 10 digits only"
-                    maxLength='10'
+                    maxLength="10"
                     onHandleChange={handlePhoneNumChange}
                   />
                 </div>
@@ -568,6 +684,8 @@ export default function AppointmentPage(props) {
                   }}
                 >
                   <StripeElement
+                    accessToken={access_token}
+                    customerUid={customerUid}
                     stripePromise={stripePromise}
                     treatmentID={treatmentID}
                     treatmentName={elementToBeRendered.title}
@@ -576,10 +694,18 @@ export default function AppointmentPage(props) {
                     fName={fName}
                     email={email}
                     phoneNum={phoneNum}
-                    date={moment(location.state.date).format('ll')}
-                    selectedTime={formatTime(location.state.date, location.state.time)}
+                    date={moment(location.state.date).format("ll")}
+                    selectedTime={formatTime(
+                      location.state.date,
+                      location.state.time
+                    )}
+                    mode={location.state.mode}
+                    age={age}
+                    gender={selectGender}
                     purchaseDate={purchaseDate}
                     cost={cost}
+                    treatmentDate={location.state.date}
+                    treatmentTime={location.state.time}
                     duration={elementToBeRendered.duration}
                     image_url={elementToBeRendered.image_url}
                   />
@@ -591,12 +717,9 @@ export default function AppointmentPage(props) {
                     justifyContent: "center",
                   }}
                 >
-                
-
                   <button
                     className={classes.bookButton}
                     hidden={infoSubmitted}
-                    
                     onClick={toggleKeys}
                   >
                     Book Appointment

@@ -1,11 +1,10 @@
 @font-face {
   font-family: SF Pro Italic;
-  src: url('../fonts/SF-Pro-Italic.ttf');
-  font-family: SF Pro Display Regular ;
-  src: url('../fonts/SF-Pro-Display-Black.otf');
+  src: url("../fonts/SF-Pro-Italic.ttf");
+  font-family: SF Pro Display Regular;
+  src: url("../fonts/SF-Pro-Display-Black.otf");
   font-family: SF Pro Display Semibold;
-  src: url('../fonts/SF-Pro-Display-Semibold.otf');
-
+  src: url("../fonts/SF-Pro-Display-Semibold.otf");
 }
 
 .navbar {
@@ -22,25 +21,30 @@
   /* cursor: pointer; */
 }
 
-.emptyDiv{
-flex: 0.15;
-margin-bottom: 2rem;
+.emptyDiv {
+  flex: 0.15;
+  margin-bottom: 2rem;
 }
 
-.emptyDiv1{
+.emptyDiv1 {
   display: flex;
   justify-content: flex-start;
   flex: 0.5;
   text-align: left;
-  }
-
+}
+.nav-logobar {
+  flex-basis: 20%;
+  font-size: 0;
+}
 .nav-logo {
-  flex:0.5;
-  text-align: right;
+  height: auto;
+  width: auto;
+  max-height: 15vh;
+  max-width: 10rem;
 }
 
 .nav-links {
-  flex:0.8;
+  flex: 0.8;
   text-align: center;
   display: grid;
   grid-template-columns: repeat(10, auto);
@@ -60,10 +64,10 @@ margin-bottom: 2rem;
   transition: 0.3s all;
 }
 
-.nav-link:hover, .nav-link:focus {
-  color: #D3A625;
+.nav-link:hover,
+.nav-link:focus {
+  color: #d3a625;
 }
-
 
 .nav-log {
   list-style: none;
@@ -76,13 +80,13 @@ margin-bottom: 2rem;
 }
 
 .instagram-icon {
-  color:  #ad8131;
+  color: #ad8131;
   margin-top: -0.2rem;
   margin-left: 5%;
 }
 
 .instagram-icon:hover {
-  color: #D3A625;
+  color: #d3a625;
 }
 
 @media screen and (max-width: 1250px) and (min-width: 1050px) {
@@ -101,17 +105,17 @@ margin-bottom: 2rem;
     /* cursor: pointer; */
   }
 
-  .emptyDiv{
+  .emptyDiv {
     flex: 0;
-    }
+  }
 
-    .emptyDiv1{
-      flex: 0;
-      }
-      .nav-logo {
-        flex:0;
-        text-align: left;
-      }
+  .emptyDiv1 {
+    flex: 0;
+  }
+  .nav-logo {
+    flex: 0;
+    text-align: left;
+  }
 
   .nav-links {
     font-size: 18px;
@@ -119,15 +123,15 @@ margin-bottom: 2rem;
     flex-direction: column;
     position: absolute;
     text-align: center;
-    width: 100% ;
-    top: 80px;
+    width: 96%;
+    top: 13vh;
     left: -150%;
     transition: 0.2s all;
   }
 
   .nav-links.active {
     background: white;
-    left: -10%;
+    left: 0%;
   }
 
   .nav-item {
@@ -140,7 +144,6 @@ margin-bottom: 2rem;
     display: flex;
   }
 
-  
   .right {
     width: 0px;
     margin-left: 0px;
@@ -148,7 +151,68 @@ margin-bottom: 2rem;
   }
 
   .instagram-icon {
-    flex:0;
+    flex: 0;
+    visibility: hidden;
+  }
+}
+@media screen and (min-width: 200px) and (max-width: 500px) {
+  .navbar {
+    position: sticky;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: space-between;
+    /* cursor: pointer; */
+  }
+
+  .emptyDiv {
+    flex: 0;
+  }
+
+  .emptyDiv1 {
+    flex: 0;
+  }
+
+  .nav-logo {
+    flex: 0;
+    text-align: left;
+  }
+
+  .nav-links {
+    font-size: 18px;
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    text-align: center;
+    width: 90%;
+    top: 13vh;
+    left: -150%;
+    transition: 0.2s all;
+  }
+
+  .nav-links.active {
+    background: white;
+    left: 0%;
+  }
+
+  .nav-item {
+    border-bottom: 1px solid #d3a625;
+    margin-left: -10%;
+    height: 40px;
+  }
+
+  .nav-icon {
+    display: flex;
+  }
+
+  .right {
+    width: 0px;
+    margin-left: 0px;
+    display: none;
+  }
+
+  .instagram-icon {
+    flex: 0;
     visibility: hidden;
   }
 }

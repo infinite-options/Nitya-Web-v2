@@ -11,6 +11,10 @@
   }
 .BodyFontAppt{
   font-family:SF Pro Display Regular ;
+  color: #D3A625;
+  font-size: 18px;
+  text-align: center;
+  width: 100%;
 }
 
 .TitleFontAppt{
@@ -20,6 +24,7 @@
   font-weight:500;
   font-size: 30px;
   text-align: center;
+  width: 100%;
 }
 
 .ApptContainer{
@@ -44,7 +49,9 @@
 
 .ApptConfirmContainer{
   display:flex;
-  justify-content:space-evenly;
+  justify-content:space-between;
+  align-items: center;
+  padding: 1%;
 }
 
 .ApptConfirmTextBox{
@@ -75,7 +82,7 @@
 
 
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 700px) {
 
   .ApptContainer{
     display:flex;

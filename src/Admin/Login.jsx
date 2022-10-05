@@ -3,78 +3,32 @@ import { makeStyles } from "@material-ui/core/styles";
 import Cookies from "js-cookie";
 import { useHistory, withRouter } from "react-router";
 import axios from "axios";
-import { Grid, Paper, Button, Typography, Box } from "@material-ui/core";
+import { Button, Typography } from "@material-ui/core";
+import ScrollToTop from "../Blog/ScrollToTop";
+import Google from "../Assets/Images/Google.svg";
+import { Col, Form, Modal, Row } from "react-bootstrap";
 import { AuthContext } from "../auth/AuthContext";
-//import CssTextField from "../../utils/CssTextField";
-//import SocialLogin from "./SocialLogin";
-//import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-//import { faEye } from "@fortawesome/free-solid-svg-icons";
+import { GoogleLogin } from "react-google-login";
 
-const eye = ''; // <FontAwesomeIcon icon={faEye} />;
+const eye = ""; // <FontAwesomeIcon icon={faEye} />;
 
+const BASE_URL = process.env.REACT_APP_SERVER_BASE_URI;
+let CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
+let CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
 function AdminLogin(props) {
   const [emailValue, setEmail] = useState("");
   const [passwordValue, setPassword] = useState("");
   const [errorValue, setError] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-
+  const [accessToken, setAccessToken] = useState("");
+  const [idToken, setIdToken] = useState("");
+  const [socialId, setSocialId] = useState("");
+  const [userID, setUserID] = useState("");
+  const [loggedIn, setLoggedIn] = useState();
+  const [doNotExistShow, setDoNotExistShow] = useState(false);
+  const [userExistShow, setUserExistShow] = useState(false);
   const Auth = useContext(AuthContext);
   const history = useHistory();
-
-  useEffect(() => {
-    if (
-      process.env.REACT_APP_APPLE_CLIENT_ID &&
-      process.env.REACT_APP_APPLE_REDIRECT_URI
-    ) {
-      /*  window.AppleID.auth.init({
-        clientId: process.env.REACT_APP_APPLE_CLIENT_ID,
-        scope: "email",
-        redirectURI: process.env.REACT_APP_APPLE_REDIRECT_URI,
-      }); */
-    }
-    // Note: search query parameters used for Apple Login
-    let queryString = props.location.search;
-    let urlParams = new URLSearchParams(queryString);
-    // Clear Query parameters
-    window.history.pushState({}, document.title, window.location.pathname);
-    // console.log(props,urlParams)
-    // Successful Log in with Apple, set cookies, context, redirect
-    if (urlParams.has("id")) {
-      let customerId = urlParams.get("id");
-      Auth.setIsAuth(true);
-      Cookies.set("login-session", "good");
-      Cookies.set("customer_uid", customerId);
-      axios
-        .get(process.env.REACT_APP_SERVER_BASE_URI + "Profile/" + customerId)
-        .then((response) => {
-          console.log("Account:", response);
-          let newAccountType = response.data.result[0].role.toLowerCase();
-          switch (newAccountType) {
-            case "admin":
-              Auth.setAuthLevel(2);
-              props.history.push("/admin");
-              break;
-
-            case "customer":
-              Auth.setAuthLevel(0);
-              props.history.push("/store");
-              break;
-            default:
-              Auth.setAuthLevel(0);
-              props.history.push("/admin");
-          }
-        })
-        .catch((err) => {
-          console.log(err.response || err);
-        });
-      props.history.push("/admin");
-    }
-    // Log which media platform user should have signed in with instead of Apple
-    // May eventually implement to display the message for which platform to Login
-    else if (urlParams.has("media")) {
-      console.log(urlParams.get("media"));
-    }
-  }, []);
 
   useEffect(() => {
     if (
@@ -114,6 +68,280 @@ function AdminLogin(props) {
   const handlePasswordChange = (e) => {
     // console.log('password is changing')
     setPassword(e.target.value);
+  };
+  const responseGoogle = (response) => {
+    console.log(response);
+    if (response.profileObj) {
+      let email = response.profileObj.email;
+      let customer_uid = "";
+      setEmail(response.profileObj.email);
+      setSocialId(response.googleId);
+      axios.get(BASE_URL + `UserTokenEmail/${email}`).then((response) => {
+        console.log(
+          "in events",
+          response["data"]["customer_uid"],
+          response["data"]["user_access_token"]
+        );
+        console.log("in events", response);
+        setAccessToken(response["data"]["user_access_token"]);
+
+        console.log("Login successful");
+        console.log(email);
+        history.push({
+          pathname: "/home",
+          state: email,
+        });
+        setUserID(response["data"]["customer_uid"]);
+        customer_uid = response["data"]["customer_uid"];
+        var old_at = response["data"]["user_access_token"];
+        console.log("in events", old_at);
+        var refreshToken = response["data"]["user_refresh_token"];
+
+        // axios
+        //   .get(
+        //     `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`
+        //   )
+        fetch(
+          `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`,
+          {
+            method: "GET",
+          }
+        )
+          .then((response) => {
+            console.log("in events", response);
+            if (response["status"] === 400) {
+              console.log("in events if");
+              let authorization_url =
+                "https://accounts.google.com/o/oauth2/token";
+
+              var details = {
+                refresh_token: refreshToken,
+                client_id: CLIENT_ID,
+                client_secret: CLIENT_SECRET,
+                grant_type: "refresh_token",
+              };
+
+              var formBody = [];
+              for (var property in details) {
+                var encodedKey = encodeURIComponent(property);
+                var encodedValue = encodeURIComponent(details[property]);
+                formBody.push(encodedKey + "=" + encodedValue);
+              }
+              formBody = formBody.join("&");
+
+              fetch(authorization_url, {
+                method: "POST",
+                headers: {
+                  "Content-Type":
+                    "application/x-www-form-urlencoded;charset=UTF-8",
+                },
+                body: formBody,
+              })
+                .then((response) => {
+                  return response.json();
+                })
+                .then((responseData) => {
+                  console.log(responseData);
+                  return responseData;
+                })
+                .then((data) => {
+                  console.log(data);
+                  let at = data["access_token"];
+                  var id_token = data["id_token"];
+                  setAccessToken(at);
+                  setIdToken(id_token);
+                  console.log("in events", at);
+                  let url = BASE_URL + `UpdateAccessToken/${customer_uid}`;
+                  axios
+                    .post(url, {
+                      user_access_token: at,
+                    })
+                    .then((response) => {})
+                    .catch((err) => {
+                      console.log(err);
+                    });
+                  return accessToken;
+                })
+                .catch((err) => {
+                  console.log(err);
+                });
+            } else {
+              setAccessToken(old_at);
+              console.log(old_at);
+            }
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+        console.log("in events", refreshToken, accessToken);
+      });
+
+      _socialLoginAttempt(email, accessToken, socialId, "GOOGLE");
+    }
+  };
+
+  const _socialLoginAttempt = (email, at, socialId, platform) => {
+    axios
+      .get(BASE_URL + "UserSocialLogin/" + email)
+      .then((res) => {
+        console.log("loginSocialTA in events", res);
+        if (res.data.result !== false) {
+          // setUserID(res.data.result[0]);
+          history.push("/blog");
+
+          Auth.setIsAuth(true);
+          Auth.isLoggedIn(true);
+          setError("");
+          console.log("Login success");
+          let customerInfo = res.data.result.result[0];
+          console.log("Login success, customerInfo");
+          Auth.setIsAuth(true);
+          Cookies.set("login-session", "good");
+          Cookies.set("customer_uid", customerInfo.customer_uid);
+          Cookies.set("role", customerInfo.role);
+          setAccessToken(res.data.result.result[0].user_access_token);
+          let newAccountType = customerInfo.role.toLowerCase();
+          console.log(newAccountType);
+          switch (newAccountType) {
+            case "admin":
+              Auth.setAuthLevel(2);
+              history.push("/blog");
+              break;
+
+            case "customer":
+              Auth.setAuthLevel(0);
+              history.push("/home");
+              break;
+
+            default:
+              Auth.setAuthLevel(1);
+              history.push("/home");
+              break;
+          }
+          console.log("Login successful");
+          console.log(email);
+
+          // Successful log in, Try to update tokens, then continue to next page based on role
+        } else {
+          axios
+            .get(BASE_URL + "GetUserEmailId/" + email)
+            .then((response) => {
+              console.log("GetUserEmailId", response);
+              if (response.data.message === "User ID doesnt exist") {
+                console.log("log in error");
+                // history.push('/signup');
+                setDoNotExistShow(true);
+              } else {
+                setUserExistShow(true);
+              }
+            })
+            .catch((error) => {
+              console.log("its in landing page");
+              console.log(error);
+            });
+        }
+      })
+      .catch((err) => {
+        if (err.response) {
+          console.log(err.response);
+        }
+        console.log(err);
+      });
+  };
+  const userDoNotExist = () => {
+    const modalStyle = {
+      position: "absolute",
+      top: "30%",
+      left: "35%",
+      width: "500px",
+    };
+    const headerStyle = {
+      border: "none",
+      textAlign: "center",
+      display: "flex",
+      alignItems: "center",
+      font: "normal normal 600 20px Quicksand-Book",
+      textTransform: "uppercase",
+      backgroundColor: " #757575",
+      padding: "1rem",
+      color: "#b28d42",
+    };
+    const footerStyle = {
+      border: "none",
+      backgroundColor: " #757575",
+    };
+    const bodyStyle = {
+      backgroundColor: " #757575",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      font: "normal normal 600 16px Quicksand-Regular",
+    };
+    return (
+      <Modal show={doNotExistShow} onHide={hideDoNotExist} style={modalStyle}>
+        <Form>
+          <Modal.Header style={headerStyle} closeButton>
+            <Modal.Title>User Account Does Not Exist</Modal.Title>
+          </Modal.Header>
+
+          <Modal.Body style={bodyStyle}>
+            <div>
+              The User with email: {emailValue} does not exist! Please Sign Up!
+            </div>
+          </Modal.Body>
+
+          <Modal.Footer style={footerStyle}>
+            <Row
+              style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+              }}
+            >
+              <Col
+                xs={6}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  type="submit"
+                  onClick={hideDoNotExist}
+                  className={classes.loginbutton}
+                >
+                  Cancel
+                </Button>
+              </Col>
+              <Col
+                xs={6}
+                style={{
+                  display: "flex",
+                  flexDirection: "row",
+                  alignItems: "center",
+                  justifyContent: "center",
+                }}
+              >
+                <Button
+                  type="submit"
+                  onClick={() => history.push("/signup")}
+                  className={classes.loginbutton}
+                >
+                  Sign Up
+                </Button>
+              </Col>
+            </Row>
+          </Modal.Footer>
+        </Form>
+      </Modal>
+    );
+  };
+  const hideDoNotExist = () => {
+    setDoNotExistShow(false);
   };
 
   const verifyLoginInfo = (e) => {
@@ -191,33 +419,36 @@ function AdminLogin(props) {
                     //TODO: tell to please use Google/ Facebook login
                     console.log(res);
                     if (res.data.code === 200) {
-                      history.push("/blog")
-                      Auth.setIsAuth(true)
-                      Auth.isLoggedIn(true)
+                      history.push("/blog");
+                      Auth.setIsAuth(true);
+                      Auth.isLoggedIn(true);
+
                       setError("");
                       console.log("Login success");
                       let customerInfo = res.data.result[0];
-
+                      console.log("Login success, customerInfo");
                       Auth.setIsAuth(true);
                       Cookies.set("login-session", "good");
                       Cookies.set("customer_uid", customerInfo.customer_uid);
                       Cookies.set("role", customerInfo.role);
 
                       let newAccountType = customerInfo.role.toLowerCase();
+                      console.log(newAccountType);
                       switch (newAccountType) {
                         case "admin":
                           Auth.setAuthLevel(2);
-                          props.history.push("/blog");
+                          history.push("/blog");
+                          console.log("here");
                           break;
 
                         case "customer":
                           Auth.setAuthLevel(0);
-                          props.history.push("/home");
+                          history.push("/home");
                           break;
 
                         default:
                           Auth.setAuthLevel(1);
-                          props.history.push("/home");
+                          history.push("/home");
                           break;
                       }
                     } else if (res.data.code === 406 || res.data.code === 404) {
@@ -234,7 +465,7 @@ function AdminLogin(props) {
                       axios
                         .post(
                           process.env.REACT_APP_SERVER_BASE_URI +
-                          "email_verification",
+                            "email_verification",
                           { email: emailValue },
                           {
                             headers: {
@@ -402,6 +633,21 @@ function AdminLogin(props) {
       right: "28px",
       cursor: "pointer",
     },
+    buttonLayout: { width: "100%", padding: "0", margin: "0" },
+    loginbuttons: {
+      display: "flex",
+      flexDirection: "row",
+      alignItems: "center",
+      justifyContent: "center",
+    },
+    loginbutton: {
+      background: "#b28d42 0% 0% no-repeat padding-box",
+      borderRadius: "10px",
+      font: "normal normal bold 16px Quicksand-Bold",
+      color: "#ffffff",
+      margin: "1rem",
+      textTransform: "none",
+    },
   });
 
   const classes = useStyles();
@@ -412,11 +658,43 @@ function AdminLogin(props) {
 
   return (
     <div className={classes.root}>
+      <ScrollToTop />
       <div className={classes.container}>
         <div className={classes.pageText} style={{ paddingBottom: "20px" }}>
           Login
         </div>
         {/* <SocialLogin /> */}
+        <Row xs={12} className={classes.buttonLayout}>
+          <Col></Col>
+          <Col xs={8} className={classes.loginbuttons}>
+            <Button>
+              <GoogleLogin
+                clientId={CLIENT_ID}
+                render={(renderProps) => (
+                  <img
+                    src={Google}
+                    onClick={renderProps.onClick}
+                    disabled={renderProps.disabled}
+                    alt={""}
+                    style={{
+                      minWidth: "60%",
+                      maxWidth: "70%",
+                      padding: "0",
+                      margin: 0,
+                    }}
+                  ></img>
+                )}
+                buttonText="Log In"
+                onSuccess={responseGoogle}
+                onFailure={responseGoogle}
+                isSignedIn={false}
+                disable={false}
+                cookiePolicy={"single_host_origin"}
+              />
+            </Button>
+          </Col>
+          <Col></Col>
+        </Row>
         <div className={classes.pageText} style={{ padding: "10px" }}>
           Or
         </div>
@@ -464,13 +742,13 @@ function AdminLogin(props) {
           className={classes.button}
           style={{ marginBottom: "30px" }}
           onClick={() => {
-            window.location.href = "/signup";
+            history.push("/signup");
           }}
         >
           Sign Up
         </button>
       </div>
-    
+      {userDoNotExist()}
     </div>
   );
 }
