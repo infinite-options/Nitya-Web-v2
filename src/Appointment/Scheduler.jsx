@@ -341,7 +341,7 @@ export default function Scheduler(props) {
 
     var clientSecret;
     const cardElement = await elements.getElement(CardElement);
-
+    console.log(props.customerUid);
     const postURL =
       "https://huo8rhh76i.execute-api.us-west-1.amazonaws.com/dev/api/v2/createPaymentIntent";
     axios
