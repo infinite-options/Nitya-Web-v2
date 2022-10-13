@@ -152,6 +152,12 @@ export default function AppointmentPage(props) {
   const [email, setEmail] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [notes, setNotes] = useState("");
+  const [gender, setGender] = useState({
+    male: false,
+    female: true,
+  });
+  const [selectGender, setSelectGender] = useState("Female");
+  const [age, setAge] = useState("");
 
   // for hide & show
   const [infoSubmitted, setInfoSubmitted] = useState(false);
@@ -161,12 +167,6 @@ export default function AppointmentPage(props) {
   const { serviceArr, servicesLoaded } = useContext(MyContext);
   const [elementToBeRendered, setElementToBeRendered] = useState([]);
   const treatment_uid = treatmentID;
-  const [gender, setGender] = useState({
-    male: false,
-    female: true,
-  });
-  const [selectGender, setSelectGender] = useState("Female");
-  const [age, setAge] = useState(null);
   //for axios.get
   const [customerUid, setCustomerUid] = useState("");
   const cost = elementToBeRendered.cost;
@@ -262,7 +262,8 @@ export default function AppointmentPage(props) {
   //for stripe
   function toggleKeys() {
     const tempFind = [];
-    if (email === "" || fName === "" || phoneNum === "") {
+    console.log(age);
+    if (age === "" || email === "" || fName === "" || phoneNum === "") {
       setErrorMessage("Please fill out all fields");
       return;
     }
@@ -520,6 +521,7 @@ export default function AppointmentPage(props) {
                     label="Male"
                   />
                   {/* <SimpleForm field="Age" onHandleChange={handleAgeChange} /> */}
+                  {age === "" ? required : ""}
                   <input
                     name="variable"
                     placeholder="Age"
