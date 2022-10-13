@@ -144,12 +144,10 @@ export default function AppointmentPage(props) {
 
   const { treatmentID } = useParams();
   const [stripePromise, setStripePromise] = useState(null);
-  let PUBLISHABLE_KEY = "pk_test_51Ihyn......0wa0SR2JG";
   const [useTestKeys, setUseTestKeys] = useState(true);
 
   // form use states, Axios.Post
   const [purchaseDate, setPurchaseDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState(null);
   const [fName, setFName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
@@ -159,7 +157,6 @@ export default function AppointmentPage(props) {
   const [infoSubmitted, setInfoSubmitted] = useState(false);
   // const [bookNowClicked, setBookNowClicked] = useState(false);
   const [bookNowClicked, setBookNowClicked] = useState(true);
-  const [timeSelected, setTimeSelected] = useState(false);
   //import context
   const { serviceArr, servicesLoaded } = useContext(MyContext);
   const [elementToBeRendered, setElementToBeRendered] = useState([]);
@@ -171,14 +168,6 @@ export default function AppointmentPage(props) {
   const [selectGender, setSelectGender] = useState("Female");
   const [age, setAge] = useState(null);
   //for axios.get
-  const [date, setDate] = useState(new Date());
-  const [minDate, setMinDate] = useState(new Date());
-  const [dateString, setDateString] = useState(null);
-  const [dateHasBeenChanged, setDateHasBeenChanged] = useState(true);
-  const [dateString1, setDateString1] = useState(null);
-  const [apiDateString, setApiDateString] = useState(null);
-  const [timeSlots, setTimeSlots] = useState([]);
-  const [duration, setDuration] = useState(null);
   const [customerUid, setCustomerUid] = useState("");
   const cost = elementToBeRendered.cost;
   const [errorMessage, setErrorMessage] = useState("");
@@ -190,8 +179,6 @@ export default function AppointmentPage(props) {
           setElementToBeRendered(element);
           console.log("element to be rendered: ", elementToBeRendered);
           console.log("duration: ", elementToBeRendered.duration);
-          // setDuration(parseDuration(elementToBeRendered.duration));
-          setDuration(elementToBeRendered.duration);
         }
       });
     }
