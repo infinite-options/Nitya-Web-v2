@@ -144,12 +144,10 @@ export default function AppointmentPage(props) {
 
   const { treatmentID } = useParams();
   const [stripePromise, setStripePromise] = useState(null);
-  let PUBLISHABLE_KEY = "pk_test_51Ihyn......0wa0SR2JG";
   const [useTestKeys, setUseTestKeys] = useState(true);
 
   // form use states, Axios.Post
   const [purchaseDate, setPurchaseDate] = useState(new Date());
-  const [selectedTime, setSelectedTime] = useState(null);
   const [fName, setFName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
@@ -159,7 +157,6 @@ export default function AppointmentPage(props) {
   const [infoSubmitted, setInfoSubmitted] = useState(false);
   // const [bookNowClicked, setBookNowClicked] = useState(false);
   const [bookNowClicked, setBookNowClicked] = useState(true);
-  const [timeSelected, setTimeSelected] = useState(false);
   //import context
   const { serviceArr, servicesLoaded } = useContext(MyContext);
   const [elementToBeRendered, setElementToBeRendered] = useState([]);
@@ -171,20 +168,9 @@ export default function AppointmentPage(props) {
   const [selectGender, setSelectGender] = useState("Female");
   const [age, setAge] = useState(null);
   //for axios.get
-  const [date, setDate] = useState(new Date());
-  const [minDate, setMinDate] = useState(new Date());
-  const [dateString, setDateString] = useState(null);
-  const [dateHasBeenChanged, setDateHasBeenChanged] = useState(true);
-  const [dateString1, setDateString1] = useState(null);
-  const [apiDateString, setApiDateString] = useState(null);
-  const [timeSlots, setTimeSlots] = useState([]);
-  const [duration, setDuration] = useState(null);
   const [customerUid, setCustomerUid] = useState("");
   const cost = elementToBeRendered.cost;
-
-  useEffect(() => {
-    console.log();
-  }, []);
+  const [errorMessage, setErrorMessage] = useState("");
 
   useEffect(() => {
     if (servicesLoaded) {
@@ -193,13 +179,18 @@ export default function AppointmentPage(props) {
           setElementToBeRendered(element);
           console.log("element to be rendered: ", elementToBeRendered);
           console.log("duration: ", elementToBeRendered.duration);
-          // setDuration(parseDuration(elementToBeRendered.duration));
-          setDuration(elementToBeRendered.duration);
         }
       });
     }
   });
-
+  const required =
+    errorMessage === "Please fill out all fields" ? (
+      <span className="ms-1" style={{ color: "red", fontSize: "12px" }}>
+        *
+      </span>
+    ) : (
+      ""
+    );
   // parse duration
   const parseDuration = (rawDuration) => {
     if (rawDuration === undefined) {
@@ -250,29 +241,42 @@ export default function AppointmentPage(props) {
   };
   // handle form changes
   const handleAgeChange = (newAge) => {
-    setAge(newAge);
+    setAge(newAge.target.value);
   };
   const handleFullNameChange = (newFName) => {
-    setFName(newFName);
+    setFName(newFName.target.value);
   };
 
   const handleEmailChange = (newEmail) => {
-    setEmail(newEmail);
+    setEmail(newEmail.target.value);
   };
 
   const handlePhoneNumChange = (newPhoneNum) => {
-    setPhoneNum(newPhoneNum);
+    setPhoneNum(newPhoneNum.target.value);
   };
 
   const handleNotesChange = (newNotes) => {
-    setNotes(newNotes);
+    setNotes(newNotes.target.value);
   };
 
   //for stripe
   function toggleKeys() {
-    setUseTestKeys(!useTestKeys);
-    setInfoSubmitted(true);
     const tempFind = [];
+    if (email === "" || fName === "" || phoneNum === "") {
+      setErrorMessage("Please fill out all fields");
+      return;
+    }
+
+    if (email !== 0) {
+      if (
+        !email.match(
+          /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+        )
+      ) {
+        setErrorMessage("Please enter a valid email.");
+        return;
+      }
+    }
 
     const body = {
       first_name: fName,
@@ -367,110 +371,15 @@ export default function AppointmentPage(props) {
           }
         });
     }
+    setUseTestKeys(!useTestKeys);
+    setErrorMessage("");
+    setInfoSubmitted(true);
   }
-
-  // for appt
-  //String formatting functions for the date variable
-
-  const doubleDigitMonth = (date) => {
-    let str = "00" + (date.getMonth() + 1);
-    return str.substring(str.length - 2);
-  };
-
-  const doubleDigitDay = (date) => {
-    let str = "00" + date.getDate();
-    return str.substring(str.length - 2);
-  };
-
-  // This one is for
-  const dateFormat1 = (date) => {
-    return (
-      doubleDigitMonth(date) +
-      "/" +
-      doubleDigitDay(date) +
-      "/" +
-      date.getFullYear()
-    );
-  };
-
-  // This one is for the timeslotAPI call
-  const dateFormat2 = (date) => {
-    var months = {
-      "01": "Jan",
-      "02": "Feb",
-      "03": "Mar",
-      "04": "Apr",
-      "05": "May",
-      "06": "Jun",
-      "07": "Jul",
-      "08": "Aug",
-      "09": "Sep",
-      10: "Oct",
-      11: "Nov",
-      12: "Dec",
-      "": "",
-    };
-    return (
-      months[doubleDigitMonth(date)] +
-      " " +
-      doubleDigitDay(date) +
-      ", " +
-      date.getFullYear() +
-      " "
-    );
-  };
-
-  // This one is for doing the sendToDatabase Post Call
-  const dateFormat3 = (date) => {
-    return (
-      date.getFullYear() +
-      "-" +
-      doubleDigitMonth(date) +
-      "-" +
-      doubleDigitDay(date)
-    );
-  };
-
-  const dateStringChange = (date) => {
-    setDateString(dateFormat1(date));
-    setApiDateString(dateFormat3(date));
-    setDateString1(dateFormat2(date));
-    setDateHasBeenChanged(true);
-  };
-
-  const dateChange = (date) => {
-    setDate(date);
-    dateStringChange(date);
-    // setTimeSelected(true);
-    if (timeSelected === true) {
-      setTimeSelected(false);
-    }
-  };
 
   function formatTime(date, time) {
     if (time == null) {
       return "?";
     } else {
-      // time = time.split(":");
-      // // fetch
-      // var hours = Number(time[0]);
-      // var minutes = Number(time[1]);
-      // var seconds = Number(time[2]);
-
-      // // calculate
-      // var strTime;
-
-      // if (hours > 0 && hours <= 12) {
-      //   strTime = "" + hours;
-      // } else if (hours > 12) {
-      //   strTime = "" + (hours - 12);
-      // } else if (hours == 0) {
-      //   strTime = "12";
-      // }
-
-      // strTime += minutes < 10 ? ":0" + minutes : ":" + minutes; // get minutes
-      // strTime += seconds < 10 ? ":0" + seconds : ":" + seconds; // get seconds
-      // strTime += hours >= 12 ? " P.M." : " A.M."; // get AM/PM
       console.log(date, time);
       var newDate = new Date((date + "T" + time).replace(/\s/, "T"));
       var hours = newDate.getHours();
@@ -489,52 +398,6 @@ export default function AppointmentPage(props) {
       return strTime;
     }
   }
-  function convert(value) {
-    var a = value.split(":"); // split it at the colons
-
-    // minutes are worth 60 seconds. Hours are worth 60 minutes.
-    var seconds = +a[0] * 60 * 60 + +a[1] * 60 + +a[2];
-
-    return seconds + 1;
-  }
-
-  //get appt
-  useEffect(() => {
-    if (dateHasBeenChanged) {
-      axios
-        .get(
-          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
-            apiDateString +
-            "/" +
-            duration
-        )
-        .then((res) => {
-          console.log("This is the information we got" + res.data);
-          setTimeSlots(res.data.result);
-          console.log("Timeslots Array " + timeSlots);
-        });
-    }
-    setDateHasBeenChanged(false);
-  });
-
-  function renderAvailableApptsVertical() {
-    return timeSlots.map((element) => (
-      <Col xs={3}>
-        <button
-          className={classes.timeslotButton}
-          onClick={() => selectApptTime(element.begin_time)}
-        >
-          {formatTime(apiDateString, element.begin_time)}
-        </button>
-      </Col>
-    ));
-  }
-
-  function selectApptTime(element) {
-    setSelectedTime(element);
-    setTimeSelected(true);
-  }
-
   return (
     <div className="HomeContainer">
       <ScrollToTop />
@@ -604,9 +467,27 @@ export default function AppointmentPage(props) {
                     marginBottom: "10px",
                   }}
                 >
-                  <SimpleForm
+                  {/* <SimpleForm
                     field="Full Name"
                     onHandleChange={handleFullNameChange}
+                  /> */}
+                  {fName === "" ? required : ""}
+                  <input
+                    name="variable"
+                    placeholder="Enter Full Name"
+                    value={fName}
+                    onChange={(e) => handleFullNameChange(e)}
+                    style={{
+                      padding: "10px",
+                      boxSizing: "border-box",
+                      borderRadius: "20px",
+                      fontColor: "black",
+                      fontSize: "20px",
+                      border: "2px solid #B28D42",
+                      width: "100%",
+                      // fontFamily: "AvenirHeavy",
+                      outline: "none",
+                    }}
                   />
                 </div>
                 <div
@@ -638,7 +519,24 @@ export default function AppointmentPage(props) {
                     }
                     label="Male"
                   />
-                  <SimpleForm field="Age" onHandleChange={handleAgeChange} />
+                  {/* <SimpleForm field="Age" onHandleChange={handleAgeChange} /> */}
+                  <input
+                    name="variable"
+                    placeholder="Age"
+                    value={age}
+                    onChange={(e) => handleAgeChange(e)}
+                    style={{
+                      padding: "10px",
+                      boxSizing: "border-box",
+                      borderRadius: "20px",
+                      fontColor: "black",
+                      fontSize: "20px",
+                      border: "2px solid #B28D42",
+                      width: "100%",
+                      // fontFamily: "AvenirHeavy",
+                      outline: "none",
+                    }}
+                  />
                 </div>
                 <div
                   style={{
@@ -650,9 +548,28 @@ export default function AppointmentPage(props) {
                     marginBottom: "10px",
                   }}
                 >
-                  <SimpleForm
+                  {/* <SimpleForm
                     field="Email Address"
                     onHandleChange={handleEmailChange}
+                  /> */}
+                  {email === "" ? required : ""}
+                  <input
+                    name="variable"
+                    placeholder="Email Address"
+                    value={email}
+                    // pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
+                    onChange={(e) => handleEmailChange(e)}
+                    style={{
+                      padding: "10px",
+                      boxSizing: "border-box",
+                      borderRadius: "20px",
+                      fontColor: "black",
+                      fontSize: "20px",
+                      border: "2px solid #B28D42",
+                      width: "100%",
+                      // fontFamily: "AvenirHeavy",
+                      outline: "none",
+                    }}
                   />
                 </div>
                 <div
@@ -660,10 +577,29 @@ export default function AppointmentPage(props) {
                     marginBottom: "10px",
                   }}
                 >
-                  <SimpleForm
+                  {/* <SimpleForm
                     field="Phone Number - 10 digits only"
                     maxLength="10"
                     onHandleChange={handlePhoneNumChange}
+                  /> */}
+                  {phoneNum === "" ? required : ""}
+                  <input
+                    name="variable"
+                    placeholder="Phone Number - 10 digits only"
+                    value={phoneNum}
+                    maxLength="10"
+                    onChange={(e) => handlePhoneNumChange(e)}
+                    style={{
+                      padding: "10px",
+                      boxSizing: "border-box",
+                      borderRadius: "20px",
+                      fontColor: "black",
+                      fontSize: "20px",
+                      border: "2px solid #B28D42",
+                      width: "100%",
+                      // fontFamily: "AvenirHeavy",
+                      outline: "none",
+                    }}
                   />
                 </div>
 
@@ -672,9 +608,27 @@ export default function AppointmentPage(props) {
                     marginBottom: "10px",
                   }}
                 >
-                  <SimpleFormText
+                  {/* <SimpleFormText
                     field="Type your message here"
                     onHandleChange={handleNotesChange}
+                  /> */}
+                  <input
+                    name="variable"
+                    placeholder="Type your message here"
+                    value={notes}
+                    maxLength="100"
+                    onChange={(e) => handleNotesChange(e)}
+                    style={{
+                      padding: "10px",
+                      boxSizing: "border-box",
+                      borderRadius: "20px",
+                      fontColor: "black",
+                      fontSize: "20px",
+                      border: "2px solid #B28D42",
+                      width: "100%",
+                      // fontFamily: "AvenirHeavy",
+                      outline: "none",
+                    }}
                   />
                 </div>
                 <div
@@ -709,6 +663,14 @@ export default function AppointmentPage(props) {
                     duration={elementToBeRendered.duration}
                     image_url={elementToBeRendered.image_url}
                   />
+                </div>
+                <div
+                  className="text-center"
+                  style={errorMessage === "" ? { visibility: "hidden" } : {}}
+                >
+                  <p style={{ color: "red", fontSize: "12px" }}>
+                    {errorMessage || "error"}
+                  </p>
                 </div>
                 <div
                   aria-label={"click button to book your appointment"}

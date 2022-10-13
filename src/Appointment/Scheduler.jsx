@@ -101,16 +101,9 @@ export default function Scheduler(props) {
   const history = useHistory();
   //for confirmation page
   const [apptInfo, setApptInfo] = useState({});
-  const [apptConfirmed, setApptConfirmed] = useState(false);
-
   // for hide and show
   const [submitted, setSubmitted] = useState(false);
-
-  // form use states, Axios.Post
-  const [fName, setFName] = useState("");
-  const [email, setEmail] = useState("");
-  const [phoneNum, setPhoneNum] = useState("");
-  const [notes, setNotes] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
 
   //String formatting functions for the date variable
   const doubleDigitMonth = (date) => {
@@ -378,19 +371,53 @@ export default function Scheduler(props) {
                   console.log(
                     "confirmedCardPayment result: " + JSON.stringify(result)
                   );
-                  sendToDatabase();
-                  creatEvent();
-                })
-                .catch((err) => {
-                  console.log(err);
-                  if (err.response) {
-                    console.log("error: " + JSON.stringify(err.response));
+                  console.log(result.data);
+                  if (result.error) {
+                    console.log(result.error);
+                    setErrorMessage(result.error.message);
+                    const body = {
+                      name: props.fName,
+                      phone: props.phoneNum,
+                      email: props.email,
+                      message: JSON.stringify(result.error),
+                    };
+                    // sendToDatabase();
+                    axios
+                      .post(
+                        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/SendEmailPaymentIntent",
+                        body
+                      )
+                      .then((response) => {
+                        console.log("response", response.data.result);
+                      });
+
+                    setSubmitted(false);
+                    setLoadingState(false);
+                  } else {
+                    sendToDatabase();
+                    creatEvent();
                   }
-                  setSubmitted(false);
-                  setLoadingState(false);
                 });
             } catch (e) {
+              console.log(res.error.message);
+              setErrorMessage(res.error.message);
+              const body = {
+                name: props.fName,
+                phone: props.phoneNum,
+                email: props.email,
+                message: JSON.stringify(res.error),
+              };
+              // sendToDatabase();
+              axios
+                .post(
+                  "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/SendEmailPaymentIntent",
+                  body
+                )
+                .then((response) => {
+                  console.log("response");
+                });
               console.log("error trying to pay: ", e);
+
               setSubmitted(false);
               setLoadingState(false);
             }
@@ -398,6 +425,22 @@ export default function Scheduler(props) {
       })
       .catch((err) => {
         console.log(err);
+        const body = {
+          name: props.fName,
+          phone: props.phoneNum,
+          email: props.email,
+          message: props.notes,
+        };
+        // sendToDatabase();
+        axios
+          .post(
+            "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/SendEmailPaymentIntent",
+            body
+          )
+          .then((response) => {
+            console.log("response", response.data.result);
+            setErrorMessage("Payment Error");
+          });
         if (err.response) {
           console.log("error: " + JSON.stringify(err.response));
           setSubmitted(false);
@@ -448,6 +491,14 @@ export default function Scheduler(props) {
             outline: "none",
           }}
         />
+        <div
+          className="text-center"
+          style={errorMessage === "" ? { visibility: "hidden" } : {}}
+        >
+          <p style={{ color: "red", fontSize: "12px" }}>
+            {errorMessage || "error"}
+          </p>
+        </div>
         <div
           aria-label={"click button to book your appointment"}
           hidden={!props.infoSubmitted ? "hidden" : ""}
