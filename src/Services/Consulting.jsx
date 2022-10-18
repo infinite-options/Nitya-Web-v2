@@ -5,19 +5,19 @@ import BookNowBTN from "../Services/BookNowBtn";
 import loadinggif from "../Assets/Images/loading.gif";
 import "../Home/Home.css";
 
-export default function Consulting() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    axios
-      .get(
-        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/treatments"
-      )
-      .then((res) => {
-        console.log("response email", res.data.result);
-        setData(res.data.result);
-      });
-  }, []);
+export default function Consulting(props) {
+  // const [data, setData] = useState([]);
+  const data = props.data;
+  // useEffect(() => {
+  //   axios
+  //     .get(
+  //       "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/treatments"
+  //     )
+  //     .then((res) => {
+  //       console.log("response email", res.data.result);
+  //       setData(res.data.result);
+  //     });
+  // }, []);
 
   return (
     <div className="ServiceCard">
