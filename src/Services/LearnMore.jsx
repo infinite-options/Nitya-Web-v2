@@ -9,6 +9,8 @@ import "../Home/Home.css";
 
 export default function LearnMore(props) {
   const location = useLocation();
+  console.log(location.state);
+  const accessToken = location.state.accessToken;
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -55,7 +57,7 @@ export default function LearnMore(props) {
 
       {data != "" ? (
         data
-          .filter((service) => location.state.id === service.treatment_uid)
+          .filter((service) => location.state.apptID === service.treatment_uid)
           .map((filteredService) => (
             <div style={{ padding: "3% 20% 3% 20%" }}>
               <div style={{ textAlign: "center" }}>
@@ -67,7 +69,10 @@ export default function LearnMore(props) {
                   {parseDuration(filteredService.duration)} |{" "}
                   {filteredService.cost}
                 </div>
-                <BookNowBTN apptID={filteredService.treatment_uid} />
+                <BookNowBTN
+                  apptID={filteredService.treatment_uid}
+                  accessToken={accessToken}
+                />
                 <div style={{ margin: "2rem" }}>
                   <img
                     style={{
@@ -99,7 +104,10 @@ export default function LearnMore(props) {
                     {parseDuration(filteredService.duration)} |{" "}
                     {filteredService.cost}
                   </div>
-                  <BookNowBTN apptID={filteredService.treatment_uid} />
+                  <BookNowBTN
+                    apptID={filteredService.treatment_uid}
+                    accessToken={accessToken}
+                  />
 
                   {/* <div className="LearnMoreText">
                     6055 Meridian Ave, Ste. 40, San Jose, CA 95120, US
