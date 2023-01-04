@@ -334,6 +334,11 @@ export default function Scheduler(props) {
 
     var clientSecret;
     const cardElement = await elements.getElement(CardElement);
+    const paymentJSON = {
+      customer_uid: props.customerUid,
+      business_code: props.notes === "NITYATEST" ? "NITYATEST" : "NITYA",
+      payment_summary: temp,
+    };
     console.log(props.customerUid);
     const postURL =
       "https://huo8rhh76i.execute-api.us-west-1.amazonaws.com/dev/api/v2/createPaymentIntent";
@@ -379,7 +384,10 @@ export default function Scheduler(props) {
                       name: props.fName,
                       phone: props.phoneNum,
                       email: props.email,
-                      message: JSON.stringify(result.error),
+                      message: props.notes,
+                      error: JSON.stringify(res.error),
+                      endpoint_call: "confirmCardPayment",
+                      jsonObject_sent: JSON.stringify(paymentJSON),
                     };
                     // sendToDatabase();
                     axios
@@ -405,7 +413,10 @@ export default function Scheduler(props) {
                 name: props.fName,
                 phone: props.phoneNum,
                 email: props.email,
-                message: JSON.stringify(res.error),
+                message: props.notes,
+                error: JSON.stringify(res.error),
+                endpoint_call: "createPaymentMethod",
+                jsonObject_sent: JSON.stringify(paymentJSON),
               };
               // sendToDatabase();
               axios
@@ -430,6 +441,9 @@ export default function Scheduler(props) {
           phone: props.phoneNum,
           email: props.email,
           message: props.notes,
+          error: "",
+          endpoint_call: "createPaymentIntent",
+          jsonObject_sent: JSON.stringify(paymentJSON),
         };
         // sendToDatabase();
         axios
