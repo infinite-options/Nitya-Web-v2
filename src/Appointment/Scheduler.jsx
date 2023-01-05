@@ -385,7 +385,7 @@ export default function Scheduler(props) {
                       phone: props.phoneNum,
                       email: props.email,
                       message: props.notes,
-                      error: JSON.stringify(res.error),
+                      error: JSON.stringify(result.error),
                       endpoint_call: "confirmCardPayment",
                       jsonObject_sent: JSON.stringify(paymentJSON),
                     };
