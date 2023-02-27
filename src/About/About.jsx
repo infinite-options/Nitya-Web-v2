@@ -14,6 +14,7 @@ export default function About() {
           name="description"
           content="We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies"
         />
+        <link rel="canonical" href="/about" />
       </Helmet>
 
       <ScrollToTop />

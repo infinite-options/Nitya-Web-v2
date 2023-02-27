@@ -203,11 +203,11 @@ export default function AppointmentPage(props) {
     console.log(
       "dateformat2",
       months[doubleDigitMonth(date)] +
-        " " +
-        doubleDigitDay(date) +
-        ", " +
-        date.getFullYear() +
-        " "
+      " " +
+      doubleDigitDay(date) +
+      ", " +
+      date.getFullYear() +
+      " "
     );
     return (
       months[doubleDigitMonth(date)] +
@@ -225,10 +225,10 @@ export default function AppointmentPage(props) {
     console.log(
       "dateformat3",
       date.getFullYear() +
-        "-" +
-        doubleDigitMonth(date) +
-        "-" +
-        doubleDigitDay(date)
+      "-" +
+      doubleDigitMonth(date) +
+      "-" +
+      doubleDigitDay(date)
     );
     return (
       date.getFullYear() +
@@ -300,7 +300,7 @@ export default function AppointmentPage(props) {
       console.log("407", duration, apiDateString);
       let date =
         apiDateString >
-        moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
+          moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
           ? apiDateString
           : moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD");
       console.log("apiDateString", apiDateString, date);
@@ -308,11 +308,11 @@ export default function AppointmentPage(props) {
       axios
         .get(
           "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
-            date +
-            "/" +
-            duration +
-            "/" +
-            hoursMode
+          date +
+          "/" +
+          duration +
+          "/" +
+          hoursMode
         )
         .then((res) => {
           // setTimeAASlots(res.data.result);
@@ -340,7 +340,7 @@ export default function AppointmentPage(props) {
 
       let date =
         apiDateString >
-        moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
+          moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
           ? apiDateString
           : moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD");
       console.log("apiDateString", apiDateString, date);
@@ -433,11 +433,11 @@ export default function AppointmentPage(props) {
       axios
         .get(
           "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
-            apiDateString +
-            "/" +
-            duration +
-            "/" +
-            hoursMode
+          apiDateString +
+          "/" +
+          duration +
+          "/" +
+          hoursMode
         )
         .then((res) => {
           let timeSlotsAA = [];
@@ -632,6 +632,8 @@ export default function AppointmentPage(props) {
           name="description"
           content="Book an Appointment that's convenient to you"
         />
+        <link rel="canonical" href="/appointmentpage" />
+
       </Helmet>
       <br />
       {bookNowClicked ? (
