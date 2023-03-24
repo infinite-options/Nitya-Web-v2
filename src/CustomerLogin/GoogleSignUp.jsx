@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import GoogleLogin from "react-google-login";
+import React, { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
 import axios from "axios";
 import { Button } from "@material-ui/core";
 import makeStyles from "@material-ui/core/styles/makeStyles";
@@ -10,6 +10,7 @@ import Google from "../Assets/Images/Google.svg";
 const BASE_URL = process.env.REACT_APP_SERVER_BASE_URI;
 let CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
 let CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
+let SCOPES = "https://www.googleapis.com/auth/calendar";
 const useStyles = makeStyles({
   loginbuttons: {
     display: "flex",
@@ -33,7 +34,13 @@ const useStyles = makeStyles({
     margin: "1rem",
     textTransform: "none",
   },
-  buttonLayout: { width: "100%", padding: "0", margin: "0" },
+  buttonLayout: {
+    width: "100%",
+    padding: "0",
+    margin: "0",
+    display: "flex",
+    justifyContent: "center",
+  },
 
   textfield: {
     background: "##757575",
@@ -44,130 +51,171 @@ const useStyles = makeStyles({
     width: "300px",
   },
 });
-
-export default function SocialLogin() {
+function GoogleSignUp() {
   const classes = useStyles();
   const history = useHistory();
+
   const [email, setEmail] = useState("");
   const [newPhoneNumber, setNewPhoneNumber] = useState("");
   const [newFName, setNewFName] = useState("");
   const [newLName, setNewLName] = useState("");
-
   const [socialId, setSocialId] = useState("");
-  const [refreshToken, setrefreshToken] = useState("");
+  const [refreshToken, setRefreshToken] = useState("");
   const [accessToken, setAccessToken] = useState("");
-  const [accessExpiresIn, setaccessExpiresIn] = useState("");
+  const [accessExpiresIn, setAccessExpiresIn] = useState("");
+  // const [tokenClient, setTokenClient] = useState({});
+  let codeClient = {};
   const [alreadyExists, setAlreadyExists] = useState(false);
-
   const [socialSignUpModalShow, setSocialSignUpModalShow] = useState(false);
   const [loginSuccessful, setLoginSuccessful] = useState(false);
 
-  let redirecturi = "https://www.nityaayurveda.com";
+  function getAuthorizationCode() {
+    // Request authorization code and obtain user consent,  method of the code client to trigger the user flow
+    codeClient.requestCode();
+  }
+  const formatPhoneNumber = (value) => {
+    if (!value) return value;
 
-  const responseGoogle = (response) => {
-    console.log("response", response);
+    const phoneNumber = value.replace(/[^\d]/g, "");
 
-    let auth_code = response.code;
-    let authorization_url = "https://accounts.google.com/o/oauth2/token";
+    const phoneNumberLength = phoneNumber.length;
 
-    console.log("auth_code", auth_code);
-    var details = {
-      code: auth_code,
-      client_id: CLIENT_ID,
-      client_secret: CLIENT_SECRET,
-      // redirect_uri: "http://localhost:3000",
-      // redirect_uri: redirecturi,
-      redirect_uri: "postmessage",
-      grant_type: "authorization_code",
-    };
+    if (phoneNumberLength < 4) return phoneNumber;
 
-    var formBody = [];
-    for (var property in details) {
-      var encodedKey = encodeURIComponent(property);
-      var encodedValue = encodeURIComponent(details[property]);
-      formBody.push(encodedKey + "=" + encodedValue);
+    if (phoneNumberLength < 7) {
+      return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(3)}`;
     }
-    formBody = formBody.join("&");
 
-    fetch(authorization_url, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/x-www-form-urlencoded;charset=UTF-8",
-      },
-      body: formBody,
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((responseData) => {
-        console.log(responseData);
-        return responseData;
-      })
-      .then((data) => {
-        console.log(data);
-        let at = data["access_token"];
-        let rt = data["refresh_token"];
-        let ax = data["expires_in"];
-        setAccessToken(at);
-        setrefreshToken(rt);
-        setaccessExpiresIn(ax);
-        console.log("res", at, rt);
-
-        axios
-          .get(
-            "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" +
-              at
-          )
-          .then((response) => {
-            console.log(response.data);
-
-            let data = response.data;
-            //setUserInfo(data);
-            let e = data["email"];
-            let fn = data["given_name"];
-            let ln = data["family_name"];
-            let si = data["id"];
-
-            setEmail(e);
-            setNewFName(fn);
-            setNewLName(ln);
-            setSocialId(si);
-            axios.get(BASE_URL + "GetUserEmailId/" + e).then((response) => {
-              console.log(response.data);
-              if (response.data.message === "User ID doesnt exist") {
-                setSocialSignUpModalShow(!socialSignUpModalShow);
-              } else {
-                setAlreadyExists(!alreadyExists);
-              }
-            });
-          })
-          .catch((error) => {
-            console.log("its in landing page");
-            console.log(error);
-          });
-
-        // setSocialSignUpModalShow(!socialSignUpModalShow);
-
-        return (
-          accessToken,
-          refreshToken,
-          accessExpiresIn,
-          email,
-          newFName,
-          newLName,
-          socialId
-        );
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    return `(${phoneNumber.slice(0, 3)}) ${phoneNumber.slice(
+      3,
+      6
+    )}-${phoneNumber.slice(6, 10)}`;
   };
-  console.log(email);
+  useEffect(() => {
+    /* global google */
+
+    if (window.google) {
+      console.log("in here signup");
+
+      // initialize a code client for the authorization code flow.
+      codeClient = google.accounts.oauth2.initCodeClient({
+        client_id: CLIENT_ID,
+        scope: SCOPES,
+        callback: (tokenResponse) => {
+          console.log(tokenResponse);
+          // gets back authorization code
+          if (tokenResponse && tokenResponse.code) {
+            let auth_code = tokenResponse.code;
+            let authorization_url =
+              "https://accounts.google.com/o/oauth2/token";
+
+            console.log("auth_code", auth_code);
+            var details = {
+              code: auth_code,
+              client_id: CLIENT_ID,
+              client_secret: CLIENT_SECRET,
+              redirectUri: "postmessage",
+              grant_type: "authorization_code",
+            };
+
+            var formBody = [];
+            for (var property in details) {
+              var encodedKey = encodeURIComponent(property);
+              var encodedValue = encodeURIComponent(details[property]);
+              formBody.push(encodedKey + "=" + encodedValue);
+            }
+            formBody = formBody.join("&");
+            // use authorization code, send it to google endpoint to get back ACCESS TOKEN n REFRESH TOKEN
+            fetch(authorization_url, {
+              method: "POST",
+              headers: {
+                "Content-Type":
+                  "application/x-www-form-urlencoded;charset=UTF-8",
+              },
+              body: formBody,
+            })
+              .then((response) => {
+                return response.json();
+              })
+              .then((responseData) => {
+                console.log(responseData);
+                return responseData;
+              })
+              //   got ACCESS TOKEN n REFRESH TOKEN
+
+              .then((data) => {
+                console.log(data);
+                let at = data["access_token"];
+                let rt = data["refresh_token"];
+                let ax = data["expires_in"];
+                //  expires every 1 hr
+                setAccessToken(at);
+                // stays the same and used to refresh ACCESS token
+                setRefreshToken(rt);
+                setAccessExpiresIn(ax);
+                //  use ACCESS token, to get email and other account info
+                axios
+                  .get(
+                    "https://www.googleapis.com/oauth2/v1/userinfo?alt=json&access_token=" +
+                      at
+                  )
+                  .then((response) => {
+                    console.log(response.data);
+
+                    let data = response.data;
+                    //setUserInfo(data);
+                    let e = data["email"];
+                    let fn = data["given_name"];
+                    let ln = data["family_name"];
+                    let si = data["id"];
+
+                    setEmail(e);
+                    setNewFName(fn);
+                    setNewLName(ln);
+                    setSocialId(si);
+                    axios
+                      .get(BASE_URL + "GetUserEmailId/" + e)
+                      .then((response) => {
+                        console.log(response.data);
+                        if (response.data.message === "User ID doesnt exist") {
+                          setSocialSignUpModalShow(!socialSignUpModalShow);
+                        } else {
+                          setAlreadyExists(!alreadyExists);
+                        }
+                      });
+                  })
+                  .catch((error) => {
+                    console.log("its in landing page");
+                    console.log(error);
+                  });
+
+                // setSocialSignUpModalShow(!socialSignUpModalShow);
+
+                return (
+                  accessToken,
+                  refreshToken,
+                  accessExpiresIn,
+                  email,
+                  newFName,
+                  newLName,
+                  socialId
+                );
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        },
+      });
+    }
+  }, [getAuthorizationCode]);
+
+  // login modal
   const loginSuccessfulModal = () => {
     const modalStyle = {
       position: "absolute",
       top: "30%",
-      left: "35%",
+      left: "10%",
       width: "500px",
     };
     const headerStyle = {
@@ -259,11 +307,12 @@ export default function SocialLogin() {
       </Modal>
     );
   };
+  //  user already exists modal
   const alreadyExistsModal = () => {
     const modalStyle = {
       position: "absolute",
       top: "30%",
-      left: "35%",
+      left: "10%",
       width: "500px",
     };
     const headerStyle = {
@@ -350,11 +399,13 @@ export default function SocialLogin() {
       </Modal>
     );
   };
+
   const hideAlreadyExists = () => {
     //setSignUpModalShow(false);
     setAlreadyExists(!alreadyExists);
     history.push("/");
   };
+  //  close signup modla
   const hideSignUp = () => {
     //setSignUpModalShow(false);
     setSocialSignUpModalShow(false);
@@ -366,7 +417,7 @@ export default function SocialLogin() {
   };
 
   const handleNewPhoneNumberChange = (event) => {
-    setNewPhoneNumber(event.target.value);
+    setNewPhoneNumber(formatPhoneNumber(event.target.value));
   };
 
   const handleNewFNameChange = (event) => {
@@ -377,6 +428,7 @@ export default function SocialLogin() {
     setNewLName(event.target.value);
   };
 
+  //  function to send info to backend if signed up via google
   const handleSocialSignUpDone = () => {
     axios
       .post(BASE_URL + "UserSocialSignUp", {
@@ -385,10 +437,10 @@ export default function SocialLogin() {
         customer_last_name: newLName,
         customer_phone_num: newPhoneNumber,
         role: "ADMIN",
-        user_access_token: accessToken,
-        user_refresh_token: refreshToken,
-        social_id: socialId,
-        access_expires_in: accessExpiresIn.toString(),
+        user_access_token: "",
+        user_refresh_token: "",
+        social_id: "",
+        access_expires_in: "",
         user_social_media: "GOOGLE",
       })
       .then((response) => {
@@ -406,12 +458,14 @@ export default function SocialLogin() {
         console.log(error);
       });
   };
+
+  //  modal to signup with google
   const socialSignUpModal = () => {
     const modalStyle = {
       position: "absolute",
       top: "30%",
-      left: "35%",
-      width: "500px",
+      left: "10%",
+      width: "456px",
     };
     const headerStyle = {
       border: "none",
@@ -535,47 +589,36 @@ export default function SocialLogin() {
     <Row xs={12} className={classes.buttonLayout}>
       <Row xs={12} className={classes.buttonLayout}>
         <Col></Col>
-        <Col xs={8} className={classes.loginbuttons}>
-          <Button>
-            <GoogleLogin
-              clientId={process.env.REACT_APP_GOOGLE_CLIENT_ID}
-              accessType="offline"
-              prompt="consent"
-              responseType="code"
-              buttonText="Log In"
-              ux_mode="redirect"
-              isSignedIn={false}
-              disable={true}
-              cookiePolicy={"single_host_origin"}
-              //redirectUri="https://www.nityaayurveda.com"
-              scope="https://www.googleapis.com/auth/calendar"
-              // redirectUri="http://localhost:3000"
-              redirectUri="postmessage"
-              onSuccess={responseGoogle}
-              onFailure={responseGoogle}
-              render={(renderProps) => (
-                <img
-                  src={Google}
-                  onClick={renderProps.onClick}
-                  disabled={renderProps.disabled}
-                  alt={""}
-                  style={{
-                    minWidth: "60%",
-                    maxWidth: "70%",
-                    padding: "0",
-                    margin: 0,
-                  }}
-                ></img>
-              )}
+        <Col id="signUpDiv">
+          <Button
+            class="btn btn-outline-dark"
+            onClick={() => getAuthorizationCode()}
+            role="button"
+            style={{
+              textTransform: "none",
+              borderRadius: "50px",
+              backgroundColor: "white",
+            }}
+          >
+            <img
+              width="20px"
+              style={{
+                marginBottom: "3px",
+                marginRight: "5px",
+              }}
+              alt="Google sign-in"
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
             />
+            Sign Up with Google
           </Button>
         </Col>
-        <Col></Col>
+        <Col>{/* <input type="submit" /> */}</Col>
       </Row>
-
       {socialSignUpModal()}
       {alreadyExistsModal()}
       {loginSuccessfulModal()}
     </Row>
   );
 }
+
+export default GoogleSignUp;

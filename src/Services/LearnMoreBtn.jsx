@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 function LearnMoreBtn(props) {
   const apptID = props.apptID;
   const accessToken = props.accessToken;
-  console.log("learnmore props", props);
+  // console.log("learnmore props", props);
   return (
     <div>
       <br />

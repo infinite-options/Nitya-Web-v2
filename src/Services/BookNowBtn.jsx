@@ -8,7 +8,7 @@ import "../Home/Home.css";
 const BASE_URL = process.env.REACT_APP_SERVER_BASE_URI;
 
 export default function BookNowBTN(props) {
-  console.log("BookNowBtn props", props);
+  // console.log("BookNowBtn props", props);
   const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
   const CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
   const [tID, setTID] = useState(props.apptID);
@@ -119,7 +119,7 @@ export default function BookNowBTN(props) {
   //     });
   // };
 
-  console.log("in accesstoken", accessToken);
+  // console.log("in accesstoken", accessToken);
 
   return (
     <div
