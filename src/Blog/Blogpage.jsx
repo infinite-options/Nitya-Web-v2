@@ -27,6 +27,7 @@ import EditSharpIcon from "@material-ui/icons/EditSharp";
 import ScrollToTop from "./ScrollToTop";
 import "../Appointment/AppointmentPage.css";
 import "../Home/Home.css";
+import Cookies from "js-cookie";
 const style = {
   position: "absolute",
   top: "50%",
@@ -223,8 +224,13 @@ function Blogpage(props) {
 
   const history = useHistory();
   const Auth = useContext(AuthContext);
-
+  console.log(Auth);
   const handleOpenAvailabilityModal = () => history.push("/availability");
+  const logout = () => {
+    Auth.setIsAuth(false);
+    Auth.setIsLoggedIn(false);
+    history.push("/");
+  };
 
   const fetchData = async () => {
     const res = await fetch(
@@ -510,6 +516,19 @@ function Blogpage(props) {
           onClick={() => handleOpenAvailabilityModal()}
         >
           Practitioner Availabilty
+        </Button>
+      </div>
+      <div hidden={Auth.isAuth === false}>
+        <Button
+          style={{
+            backgroundColor: "#d3a625",
+            color: "white",
+            marginTop: "1rem",
+            marginBottom: "1rem",
+          }}
+          onClick={() => logout()}
+        >
+          Logout
         </Button>
       </div>
     </div>

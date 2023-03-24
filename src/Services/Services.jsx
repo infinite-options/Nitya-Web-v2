@@ -44,7 +44,7 @@ export default function Services() {
           }
         )
           .then((response) => {
-            console.log("in events", response);
+            // console.log("in events", response);
             if (response["status"] === 400) {
               // console.log("in events if");
               let authorization_url =
@@ -64,7 +64,7 @@ export default function Services() {
                 formBody.push(encodedKey + "=" + encodedValue);
               }
               formBody = formBody.join("&");
-              console.log(details);
+              // console.log(details);
               fetch(authorization_url, {
                 method: "POST",
                 headers: {
@@ -109,24 +109,24 @@ export default function Services() {
           .catch((err) => {
             console.log(err);
           });
-        console.log("in events", refreshToken);
+        // console.log("in events", refreshToken);
       })
       .catch((error) => {
         console.log("Error in events" + error);
       });
   };
 
-  console.log("in accesstoken", accessToken);
+  // console.log("in accesstoken", accessToken);
   const getServices = () => {
     axios
       .get(
         "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/treatments"
       )
       .then((res) => {
-        console.log("response email", res.data.result);
+        // console.log("response email", res.data.result);
         setData(res.data.result);
         let services = res.data.result;
-        console.log(services);
+        // console.log(services);
         let treat = [];
         let consult = [];
         for (let i = 0; i < services.length; i++) {
