@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { makeStyles } from "@material-ui/core/styles";
+import { Col, Row } from "react-bootstrap";
 import { Button } from "@material-ui/core";
 import Dialog from "@material-ui/core/Dialog";
+import { makeStyles } from "@material-ui/core/styles";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import SocialLogin from "./SocialLogin";
-
 import ScrollToTop from "../Blog/ScrollToTop";
+import GoogleSignUp from "../CustomerLogin/GoogleSignUp";
 const eye = ""; //<FontAwesomeIcon icon={faEye} />;
 
 const pageColor = "#b28d42";
@@ -38,7 +38,8 @@ const useStyles = makeStyles({
     marginRight: "auto",
   },
   formTextInput: {
-    width: "457px",
+    maxWidth: "457px",
+    minWidth: "300px",
     padding: "10px 20px",
     margin: "7px",
     borderRadius: "25px",
@@ -49,9 +50,9 @@ const useStyles = makeStyles({
     },
   },
   button: {
-    height: "60px",
+    height: "40px",
+    fontSize: "20px",
     width: "243px",
-
     color: "white",
     backgroundColor: pageColor,
     borderRadius: "25px",
@@ -62,6 +63,9 @@ const useStyles = makeStyles({
     },
   },
   inputWrapper: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     position: "relative",
   },
   eye: {
@@ -71,6 +75,12 @@ const useStyles = makeStyles({
     right: "28px",
     cursor: "pointer",
   },
+  loginbuttons: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+  },
 });
 export default function SignUp() {
   const classes = useStyles();
@@ -79,6 +89,7 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
+  const [errorValue, setError] = useState("");
   const [open, setOpen] = useState(false);
 
   const togglePasswordVisiblity = (id, passwordShown) => {
@@ -117,11 +128,6 @@ export default function SignUp() {
     social_id: "NULL",
   };
 
-  // const success = () => {
-  //   handleClose();
-  //   window.location.href = "/login";
-  // };
-
   const handleSignUp = () => {
     if (password === confirmPassword) {
       axios
@@ -139,85 +145,105 @@ export default function SignUp() {
   };
 
   return (
-    <div className={classes.root}>
+    <div className="HomeContainer">
       <ScrollToTop />
-      <div className={classes.container}>
-        <div className={classes.pageText} style={{ paddingBottom: "20px" }}>
-          Sign Up
-        </div>
-        <SocialLogin />
+      <div className="Card">
+        <div className="CardGrid">
+          <div>
+            <div className="CardTitle">Signup</div>
 
-        <div className={classes.pageText} style={{ paddingTop: "20px" }}>
-          Or
-        </div>
-        <form className={classes.formContainer}>
-          <div className={classes.inputWrapper}>
-            <input
-              className={classes.formTextInput}
-              type="text"
-              placeholder="Email Address"
-              onChange={(e) => {
-                setEmail(e.target.value);
+            <Row xs={12} className="CardText" style={{ padding: "2rem" }}>
+              <Col></Col>
+              <Col xs={8} className={classes.loginbuttons}>
+                <GoogleSignUp errorValue={errorValue} setError={setError} />
+              </Col>
+              <Col></Col>
+            </Row>
+            <div className="CardTitle">Or</div>
+            <form
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                flexDirection: "column",
               }}
-            />
-          </div>
+            >
+              <div className={classes.inputWrapper}>
+                <input
+                  className={classes.formTextInput}
+                  type="text"
+                  placeholder="Email Address"
+                  onChange={(e) => {
+                    setEmail(e.target.value);
+                  }}
+                />
+              </div>
 
-          <div className={classes.inputWrapper}>
-            <input
-              className={classes.formTextInput}
-              type={password1Shown ? "text" : "password"}
-              placeholder=" Create Password"
-              onChange={(e) => {
-                setPassword(e.target.value);
+              <div className={classes.inputWrapper}>
+                <input
+                  className={classes.formTextInput}
+                  type={password1Shown ? "text" : "password"}
+                  placeholder=" Create Password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                  }}
+                />
+                <i
+                  className={classes.eye}
+                  onClick={() => togglePasswordVisiblity(1, password1Shown)}
+                >
+                  {eye}
+                </i>
+              </div>
+              <div className={classes.inputWrapper}>
+                <input
+                  className={classes.formTextInput}
+                  type={password2Shown ? "text" : "password"}
+                  placeholder=" Confirm Password"
+                  onChange={(e) => {
+                    setConfirmPassword(e.target.value);
+                  }}
+                />
+                <i
+                  className={classes.eye}
+                  onClick={() => togglePasswordVisiblity(2, password2Shown)}
+                >
+                  {eye}
+                </i>
+              </div>
+            </form>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                padding: "15px",
               }}
-            />
-            <i
-              className={classes.eye}
-              onClick={() => togglePasswordVisiblity(1, password1Shown)}
             >
-              {eye}
-            </i>
+              {" "}
+              <button onClick={handleSignUp} className={classes.button}>
+                {" "}
+                Sign Up
+              </button>
+            </div>
+            <div className="CardTitle" style={{ marginTop: "40px" }}>
+              Already have an account?
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              {" "}
+              <button
+                className={classes.button}
+                style={{ marginBottom: "30px" }}
+                onClick={() => {
+                  window.location.href = "/login";
+                }}
+              >
+                Login
+              </button>
+            </div>
           </div>
-          <div className={classes.inputWrapper}>
-            <input
-              className={classes.formTextInput}
-              type={password2Shown ? "text" : "password"}
-              placeholder=" Confirm Password"
-              onChange={(e) => {
-                setConfirmPassword(e.target.value);
-              }}
-            />
-            <i
-              className={classes.eye}
-              onClick={() => togglePasswordVisiblity(2, password2Shown)}
-            >
-              {eye}
-            </i>
-          </div>
-        </form>
-        <Button type="submit" onClick={handleSignUp} className={classes.button}>
-          {" "}
-          SignUp
-        </Button>
-        {/* <input type="submit" value="Sign Up" className={classes.button} /> */}
-        <div className={classes.pageText} style={{ marginTop: "40px" }}>
-          Already have an account?
         </div>
-        <button
-          className={classes.button}
-          style={{ marginBottom: "30px" }}
-          onClick={() => {
-            window.location.href = "/login";
-          }}
-        >
-          Login
-        </button>
       </div>
 
       <div>
-        {/* <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-          Open alert dialog
-        </Button> */}
         <Dialog
           open={open}
           onClose={handleClose}
