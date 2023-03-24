@@ -106,7 +106,7 @@ export default function SeminarRegister() {
     };
     axios
       .post(BASE_URL + `RegistrationConfirmation/${email}`, name)
-      .then((response) => {})
+      .then((response) => { })
       .catch((error) => {
         console.log("error", error);
       });
@@ -123,7 +123,7 @@ export default function SeminarRegister() {
         .then((result) => {
           console.log(
             "(1 PaymentDetails) Stripe-key then result (1): " +
-              JSON.stringify(result)
+            JSON.stringify(result)
           );
 
           let tempStripePromise = loadStripe(result.data.publicKey);
@@ -153,7 +153,7 @@ export default function SeminarRegister() {
         .then((result) => {
           console.log(
             "(2 PaymentDetails) Stripe-key then result (1): " +
-              JSON.stringify(result)
+            JSON.stringify(result)
           );
 
           let tempStripePromise = loadStripe(result.data.publicKey);
@@ -202,6 +202,7 @@ export default function SeminarRegister() {
           name="description"
           content="We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies"
         />
+        <link rel="canonical" href="/seminaregister" />
       </Helmet>
 
       {/* <ScrollToTop /> */}

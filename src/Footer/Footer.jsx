@@ -14,6 +14,7 @@ export default function Footer() {
       <Helmet>
         <title>Address</title>
         <meta name="description" content="Visit our San Jose Office" />
+        <link rel="canonical" href="/address" />
       </Helmet>
 
       <div className="FooterTextWrapper">

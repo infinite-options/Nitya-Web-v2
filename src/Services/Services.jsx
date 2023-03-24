@@ -92,7 +92,7 @@ export default function Services() {
                     .post(url + customer_uid, {
                       user_access_token: at,
                     })
-                    .then((response) => {})
+                    .then((response) => { })
                     .catch((err) => {
                       // console.log(err);
                     });
@@ -152,6 +152,7 @@ export default function Services() {
           name="description"
           content="We offer Ayurvedic health consultations, Panchakarma (cleansing & purification treatments) and classical Ayurvedic wellness therapies."
         />
+        <link rel="canonical" href="/services" />
       </Helmet>
       <ScrollToTop />
       <div className="Card">

@@ -335,6 +335,7 @@ function Blogpage(props) {
           name="description"
           content="Ayurvedic Musings about health, recipies and living well"
         />
+        <link rel="canonical" href="/blog" />
       </Helmet>
       <ScrollToTop />
       <div className={classes.blogpage} id="blogpage">
@@ -463,7 +464,7 @@ function Blogpage(props) {
                       ></Menu>
                       <div
                         hidden={Auth.isAuth === false}
-                        // style={{ }}
+                      // style={{ }}
                       >
                         {/* http://localhost:4000/api/v2/deleteBlog/150-000048 */}
                         <DeleteForeverSharpIcon
