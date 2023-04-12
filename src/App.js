@@ -64,7 +64,7 @@ function App() {
         setServicesLoaded(true);
       });
     }
-  });
+  }, []);
 
   return (
     <div className="App">
@@ -135,7 +135,9 @@ function App() {
               </Route>
 
               <Route path="/learnMore">
-                <LearnMore />
+                <MyContext.Provider value={{ serviceArr, servicesLoaded }}>
+                  <LearnMore />
+                </MyContext.Provider>
               </Route>
 
               <Route path="/about">
@@ -154,12 +156,16 @@ function App() {
               </Route>
 
               <Route path="/services">
-                <Services />
+                <MyContext.Provider value={{ serviceArr, servicesLoaded }}>
+                  <Services />
+                </MyContext.Provider>
               </Route>
 
               <Route exact path="/seminar" component={SeminarRegister} />
               <Route path="/">
-                <Home />
+                <MyContext.Provider value={{ serviceArr, servicesLoaded }}>
+                  <Home />
+                </MyContext.Provider>
               </Route>
             </Switch>
 

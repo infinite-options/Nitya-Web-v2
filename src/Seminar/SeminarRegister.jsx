@@ -5,7 +5,7 @@ import axios from "axios";
 import { withStyles } from "@material-ui/core/styles";
 import { Elements } from "@stripe/react-stripe-js";
 
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { Typography } from "@material-ui/core";
 import { Radio } from "@material-ui/core";
 import FormGroup from "@material-ui/core/FormGroup";

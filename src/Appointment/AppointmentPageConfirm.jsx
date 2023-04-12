@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Col } from "reactstrap";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useLocation, useParams } from "react-router";
-import { loadStripe } from "@stripe/stripe-js";
+import { loadStripe } from "@stripe/stripe-js/pure";
 import { Radio } from "@material-ui/core";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";

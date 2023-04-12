@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Box, Button } from "@material-ui/core";
 import { Helmet } from "react-helmet";
 import axios from "axios";
+import { MyContext } from "../App.js";
 import Consulting from "./Consulting.jsx";
 import Treatments from "./Treaments.jsx";
 import ScrollToTop from "../Blog/ScrollToTop";
@@ -19,6 +20,8 @@ export default function Services() {
   const CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
 
   const [accessToken, setAccessToken] = useState("");
+
+  const { serviceArr } = useContext(MyContext);
 
   function stateChangeable() {
     setState(true);
@@ -117,30 +120,8 @@ export default function Services() {
   };
 
   // console.log("in accesstoken", accessToken);
-  const getServices = () => {
-    axios
-      .get(
-        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/treatments"
-      )
-      .then((res) => {
-        // console.log("response email", res.data.result);
-        setData(res.data.result);
-        let services = res.data.result;
-        // console.log(services);
-        let treat = [];
-        let consult = [];
-        for (let i = 0; i < services.length; i++) {
-          services[i].category === "Treatment"
-            ? treat.push(services[i])
-            : consult.push(services[i]);
-        }
-        setConsulting(consult);
-        setTreatments(treat);
-      });
-  };
 
   useEffect(() => {
-    getServices();
     getAccessToken();
   }, []);
 
@@ -183,11 +164,11 @@ export default function Services() {
         </div>
 
         <Box hidden={state}>
-          <Consulting data={consulting} accessToken={accessToken} />
+          <Consulting data={serviceArr} accessToken={accessToken} />
         </Box>
 
         <Box hidden={!state}>
-          <Treatments data={treatments} accessToken={accessToken} />
+          <Treatments data={serviceArr} accessToken={accessToken} />
         </Box>
       </div>
     </div>

@@ -1,6 +1,7 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { useLocation } from "react-router-dom";
 import axios from "axios";
+import { MyContext } from "../App";
 import BookNowBTN from "./BookNowBtn";
 import ScrollToTop from "../Blog/ScrollToTop";
 import "./LearnMore.css";
@@ -11,18 +12,8 @@ export default function LearnMore(props) {
   const location = useLocation();
   console.log(location.state);
   const accessToken = location.state.accessToken;
-  const [data, setData] = useState([]);
 
-  useEffect(() => {
-    axios
-      .get(
-        "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/treatments"
-      )
-      .then((res) => {
-        console.log("response email", res.data.result);
-        setData(res.data.result);
-      });
-  }, []);
+  const { serviceArr: data } = useContext(MyContext);
 
   const parseDuration = (rawDuration) => {
     if (rawDuration === undefined) {
