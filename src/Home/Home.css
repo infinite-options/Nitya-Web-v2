@@ -101,6 +101,10 @@
   flex: 1;
 }
 
+.CardSmallFont {
+  font-size: 15px;
+}
+
 .CardButton {
   text-transform: none;
   background-color: #d3a625;
@@ -274,9 +278,16 @@
   /* display:flex;
  justify-content:space-evenly; */
   display: grid;
-  grid-template-columns: repeat(3, auto);
-  align-items: flex-end;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  align-items: center;
   margin-top: 2rem;
+}
+
+.FooterItem {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
 }
 
 .FooterText {

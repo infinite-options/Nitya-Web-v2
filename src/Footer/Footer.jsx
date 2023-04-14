@@ -34,42 +34,41 @@ export default function Footer() {
         </div>
       </div>
       <div className="FooterTextWrapper">
-        <img
-          src={Namacb}
-          style={{ height: "7rem", justifySelf: "center", alignSelf: "center" }}
-        />
-        <img
-          src={CAAM}
-          className="MobileImage"
-          style={{ height: "8rem", justifySelf: "center", alignSelf: "center" }}
-        />
-        <InstagramIcon
-          fontSize="large"
-          className="instagram-icon"
-          style={{ color: "black", justifySelf: "center", alignSelf: "center" }}
-          onClick={(event) =>
-            (window.location.href = "https://www.instagram.com/nityaayurveda/")
-          }
-        />
-      </div>
-
-      <div
-        style={{ marginTop: "3rem", marginBottom: "2rem", textAlign: "center" }}
-      >
-        <button
-          onClick={() => {
-            history.push("/login");
-          }}
-          style={{
-            textTransform: "none",
-            cursor: "pointer",
-            color: "#C3A336",
-            backgroundColor: "white",
-            border: "0px",
-          }}
-        >
-          © 2021 by Leena Marathay
-        </button>
+        <div className="FooterItem">
+          <img
+            src={Namacb}
+            style={{ height: "7rem", justifySelf: "center", alignSelf: "center" }}
+            alt="NAMA"
+          />
+        </div>
+        <div className="FooterItem">
+          <div style={{ marginTop: "3rem", marginBottom: "2rem", textAlign: "center" }}>
+            <button
+              onClick={() => {
+                history.push("/login");
+              }}
+              style={{
+                textTransform: "none",
+                cursor: "pointer",
+                color: "#C3A336",
+                backgroundColor: "white",
+                border: "0px",
+              }}
+            >
+              © 2021 by Leena Marathay
+            </button>
+          </div>
+        </div>
+        <div className="FooterItem" style={{alignItems: "center"}}>
+          <InstagramIcon
+            fontSize="large"
+            className="instagram-icon"
+            style={{ color: "black", justifySelf: "center", alignSelf: "center", marginLeft: "0" }}
+            onClick={(event) =>
+              (window.location.href = "https://www.instagram.com/nityaayurveda/")
+            }
+          />
+        </div>
       </div>
     </div>
   );
