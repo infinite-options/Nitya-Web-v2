@@ -88,7 +88,12 @@ export default function Contact() {
             </div>
             <div className="CardText" style={{ marginBottom: "1rem" }}>
               {" "}
-              Office: 408 471 7004
+              Office:
+              {" "}
+              <a href="tel:+14084717004" 
+                style={{textDecoration: "None", cursor: "pointer", color: "#D3A625"}}>
+                  408 471 7004
+              </a>
             </div>
 
             <input

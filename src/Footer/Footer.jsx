@@ -29,7 +29,12 @@ export default function Footer() {
         </div>
 
         <div className="FooterText" style={{ border: "0px" }}>
-          <div>Office: 408 471 7004</div>
+          <div>Office:{" "}
+            <a href="tel:+14084717004" 
+              style={{textDecoration: "None", cursor: "pointer", color: "#D3A625"}}>
+              408 471 7004
+            </a>
+          </div>
           <div>Email: Leena@nityaayurveda.com</div>
         </div>
       </div>
