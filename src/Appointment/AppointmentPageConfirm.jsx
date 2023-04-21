@@ -4,7 +4,12 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useLocation, useParams } from "react-router";
 import { loadStripe } from "@stripe/stripe-js/pure";
 import { Radio } from "@material-ui/core";
-import FormGroup from "@material-ui/core/FormGroup";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
+import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import axios from "axios";
 import StripeElement from "./StripeElement";
@@ -131,6 +136,33 @@ const useStyles = makeStyles({
       width: "280px",
     },
   },
+
+  dialog: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  dialogActions: {
+    display: "flex",
+    justifyContent: "space-evenly",
+  },
+
+  dialogButton: {
+    cursor: "pointer",
+    backgroundColor: "#D3A625",
+    border: "2px solid #D3A625",
+    color: "white",
+    textDecoration: "none",
+    fontSize: "15px",
+    borderRadius: "50px",
+    fontFamily: "AvenirHeavy",
+    "&:hover": {
+      borderColor: "#D3A625",
+      background: "#D3A625",
+      color: "#white",
+    },
+  },
 });
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function AppointmentPage(props) {
@@ -171,6 +203,9 @@ export default function AppointmentPage(props) {
   const [customerUid, setCustomerUid] = useState("");
   const cost = elementToBeRendered.cost;
   const [errorMessage, setErrorMessage] = useState("");
+  const [showDialog, setShowDialog] = useState(false);
+  const [dialogText, setDialogText] = useState("");
+  const [dialogTitle, setDialogTitle] = useState("");
 
   useEffect(() => {
     if (servicesLoaded) {
@@ -260,7 +295,7 @@ export default function AppointmentPage(props) {
   };
 
   //for stripe
-  function toggleKeys() {
+  async function toggleKeys() {
     const tempFind = [];
     console.log(age);
     if (age === "" || email === "" || fName === "" || phoneNum === "") {
@@ -285,29 +320,27 @@ export default function AppointmentPage(props) {
       role: "CUSTOMER",
       phone_num: phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       email: email,
+      is_intro_consult: treatmentID === "330-000010",
     };
     // sendToDatabase();
-    axios
-      .post(
+    try {
+      const resp = await axios.post(
         "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/findCustomer",
         body
-      )
-      .then((response) => {
-        console.log("response", response.data.result);
-        setCustomerUid(response.data.result.customer_uid);
-        // for (var i = 0; i < response.data.result.length; i++) {
-        //   tempFind.push(response.data.result[i]);
-        // }
-        // console.log("response", tempFind);
-        // for (var i = 0; i < tempFind.length; i++) {
-        //   if (email === tempFind[i].customer_email) {
-        //     if (phoneNum === tempFind[i].customer_phone_num) {
-        //       console.log("response", tempFind[i].customer_uid);
-        //       setCustomerUid(tempFind[i].customer_uid);
-        //     }
-        //   }
-        // }
-      });
+      );
+      if (resp.data.customer_uid) 
+        setCustomerUid(resp.data.customer_uid);
+      if (resp.data.warning) {
+        setDialogTitle("Warning");
+        setDialogText(resp.data.warning);
+        setShowDialog(true);
+      }
+    } catch (error) {
+      setDialogTitle("Error");
+      setDialogText(error.response.data.message);
+      setShowDialog(true);
+      return;
+    }
 
     console.log("response", customerUid);
     if (notes === "NITYATEST") {
@@ -399,9 +432,37 @@ export default function AppointmentPage(props) {
       return strTime;
     }
   }
+
+  const handleDialogClose = () => {
+    setShowDialog(false);
+  };
+
   return (
     <div className="HomeContainer">
       <ScrollToTop />
+      <Dialog
+        open={showDialog}
+        onClose={handleDialogClose}
+        aria-labelledby="alert-dialog-title"
+        className={classes.dialog}
+      >
+        <DialogTitle id="alert-dialog-title">
+          {dialogTitle}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {dialogText}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions className={classes.dialogActions}>
+          <Button
+            onClick={handleDialogClose}
+            className={classes.dialogButton}
+          >
+            Ok
+          </Button>
+        </DialogActions>
+      </Dialog>
       <br />
       {bookNowClicked || location.state.signedin ? (
         <div className="Card" style={{ alignItems: "center" }}>

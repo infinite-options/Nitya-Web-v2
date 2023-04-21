@@ -1,6 +1,6 @@
 import React from "react";
 import { Helmet } from "react-helmet";
-import Img from "../Assets/Images/card2.png";
+import Img from "../Assets/Images/card2.webp";
 import ScrollToTop from "../Blog/ScrollToTop";
 
 import "../Home/Home.css";

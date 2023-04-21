@@ -1,7 +1,7 @@
 import React from "react";
 import { useHistory } from "react-router";
 import { Helmet } from "react-helmet";
-import card1 from "../Assets/Images/card1.jpg";
+import card1 from "../Assets/Images/card1.webp";
 import ScrollToTop from "../Blog/ScrollToTop";
 import "../Home/Home.css";
 

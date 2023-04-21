@@ -1,6 +1,5 @@
 import React from "react";
 import InstagramIcon from "@material-ui/icons/Instagram";
-import CAAM from "../Assets/Images/CAAM-logo.png";
 import Namacb from "../Assets/Images/namacb.png";
 import { Helmet } from "react-helmet";
 import { useHistory } from "react-router-dom";

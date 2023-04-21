@@ -11,7 +11,7 @@ import { Radio } from "@material-ui/core";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import ScrollToTop from "../Blog/ScrollToTop";
-import SeminarImg from "../Assets/Images/Seminar.png";
+import SeminarImg from "../Assets/Images/Seminar.webp";
 import DonationElement from "./DonationElement";
 import "../Home/Home.css";
 
