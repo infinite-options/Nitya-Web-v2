@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 
 function LearnMoreBtn(props) {
   const apptID = props.apptID;
-  const accessToken = props.accessToken;
   // console.log("learnmore props", props);
   return (
     <div>
@@ -22,7 +21,6 @@ function LearnMoreBtn(props) {
             pathname: "/learnMore",
             state: {
               apptID: apptID,
-              accessToken: accessToken,
             },
           }}
           style={{ color: "#0288D1", fontSize: "16px" }}

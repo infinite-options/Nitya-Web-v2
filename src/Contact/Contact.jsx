@@ -8,6 +8,8 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 
+import mapImg from "../Assets/Images/Map.webp";
+
 import "../Home/Home.css";
 
 export default function Contact() {
@@ -21,6 +23,7 @@ export default function Contact() {
     message: "",
   });
   const [errorMessage, setErrorMessage] = useState("");
+  const [isMapClicked, setMapClicked] = useState(false);
 
   const required =
     errorMessage === "Please fill out all fields" ? (
@@ -166,13 +169,15 @@ export default function Contact() {
               Submit
             </button>
           </div>
-          <div>
+          <div onClick={() => setMapClicked(true)} className="MapContainer">
+            {isMapClicked?
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3176.732452474541!2d-121.8872221846979!3d37.230325779862234!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x808e314406ce969d%3A0x82fb75802c5ef489!2s6055%20Meridian%20Ave%20%2340%2C%20San%20Jose%2C%20CA%2095120!5e0!3m2!1sen!2sus!4v1618695078070!5m2!1sen!2sus"
               className="Contact_Map"
               allowfullscreen=""
               loading="lazy"
             ></iframe>
+            :<img width="330" height="590" src={mapImg} className="ContactMapImg" alt="map" />}
           </div>
         </div>
       </div>

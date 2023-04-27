@@ -15,7 +15,6 @@ export default function BookNowBTN(props) {
   // const [accessToken, setAccessToken] = useState("");
   const [signedin, setSignedIn] = useState(false);
   const [bookNow, setBookNow] = useState(false);
-  const accessToken = props.accessToken;
   // useEffect(() => {
   //   getAccessToken();
   // }, []);
@@ -136,7 +135,6 @@ export default function BookNowBTN(props) {
         <Link
           to={{
             pathname: `/${tID}/appt`,
-            state: { accessToken: accessToken },
           }}
           // to={`/${tID}/appt`}
           // params={{ accessToken: accessToken }}

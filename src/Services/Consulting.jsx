@@ -6,7 +6,6 @@ import loadinggif from "../Assets/Images/loading.gif";
 import "../Home/Home.css";
 
 export default function Consulting(props) {
-  const accessToken = props.accessToken;
   // const [data, setData] = useState([]);
   const data = props.data;
   // useEffect(() => {
@@ -78,11 +77,9 @@ export default function Consulting(props) {
                     </div>
                     <LearnMoreBTN
                       apptID={filteredService.treatment_uid}
-                      accessToken={accessToken}
                     />
                     <BookNowBTN
                       apptID={filteredService.treatment_uid}
-                      accessToken={accessToken}
                     />
                   </div>
                 </div>

@@ -156,6 +156,11 @@
   /* padding: 0%; */
   /* padding:3%; */
 }
+
+.MapContainer {
+  cursor: pointer;
+  background:url(../Assets/Images/loading.gif) center center no-repeat;
+}
 /* -------------- Services ------------------------------------------------*/
 
 /* Title "Services" on Home.jsx */
@@ -238,10 +243,18 @@
 /* Map Conatiner in Contact.jsx */
 .Contact_Map {
   border: 0;
-  width: 95%;
+  width: 100%;
   border-radius: 0%;
   height: 100%;
   margin-right: 1.8rem;
+}
+
+@media only screen and (max-width: 900px) {
+  .ContactMapImg {
+    object-fit: cover;
+    width: 312px;
+    height: 150px;
+  }
 }
 
 /* Input for all the contact.jsx */

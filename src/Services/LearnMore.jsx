@@ -11,7 +11,6 @@ import "../Home/Home.css";
 export default function LearnMore(props) {
   const location = useLocation();
   console.log(location.state);
-  const accessToken = location.state.accessToken;
 
   const { serviceArr: data } = useContext(MyContext);
 
@@ -62,7 +61,6 @@ export default function LearnMore(props) {
                 </div>
                 <BookNowBTN
                   apptID={filteredService.treatment_uid}
-                  accessToken={accessToken}
                 />
                 <div style={{ margin: "2rem" }}>
                   <img
@@ -97,7 +95,6 @@ export default function LearnMore(props) {
                   </div>
                   <BookNowBTN
                     apptID={filteredService.treatment_uid}
-                    accessToken={accessToken}
                   />
 
                   {/* <div className="LearnMoreText">
