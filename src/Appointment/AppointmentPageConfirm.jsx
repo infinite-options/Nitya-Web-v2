@@ -180,7 +180,8 @@ export default function AppointmentPage(props) {
 
   // form use states, Axios.Post
   const [purchaseDate, setPurchaseDate] = useState(new Date());
-  const [fName, setFName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [notes, setNotes] = useState("");
@@ -278,8 +279,12 @@ export default function AppointmentPage(props) {
   const handleAgeChange = (newAge) => {
     setAge(newAge.target.value);
   };
-  const handleFullNameChange = (newFName) => {
-    setFName(newFName.target.value);
+  const handleFirstNameChange = (newFName) => {
+    setFirstName(newFName.target.value);
+  };
+
+  const handleLastNameChange = (newLName) => {
+    setLastName(newLName.target.value);
   };
 
   const handleEmailChange = (newEmail) => {
@@ -298,7 +303,7 @@ export default function AppointmentPage(props) {
   async function toggleKeys() {
     const tempFind = [];
     console.log(age);
-    if (age === "" || email === "" || fName === "" || phoneNum === "") {
+    if (age === "" || email === "" || firstName === "" || lastName === "" || phoneNum === "") {
       setErrorMessage("Please fill out all fields");
       return;
     }
@@ -315,12 +320,12 @@ export default function AppointmentPage(props) {
     }
 
     const body = {
-      first_name: fName,
-      last_name: "",
+      first_name: firstName,
+      last_name: lastName,
       role: "CUSTOMER",
       phone_num: phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       email: email,
-      is_intro_consult: treatmentID === "330-000010",
+      is_ret_client_appt: treatmentID === "330-000005",
     };
     // sendToDatabase();
     try {
@@ -527,18 +532,34 @@ export default function AppointmentPage(props) {
                 <div
                   style={{
                     marginBottom: "10px",
+                    display: "flex"
                   }}
                 >
-                  {/* <SimpleForm
-                    field="Full Name"
-                    onHandleChange={handleFullNameChange}
-                  /> */}
-                  {fName === "" ? required : ""}
+                  {firstName === "" ? required : ""}
                   <input
                     name="variable"
-                    placeholder="Enter Full Name"
-                    value={fName}
-                    onChange={(e) => handleFullNameChange(e)}
+                    placeholder="Enter First Name"
+                    value={firstName}
+                    onChange={handleFirstNameChange}
+                    style={{
+                      padding: "10px",
+                      boxSizing: "border-box",
+                      borderRadius: "20px",
+                      fontColor: "black",
+                      fontSize: "20px",
+                      border: "2px solid #B28D42",
+                      width: "100%",
+                      // fontFamily: "AvenirHeavy",
+                      outline: "none",
+                    }}
+                  />
+                  {required? "": <span>&nbsp;</span>}
+                  {lastName === "" ? required : ""}
+                  <input
+                    name="variable"
+                    placeholder="Enter Last Name"
+                    value={lastName}
+                    onChange={handleLastNameChange}
                     style={{
                       padding: "10px",
                       boxSizing: "border-box",
@@ -609,6 +630,7 @@ export default function AppointmentPage(props) {
                 <div
                   style={{
                     marginBottom: "10px",
+                    display: "flex"
                   }}
                 >
                   {/* <SimpleForm
@@ -638,6 +660,7 @@ export default function AppointmentPage(props) {
                 <div
                   style={{
                     marginBottom: "10px",
+                    display: "flex"
                   }}
                 >
                   {/* <SimpleForm
@@ -708,7 +731,8 @@ export default function AppointmentPage(props) {
                     treatmentName={elementToBeRendered.title}
                     notes={notes}
                     infoSubmitted={infoSubmitted}
-                    fName={fName}
+                    firstName={firstName}
+                    lastName={lastName}
                     email={email}
                     phoneNum={phoneNum}
                     date={moment(location.state.date).format("ll")}

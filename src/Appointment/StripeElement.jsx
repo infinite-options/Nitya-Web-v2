@@ -15,7 +15,8 @@ export default function StripeElement(props) {
         customerUid={props.customerUid}
         notes={props.notes}
         infoSubmitted={props.infoSubmitted}
-        fName={props.fName}
+        firstName={props.firstName}
+        lastName={props.lastName}
         email={props.email}
         phoneNum={props.phoneNum}
         date={props.date}
