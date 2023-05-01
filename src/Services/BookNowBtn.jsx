@@ -1,11 +1,46 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
+import { makeStyles } from "@material-ui/core/styles";
+import Dialog from "@material-ui/core/Dialog";
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogActions from "@material-ui/core/DialogActions";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
 import "./BookNowBtn.css";
 import "../Home/Home.css";
 
 const BASE_URL = process.env.REACT_APP_SERVER_BASE_URI;
+
+const useStyles = makeStyles({
+  dialog: {
+    display: "flex",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  dialogActions: {
+    display: "flex",
+    justifyContent: "space-evenly",
+  },
+
+  dialogButton: {
+    cursor: "pointer",
+    backgroundColor: "#D3A625",
+    border: "2px solid #D3A625",
+    color: "white",
+    textDecoration: "none",
+    width: "100px",
+    fontSize: "24px",
+    borderRadius: "50px",
+    fontFamily: "AvenirHeavy",
+    "&:hover": {
+      borderColor: "#D3A625",
+      background: "#D3A625",
+      color: "#white",
+    },
+  },
+});
 
 export default function BookNowBTN(props) {
   // console.log("BookNowBtn props", props);
@@ -15,6 +50,8 @@ export default function BookNowBTN(props) {
   // const [accessToken, setAccessToken] = useState("");
   const [signedin, setSignedIn] = useState(false);
   const [bookNow, setBookNow] = useState(false);
+  const classes = useStyles();
+  const [showDialog, setShowDialog] = useState(false);
   // useEffect(() => {
   //   getAccessToken();
   // }, []);
@@ -125,6 +162,47 @@ export default function BookNowBTN(props) {
       aria-label={"click button to book a session now"}
       style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}
     >
+      <Dialog
+        open={showDialog}
+        onClose={()=>setShowDialog(false)}
+        aria-labelledby="alert-dialog-title"
+        className={classes.dialog}
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"Question"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            {"Have you had an Initial Consultation?"}
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions className={classes.dialogActions}>
+          <Button
+            className={classes.dialogButton}
+          >
+            <Link
+              to={{
+                pathname: `/${tID}/appt`,
+              }}
+              style={{ textDecoration: "none" }}
+            >
+              Yes
+            </Link>
+          </Button>
+          <Button
+            className={classes.dialogButton}
+          >
+            <Link
+              to={{
+                pathname: `/330-000010/appt`,
+              }}
+              style={{ textDecoration: "none" }}
+            >
+              No
+            </Link>
+          </Button>
+        </DialogActions>
+      </Dialog>
       <Button
         className="BookNowBtn"
         onClick={() => {
@@ -132,7 +210,13 @@ export default function BookNowBTN(props) {
           setBookNow(true);
         }}
       >
-        <Link
+        {tID==='330-000005'?
+        <div role="button" 
+          onClick={()=>setShowDialog(true)}
+          style={{cursor: "pointer"}}>
+          <p className="BookNowBtn">Book Now</p>
+        </div>
+        :<Link
           to={{
             pathname: `/${tID}/appt`,
           }}
@@ -141,7 +225,7 @@ export default function BookNowBTN(props) {
           style={{ textDecoration: "none" }}
         >
           <p className="BookNowBtn">Book Now</p>
-        </Link>
+        </Link>}
       </Button>
     </div>
   );
