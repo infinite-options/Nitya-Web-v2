@@ -159,8 +159,8 @@ export default function Scheduler(props) {
 
   function sendToDatabase() {
     console.log("create appt", {
-      first_name: props.fName,
-      last_name: "",
+      first_name: props.firstName,
+      last_name: props.lastName,
       email: props.email,
       phone_no: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       appt_treatment_uid: props.treatmentID, //TREATMENT INFO #1
@@ -177,8 +177,8 @@ export default function Scheduler(props) {
       "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/createAppointment";
     axios
       .post(postURL, {
-        first_name: props.fName,
-        last_name: "",
+        first_name: props.firstName,
+        last_name: props.lastName,
         email: props.email,
         phone_no: props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
         appt_treatment_uid: props.treatmentID, //TREATMENT INFO #1
@@ -202,7 +202,7 @@ export default function Scheduler(props) {
       });
 
     setApptInfo({
-      first_name: props.fName,
+      first_name: props.firstName + " " + props.lastName,
       email: props.email,
       phone_no: props.phoneNum,
       treatment: props.treatmentName,
@@ -241,7 +241,7 @@ export default function Scheduler(props) {
       location: "6055 Meridian Ave #40, San Jose, CA, 95120",
       description:
         "Name: " +
-        props.fName +
+        props.firstName + " " + props.lastName +
         "\n" +
         "Phone No: " +
         props.phoneNum.replace(/[^a-z\d\s]+/gi, ""),
@@ -381,7 +381,7 @@ export default function Scheduler(props) {
                     console.log(result.error);
                     setErrorMessage(result.error.message);
                     const body = {
-                      name: props.fName,
+                      name: props.firstName + " " + props.lastName,
                       phone: props.phoneNum,
                       email: props.email,
                       message: props.notes,
@@ -410,7 +410,7 @@ export default function Scheduler(props) {
               console.log(res.error.message);
               setErrorMessage(res.error.message);
               const body = {
-                name: props.fName,
+                name: props.firstName + " " + props.lastName,
                 phone: props.phoneNum,
                 email: props.email,
                 message: props.notes,
@@ -437,7 +437,7 @@ export default function Scheduler(props) {
       .catch((err) => {
         console.log(err);
         const body = {
-          name: props.fName,
+          name: props.firstName + " " + props.lastName,
           phone: props.phoneNum,
           email: props.email,
           message: props.notes,

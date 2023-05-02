@@ -4,12 +4,6 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useLocation, useParams } from "react-router";
 import { loadStripe } from "@stripe/stripe-js/pure";
 import { Radio } from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import axios from "axios";
 import StripeElement from "./StripeElement";
@@ -18,6 +12,7 @@ import { MyContext } from "../App";
 import SimpleForm from "./simpleForm";
 import SimpleFormText from "./simpleFormText";
 import ScrollToTop from "../Blog/ScrollToTop";
+import Popup from "../Popup/Popup";
 import "./calendar.css";
 import "../Appointment/AppointmentPage.css";
 
@@ -136,33 +131,6 @@ const useStyles = makeStyles({
       width: "280px",
     },
   },
-
-  dialog: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  dialogActions: {
-    display: "flex",
-    justifyContent: "space-evenly",
-  },
-
-  dialogButton: {
-    cursor: "pointer",
-    backgroundColor: "#D3A625",
-    border: "2px solid #D3A625",
-    color: "white",
-    textDecoration: "none",
-    fontSize: "15px",
-    borderRadius: "50px",
-    fontFamily: "AvenirHeavy",
-    "&:hover": {
-      borderColor: "#D3A625",
-      background: "#D3A625",
-      color: "#white",
-    },
-  },
 });
 const API_KEY = process.env.REACT_APP_GOOGLE_API_KEY;
 export default function AppointmentPage(props) {
@@ -180,7 +148,8 @@ export default function AppointmentPage(props) {
 
   // form use states, Axios.Post
   const [purchaseDate, setPurchaseDate] = useState(new Date());
-  const [fName, setFName] = useState("");
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNum, setPhoneNum] = useState("");
   const [notes, setNotes] = useState("");
@@ -278,8 +247,12 @@ export default function AppointmentPage(props) {
   const handleAgeChange = (newAge) => {
     setAge(newAge.target.value);
   };
-  const handleFullNameChange = (newFName) => {
-    setFName(newFName.target.value);
+  const handleFirstNameChange = (newFName) => {
+    setFirstName(newFName.target.value);
+  };
+
+  const handleLastNameChange = (newLName) => {
+    setLastName(newLName.target.value);
   };
 
   const handleEmailChange = (newEmail) => {
@@ -298,7 +271,7 @@ export default function AppointmentPage(props) {
   async function toggleKeys() {
     const tempFind = [];
     console.log(age);
-    if (age === "" || email === "" || fName === "" || phoneNum === "") {
+    if (age === "" || email === "" || firstName === "" || lastName === "" || phoneNum === "") {
       setErrorMessage("Please fill out all fields");
       return;
     }
@@ -315,12 +288,12 @@ export default function AppointmentPage(props) {
     }
 
     const body = {
-      first_name: fName,
-      last_name: "",
+      first_name: firstName,
+      last_name: lastName,
       role: "CUSTOMER",
       phone_num: phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       email: email,
-      is_intro_consult: treatmentID === "330-000010",
+      is_ret_client_appt: treatmentID === "330-000005",
     };
     // sendToDatabase();
     try {
@@ -440,29 +413,12 @@ export default function AppointmentPage(props) {
   return (
     <div className="HomeContainer">
       <ScrollToTop />
-      <Dialog
-        open={showDialog}
-        onClose={handleDialogClose}
-        aria-labelledby="alert-dialog-title"
-        className={classes.dialog}
-      >
-        <DialogTitle id="alert-dialog-title">
-          {dialogTitle}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {dialogText}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions className={classes.dialogActions}>
-          <Button
-            onClick={handleDialogClose}
-            className={classes.dialogButton}
-          >
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <Popup 
+        showDialog={showDialog} 
+        onClose={handleDialogClose} 
+        title={dialogTitle} 
+        text={dialogText} 
+      />
       <br />
       {bookNowClicked || location.state.signedin ? (
         <div className="Card" style={{ alignItems: "center" }}>
@@ -527,18 +483,34 @@ export default function AppointmentPage(props) {
                 <div
                   style={{
                     marginBottom: "10px",
+                    display: "flex"
                   }}
                 >
-                  {/* <SimpleForm
-                    field="Full Name"
-                    onHandleChange={handleFullNameChange}
-                  /> */}
-                  {fName === "" ? required : ""}
+                  {firstName === "" ? required : ""}
                   <input
                     name="variable"
-                    placeholder="Enter Full Name"
-                    value={fName}
-                    onChange={(e) => handleFullNameChange(e)}
+                    placeholder="Enter First Name"
+                    value={firstName}
+                    onChange={handleFirstNameChange}
+                    style={{
+                      padding: "10px",
+                      boxSizing: "border-box",
+                      borderRadius: "20px",
+                      fontColor: "black",
+                      fontSize: "20px",
+                      border: "2px solid #B28D42",
+                      width: "100%",
+                      // fontFamily: "AvenirHeavy",
+                      outline: "none",
+                    }}
+                  />
+                  {required? "": <span>&nbsp;</span>}
+                  {lastName === "" ? required : ""}
+                  <input
+                    name="variable"
+                    placeholder="Enter Last Name"
+                    value={lastName}
+                    onChange={handleLastNameChange}
                     style={{
                       padding: "10px",
                       boxSizing: "border-box",
@@ -609,6 +581,7 @@ export default function AppointmentPage(props) {
                 <div
                   style={{
                     marginBottom: "10px",
+                    display: "flex"
                   }}
                 >
                   {/* <SimpleForm
@@ -638,6 +611,7 @@ export default function AppointmentPage(props) {
                 <div
                   style={{
                     marginBottom: "10px",
+                    display: "flex"
                   }}
                 >
                   {/* <SimpleForm
@@ -708,7 +682,8 @@ export default function AppointmentPage(props) {
                     treatmentName={elementToBeRendered.title}
                     notes={notes}
                     infoSubmitted={infoSubmitted}
-                    fName={fName}
+                    firstName={firstName}
+                    lastName={lastName}
                     email={email}
                     phoneNum={phoneNum}
                     date={moment(location.state.date).format("ll")}
