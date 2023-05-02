@@ -4,12 +4,6 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { useLocation, useParams } from "react-router";
 import { loadStripe } from "@stripe/stripe-js/pure";
 import { Radio } from "@material-ui/core";
-import Dialog from "@material-ui/core/Dialog";
-import DialogTitle from "@material-ui/core/DialogTitle";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogActions from "@material-ui/core/DialogActions";
-import Button from "@material-ui/core/Button";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import axios from "axios";
 import StripeElement from "./StripeElement";
@@ -18,6 +12,7 @@ import { MyContext } from "../App";
 import SimpleForm from "./simpleForm";
 import SimpleFormText from "./simpleFormText";
 import ScrollToTop from "../Blog/ScrollToTop";
+import Popup from "../Popup/Popup";
 import "./calendar.css";
 import "../Appointment/AppointmentPage.css";
 
@@ -134,33 +129,6 @@ const useStyles = makeStyles({
     width: "320px",
     "@media (max-width: 1050px)": {
       width: "280px",
-    },
-  },
-
-  dialog: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-
-  dialogActions: {
-    display: "flex",
-    justifyContent: "space-evenly",
-  },
-
-  dialogButton: {
-    cursor: "pointer",
-    backgroundColor: "#D3A625",
-    border: "2px solid #D3A625",
-    color: "white",
-    textDecoration: "none",
-    fontSize: "15px",
-    borderRadius: "50px",
-    fontFamily: "AvenirHeavy",
-    "&:hover": {
-      borderColor: "#D3A625",
-      background: "#D3A625",
-      color: "#white",
     },
   },
 });
@@ -445,29 +413,12 @@ export default function AppointmentPage(props) {
   return (
     <div className="HomeContainer">
       <ScrollToTop />
-      <Dialog
-        open={showDialog}
-        onClose={handleDialogClose}
-        aria-labelledby="alert-dialog-title"
-        className={classes.dialog}
-      >
-        <DialogTitle id="alert-dialog-title">
-          {dialogTitle}
-        </DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            {dialogText}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions className={classes.dialogActions}>
-          <Button
-            onClick={handleDialogClose}
-            className={classes.dialogButton}
-          >
-            Ok
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <Popup 
+        showDialog={showDialog} 
+        onClose={handleDialogClose} 
+        title={dialogTitle} 
+        text={dialogText} 
+      />
       <br />
       {bookNowClicked || location.state.signedin ? (
         <div className="Card" style={{ alignItems: "center" }}>

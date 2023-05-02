@@ -7,6 +7,7 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import { Button } from "reactstrap";
 import { Link } from "react-router-dom";
+import Popup from "../Popup/Popup";
 import "./BookNowBtn.css";
 import "../Home/Home.css";
 
@@ -51,7 +52,12 @@ export default function BookNowBTN(props) {
   const [signedin, setSignedIn] = useState(false);
   const [bookNow, setBookNow] = useState(false);
   const classes = useStyles();
-  const [showDialog, setShowDialog] = useState(false);
+  const [showQuesDialog, setShowQuesDialog] = useState(false);
+  const [showInfoDialog, setShowInfoDialog] = useState(false);
+  const handleOnNo = () => {
+    setShowQuesDialog(false);
+    setShowInfoDialog(true);
+  }
   // useEffect(() => {
   //   getAccessToken();
   // }, []);
@@ -162,14 +168,20 @@ export default function BookNowBTN(props) {
       aria-label={"click button to book a session now"}
       style={{ display: "flex", justifyContent: "center", marginTop: "1rem" }}
     >
+      <Popup 
+        showDialog={showInfoDialog} 
+        onClose={()=>setShowInfoDialog(false)} 
+        title={"Note"} 
+        text={"Please book an Initial Consultation first."} 
+      />
       <Dialog
-        open={showDialog}
-        onClose={()=>setShowDialog(false)}
+        open={showQuesDialog}
+        onClose={()=>setShowQuesDialog(false)}
         aria-labelledby="alert-dialog-title"
         className={classes.dialog}
       >
         <DialogTitle id="alert-dialog-title">
-          {"Question"}
+          {"Please confirm"}
         </DialogTitle>
         <DialogContent>
           <DialogContentText>
@@ -177,29 +189,23 @@ export default function BookNowBTN(props) {
           </DialogContentText>
         </DialogContent>
         <DialogActions className={classes.dialogActions}>
-          <Button
-            className={classes.dialogButton}
+          <Link
+            to={{
+              pathname: `/${tID}/appt`,
+            }}
+            style={{ textDecoration: "none" }}
           >
-            <Link
-              to={{
-                pathname: `/${tID}/appt`,
-              }}
-              style={{ textDecoration: "none" }}
+            <Button
+              className={classes.dialogButton}
             >
               Yes
-            </Link>
-          </Button>
+            </Button>
+          </Link>
           <Button
+            onClick={handleOnNo}
             className={classes.dialogButton}
           >
-            <Link
-              to={{
-                pathname: `/330-000010/appt`,
-              }}
-              style={{ textDecoration: "none" }}
-            >
-              No
-            </Link>
+            No
           </Button>
         </DialogActions>
       </Dialog>
@@ -210,9 +216,9 @@ export default function BookNowBTN(props) {
           setBookNow(true);
         }}
       >
-        {tID==='330-000005'?
+        {['330-000005', '330-000006'].includes(tID)?
         <div role="button" 
-          onClick={()=>setShowDialog(true)}
+          onClick={()=>setShowQuesDialog(true)}
           style={{cursor: "pointer"}}>
           <p className="BookNowBtn">Book Now</p>
         </div>
