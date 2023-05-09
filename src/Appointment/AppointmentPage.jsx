@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import axios from "axios";
 import { Helmet } from "react-helmet";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
@@ -32,6 +32,10 @@ const useStyles = makeStyles({
       marginLeft: "0rem",
       width: "100%",
     },
+  },
+
+  calDisabled: {
+    pointerEvents: "none",
   },
 
   timeslotButton: {
@@ -94,32 +98,16 @@ export default function AppointmentPage(props) {
   const [date, setDate] = useState(currentDate);
   const [minDate, setMinDate] = useState(currentDate);
   const [dateString, setDateString] = useState(null);
-  const [dateHasBeenChanged, setDateHasBeenChanged] = useState(true);
+  const [dateHasBeenChanged, setDateHasBeenChanged] = useState(false);
   const [dateString1, setDateString1] = useState(null);
   const [apiDateString, setApiDateString] = useState(null);
   const [timeSlots, setTimeSlots] = useState([]);
   const [timeAASlots, setTimeAASlots] = useState([]);
-  const [duration, setDuration] = useState(null);
+  const duration = useRef(null);
   const [buttonSelect, setButtonSelect] = useState(false);
   const [selectedButton, setSelectedButton] = useState("");
-
-  useEffect(() => {
-    console.log();
-  }, []);
-
-  useEffect(() => {
-    if (servicesLoaded) {
-      serviceArr.forEach((element) => {
-        if (element.treatment_uid === treatment_uid) {
-          setElementToBeRendered(element);
-          console.log("element to be rendered: ", elementToBeRendered);
-          console.log("duration: ", elementToBeRendered.duration);
-          // setDuration(parseDuration(elementToBeRendered.duration));
-          setDuration(elementToBeRendered.duration);
-        }
-      });
-    }
-  });
+  const isFirstLoad = useRef(true);
+  const [isCalDisabled, setCalDisabled] = useState(false);
 
   function convert(value) {
     var a = value.split(":"); // split it at the colons
@@ -242,7 +230,7 @@ export default function AppointmentPage(props) {
     setDateString(dateFormat1(date));
     setApiDateString(dateFormat3(date));
     setDateString1(dateFormat2(date));
-    setDateHasBeenChanged(true);
+    setDateHasBeenChanged(!dateHasBeenChanged);
   };
 
   const dateChange = (date) => {
@@ -291,58 +279,51 @@ export default function AppointmentPage(props) {
       return strTime;
     }
   }
-  useEffect(() => {
-    setTimeAASlots([]);
-    if (attendMode && duration !== null) {
+  const getTimeAASlots = async () => {
+    try {
+      setTimeAASlots([]);
       let hoursMode = "";
       hoursMode = attendMode === "Online" ? "Online" : "Office";
-      console.log("407", duration, apiDateString);
       let date =
         apiDateString >
           moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
           ? apiDateString
           : moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD");
-      console.log("apiDateString", apiDateString, date);
       setApiDateString(date);
-      axios
+      const res = await axios
         .get(
           "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
           date +
           "/" +
-          duration +
+          duration.current +
           "/" +
           hoursMode
-        )
-        .then((res) => {
-          // setTimeAASlots(res.data.result);
-          // console.log("Timeslots Array " + timeSlots);
-          let timeSlotsAA = [];
-          if (JSON.stringify(res.data.result.length) > 0) {
-            res.data.result.map((r) => {
-              timeSlotsAA.push(r["begin_time"]);
-            });
-          }
-          setTimeAASlots(timeSlotsAA);
+      );
+      let timeSlotsAA = [];
+      if (JSON.stringify(res.data.result.length) > 0) {
+        res.data.result.map((r) => {
+          timeSlotsAA.push(r["begin_time"]);
         });
+      }
+      setTimeAASlots(timeSlotsAA);
+    } catch(error) {
+      console.error("Error in getTimeAASlots: "+error);
     }
-    setDateHasBeenChanged(false);
-  }, [servicesLoaded, duration, attendMode]);
+  };
 
-  useEffect(() => {
-    if (accessToken && attendMode && duration !== null) {
+  const getTimeSlots = async () => {
+    try {
       setTimeSlots([]);
       const headers = {
         "Content-Type": "application/json",
         Accept: "application/json",
         Authorization: "Bearer " + accessToken,
       };
-
       let date =
         apiDateString >
           moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD")
           ? apiDateString
           : moment(new Date(+new Date() + 86400000)).format("YYYY-MM-DD");
-      console.log("apiDateString", apiDateString, date);
       setApiDateString(date);
       const morningTime =
         attendMode === "Online" ? "T08:00:00-0800" : "T09:00:00-0800";
@@ -357,185 +338,59 @@ export default function AppointmentPage(props) {
           },
         ],
       };
-      console.log(headers);
-      console.log(data);
-      axios
-        .post(
-          `https://www.googleapis.com/calendar/v3/freeBusy?key=${API_KEY}`,
-          data,
-          {
-            headers: headers,
+      const response = await axios
+        .post(`https://www.googleapis.com/calendar/v3/freeBusy?key=${API_KEY}`,
+        data, {
+          headers: headers,
+        }
+      );
+      let busy = response.data.calendars.primary.busy;
+      let start_time = Date.parse(date + morningTime) / 1000;
+      let end_time = Date.parse(date + eveningTime) / 1000;
+      let free = [];
+      let appt_start_time = start_time;
+      let seconds = convert(duration.current);
+      // Loop through each appt slot in the search range.
+      while (appt_start_time < end_time) {
+        // Add appt duration to the appt start time so we know where the appt will end.
+        let appt_end_time = appt_start_time + seconds;
+        // For each appt slot, loop through the current appts to see if it falls
+        // in a slot that is already taken.
+        let slot_available = true;
+        busy.forEach((times) => {
+          let this_start = Date.parse(times["start"]) / 1000;
+          let this_end = Date.parse(times["end"]) / 1000;
+          console.log(
+            "freebusy busy times",
+            busy,
+            times["start"],
+            times["end"]
+          );
+          // If the appt start time or appt end time falls on a current appt, slot is taken.
+          if (
+            (appt_start_time >= this_start && appt_start_time < this_end) ||
+            (appt_end_time > this_start && appt_end_time <= this_end)
+          ) {
+            slot_available = false;
+            return; // No need to continue if it's taken.
           }
-        )
-        .then((response) => {
-          let busy = response.data.calendars.primary.busy;
-          let start_time = Date.parse(date + morningTime) / 1000;
-          let end_time = Date.parse(date + eveningTime) / 1000;
-          let free = [];
-          let appt_start_time = start_time;
-
-          let seconds = convert(duration);
-          // Loop through each appt slot in the search range.
-          while (appt_start_time < end_time) {
-            // Add appt duration to the appt start time so we know where the appt will end.
-            let appt_end_time = appt_start_time + seconds;
-
-            // For each appt slot, loop through the current appts to see if it falls
-            // in a slot that is already taken.
-            let slot_available = true;
-
-            busy.forEach((times) => {
-              let this_start = Date.parse(times["start"]) / 1000;
-              let this_end = Date.parse(times["end"]) / 1000;
-              console.log(
-                "freebusy busy times",
-                busy,
-                times["start"],
-                times["end"]
-              );
-              // If the appt start time or appt end time falls on a current appt, slot is taken.
-              if (
-                (appt_start_time >= this_start && appt_start_time < this_end) ||
-                (appt_end_time > this_start && appt_end_time <= this_end)
-              ) {
-                slot_available = false;
-                return; // No need to continue if it's taken.
-              }
-            });
-            console.log("freebusy", free);
-            // If we made it through all appts and the slot is still available, it's an open slot.
-            if (slot_available) {
-              free.push(
-                moment(new Date(appt_start_time * 1000)).format("HH:mm:ss")
-              );
-            }
-            // + duration minutes
-            appt_start_time += 60 * 30;
-          }
-          console.log("freebusy", free);
-          setTimeSlots(free);
-        })
-        .catch((error) => {
-          console.log("error", error);
         });
+        console.log("freebusy", free);
+        // If we made it through all appts and the slot is still available, it's an open slot.
+        if (slot_available) {
+          free.push(
+            moment(new Date(appt_start_time * 1000)).format("HH:mm:ss")
+          );
+        }
+        // + duration minutes
+        appt_start_time += 60 * 30;
+      }
+      console.log("freebusy", free);
+      setTimeSlots(free);
+    } catch(error) {
+      console.error("Error in getTimeSlots: "+error);
     }
-    setDateHasBeenChanged(false);
-  }, [servicesLoaded, duration, attendMode, accessToken]);
-  //get appt
-  useEffect(() => {
-    if (dateHasBeenChanged) {
-      setTimeAASlots([]);
-      let hoursMode = "";
-      hoursMode = attendMode === "Online" ? "Online" : "Office";
-      console.log("407", duration);
-
-      axios
-        .get(
-          "https://mfrbehiqnb.execute-api.us-west-1.amazonaws.com/dev/api/v2/availableAppointments/" +
-          apiDateString +
-          "/" +
-          duration +
-          "/" +
-          hoursMode
-        )
-        .then((res) => {
-          let timeSlotsAA = [];
-          if (JSON.stringify(res.data.result.length) > 0) {
-            res.data.result.map((r) => {
-              timeSlotsAA.push(r["begin_time"]);
-            });
-          }
-          setTimeAASlots(timeSlotsAA);
-        });
-    }
-    setDateHasBeenChanged(false);
-  });
-
-  useEffect(() => {
-    if (accessToken && dateHasBeenChanged) {
-      setTimeSlots([]);
-      const headers = {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Authorization: "Bearer " + accessToken,
-      };
-      const morningTime =
-        attendMode === "Online" ? "T08:00:00-0800" : "T09:00:00-0800";
-      const eveningTime =
-        attendMode === "Online" ? "T20:00:00-0800" : "T20:00:00-0800";
-      const data = {
-        timeMin: apiDateString + morningTime,
-        timeMax: apiDateString + eveningTime,
-        items: [
-          {
-            id: "primary",
-          },
-        ],
-      };
-      console.log(headers);
-      console.log(data);
-      axios
-        .post(
-          `https://www.googleapis.com/calendar/v3/freeBusy?key=${API_KEY}`,
-          data,
-          {
-            headers: headers,
-          }
-        )
-        .then((response) => {
-          let busy = response.data.calendars.primary.busy;
-          let start_time = Date.parse(apiDateString + morningTime) / 1000;
-          let end_time = Date.parse(apiDateString + eveningTime) / 1000;
-          let free = [];
-          let appt_start_time = start_time;
-
-          let seconds = convert(duration);
-          // Loop through each appt slot in the search range.
-          while (appt_start_time < end_time) {
-            // Add appt duration to the appt start time so we know where the appt will end.
-            let appt_end_time = appt_start_time + seconds;
-
-            // For each appt slot, loop through the current appts to see if it falls
-            // in a slot that is already taken.
-            let slot_available = true;
-
-            busy.forEach((times) => {
-              let this_start = Date.parse(times["start"]) / 1000;
-              let this_end = Date.parse(times["end"]) / 1000;
-              console.log(
-                "freebusy busy times",
-                busy,
-                times["start"],
-                times["end"]
-              );
-              // If the appt start time or appt end time falls on a current appt, slot is taken.
-              if (
-                (appt_start_time >= this_start && appt_start_time < this_end) ||
-                (appt_end_time > this_start && appt_end_time <= this_end)
-              ) {
-                slot_available = false;
-                return; // No need to continue if it's taken.
-              }
-            });
-            console.log("freebusy", free);
-            // If we made it through all appts and the slot is still available, it's an open slot.
-            if (slot_available) {
-              free.push(
-                moment(new Date(appt_start_time * 1000)).format("HH:mm:ss")
-              );
-            }
-            // + duration minutes
-            appt_start_time += 60 * 30;
-          }
-          console.log("freebusy", free);
-          setTimeSlots(free);
-        })
-        .catch((error) => {
-          console.log("error", error);
-        });
-    }
-    setDateHasBeenChanged(false);
-  });
+  };
 
   function renderAvailableApptsVertical() {
     console.log("TimeSlots", timeSlots);
@@ -622,100 +477,76 @@ export default function AppointmentPage(props) {
     setButtonSelect(true);
   }
 
-  const getAccessToken = () => {
+  const getAccessToken = async () => {
     const BASE_URL = process.env.REACT_APP_SERVER_BASE_URI;
     const CLIENT_ID = process.env.REACT_APP_GOOGLE_CLIENT_ID;
     const CLIENT_SECRET = process.env.REACT_APP_GOOGLE_CLIENT_SECRET;
-    let url = BASE_URL + "customerToken/";
-    let customer_uid = "100-000093";
-    axios
-      .get(url + customer_uid)
-      .then((response) => {
-        var old_at = response["data"]["user_access_token"];
-        var refreshToken = response["data"]["user_refresh_token"];
-
-        fetch(
-          `https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`,
-          {
-            method: "GET",
-          }
-        )
-          .then((response) => {
-            // console.log("in events", response);
-            if (true) {
-              // console.log("in events if");
-              let authorization_url =
-                "https://accounts.google.com/o/oauth2/token";
-
-              var details = {
-                refresh_token: refreshToken,
-                client_id: CLIENT_ID,
-                client_secret: CLIENT_SECRET,
-                grant_type: "refresh_token",
-              };
-
-              var formBody = [];
-              for (var property in details) {
-                var encodedKey = encodeURIComponent(property);
-                var encodedValue = encodeURIComponent(details[property]);
-                formBody.push(encodedKey + "=" + encodedValue);
-              }
-              formBody = formBody.join("&");
-              // console.log(details);
-              fetch(authorization_url, {
-                method: "POST",
-                headers: {
-                  "Content-Type":
-                    "application/x-www-form-urlencoded;charset=UTF-8",
-                },
-                body: formBody,
-              })
-                .then((response) => {
-                  return response.json();
-                })
-                .then((responseData) => {
-                  // console.log(responseData);
-                  return responseData;
-                })
-                .then((data) => {
-                  // console.log(data);
-                  let at = data["access_token"];
-                  var id_token = data["id_token"];
-                  setAccessToken(at);
-                  // setIdToken(id_token);
-                  // console.log("in events", at);
-                  let url = BASE_URL + "UpdateAccessToken/";
-                  axios
-                    .post(url + customer_uid, {
-                      user_access_token: at,
-                    })
-                    .then((response) => {})
-                    .catch((err) => {
-                      // console.log(err);
-                    });
-                  return accessToken;
-                })
-                .catch((err) => {
-                  // console.log(err);
-                });
-            } else {
-              // console.log("here", old_at);
-              setAccessToken(old_at);
+    const url = BASE_URL + "customerToken/";
+    const customer_uid = "100-000093";
+    try {
+      const response = await axios.get(url + customer_uid);
+      const old_at = response["data"]["user_access_token"];
+      const refreshToken = response["data"]["user_refresh_token"];
+      try {
+        await axios
+          .get(`https://www.googleapis.com/oauth2/v1/tokeninfo?access_token=${old_at}`);
+        setAccessToken(old_at);
+      } catch (error) {
+        var properties = {
+          refresh_token: refreshToken,
+          client_id: CLIENT_ID,
+          client_secret: CLIENT_SECRET,
+          grant_type: "refresh_token",
+        };
+        var formBody = [];
+        for (let property in properties) {
+          var encodedKey = encodeURIComponent(property);
+          var encodedValue = encodeURIComponent(properties[property]);
+          formBody.push(encodedKey + "=" + encodedValue);
+        }
+        formBody = formBody.join("&");
+        const tokenResponse = await 
+          axios.post("https://accounts.google.com/o/oauth2/token",
+          formBody, {
+            headers: {
+              "Content-Type":
+                "application/x-www-form-urlencoded;charset=UTF-8",
             }
-          })
-          .catch((err) => {
-            console.log(err);
           });
-        // console.log("in events", refreshToken);
-      })
-      .catch((error) => {
-        console.log("Error in events" + error);
-      });
+        const at = tokenResponse["data"]["access_token"];
+        setAccessToken(at);
+        const url = BASE_URL + "UpdateAccessToken/";
+        await axios.post(url + customer_uid, {
+          user_access_token: at,
+        });
+      }
+    } catch(error) {
+      console.error("Error in getAccessToken: " + error);
+    }
+  };
+
+  const onChange = async () => {
+    if (servicesLoaded) {
+      setCalDisabled(true);
+      if(isFirstLoad.current) {
+        serviceArr.forEach(service => {
+          if (service.treatment_uid === treatment_uid) {
+            setElementToBeRendered(service);
+            duration.current = service.duration;
+          }
+        });
+        isFirstLoad.current = false;
+        await getAccessToken();
+      }
+      await getTimeSlots();
+      await getTimeAASlots();
+      setCalDisabled(false);
+    }
   };
 
   useEffect(() => {
-    getAccessToken();
-  }, []);
+    onChange();
+  }, [servicesLoaded, dateHasBeenChanged, attendMode]);
 
   return (
     <div className="HomeContainer">
@@ -801,6 +632,10 @@ export default function AppointmentPage(props) {
                   minDate={minDate}
                   next2Label={null}
                   prev2Label={null}
+                  tileDisabled={()=>isCalDisabled}
+                  className={
+                    isCalDisabled?classes.calDisabled:""
+                  }
                 />
               </div>
             </div>

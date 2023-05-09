@@ -293,7 +293,7 @@ export default function AppointmentPage(props) {
       role: "CUSTOMER",
       phone_num: phoneNum.replace(/[^a-z\d\s]+/gi, ""),
       email: email,
-      is_ret_client_appt: treatmentID === "330-000005",
+      is_ret_client_appt: ['330-000005','330-000006'].includes(treatmentID),
     };
     // sendToDatabase();
     try {
