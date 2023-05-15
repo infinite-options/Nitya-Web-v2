@@ -373,8 +373,8 @@ function Blogpage(props) {
                   className={classes.navDisplayFlex}
                 >
                   {navLinks.map(({ title, path }) => (
-                    <a
-                      href={path}
+                    <Link
+                      to={path}
                       key={title}
                       className={classes.linkText}
                       style={{ textDecoration: "none" }}
@@ -382,7 +382,7 @@ function Blogpage(props) {
                       <ListItem button>
                         <ListItemText primary={title} />
                       </ListItem>
-                    </a>
+                    </Link>
                   ))}
                 </List>
               </Container>

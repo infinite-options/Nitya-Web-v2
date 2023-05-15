@@ -101,8 +101,11 @@
   flex: 1;
 }
 
-.CardSmallFont {
-  font-size: 15px;
+.CardParagraphs {
+  font-size: 18px;
+  color: #000000;
+  background-color: #dadada;
+  padding: 5px 20px 5px 20px;
 }
 
 .CardButton {
@@ -501,6 +504,14 @@
     margin-bottom: 1rem;
     flex: 1;
   }
+
+  .CardParagraphs {
+    font-size: 18px;
+    color: #000000;
+    background-color: #dadada;
+    padding: 5px 20px 5px 20px;
+  }
+
   .Services_Title_Font {
     font-family: Hoefler Text;
     font-size: 16px;
@@ -734,6 +745,13 @@
     margin-right: 0rem;
     margin-bottom: 1rem;
     flex: 1;
+  }
+
+  .CardParagraphs {
+    font-size: 18px;
+    color: #000000;
+    background-color: #dadada;
+    padding: 5px 20px 5px 20px;
   }
 
   .Services_Title_Font {
